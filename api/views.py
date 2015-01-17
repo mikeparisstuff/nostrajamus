@@ -15,14 +15,17 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = (permissions.AllowAny,)
 
-    # def create(self, request):
-    #     data = request.data
-    #     user_serializer = ProfileSerializer(data=data, context={'request': request})
-    #     if user_serializer.is_valid():
-    #         new_user = user_serializer.save()
-    #         return Response(user_serializer.data, status=status.HTTP_201_CREATED)
-    #     else:
-    #         return Response({"error": user_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    def create(self, request):
+        data = request.data
+        user = Profile.objects.create_user(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            email=data['email'],
+            password=data['password'],
+            username=data['username']
+        )
+        user_serializer = ProfileSerializer(user, context={'request': request})
+        return Response(user_serializer.data, status=status.HTTP_201_CREATED)
 
     # def list(self, request):
     #     pass
