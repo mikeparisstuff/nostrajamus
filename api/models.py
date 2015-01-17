@@ -74,7 +74,9 @@ class Profile(AbstractUser):
     )
 
     contests = models.ManyToManyField(
-        Contest
+        Contest,
+        blank=True,
+        null=True
     )
 
 
