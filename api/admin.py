@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSong, ContestEntry, SCUser
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSong, ContestEntry, SCUser, Feedback
 
 # Register your models here.
 
@@ -24,6 +24,9 @@ class ContestEntryAdmin(admin.ModelAdmin):
 class SCUserAdmin(admin.ModelAdmin):
     list_display = ('id', 'sc_id', 'username', 'permalink_url')
 
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text', 'created_at')
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(SCTrack, SCTrackAdmin)
 admin.site.register(Contest, ContestAdmin)
@@ -31,3 +34,4 @@ admin.site.register(SCPeriodicPlayCount, SCPeriodicPlayCountAdmin)
 admin.site.register(WatchedSong, WatchedSongAdmin)
 admin.site.register(ContestEntry, ContestEntryAdmin)
 admin.site.register(SCUser, SCUserAdmin)
+admin.site.register(Feedback, FeedbackAdmin)

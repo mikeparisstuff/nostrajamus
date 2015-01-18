@@ -436,3 +436,11 @@ class ContestEntry(BaseModel):
     initial_playback_count = models.IntegerField()
 
     initial_follower_count = models.IntegerField()
+
+class Feedback(BaseModel):
+
+    text = models.CharField(
+        max_length=512,
+        blank=True,
+        default=''
+    )

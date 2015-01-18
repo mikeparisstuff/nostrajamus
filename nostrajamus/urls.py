@@ -13,6 +13,7 @@ router.register(r'tracks', views.TrackViewSet)
 router.register(r'playcounts', views.PeriodicPlayCountViewSet)
 router.register(r'scusers', views.SCUserViewSet)
 router.register(r'contest_entries', views.ContestEntryViewSet)
+router.register(r'feedback', views.FeedbackViewSet)
 
 urlpatterns = patterns('',
     # Examples:

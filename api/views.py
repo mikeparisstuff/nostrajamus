@@ -2,8 +2,8 @@ from django.shortcuts import render, render_to_response, RequestContext
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry
-from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback
+from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer
 
 import soundcloud
 client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
@@ -113,3 +113,7 @@ class PeriodicPlayCountViewSet(viewsets.ModelViewSet):
 class SCUserViewSet(viewsets.ModelViewSet):
     queryset = SCUser.objects.all()
     serializer_class = SCUserSerializer
+
+class FeedbackViewSet(viewsets.ModelViewSet):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer

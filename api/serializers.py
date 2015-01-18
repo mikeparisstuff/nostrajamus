@@ -1,6 +1,6 @@
 __author__ = 'MichaelParis'
 
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback
 from rest_framework.exceptions import ValidationError
 from rest_framework import serializers
 from datetime import datetime
@@ -89,3 +89,7 @@ class SCPeriodicPlayCountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SCPeriodicPlayCount
         fields = ('track_title', 'soundcloud_id', 'playback_count', 'follower_count')
+
+class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Feedback
