@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response, RequestContext
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
@@ -7,6 +7,9 @@ from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSeriali
 
 import soundcloud
 client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
+
+def home_page(request):
+    return render_to_response("index.html", RequestContext(request, {}))
 
 # Create your views here.
 
@@ -61,6 +64,7 @@ class ContestViewSet(viewsets.ModelViewSet):
     @detail_route(methods=("POST",))
     def enter(self, request, pk=None):
         contest = self.get_object()
+        print request.data
         track_data = request.data.get("track")
         track_id = track_data['id']
         user_data = request.data.get("user")
@@ -70,11 +74,11 @@ class ContestViewSet(viewsets.ModelViewSet):
         print dir(track_serializer)
         if track_serializer.is_valid() and user_serializer.is_valid():
             print track_serializer.errors
-            try:
-                track = track_serializer.save()
-            except:
+            # try:
+            track = track_serializer.save()
+            # except:
                 # The track already exists
-                track = SCTrack.objects.get(sc_id = track_id)
+                # track = SCTrack.objects.get(sc_id = track_id)
             user = user_serializer.save()
             # Add a new Contest entry with the
             contest_entry = ContestEntry.objects.create(

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>NostraJAMus - Music Discovery, Prediction, and Tastemaking</title>
+
+    <!-- CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/nostrajamus.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="static/css/sticky-footer-navbar.css" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="http://connect.soundcloud.com/sdk.js"></script>
+    <!-- jQuery Version 1.11.1 -->
+    <script src="static/js/jquery.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="static/js/bootstrap.min.js"></script>
+
+    <!-- Custom CSS -->
+    <style>
+    </style>
+
+    <!-- Google Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-58603725-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <a href="http://www.nostrajamus.com"><img class="logo-img" src="static/img/icon_crystalball_xsm.png"/>
+            <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+<!--                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> -->
+                    <div class="navbar-brand">NostraJAMus</div>
+                </div>
+            </a>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a>Next Contest : 01.21.15</a></li>
+            </ul>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+<!--             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div> -->
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container page">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="nostra-font">
+                    <h1 class="welcome">Welcome, Tastemaker!</h1>
+                    <p class="lead">If you're up for the challenge, enter in our next contest:</p>
+                </div>
+                <ul class="list-unstyled">
+                    <li><div id="countdown"></div></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <div class="registration nostra-font2">
+        <div class="container-fluid">
+            <section class="container">
+                <div class="container-page"> 
+                    <hr>
+                    <div class="col-lg-12 instructions">
+                        <div class="col-md-4 nostra-font2">
+                            <img src="static/img/heart.png" class="img-instructions"/>
+                            <div class="nostra-font1 caption">Love a new song and you're dying to share it with your friends?</div>
+                        </div>
+                        <div class="col-md-4 nostra-font2">
+                            <img src="static/img/axe.png" class="img-instructions"/>
+                            <div class="nostra-font1 caption">Think it's a smash hit?<br>Champion your songs to fame and glory.</div>
+                        </div>
+                        <div class="col-md-4 nostra-font2">
+                            <img src="static/img/prize.png" class="img-instructions"/>
+                            <div class="nostra-font1 caption">Enter in the next context.<br><u>WIN BIG</u> on your tastes!</div>
+                        </div>
+                    </div>
+                    <hr>
+                    
+                    <div class="col-md-12 nostra-font2 free">IT'S FREE!</div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-default btn-lg nostra-font2 play" data-toggle="modal" data-target="#rulesModal">
+                        How To Play
+                    </button>
+                    <div class="registration-background">
+
+                        <h3 class="dark-grey">Registration</h3>
+
+                        <form id="registrationForm">
+                            <div class="form-group col-lg-6">
+                                <label class="control-label" for="firstname">First Name</label>
+                                <input type="text" name="" class="form-control" id="first_name" value="">
+                            </div>
+                            
+                            <div class="form-group col-lg-6">
+                                <label class="control-label" for="lastname">Last Name</label>
+                                <input type="text" name="" class="form-control" id="last_name" value="">
+                            </div>
+                                            
+                            <div class="form-group col-lg-6">
+                                <label class="control-label" for="email1">Email Address</label>
+                                <input type="text" name="" class="form-control" id="email1" value="">
+                            </div>
+                            
+                            <div class="form-group col-lg-6">
+                                <label class="control-label" for="email2">Confirm Email Address</label>
+                                <input type="text" name="" class="form-control" id="email2" value="">
+                            </div>
+
+                            <div class="form-group col-lg-12">
+                                <label class="control-label" for="username">Username (Alias)</label>
+                                <div class="subheading">This will show up on the leaderboard.</div>
+                                <input type="text" name="" class="form-control" id="username" value="">
+                            </div>
+<!--                             <div class="form-group col-lg-12">
+                                <label class="control-label" for="username">Password:</label>
+                                <input type="password" name="" class="form-control" id="username" value="">
+                            </div> -->
+                            <div class="form-group col-lg-12">
+                                <label class="control-label" for="song">Song</label>
+                                <div class="subheading">Choose wisely.</div>
+                                <input type="text" name="" class="form-control" id="search" value="" type="text" placeholder="Search Soundcloud . . .">
+                                <br>
+                                <div id="sc-embed"></div>
+                                </input>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg btn-register" id="register-btn">Register</button>
+                            <div id="errors"></div>
+                        </form>
+<!--                         <button type="submit" class="btn btn-primary btn-lg btn-register" id="register-btn">Register</button>
+ -->
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- <footer class="footer"> -->
+      <!-- <div class="container"> -->
+        <!-- <p class="text-muted"> -->
+        <div class="social-group">
+            <a href="https://www.facebook.com/nostrajamus.music?ref=hl"><img src="static/img/social-media/facebook-48x48.png" class="social-btn"/></a>
+            <a href="https://twitter.com/NostraJAMusVA"><img src="static/img/social-media/32/twitter-32x32.png" class="social-btn"/></a>
+            <a href="https://soundcloud.com/nostrajamus"><img src="static/img/social-media/soundcloud.png" class="social-btn"/></a>
+            <a href="https://play.spotify.com/user/collinwaldoch/playlist/0QmOLxaXpiDhToT2jxTVgL?play=true&utm_source=open.spotify.com&utm_medium=open"><img src="static/img/social-media/spotify.png" class="social-btn"/></a>
+        </div>
+        <!-- </p> -->
+
+        <div class="feedback nostra-font2">
+            Chat with us: &nbsp
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                Submit Feedback
+            </button>
+        </div>
+      <!-- </div> -->
+    <!-- </footer> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Feedback</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form form-feedback">
+                <textarea class="form-control" rows="3" id="feedback-text" placeholder="Tell us what you think."></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind</button>
+            <button type="button" class="btn btn-primary" id="feedback-submit" data-dismiss="modal">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Contest Rules</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form form-feedback">
+                <div class="textbox" id="">(Collin)</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // set the date we're counting down to
+        var target_date = new Date('Jan, 21, 2015').getTime();
+
+        // variables for time units
+        var days, hours, minutes, seconds;
+
+        // get tag element
+        var countdown = document.getElementById('countdown');
+
+        // update the tag with id "countdown" every 1 second
+        setInterval(function () {
+
+            // find the amount of "seconds" between now and target
+            var current_date = new Date().getTime();
+            var seconds_left = (target_date - current_date) / 1000;
+
+            // do some time calculations
+            days = parseInt(seconds_left / 86400);
+            seconds_left = seconds_left % 86400;
+
+            hours = parseInt(seconds_left / 3600);
+            seconds_left = seconds_left % 3600;
+
+            minutes = parseInt(seconds_left / 60);
+            seconds = parseInt(seconds_left % 60);
+
+            // format countdown string + set tag value
+            countdown.innerHTML = '<span class="days">' + days +  ' <b>Days</b></span> <span class="hours">' + hours + ' <b>Hours</b></span> <span class="minutes">'
+            + minutes + ' <b>Minutes</b></span> <span class="seconds">' + seconds + ' <b>Seconds</b></span>';  
+
+        }, 1000);
+    </script>
+
+    <script>
+        $(function() {
+            SC.initialize({
+                client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
+            });
+
+            var songObj;
+
+            $("#search").autocomplete({
+                source: function(request, response) {
+                  // find all sounds of buskers licensed under 'creative commons share alike'
+                  // alert("Source");
+                  SC.get('/tracks', { q: request.term}, function(tracks) {
+                    // alert(tracks);
+                    var titles = [];
+                    for (var i = 0; i < tracks.length; i++) {
+                      if (i > 20) { break; }
+                      var item = { label: tracks[i].title, value: tracks[i] };
+                      titles[i] = item;
+                    }
+                    response(titles);
+                  });
+                },
+
+                select: function(event, ui) {
+                    // var song_title = ui.item.label;
+                    var song_id = ui.item.value.id;
+                    var song_play_count = ui.item.value.playback_count;
+                    var sc_frame = '<iframe width="50%" height="50%" scrolling="no" frameborder="yes" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + song_id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe><br><br><div>Play Count: ' + song_play_count;
+                    // var modal_btn = '<button type="button" class="btn btn-primary btn-lg btn-sc" data-toggle="modal" data-target="#myModal">Preview Song<img src="img/sm-sc.png" class="sc-img"/></button>';
+                    // document.getElementById("search").innerHTML = song_title;
+                    document.getElementById("sc-embed").innerHTML = sc_frame;
+                    event.preventDefault();
+                    $(this).val(ui.item.label);
+                    songObj = ui.item;
+                },
+
+                focus: function( event, ui ) { 
+                    // console.log(ui.item);
+                    event.preventDefault();
+                    $(this).val(ui.item.label);
+                }
+            });
+
+            $("#registrationForm").submit(function( event ) {
+                for (var i = 0; i < event.target.length-1; i++) {
+                    event.preventDefault();
+                    if (event.target[i].value == null || event.target[i].value == '') {
+                        var errorMessage = "Please fill out all fields.";
+                        document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+                        $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+                        return false;
+                    }
+                }
+                if (event.target[2].value != event.target[3].value) {
+                    event.preventDefault();
+                    errorMessage = "Emails do not match.";
+                    document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+                    $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+                }
+                else {
+                    if(event.target[2].value.indexOf('@') === -1) {
+                        event.preventDefault();
+                        errorMessage = "Invalid email address."
+                        document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+                        $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+                    }
+                    else if (songObj == null) {
+                        console.log(songObj);
+                        event.preventDefault();
+                        errorMessage = "Invalid song selection."
+                        document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+                        $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+                    }
+                    else {
+
+                        // MICHAEL: AJAX CALL FOR FORM SUBMISSION
+                        console.log(JSON.stringify({
+                                "track": songObj.value,
+                                "user": {
+                                    "first_name": event.target[0].value,
+                                    "last_name": event.target[1].value,
+                                    "username": event.target[4].value,
+                                    "email": event.target[2].value
+                                }
+                            }));
+                        $.ajax({
+                            type: 'POST',
+                            url: 'http://127.0.0.1:8000/api/contests/1/enter/',
+                            dataType: 'json',
+                            crossDomain: 'true',
+                            contentType: "application/json",
+                            data: JSON.stringify({
+                                "track": songObj.value,
+                                "user": {
+                                    "first_name": event.target[0].value,
+                                    "last_name": event.target[1].value,
+                                    "username": event.target[4].value,
+                                    "email": event.target[2].value
+                                }
+                            }),
+                            success: function(data) { alert('data: ' + data); },
+                            error: function(error) {
+                                alert(error);
+                                console.log(error);
+                            }
+                        });
+
+                        // /MICHAEL: AJAX CALL FOR FORM SUBMISSION
+
+                        event.preventDefault();
+                    }
+
+                }
+            });
+
+            // MICHAEL: AJAX CALL FOR FEEDBACK SUBMISSION
+            
+            $('#feedback-submit').click(function(event){
+                // alert($('#feedback-text').val());
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://54.165.2.116:8000/feedback/', //<--- need to make endpoint
+                    dataType: 'json',
+                    crossDomain: 'true',
+                    contentType: "application/json",
+                    data: {
+                        "feedback": $('#feedback-text').val()
+                    },
+                    success: function(data) { alert('data: ' + data); },
+                    error: function(error) {
+                        alert("failure");
+                    }
+                });
+                event.preventDefault();
+            });
+
+            // /MICHAEL: AJAX CALL FOR FEEDBACK SUBMISSION
+
+        });
+
+    </script>
+
+</body>
+
+</html>

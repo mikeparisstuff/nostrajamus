@@ -94,6 +94,12 @@ class SCUser(BaseModel):
          max_length=64
      )
 
+     kind = models.CharField(
+         max_length=32,
+         blank=True,
+         null=True
+     )
+
      uri = models.URLField()
 
      permalink_url = models.URLField()
@@ -233,10 +239,7 @@ class SCTrack(BaseModel):
     )
 
     #The release number of the track
-    release = models.IntegerField(
-        blank=True,
-        null=True
-    )
+    release = models.CharField(max_length=255, blank=True, null=True)
 
     purchase_url = models.URLField(
         blank=True,
@@ -267,7 +270,9 @@ class SCTrack(BaseModel):
     )
 
     track_type = models.CharField(
-        max_length=32
+        max_length=32,
+        blank=True,
+        null=True
     )
 
     key_signature = models.CharField(
@@ -338,6 +343,35 @@ class SCTrack(BaseModel):
     comment_count = models.IntegerField()
 
     attachments_uri = models.URLField(
+        blank=True,
+        null=True
+    )
+
+    policy = models.CharField(
+        max_length=32,
+        blank = True,
+        null = True
+    )
+
+    purchase_title = models.CharField(
+        max_length=64,
+        blank = True,
+        null = True
+    )
+
+    kind = models.CharField(
+        max_length=16,
+        blank=True,
+        null=True
+    )
+
+    embeddable_by = models.CharField(
+        max_length=16,
+        blank=True,
+        null=True
+    )
+
+    sc_last_modified = models.DateTimeField(
         blank=True,
         null=True
     )
