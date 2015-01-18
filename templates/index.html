@@ -366,7 +366,7 @@
                             }));
                         $.ajax({
                             type: 'POST',
-                            url: 'http://127.0.0.1:8000/api/contests/1/enter/',
+                            url: 'api/contests/1/enter/', //http://127.0.0.1:8000/
                             dataType: 'json',
                             crossDomain: 'true',
                             contentType: "application/json",
@@ -381,7 +381,7 @@
                             }),
                             success: function(data) { alert('data: ' + data); },
                             error: function(error) {
-                                alert(error);
+{#                                alert(error);#}
                                 console.log(error);
                             }
                         });
