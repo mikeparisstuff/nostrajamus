@@ -74,11 +74,11 @@ class ContestViewSet(viewsets.ModelViewSet):
         print dir(track_serializer)
         if track_serializer.is_valid() and user_serializer.is_valid():
             print track_serializer.errors
-            # try:
-            track = track_serializer.save()
-            # except:
+            try:
+                track = track_serializer.save()
+            except:
                 # The track already exists
-                # track = SCTrack.objects.get(sc_id = track_id)
+                track = SCTrack.objects.get(sc_id = track_id)
             user = user_serializer.save()
             # Add a new Contest entry with the
             contest_entry = ContestEntry.objects.create(
