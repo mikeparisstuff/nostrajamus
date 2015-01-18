@@ -400,12 +400,12 @@
                 // alert($('#feedback-text').val());
                 $.ajax({
                     type: 'POST',
-                    url: 'http://54.165.2.116:8000/feedback/', //<--- need to make endpoint
+                    url: 'feedback/', //<--- need to make endpoint
                     dataType: 'json',
                     crossDomain: 'true',
                     contentType: "application/json",
                     data: {
-                        "feedback": $('#feedback-text').val()
+                        "text": $('#feedback-text').val()
                     },
                     success: function(data) { alert('data: ' + data); },
                     error: function(error) {
