@@ -404,9 +404,9 @@
                     dataType: 'json',
                     crossDomain: 'true',
                     contentType: "application/json",
-                    data: {
+                    data: JSON.stringify({
                         "text": $('#feedback-text').val()
-                    },
+                    }),
                     success: function(data) { alert('data: ' + data); },
                     error: function(error) {
                         alert("failure");
