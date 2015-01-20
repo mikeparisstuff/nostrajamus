@@ -88,7 +88,7 @@ class SCPeriodicPlayCountSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = SCPeriodicPlayCount
-        fields = ('track_title', 'soundcloud_id', 'playback_count', 'follower_count')
+        fields = ('track_title', 'soundcloud_id', 'playback_count', 'follower_count', 'created_at', 'modified_at')
 
 class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
