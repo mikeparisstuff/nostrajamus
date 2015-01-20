@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+from datetime import timedelta
+
 import djcelery
 djcelery.setup_loader()
 BROKER_URL = 'django://'
@@ -87,7 +89,17 @@ REST_FRAMEWORK = {
     'PAGINATE_BY': 10
 }
 
+# Celery
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERYBEAT_SCHEDULE = {
+    'update-playcounts': {
+        'task': 'api.update_playcount',
+        'schedule': timedelta(minutes=1)
+    }
+}
+CELERY_TIMEZONE = 'UTC'
+
+
 AUTH_USER_MODEL = 'api.Profile'
 
 # Internationalization
