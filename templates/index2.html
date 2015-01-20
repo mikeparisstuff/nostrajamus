@@ -614,13 +614,15 @@
                 console.log(data);
                 var playbacks = [];
                 var followers = [];
+                var labels = [];
                 for (var i = 0; i < data.length; i++) {
                     var periodic_pc = data[i];
                     playbacks.push(periodic_pc.playback_count);
                     followers.push(periodic_pc.follower_count);
+                    labels.push(i);
                 }
                 var data = {
-                    labels: ["First", "Last"],
+                    labels: labels,
                     datasets: [
                         {
                             label: "Artist Followers",
