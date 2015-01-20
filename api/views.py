@@ -9,7 +9,7 @@ import soundcloud
 client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
 
 def home_page(request):
-    return render_to_response("index.html", RequestContext(request, {}))
+    return render_to_response("index2.html", RequestContext(request, {}))
 
 # Create your views here.
 
