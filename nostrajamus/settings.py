@@ -111,7 +111,7 @@ CELERY_IMPORTS = ('api.tasks',)
 CELERYBEAT_SCHEDULE = {
     'update-playcounts': {
         'task': 'api.tasks.update_playcount',
-        'schedule': timedelta(minutes=10)
+        'schedule': timedelta(minutes=20)
     }
 }
 
