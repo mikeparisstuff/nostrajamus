@@ -67,12 +67,23 @@ WSGI_APPLICATION = 'nostrajamus.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+DATABASES = {}
+
+instance_id = os.environ.get('INSTANCE_ID', None)
+if instance_id == 'PROD':
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'NostrajamusProd',
+        'USER': os.environ['RDS_USERNAME'],
+        'PASSWORD': os.environ['RDS_PASSWORD'],
+        'HOST': 'nostrajamusprod.cqgo2wxdycyf.us-east-1.rds.amazonaws.com',
+        'PORT': os.environ['RDS_PORT']
+    }
+else:
+    DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -98,6 +109,7 @@ CELERYBEAT_SCHEDULE = {
     }
 }
 CELERY_TIMEZONE = 'UTC'
+CELERY_IMPORTS = ('api.tasks',)
 
 
 AUTH_USER_MODEL = 'api.Profile'
