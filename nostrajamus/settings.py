@@ -81,8 +81,12 @@ if instance_id == 'PROD':
     }
 else:
     DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'nostrajamusdev',
+        'USER': 'django_login',
+        'PASSWORD': 'django_login',
+        'HOST': '',
+        'PORT': '',
     }
 
 REST_FRAMEWORK = {
@@ -102,15 +106,14 @@ REST_FRAMEWORK = {
 
 # Celery
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERY_TIMEZONE = 'UTC'
+CELERY_IMPORTS = ('api.tasks',)
 CELERYBEAT_SCHEDULE = {
     'update-playcounts': {
-        'task': 'api.update_playcount',
+        'task': 'api.tasks.update_playcount',
         'schedule': timedelta(minutes=1)
     }
 }
-CELERY_TIMEZONE = 'UTC'
-CELERY_IMPORTS = ('api.tasks',)
-
 
 AUTH_USER_MODEL = 'api.Profile'
 

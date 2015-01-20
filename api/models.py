@@ -201,7 +201,7 @@ class SCTrack(BaseModel):
     )
 
     tag_list = models.CharField(
-        max_length=256,
+        max_length=512,
         blank=True,
         default=''
     )
@@ -218,7 +218,7 @@ class SCTrack(BaseModel):
     )
 
     description = models.CharField(
-        max_length=256,
+        max_length=1024,
         blank=True,
         null=True
     )
@@ -239,7 +239,7 @@ class SCTrack(BaseModel):
     )
 
     #The release number of the track
-    release = models.CharField(max_length=255, blank=True, null=True)
+    release = models.CharField(max_length=256, blank=True, null=True)
 
     purchase_url = models.URLField(
         blank=True,

@@ -379,7 +379,10 @@
                                     "email": event.target[2].value
                                 }
                             }),
-                            success: function(data) { alert('data: ' + data); },
+                            success: function(data) {
+{#                                alert('data: ' + data); #}
+                                console.log('SUCCESS: ' + data);
+                            },
                             error: function(error) {
 {#                                alert(error);#}
                                 console.log(error);
@@ -411,7 +414,8 @@
                     //    alert('data: ' + data);
                     },
                     error: function(error) {
-                        alert("failure");
+                        console.log(error);
+{#                        alert("failure");#}
                     }
                 });
                 event.preventDefault();
