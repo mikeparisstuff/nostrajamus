@@ -87,7 +87,7 @@ $(function() {
                 "track": songObj.value,
                 "user": {
                     "first_name": $("#first_name").val(),
-                    "last_name": $("last_name").val(),
+                    "last_name": $("#last_name").val(),
                     "username": $("#username").val(),
                     "password": $("#password1").val(),
                     "email": $("#email").val()
