@@ -19,7 +19,7 @@ class WatchedSongAdmin(admin.ModelAdmin):
     list_display = ('user', 'track', 'initial_playback_count', 'initial_follower_count', 'is_active')
 
 class ContestEntryAdmin(admin.ModelAdmin):
-    list_display = ('user', 'track', 'contest', 'initial_playback_count', 'initial_follower_count', 'is_active')
+    list_display = ('user', 'track', 'contest', 'jam_points', 'initial_playback_count', 'initial_follower_count', 'is_active')
 
 class SCUserAdmin(admin.ModelAdmin):
     list_display = ('id', 'sc_id', 'username', 'permalink_url')
