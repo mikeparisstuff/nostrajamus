@@ -34,9 +34,12 @@ class HomePageView(APIView):
         data = {}
         if request.user.is_authenticated():
             user = request.user
-            contest1 = user.contests.get(pk=1)
-            contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
-            data['my_track'] = contest_entry.track
+            try:
+                contest1 = user.contests.get(pk=1)
+                contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
+                data['my_track'] = contest_entry.track
+            except:
+                return render_to_response("index2.html", RequestContext(request, {}))
         return render_to_response("index2.html", RequestContext(request, data))
 
 class LoginView(APIView):
