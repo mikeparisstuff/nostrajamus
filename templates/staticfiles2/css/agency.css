@@ -5,6 +5,9 @@ body {
 .text-muted {
   color: #777777;
 }
+.text-large {
+  font-size: 20px;
+}
 .text-primary {
   color: #ff5252;
 }
@@ -637,7 +640,7 @@ section#contact .form-group input.form-control {
   height: auto;
 }
 section#contact .form-group textarea.form-control {
-  height: 236px;
+  height: 150px;
 }
 section#contact .form-control:focus {
   border-color: #ff5252;

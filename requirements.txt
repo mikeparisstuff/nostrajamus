@@ -8,6 +8,7 @@ billiard==3.3.0.19
 celery==3.1.17
 django-celery==3.1.16
 django-filter==0.9.1
+django-mailchimp==0.1.30
 django-rest-swagger==0.2.8
 djangorestframework==3.0.3
 fudge==1.0.3

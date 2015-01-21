@@ -460,3 +460,14 @@ class Feedback(BaseModel):
         blank=True,
         default=''
     )
+
+    name = models.CharField(
+        max_length=64,
+        blank=True,
+        default=''
+    )
+
+    email = models.EmailField(
+        blank=True,
+        null=True
+    )

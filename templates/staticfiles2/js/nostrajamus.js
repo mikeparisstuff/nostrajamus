@@ -8,6 +8,24 @@ $(function() {
         client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
     });
 
+    function insertCommas(s) {
+
+        // get stuff before the dot
+        var d = s.indexOf('.');
+        var s2 = d === -1 ? s : s.slice(0, d);
+
+        // insert commas every 3 digits from the right
+        for (var i = s2.length - 3; i > 0; i -= 3)
+          s2 = s2.slice(0, i) + ',' + s2.slice(i);
+
+        // append fractional part
+        if (d !== -1)
+          s2 += s.slice(d);
+
+        return s2;
+
+    }
+
     var songObj;
     $("#search").autocomplete({
         source: function(request, response) {
@@ -29,9 +47,14 @@ $(function() {
             // var song_title = ui.item.label;
             var song_id = ui.item.value.id;
             var song_play_count = ui.item.value.playback_count;
-            var sc_frame = '<iframe width="50%" height="50%" scrolling="no" frameborder="yes" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + song_id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe><br><br><div>Play Count: ' + song_play_count;
+            var user_id = ui.item.value.user.id;
+            var sc_frame = '<iframe width="100%" height="166px" scrolling="no" frameborder="yes" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + song_id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>';
             // var modal_btn = '<button type="button" class="btn btn-primary btn-lg btn-sc" data-toggle="modal" data-target="#myModal">Preview Song<img src="img/sm-sc.png" class="sc-img"/></button>';
             // document.getElementById("search").innerHTML = song_title;
+            SC.get("/users/"+user_id, {limit: 1}, function(user){
+                document.getElementById("follower_count_embed").innerHTML = "&nbsp | &nbsp Follower Count: " + user.followers_count;
+            });
+            document.getElementById("playcount_embed").innerHTML = "Play Count: "+song_play_count;
             document.getElementById("sc-embed").innerHTML = sc_frame;
             event.preventDefault();
             $(this).val(ui.item.label);

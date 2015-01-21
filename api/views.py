@@ -6,6 +6,19 @@ from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, C
 from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.views import APIView
+import mailchimp
+import os
+
+
+MAILCHIMP_API_KEY = '9defc1dba727a90da8da8d294d3fa760-us10'
+def get_mailchimp_api():
+    return mailchimp.Mailchimp(MAILCHIMP_API_KEY)
+
+instance_id = os.environ.get('INSTANCE_ID', None)
+if instance_id == 'PROD':
+    MAILCHIMP_LIST_ID = 'e0a05381ce'
+else:
+    MAILCHIMP_LIST_ID = '3556cd8dcc'
 
 import soundcloud
 client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
@@ -13,12 +26,18 @@ client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
 
 class HomePageView(APIView):
     def get(self, request, format=None):
+        # if request.user.is_authenticated():
+        #     print request.user
+        #     print 'Render main page'
+        #     return Response("Main Page")
+        # else:
+        data = {}
         if request.user.is_authenticated():
-            print request.user
-            print 'Render main page'
-            return Response("Main Page")
-        else:
-            return render_to_response("index2.html", RequestContext(request, {}))
+            user = request.user
+            contest1 = user.contests.get(pk=1)
+            contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
+            data['my_track'] = contest_entry.track
+        return render_to_response("index2.html", RequestContext(request, data))
 
 class LoginView(APIView):
     def get(self, request, format=None):
@@ -130,6 +149,19 @@ class ContestViewSet(viewsets.ModelViewSet):
                 password=user_data['password'],
                 username=user_data['username']
             )
+
+            # Add them to the mailing list
+            try:
+                m = get_mailchimp_api()
+                m.lists.subscribe(MAILCHIMP_LIST_ID, {'email': user_data['email'], 'double_optin': False, 'send_welcome': True})
+            except mailchimp.ListAlreadySubscribedError:
+                pass
+            except mailchimp.Error, e:
+                pass
+
+            user = authenticate(username=user_data['username'], password=user_data['password'])
+            login(request, user)
+
             # Add a new Contest entry with the
             contest_entry = ContestEntry.objects.create(
                 user=user,
@@ -168,3 +200,12 @@ class SCUserViewSet(viewsets.ModelViewSet):
 class FeedbackViewSet(viewsets.ModelViewSet):
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
+
+    def create(self, request):
+        data = request.data
+        feedback = Feedback.objects.create(
+            name = data['name'],
+            text = data['text'],
+            email = data['email']
+        )
+        return redirect('/')
