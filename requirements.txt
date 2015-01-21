@@ -8,14 +8,14 @@ billiard==3.3.0.19
 celery==3.1.17
 django-celery==3.1.16
 django-filter==0.9.1
-django-mailchimp==0.1.30
 django-rest-swagger==0.2.8
 djangorestframework==3.0.3
+docopt==0.4.0
 fudge==1.0.3
 kombu==3.0.24
+mailchimp==2.0.9
 psycopg2==2.5.4
 pytz==2014.10
 requests==2.5.1
-simplejson==3.6.5
 soundcloud==0.4.1
 wsgiref==0.1.2
