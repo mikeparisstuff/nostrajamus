@@ -174,7 +174,7 @@ fieldset[disabled] .btn-xl.active {
   text-transform: uppercase;
   font-weight: 400;
   letter-spacing: 1px;
-  color: white;
+  color: #ff5252;
 }
 .navbar-default .nav li a:hover,
 .navbar-default .nav li a:focus {
@@ -216,6 +216,45 @@ fieldset[disabled] .btn-xl.active {
   .navbar-default.navbar-shrink .navbar-brand {
     font-size: 1.5em;
   }
+  .navbar-default.navbar-shrink .nav li a {
+    color: white;
+  }
+}
+.btn-circle {
+  width: 70px;
+  height: 70px;
+  margin-top: 15px;
+  padding: 7px 16px;
+  border: 2px solid #ffffff;
+  border-radius: 35px;
+  font-size: 40px;
+  color: #ffffff;
+  background: transparent;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out;
+}
+.btn-circle:hover,
+.btn-circle:focus {
+  outline: none;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+.btn-circle i.animated {
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 1s;
+  -moz-transition-property: -moz-transform;
+  -moz-transition-duration: 1s;
+}
+.btn-circle:hover i.animated {
+  -webkit-animation-name: pulse;
+  -moz-animation-name: pulse;
+  -webkit-animation-duration: 1.5s;
+  -moz-animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
 }
 header {
   background-image: url('../img/paradiso.png');
@@ -434,7 +473,7 @@ section h3.section-subheading {
 }
 .timeline > li .timeline-image h4 {
   font-size: 10px;
-  margin-top: 12px;
+  margin-top: 22px;
   line-height: 14px;
 }
 .timeline > li.timeline-inverted > .timeline-panel {
@@ -468,6 +507,26 @@ section h3.section-subheading {
 .timeline .timeline-body > ul {
   margin-bottom: 0;
 }
+.center {
+  text-align: center;
+}
+.subheading-button {
+  margin-top: -40px;
+}
+.scoring-img {
+  width: 100%;
+}
+.red {
+  color: red;
+  text-align: center;
+}
+.green {
+  color: green;
+  text-align: center;
+}
+.score-example {
+  text-align: center;
+}
 @media (min-width: 768px) {
   .timeline:before {
     left: 50%;
@@ -490,7 +549,7 @@ section h3.section-subheading {
   }
   .timeline > li .timeline-image h4 {
     font-size: 13px;
-    margin-top: 16px;
+    margin-top: 28px;
     line-height: 18px;
   }
   .timeline > li.timeline-inverted > .timeline-panel {
@@ -513,7 +572,7 @@ section h3.section-subheading {
   }
   .timeline > li .timeline-image h4 {
     font-size: 18px;
-    margin-top: 30px;
+    margin-top: 55px;
     line-height: 26px;
   }
   .timeline > li.timeline-inverted > .timeline-panel {
@@ -533,7 +592,7 @@ section h3.section-subheading {
     margin-left: -85px;
   }
   .timeline > li .timeline-image h4 {
-    margin-top: 40px;
+    margin-top: 65px;
   }
   .timeline > li.timeline-inverted > .timeline-panel {
     padding: 0 100px 20px 20px;

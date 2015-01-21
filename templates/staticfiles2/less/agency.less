@@ -113,7 +113,8 @@ h1, h2, h3, h4, h5, h6 {
     			.heading-font;
     			font-weight: 400;
     			letter-spacing: 1px;
-    			color: white;
+//    			color: white;
+                color: @brand-primary;
     			&:hover,
     			&:focus {
     				color: @brand-primary;
@@ -157,8 +158,54 @@ h1, h2, h3, h4, h5, h6 {
         padding: 10px 0;
 		.navbar-brand {
 	        font-size: 1.5em;
-	    }    
+	    }
+        .nav {
+            li {
+                a {
+      			    color: white;
+                }
+            }
+        }
 	}
+}
+
+.btn-circle {
+    width: 70px;
+    height: 70px;
+    margin-top: 15px;
+    padding: 7px 16px;
+    border: 2px solid @light;
+    border-radius: 35px;
+    font-size: 40px;
+    color: @light;
+    background: transparent;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+    &:hover,
+    &:focus {
+        outline: none;
+        color: @light;
+        background: fade(@light, 10%);
+    }
+    i.animated {
+        -webkit-transition-property: -webkit-transform;
+        -webkit-transition-duration: 1s;
+        -moz-transition-property: -moz-transform;
+        -moz-transition-duration: 1s;
+    }
+    &:hover {
+        i.animated {
+            -webkit-animation-name: pulse;
+            -moz-animation-name: pulse;
+            -webkit-animation-duration: 1.5s;
+            -moz-animation-duration: 1.5s;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            -moz-animation-timing-function: linear;
+        }
+    }
 }
 
 header {
@@ -295,8 +342,8 @@ section {
                     h4 {
                         margin: 0;
                     }
-                }                
-            }            
+                }
+            }
         }
         .portfolio-caption {
         	max-width: 400px;
@@ -390,10 +437,27 @@ section {
             text-align: center;
             h4 {
             	font-size: 10px;
-            	margin-top: 12px;
+            	margin-top: 22px;
             	line-height: 14px;
             }
         }
+//        .timeline-inverted > .timeline-panel {
+//            float: right;
+//            text-align: left;
+//            padding: 0 20px 0 100px;
+//			&:before {
+//                border-left-width: 0;
+//                border-right-width: 15px;
+//                left: -15px;
+//                right: auto;
+//            }
+//            &:after {
+//                border-left-width: 0;
+//                border-right-width: 14px;
+//                left: -14px;
+//                right: auto;
+//            }
+//        }
         &.timeline-inverted > .timeline-panel {
             float: right;
             text-align: left;
@@ -432,6 +496,32 @@ section {
 	}
 }
 
+.center {
+  text-align: center;
+}
+
+.subheading-button {
+  margin-top: -40px;
+}
+
+.scoring-img {
+  width: 100%;
+}
+
+.red {
+  color: red;
+  text-align: center;
+}
+
+.green {
+  color: green;
+  text-align: center;
+}
+
+.score-example {
+  text-align: center;
+}
+
 @media(min-width:768px) {
 	.timeline {
 		&:before {
@@ -453,7 +543,7 @@ section {
 	            margin-left: -50px;
 	            h4 {
 	            	font-size: 13px;
-	            	margin-top: 16px;
+	            	margin-top: 28px;
 	            	line-height: 18px;
 	            }
 	        }
@@ -479,7 +569,7 @@ section {
 	            margin-left: -75px;
 	            h4 {
             		font-size: 18px;
-	            	margin-top: 30px;
+	            	margin-top: 55px;
 	            	line-height: 26px;
 	            }
 	        }
@@ -502,7 +592,7 @@ section {
 	            height: 170px;
 	            margin-left: -85px;
 	            h4 {
-	            	margin-top: 40px;
+	            	margin-top: 65px;
 	            }
 	        }
 	        &.timeline-inverted > .timeline-panel {
@@ -581,7 +671,7 @@ section#contact {
 	   font-weight: 700;
 	   color: @placeholder-text;
 	}
-	:-ms-input-placeholder {  
+	:-ms-input-placeholder {
 	   .heading-font;
 	   font-weight: 700;
 	   color: @placeholder-text;
@@ -706,8 +796,8 @@ ul.social-buttons {
                 -webkit-transform: rotate(90deg);
                 /* Safari and Chrome */
                 z-index:1052;
-            }            
-        }        
+            }
+        }
     }
     .modal-backdrop {
     	opacity: 0;
