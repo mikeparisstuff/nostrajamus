@@ -16,6 +16,7 @@
 
     <!-- Custom CSS -->
     <link href="/static/css/agency.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css"/>
 
     <!-- Custom Fonts -->
     <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +25,8 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
+
+    <script src="http://connect.soundcloud.com/sdk.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,6 +34,16 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-58603725-1', 'auto');
+        ga('send', 'pageview');
+    </script>
 </head>
 
 <body id="page-top" class="index">
@@ -69,6 +82,9 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                    <li>
+                        <a href="/login/">Login</a>
                     </li>
                 </ul>
             </div>
@@ -137,17 +153,17 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    <form name="contestEntryForm" id="contestEntryForm" novalidate>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                    <input type="text" class="form-control" placeholder="First Name *" id="first_name" required data-validation-required-message="Please enter your name.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                    <input type="text" class="form-control" placeholder="Last Name *" id="last_name" required data-validation-required-message="Please enter your name.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -159,19 +175,19 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Username (alias) *" id="email" required data-validation-required-message="Please enter your email address.">
+                                    <input type="email" class="form-control" placeholder="Username (alias) *" id="username" required data-validation-required-message="Please enter your email address.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password *" id="password" required data-validation-required-message="Please enter a password">
+                                    <input type="password" class="form-control" placeholder="Password *" id="password1" required data-validation-required-message="Please enter a password">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Confirm password *" id="password" required data-validation-required-message="Please enter a confirmation password">
+                                    <input type="password" class="form-control" placeholder="Confirm password *" id="password2" required data-validation-required-message="Please enter a confirmation password">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -184,15 +200,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-12">
-                                <canvas id="example-chart" width="800" height="400"></canvas>
-                                <p class="text-muted">Example graph for Asap Rocky - Fuckin' Problems. Will have dates for x-axis, less data points, and a longer time period. This just started recording data last night.</p>
-                            </div>
+{#                            <div class="col-lg-12">#}
+{#                                <canvas id="example-chart" width="800" height="400"></canvas>#}
+{#                                <p class="text-muted">Example graph for Asap Rocky - Fuckin' Problems. Will have dates for x-axis, less data points, and a longer time period. This just started recording data last night.</p>#}
+{#                            </div>#}
 
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
                                 <button type="submit" class="btn btn-xl">Join Contest</button>
+                                <div id="errors"></div>
                             </div>
                         </div>
                     </form>
@@ -589,7 +606,8 @@
 
     <!-- jQuery -->
     <script src="/static/js/jquery.js"></script>
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/static/js/bootstrap.min.js"></script>
 
@@ -597,66 +615,66 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="/static/js/classie.js"></script>
     <script src="/static/js/cbpAnimatedHeader.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></sript>
 
-    <!-- Contact Form JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
+
     <script src="/static/js/jqBootstrapValidation.js"></script>
-    <script src="/static/js/contact_me.js"></script>
+{#    <script src="/static/js/contact_me.js"></script>#}
 
-    <!-- Custom Theme JavaScript -->
     <script src="/static/js/agency.js"></script>
+    <script type="text/javascript" src="/static/js/nostrajamus.js"></script>
 
-    <script type="text/javascript">
-        var ctx = document.getElementById("example-chart").getContext("2d");
-
-        $.ajax({
-            type: 'GET',
-            url: '/api/tracks/1/playcounts/',
-            success: function(data) {
-                console.log("Success");
-                console.log(data);
-                var playbacks = [];
-                var followers = [];
-                var labels = [];
-                for (var i = 0; i < data.length; i++) {
-                    var periodic_pc = data[i];
-                    playbacks.push(periodic_pc.playback_count);
-                    followers.push(periodic_pc.follower_count);
-                    labels.push(i);
-                }
-                var data = {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: "Artist Followers",
-                            fillColor: "rgba(220,220,220,0.2)",
-                            strokeColor: "rgba(220,220,220,1)",
-                            pointColor: "rgba(220,220,220,1)",
-                            pointStrokeColor: "#fff",
-                            pointHighlightFill: "#fff",
-                            pointHighlightStroke: "rgba(220,220,220,1)",
-                            data: followers
-                        },
-                        {
-                            label: "Track Playcount",
-                            fillColor: "rgba(151,187,205,0.2)",
-                            strokeColor: "rgba(151,187,205,1)",
-                            pointColor: "rgba(151,187,205,1)",
-                            pointStrokeColor: "#fff",
-                            pointHighlightFill: "#fff",
-                            pointHighlightStroke: "rgba(151,187,205,1)",
-                            data: playbacks
-                        }
-                    ]
-                };
-                var myNewChart = new Chart(ctx).Line(data);
-            },
-            error: function(data) {
-                console.log(error);
-            }
-        });
-
-    </script>
+{#    <script type="text/javascript">#}
+{#        var ctx = document.getElementById("example-chart").getContext("2d");#}
+{##}
+{#        $.ajax({#}
+{#            type: 'GET',#}
+{#            url: '/api/tracks/1/playcounts/',#}
+{#            success: function(data) {#}
+{#                console.log("Success");#}
+{#                console.log(data);#}
+{#                var playbacks = [];#}
+{#                var followers = [];#}
+{#                var labels = [];#}
+{#                for (var i = 0; i < data.length; i++) {#}
+{#                    var periodic_pc = data[i];#}
+{#                    playbacks.push(periodic_pc.playback_count);#}
+{#                    followers.push(periodic_pc.follower_count);#}
+{#                    labels.push(i);#}
+{#                }#}
+{#                var data = {#}
+{#                    labels: labels,#}
+{#                    datasets: [#}
+{#                        {#}
+{#                            label: "Artist Followers",#}
+{#                            fillColor: "rgba(220,220,220,0.2)",#}
+{#                            strokeColor: "rgba(220,220,220,1)",#}
+{#                            pointColor: "rgba(220,220,220,1)",#}
+{#                            pointStrokeColor: "#fff",#}
+{#                            pointHighlightFill: "#fff",#}
+{#                            pointHighlightStroke: "rgba(220,220,220,1)",#}
+{#                            data: followers#}
+{#                        },#}
+{#                        {#}
+{#                            label: "Track Playcount",#}
+{#                            fillColor: "rgba(151,187,205,0.2)",#}
+{#                            strokeColor: "rgba(151,187,205,1)",#}
+{#                            pointColor: "rgba(151,187,205,1)",#}
+{#                            pointStrokeColor: "#fff",#}
+{#                            pointHighlightFill: "#fff",#}
+{#                            pointHighlightStroke: "rgba(151,187,205,1)",#}
+{#                            data: playbacks#}
+{#                        }#}
+{#                    ]#}
+{#                };#}
+{#                var myNewChart = new Chart(ctx).Line(data);#}
+{#            },#}
+{#            error: function(data) {#}
+{#                console.log(error);#}
+{#            }#}
+{#        });#}
+{##}
+{#    </script>#}
 
 </body>
 

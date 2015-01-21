@@ -21,9 +21,12 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/', views.LoginView.as_view(), name="login"),
+    url(r'^logout/', views.LogoutView.as_view(), name="logout"),
     url(r'^api/', include(router.urls)),
+    url(r'^contests/', views.Contest1View.as_view(), name='contest_1'),
     url(r'^api-auth/', include('rest_framework.urls',namespace='rest_framework')),
-    url(r'^', views.home_page),
+    url(r'^', views.HomePageView.as_view(), name='home_page'),
 )
 
 urlpatterns += staticfiles_urlpatterns()

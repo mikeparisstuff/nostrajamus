@@ -55,6 +55,18 @@ class Contest(BaseModel):
         default = True
     )
 
+    start_time = models.DateTimeField(
+        auto_now_add=True,
+        blank = True,
+        null = True
+    )
+
+    end_time = models.DateTimeField(
+        auto_now_add=True,
+        blank = True,
+        null = True
+    )
+
     class Meta:
         ordering = ('created_at',)
 
@@ -431,6 +443,10 @@ class ContestEntry(BaseModel):
     # Track the user has entered
     track = models.ForeignKey(
         SCTrack
+    )
+
+    jam_points = models.IntegerField(
+        default = 0
     )
 
     initial_playback_count = models.IntegerField()

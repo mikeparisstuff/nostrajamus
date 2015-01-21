@@ -1,17 +1,62 @@
-from django.shortcuts import render, render_to_response, RequestContext
+from django.shortcuts import render, render_to_response, RequestContext, redirect
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
 from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback
 from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer
+from django.contrib.auth import authenticate, login, logout
+from rest_framework.views import APIView
 
 import soundcloud
 client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
 
-def home_page(request):
-    return render_to_response("index2.html", RequestContext(request, {}))
 
-# Create your views here.
+class HomePageView(APIView):
+    def get(self, request, format=None):
+        if request.user.is_authenticated():
+            print request.user
+            print 'Render main page'
+            return Response("Main Page")
+        else:
+            return render_to_response("index2.html", RequestContext(request, {}))
+
+class LoginView(APIView):
+    def get(self, request, format=None):
+        return render_to_response('login.html')
+
+    def post(self, request, format=None):
+        data = request.data
+        user = authenticate(username=data.get('username'), password=data.get('password'))
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                print("User is valid, active and authenticated")
+                return redirect('/')
+            else:
+                print("The password is valid, but the account has been disabled!")
+                return redirect('/')
+        else:
+            # the authentication system was unable to verify the username and password
+            print("The username and password were incorrect.")
+            return redirect('/login/')
+
+
+class LogoutView(APIView):
+    def get(self, request, format=None):
+        logout(request)
+        return redirect('/')
+
+class Contest1View(APIView):
+
+    def get(self, request, format=None):
+        if not request.user.is_authenticated():
+            return redirect('/login/')
+        user = request.user
+        contest1 = user.contests.get(pk=1)
+        contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
+
+        return render_to_response('contests.html', {'my_track': contest_entry})
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -70,16 +115,21 @@ class ContestViewSet(viewsets.ModelViewSet):
         user_data = request.data.get("user")
         sc_user = client.get('/users/{}'.format(track_data['user']['id']))
         track_serializer = SCTrackSerializer(data=track_data)
-        user_serializer = ProfileSerializer(data=user_data)
         print dir(track_serializer)
-        if track_serializer.is_valid() and user_serializer.is_valid():
+        if track_serializer.is_valid():
             print track_serializer.errors
-            # try:
-            track = track_serializer.save()
-            # except:
+            try:
+                track = SCTrack.objects.get(sc_id = track_id)
+            except SCTrack.DoesNotExist:
                 # The track already exists
-                # track = SCTrack.objects.get(sc_id = track_id)
-            user = user_serializer.save()
+                track = track_serializer.save()
+            user = Profile.objects.create_user(
+                first_name=user_data['first_name'],
+                last_name=user_data['last_name'],
+                email=user_data['email'],
+                password=user_data['password'],
+                username=user_data['username']
+            )
             # Add a new Contest entry with the
             contest_entry = ContestEntry.objects.create(
                 user=user,
@@ -92,6 +142,7 @@ class ContestViewSet(viewsets.ModelViewSet):
             user.contests.add(contest)
             return Response({"detail": "success"}, status=status.HTTP_201_CREATED)
         else:
+            print track_serializer.errors
             return Response({'detail': 'Invalid data to enter in contest'}, status=status.HTTP_400_BAD_REQUEST)
 
 class TrackViewSet(viewsets.ModelViewSet):
