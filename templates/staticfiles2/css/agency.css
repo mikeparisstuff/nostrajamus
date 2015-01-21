@@ -520,8 +520,11 @@ section h3.section-subheading {
 .scoring-img {
   width: 100%;
 }
-.white {
+.jam-with-us {
   color: white;
+}
+.jam-with-us:hover {
+  color: black;
 }
 .red {
   color: red;
