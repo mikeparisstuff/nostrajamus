@@ -813,3 +813,42 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #ff5252;
 }
+.rank-holder {
+  background-color: #f7f7f7;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+@media (min-width: 992px) {
+  .rank-holder {
+    margin: 0 -30px 0 -30px;
+    height: 166px;
+    line-height: 166px;
+  }
+}
+.graph-btn-holder {
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+}
+.graph-btn-holder .btn {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+@media (min-width: 992px) {
+  .graph-btn-holder {
+    height: 166px;
+    line-height: 166px;
+  }
+}
+#graphModal .modal-dialog {
+  width: 900px;
+}
+section#track-section {
+  padding: 50px 0;
+}
+section#contest-section {
+  padding: 50% 0;
+  background-color: #f7f7f7;
+}

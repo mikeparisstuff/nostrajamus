@@ -25,7 +25,6 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-
     <script src="http://connect.soundcloud.com/sdk.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -104,17 +103,78 @@
         </div>
     </header>
 
-    <section>
+    <section id="track-section">
         <div id="my-song">
             <div class="container">
                 <div class="row">
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ my_track.track.sc_id }}&amp;color=ff3333&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Your Track</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="rank-holder text-center">
+                            <span class="rank">3rd Place</span>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ my_track.track.sc_id }}&amp;color=ff3333&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+                    </div>
+                    <div class="col-md-1 graph-btn-holder">
+                        <button type="button" class="btn btn-primary vcenter" data-toggle="modal" data-target="#graphModal" data-id="{{ my_track.track.id }}" data-sc-id="{{ my_track.track.sc_id }}">Graph</button>
+{#                        <canvas id="myChart" width="100%" height="166"></canvas>#}
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <section class="contest-section bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Current Rankings</h2>
+                </div>
+            </div>
+            {% for entry in all_entries %}
+            <div class="row">
+                <div class="col-md-1">
+                    <div class="rank-holder text-center">
+                        <span class="rank">{{ track.jam_points }} Jam Points</span>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ entry.track.sc_id }}&amp;color=ff3333&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+                </div>
+                <div class="col-md-1 graph-btn-holder">
+                    <button type="button" class="btn btn-primary vcenter" data-toggle="modal" data-target="#graphModal" data-id="{{ entry.track.id }}" data-sc-id="{{ entry.track.sc_id }}">Graph</button>
+{#                        <canvas id="myChart" width="100%" height="166"></canvas>#}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 
+    </section>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <canvas id="trackChart" width="850px" height="300px"></canvas>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -301,6 +361,76 @@
 
     <script src="/static/js/agency.js"></script>
     <script type="text/javascript" src="/static/js/nostrajamus.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
+    <script type="text/javascript">
+        var my_ctx = document.getElementById("trackChart").getContext("2d");
+
+        function updateGraph(id, callback) {
+            $.ajax({
+                type: 'GET',
+                url: '/api/tracks/'+id+'/playcounts/',
+                success: function (data) {
+                    console.log("Success");
+                    console.log(data);
+                    var playbacks = [];
+                    var followers = [];
+                    var labels = [];
+                    for (var i = 0; i < data.length; i++) {
+                        var periodic_pc = data[i];
+                        playbacks.push(periodic_pc.playback_count);
+                        followers.push(periodic_pc.follower_count);
+                        labels.push(i);
+                    }
+                    var data = {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: "Artist Followers",
+                                fillColor: "rgba(220,220,220,0.2)",
+                                strokeColor: "rgba(220,220,220,1)",
+                                pointColor: "rgba(220,220,220,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(220,220,220,1)",
+                                data: followers
+                            },
+                            {
+                                label: "Track Playcount",
+                                fillColor: "rgba(151,187,205,0.2)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(151,187,205,1)",
+                                data: playbacks
+                            }
+                        ]
+                    };
+                    callback(data);
+                },
+                error: function (data) {
+                    console.log(error);
+                }
+            });
+        }
+
+        $('#graphModal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget); // Button that triggered the modal
+          var track_id = button.data('id'); // Extract info from data-* attributes
+          var track_sc_id = button.data('sc-id');
+          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+          var modal = $(this);
+          SC.get('/tracks/'+track_sc_id, function(track) {
+            modal.find('.modal-title').text(track.title);
+{#            modal.find('.modal-body input').val(recipient);#}
+            updateGraph(track_id, function(data) {
+                var myNewChart = new Chart(my_ctx).Line(data);
+            });
+          });
+        })
+
+    </script>
 
 
 </body>

@@ -76,8 +76,9 @@ class Contest1View(APIView):
         user = request.user
         contest1 = user.contests.get(pk=1)
         contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
+        all_entries = ContestEntry.objects.filter(contest=contest1).order_by('-jam_points')
 
-        return render_to_response('contests.html', {'my_track': contest_entry})
+        return render_to_response('contests.html', {'my_track': contest_entry, 'all_entries': all_entries})
 
 
 class UserViewSet(viewsets.ModelViewSet):
