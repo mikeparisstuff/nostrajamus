@@ -15,7 +15,7 @@ def calculate_jam_points(initial_playcount, initial_followers, final_playcount, 
     playcount_unit = (final_playcount ** (7.0/8.0)) * (((final_playcount - initial_playcount)/initial_playcount) ** ( 8.0/7.0))
     denom = (initial_playcount ** (0.5)) + (initial_followers ** (0.5))
     jam_points = (follow_unit + playcount_unit)/denom
-    return jam_points
+    return (jam_points**0.5)
 
 
 @shared_task

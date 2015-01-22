@@ -445,8 +445,10 @@ class ContestEntry(BaseModel):
         SCTrack
     )
 
-    jam_points = models.IntegerField(
-        default = 0
+    jam_points = models.DecimalField(
+        default = 0,
+        max_digits=9,
+        decimal_places=1
     )
 
     initial_playback_count = models.IntegerField()
