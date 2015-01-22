@@ -364,6 +364,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
     <script type="text/javascript">
         var my_ctx = document.getElementById("trackChart").getContext("2d");
+        var myChart = new Chart(my_ctx).Line({});
 
         function updateGraph(id, callback) {
             $.ajax({
@@ -425,7 +426,8 @@
             modal.find('.modal-title').text(track.title);
 {#            modal.find('.modal-body input').val(recipient);#}
             updateGraph(track_id, function(data) {
-                var myNewChart = new Chart(my_ctx).Line(data);
+                myChart.datasets = data.datasets;
+                myChart.update();
             });
           });
         })
