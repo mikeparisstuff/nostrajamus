@@ -20,7 +20,74 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
 ################# CONTESTS ##########################
+
+HEAD_TO_HEAD = 'HEADTOHEAD'
+POOL = 'POOL'
+CONTEST_TYPES = (
+    (HEAD_TO_HEAD, "Head To Head"),
+    (POOL, "Pool")
+)
+
+ENTRY_FEE_OPTIONS = (
+    (0, "Free"),
+    (1, "$1"),
+    (2, "$2"),
+    (5, "$5"),
+    (10, "$10")
+)
+
+ANYONE = "ANYONE"
+FRIENDS = "FRIENDS"
+OPPONENT_OPTIONS = (
+    (ANYONE, "Anyone"),
+    (FRIENDS, "Friends")
+)
+
+WINNER_TAKES_ALL = "WINNERTAKESALL"
+TOP3 = "TOP3"
+TOPTHIRD = "TOPTHIRD"
+PRIZE_PAYOUT_OPTIONS = (
+    (WINNER_TAKES_ALL, "Winner"),
+    (TOP3, "Top 3"),
+    (TOPTHIRD, "Top Third")
+)
+
+NUM_SONGS_OPTION = (
+    (1, "One"),
+    (2, "Two"),
+    (3, "Three"),
+    (4, "Four"),
+    (5, "Five"),
+    (6, "Six"),
+    (7, "Seven"),
+    (8, "Eight"),
+    (9, "Nine"),
+    (10, "Ten")
+)
+
+################### PROFILE ##################################
+
+def get_profile_picture_upload_path(self, filename):
+    return 'profiles/profile_{}/profile_picture.jpg'.format(self.username)
+
+class Profile(AbstractUser):
+    '''
+    Registered nostrJAMus User
+    '''
+    profile_picture = models.FileField(
+        upload_to = get_profile_picture_upload_path,
+        null = True,
+        blank = True
+    )
+
+    # contests = models.ManyToManyField(
+    #     Contest,
+    #     blank=True,
+    #     null=True
+    # )
 
 class Contest(BaseModel):
 
@@ -50,6 +117,46 @@ class Contest(BaseModel):
         default=''
     )
 
+    max_entries = models.IntegerField(
+        default = -1
+    )
+
+    type = models.CharField(
+        max_length=16,
+        choices=CONTEST_TYPES,
+        default=POOL
+    )
+
+    creator = models.ForeignKey(
+        Profile,
+        blank=True,
+        null=True,
+        default=None,
+        related_name='owned_contest_set'
+    )
+
+    entry_fee = models.IntegerField(
+        choices=ENTRY_FEE_OPTIONS,
+        default=0
+    )
+
+    opponent_type = models.CharField(
+        max_length=8,
+        choices=OPPONENT_OPTIONS,
+        default=ANYONE
+    )
+
+    prize_payout = models.CharField(
+        max_length=16,
+        choices=PRIZE_PAYOUT_OPTIONS,
+        default=WINNER_TAKES_ALL
+    )
+
+    songs_per_entrant = models.IntegerField(
+        choices=NUM_SONGS_OPTION,
+        default=1
+    )
+
     # True if the contest is live else False
     is_live = models.BooleanField(
         default = True
@@ -70,25 +177,19 @@ class Contest(BaseModel):
     class Meta:
         ordering = ('created_at',)
 
-################### PROFILE ##################################
 
-def get_profile_picture_upload_path(self, filename):
-    return 'profiles/profile_{}/profile_picture.jpg'.format(self.username)
+class ContestMembership(BaseModel):
 
-class Profile(AbstractUser):
-    '''
-    Registered nostrJAMus User
-    '''
-    profile_picture = models.FileField(
-        upload_to = get_profile_picture_upload_path,
-        null = True,
-        blank = True
+    user = models.ForeignKey(
+        Profile
     )
 
-    contests = models.ManyToManyField(
-        Contest,
-        blank=True,
-        null=True
+    contest = models.ForeignKey(
+        Contest
+    )
+
+    is_active = models.BooleanField(
+        default=True
     )
 
 

@@ -82,7 +82,8 @@ if instance_id == 'PROD':
 else:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nostrajamusdev',
+        # 'NAME': 'nostrajamusdev',
+        'NAME': 'nostrajamusdev2',
         'USER': 'django_login',
         'PASSWORD': 'django_login',
         'HOST': '',
