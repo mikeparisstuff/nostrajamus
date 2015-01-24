@@ -35,9 +35,15 @@ class HomePageView(APIView):
         if request.user.is_authenticated():
             user = request.user
             try:
-                contest1 = user.contests.get(pk=1)
+                user = request.user
+                contest1 = Contest.objects.get(pk=1)
                 contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
-                data['my_track'] = contest_entry.track
+                all_entries = ContestEntry.objects.filter(contest=contest1).order_by('-jam_points')
+                my_rank = 0
+                for index, item in enumerate(all_entries):
+                    if item.id == contest_entry.id:
+                        my_rank = index+1
+                return render_to_response('contests.html', {'my_track': contest_entry, 'my_rank': my_rank, 'all_entries': all_entries})
             except:
                 return render_to_response("index2.html", RequestContext(request, {}))
         return render_to_response("index2.html", RequestContext(request, data))
