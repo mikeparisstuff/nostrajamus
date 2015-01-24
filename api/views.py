@@ -51,6 +51,10 @@ class HomePageView(APIView):
             return render_to_response('contests.html', RequestContext(request, {'all_entries': all_entries}))
         # return render_to_response("index2.html", RequestContext(request, data))
 
+class SignUpView(APIView):
+    def get(self, request, format=None):
+        return render_to_response("index2.html", RequestContext(request, {}))
+
 class LoginView(APIView):
     def get(self, request, format=None):
         return render_to_response('login.html')
