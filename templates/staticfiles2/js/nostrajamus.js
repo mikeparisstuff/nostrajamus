@@ -148,7 +148,6 @@ $(function() {
         }
 
 
-
 //                if (event.target[2].value != event.target[3].value) {
 //                    event.preventDefault();
 //                    errorMessage = "Emails do not match.";

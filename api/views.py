@@ -2,8 +2,8 @@ from django.shortcuts import render, render_to_response, RequestContext, redirec
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback
-from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ContestIdea
+from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, ContestIdeaSerializer
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.views import APIView
 import mailchimp
@@ -74,11 +74,14 @@ class Contest1View(APIView):
         if not request.user.is_authenticated():
             return redirect('/login/')
         user = request.user
-        contest1 = user.contests.get(pk=1)
+        contest1 = Contest.objects.get(pk=1)
         contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
         all_entries = ContestEntry.objects.filter(contest=contest1).order_by('-jam_points')
-
-        return render_to_response('contests.html', {'my_track': contest_entry, 'all_entries': all_entries})
+        my_rank = 0
+        for index, item in enumerate(all_entries):
+            if item.id == contest_entry.id:
+                my_rank = index+1
+        return render_to_response('contests.html', {'my_track': contest_entry, 'my_rank': my_rank, 'all_entries': all_entries})
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -213,3 +216,9 @@ class FeedbackViewSet(viewsets.ModelViewSet):
             email = data['email']
         )
         return redirect('/')
+
+
+class ContestIdeaViewSet(viewsets.ModelViewSet):
+    queryset = ContestIdea.objects.all()
+    serializer_class = ContestIdeaSerializer
+    permission_classes = (permissions.AllowAny,)

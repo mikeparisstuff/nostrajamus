@@ -67,14 +67,11 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-{#                    <li>#}
-{#                        <a class="page-scroll" href="#services">How To Play</a>#}
+{#                    <li class="active">#}
+{#                        <a class="page-scroll" href="#services">Contests</a>#}
 {#                    </li>#}
 {#                    <li>#}
-{#                        <a class="page-scroll" href="#portfolio">Beta Contest</a>#}
-{#                    </li>#}
-{#                    <li>#}
-{#                        <a class="page-scroll" href="#about">About</a>#}
+{#                        <a class="page-scroll" href="#portfolio">Trending Jams</a>#}
 {#                    </li>#}
 {#                    <li>#}
 {#                        <a class="page-scroll" href="#team">Team</a>#}
@@ -85,6 +82,9 @@
                     <li>
                         <a href="/logout/">Logout</a>
                     </li>
+{#                    <li>#}
+{#                        <button type="button" class="btn btn-success" href="">Add Funds</button>#}
+{#                    </li>#}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -98,7 +98,9 @@
             <div class="intro-text">
                 <div class="intro-lead-in">Welcome To</div>
                 <div class="intro-heading">2015 Kick Off Contest</div>
-                <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
+                <a href="#track-section" class="btn btn-circle page-scroll">
+                    <i class="fa fa-angle-double-down animated"></i>
+                </a>
             </div>
         </div>
     </header>
@@ -112,16 +114,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="rank-holder text-center">
-                            <span class="rank">3rd Place</span>
+                            <h3 class="rank">Place: {{ my_rank }}</h3>
                         </div>
                     </div>
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ my_track.track.sc_id }}&amp;color=ff3333&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
                     </div>
-                    <div class="col-md-1 graph-btn-holder">
-                        <button type="button" class="btn btn-primary vcenter" data-toggle="modal" data-target="#graphModal" data-id="{{ my_track.track.id }}" data-sc-id="{{ my_track.track.sc_id }}">Graph</button>
+                    <div class="col-md-2 graph-btn-holder">
+{#                        <button type="button" class="btn btn-primary vcenter" data-toggle="modal" data-target="#graphModal" data-id="{{ my_track.track.id }}" data-sc-id="{{ my_track.track.sc_id }}">Graph</button>#}
 {#                        <canvas id="myChart" width="100%" height="166"></canvas>#}
                     </div>
                 </div>
@@ -129,7 +131,38 @@
         </div>
     </section>
 
-    <section class="contest-section bg-light-gray">
+    <section id="choose-song-section" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Choose Our Next Contest</h2>
+                    <div class="intro-lead-in">e.g. East Coast vs. West Coast Rap or Best Acoustic Cover</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form name="chooseContestForm" id="chooseContestForm">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                    <input type="text" name="idea" class="form-control" placeholder="What do you think?" id="contest_idea">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="clear-fix"></div>
+                            <div class="col-md-12 text-center">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div id="errors"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contest-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -138,17 +171,17 @@
             </div>
             {% for entry in all_entries %}
             <div class="row">
-                <div class="col-md-1">
-                    <div class="rank-holder text-center">
-                        <span class="rank">{{ entry.jam_points }} Jam Points</span>
+                <div class="col-md-2">
+                    <div class="text-center rank-holder">
+                        <h1 class="counter">{{forloop.counter}}</h1>
                     </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ entry.track.sc_id }}&amp;color=ff3333&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
                 </div>
-                <div class="col-md-1 graph-btn-holder">
-                    <button type="button" class="btn btn-primary vcenter" data-toggle="modal" data-target="#graphModal" data-id="{{ entry.track.id }}" data-sc-id="{{ entry.track.sc_id }}">Graph</button>
-{#                        <canvas id="myChart" width="100%" height="166"></canvas>#}
+                <div class="col-md-2 rank-holder">
+                    <div>{{ entry.user.username }}</div>
+                    <div>{{ entry.jam_points }} Jam Points</div>
                 </div>
             </div>
             {% endfor %}
@@ -165,17 +198,15 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
-                <div class="modal-body">
-                    <canvas id="trackChart" width="850px" height="300px"></canvas>
+                <div class="modal-body" id="chart-modal-body">
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
+                    <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">Sweet.</button>
                 </div>
             </div>
         </div>
     </div>
-
 
 
 
@@ -363,8 +394,8 @@
     <script type="text/javascript" src="/static/js/nostrajamus.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
     <script type="text/javascript">
-        var my_ctx = document.getElementById("trackChart").getContext("2d");
-        var myChart = new Chart(my_ctx).Line({});
+{#        var my_ctx = document.getElementById("trackChart").getContext("2d");#}
+{#        var myChart = new Chart(my_ctx).Line({});#}
 
         function updateGraph(id, callback) {
             $.ajax({
@@ -415,6 +446,7 @@
             });
         }
 
+        var myChart;
         $('#graphModal').on('show.bs.modal', function (event) {
           var button = $(event.relatedTarget); // Button that triggered the modal
           var track_id = button.data('id'); // Extract info from data-* attributes
@@ -426,11 +458,51 @@
             modal.find('.modal-title').text(track.title);
 {#            modal.find('.modal-body input').val(recipient);#}
             updateGraph(track_id, function(data) {
-                myChart.datasets = data.datasets;
-                myChart.update();
+{#                myChart.datasets = data.datasets;#}
+                $("#chart-modal-body").html('<canvas id="trackChart" width="850px" height="300px"></canvas>');
+                var tc = "trackChart";
+                var my_ctx = document.getElementById(tc).getContext("2d");
+                myChart = new Chart(my_ctx).Line(data);
+
             });
           });
-        })
+        });
+
+
+
+        $("#closeModalBtn").click(function(event) {
+            myChart.clear()
+        });
+
+        $("#chooseContestForm").submit(function( event ) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/contest_ideas/', //http://127.0.0.1:8000/
+                dataType: 'json',
+                crossDomain: 'true',
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "idea": $("#contest_idea").val()
+                }),
+                success: function(data) {
+//                                alert('data: ' + data);
+                    console.log('SUCCESS: ' + data);
+                    $("#contest_idea").value = '';
+                    event.preventDefault();
+                    alert("Thanks! We will consider your idea for our next contest.");
+
+                },
+                error: function(error) {
+//                                alert(error);
+                    console.log(error);
+                    event.preventDefault();
+                    alert("Sorry there was an issue uploading that song. It may have been an issue on our side or it may help to clear your cookies and try again.")
+
+                }
+            });
+
+        });
 
     </script>
 

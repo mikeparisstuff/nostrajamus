@@ -473,3 +473,11 @@ class Feedback(BaseModel):
         blank=True,
         null=True
     )
+
+class ContestIdea(BaseModel):
+
+    idea = models.CharField(
+        max_length=256,
+        blank=True,
+        default=''
+    )

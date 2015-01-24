@@ -184,6 +184,17 @@ fieldset[disabled] .btn-xl.active {
   color: #ff5252;
   outline: none;
 }
+.navbar-default .nav li button {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+.navbar-default .nav li button:hover,
+.navbar-default .nav li button:focus {
+  outline: none;
+}
 .navbar-default .navbar-nav > .active > a {
   border-radius: 0;
   color: white;
@@ -814,17 +825,8 @@ body {
   webkit-tap-highlight-color: #ff5252;
 }
 .rank-holder {
-  background-color: #f7f7f7;
-  height: 50px;
   text-align: center;
-  line-height: 50px;
-}
-@media (min-width: 992px) {
-  .rank-holder {
-    margin: 0 -30px 0 -30px;
-    height: 166px;
-    line-height: 166px;
-  }
+  padding-top: 50px;
 }
 .graph-btn-holder {
   height: 50px;
@@ -849,6 +851,11 @@ section#track-section {
   padding: 50px 0;
 }
 section#contest-section {
-  padding: 50% 0;
-  background-color: #f7f7f7;
+  padding: 50px 0;
+}
+section#choose-song-section {
+  padding: 50px 0;
+}
+.bg-gray {
+  background-color: #777777;
 }

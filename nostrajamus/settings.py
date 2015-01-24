@@ -108,6 +108,7 @@ REST_FRAMEWORK = {
 }
 
 # Celery
+
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 CELERY_TIMEZONE = 'UTC'
 CELERY_IMPORTS = ('api.tasks',)
@@ -117,6 +118,8 @@ CELERYBEAT_SCHEDULE = {
         'schedule': timedelta(minutes=20)
     }
 }
+# One off task to start contest
+# start_contest.apply_async(eta=datetime(2015, 1, 23, 16, 0, 0,tzinfo=timezone('US/Eastern')))
 
 AUTH_USER_MODEL = 'api.Profile'
 

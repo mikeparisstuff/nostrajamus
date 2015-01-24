@@ -14,6 +14,7 @@ router.register(r'playcounts', views.PeriodicPlayCountViewSet)
 router.register(r'scusers', views.SCUserViewSet)
 router.register(r'contest_entries', views.ContestEntryViewSet)
 router.register(r'feedback', views.FeedbackViewSet)
+router.register(r'contest_ideas', views.ContestIdeaViewSet)
 
 urlpatterns = patterns('',
     # Examples:

@@ -125,6 +125,19 @@ h1, h2, h3, h4, h5, h6 {
     				outline: none;
     			}
     		}
+            button {
+    			.heading-font;
+    			font-weight: 400;
+    			letter-spacing: 1px;
+                margin-top: 5px;
+//    			color: white;
+//                color: @brand-primary;
+    			&:hover,
+    			&:focus {
+//    				color: @brand-primary;
+    				outline: none;
+    			}
+    		}
     	}
     }
 	.navbar-nav>.active>a {
@@ -844,19 +857,20 @@ body {
 // CUSTOM
 
 .rank-holder {
-  background-color: @gray-lighter;
-  height: 50px;
+  //  background-color: @gray-lighter;
+  //  height: 50px;
   text-align: center;
-  line-height: 50px;
+  //  line-height: 50px;
+  padding-top: 50px;
 }
 
-@media(min-width:992px) {
-  .rank-holder {
-    margin: 0 -30px 0 -30px;
-    height: 166px;
-    line-height: 166px;
-  }
-}
+//@media(min-width:992px) {
+//  .rank-holder {
+//    margin: 0 -30px 0 -30px;
+//    height: 166px;
+//    line-height: 166px;
+//  }
+//}
 
 .graph-btn-holder {
   height: 50px;
@@ -887,6 +901,13 @@ section#track-section {
 }
 
 section#contest-section {
-  padding: 50% 0;
-  background-color: @gray-lighter;
+  padding: 50px 0;
+}
+
+section#choose-song-section {
+  padding: 50px 0;
+}
+
+.bg-gray {
+  background-color: @gray;
 }

@@ -37,3 +37,14 @@ def update_playcount():
                                                   new_user.followers_count)
             entry.jam_points = new_jam_points
             entry.save()
+
+@shared_task
+def start_contest():
+    entries = ContestEntry.objects.all()
+    for entry in entries:
+        new_track = client.get('/tracks/{}'.format(entry.track.sc_id))
+        new_user = client.get('/users/{}'.format(entry.track.user.sc_id))
+        entry.initial_playback_count = new_track.playback_count
+        entry.initial_follower_count = new_user.followers_count
+        entry.jam_points = 0.0
+        entry.save()

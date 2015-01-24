@@ -1,6 +1,6 @@
 __author__ = 'MichaelParis'
 
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ContestIdea
 from rest_framework.exceptions import ValidationError
 from rest_framework import serializers
 from datetime import datetime
@@ -93,3 +93,7 @@ class SCPeriodicPlayCountSerializer(serializers.HyperlinkedModelSerializer):
 class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Feedback
+
+class ContestIdeaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContestIdea
