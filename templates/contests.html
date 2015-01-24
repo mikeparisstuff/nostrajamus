@@ -96,7 +96,7 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Welcome To</div>
+                <div class="intro-lead-in">Welcome To The</div>
                 <div class="intro-heading">2015 Kick Off Contest</div>
                 <a href="#track-section" class="btn btn-circle page-scroll">
                     <i class="fa fa-angle-double-down animated"></i>
@@ -396,6 +396,30 @@
     <script type="text/javascript">
 {#        var my_ctx = document.getElementById("trackChart").getContext("2d");#}
 {#        var myChart = new Chart(my_ctx).Line({});#}
+
+        $.ajaxSetup({
+             beforeSend: function(xhr, settings) {
+                 function getCookie(name) {
+                     var cookieValue = null;
+                     if (document.cookie && document.cookie != '') {
+                         var cookies = document.cookie.split(';');
+                         for (var i = 0; i < cookies.length; i++) {
+                             var cookie = jQuery.trim(cookies[i]);
+                             // Does this cookie string begin with the name we want?
+                         if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                             break;
+                         }
+                     }
+                 }
+                 return cookieValue;
+                 }
+                 if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                     // Only send the token to relative URLs i.e. locally.
+                     xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                 }
+             }
+        });
 
         function updateGraph(id, callback) {
             $.ajax({
