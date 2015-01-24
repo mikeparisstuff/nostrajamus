@@ -43,9 +43,12 @@ class HomePageView(APIView):
             for index, item in enumerate(all_entries):
                 if item.id == contest_entry.id:
                     my_rank = index+1
-            return render_to_response('contests.html', {'my_track': contest_entry, 'my_rank': my_rank, 'all_entries': all_entries})
+            return render_to_response('contests.html', RequestContext(request, {'my_track': contest_entry, 'my_rank': my_rank, 'all_entries': all_entries}))
         except:
-            return render_to_response("index2.html", RequestContext(request, {}))
+            user = request.user
+            contest1 = Contest.objects.get(pk=1)
+            all_entries = ContestEntry.objects.filter(contest=contest1).order_by('-jam_points')
+            return render_to_response('contests.html', RequestContext(request, {'all_entries': all_entries}))
         # return render_to_response("index2.html", RequestContext(request, data))
 
 class LoginView(APIView):
