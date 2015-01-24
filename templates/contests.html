@@ -105,6 +105,7 @@
         </div>
     </header>
 
+    {% if user.is_authenticated %}
     <section id="track-section">
         <div id="my-song">
             <div class="container">
@@ -129,6 +130,7 @@
             </div>
         </div>
     </section>
+    {% endif %}
 
     <section id="choose-song-section" class="bg-light-gray">
         <div class="container">
