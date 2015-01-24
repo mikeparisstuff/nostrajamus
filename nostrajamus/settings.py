@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'kombu.transport.django',
     'rest_framework',
     'rest_framework_swagger',
+    'endless_pagination',
     'api',
 
 )
@@ -120,6 +121,11 @@ CELERYBEAT_SCHEDULE = {
 }
 # One off task to start contest
 # start_contest.apply_async(eta=datetime(2015, 1, 23, 16, 0, 0,tzinfo=timezone('US/Eastern')))
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
 
 AUTH_USER_MODEL = 'api.Profile'
 

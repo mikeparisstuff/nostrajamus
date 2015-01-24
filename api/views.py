@@ -34,6 +34,7 @@ class HomePageView(APIView):
         # data = {}
         # if request.user.is_authenticated():
         #     user = request.user
+        page_template='entry_index_page.html'
         try:
             user = request.user
             contest1 = Contest.objects.get(pk=1)
@@ -41,14 +42,21 @@ class HomePageView(APIView):
             all_entries = ContestEntry.objects.filter(contest=contest1).order_by('-jam_points')
             my_rank = 0
             for index, item in enumerate(all_entries):
+                item.rank = index + 1
                 if item.id == contest_entry.id:
                     my_rank = index+1
-            return render_to_response('contests.html', RequestContext(request, {'my_track': contest_entry, 'my_rank': my_rank, 'all_entries': all_entries}))
+            if request.is_ajax():
+                template = page_template
+                return render_to_response(template, RequestContext(request, {'all_entries': all_entries, 'page_template': 'entry_index_page.html'}))
+            return render_to_response('contests.html', RequestContext(request, {'my_track': contest_entry, 'my_rank': my_rank, 'all_entries': all_entries, 'page_template': page_template}))
         except:
             user = request.user
             contest1 = Contest.objects.get(pk=1)
             all_entries = ContestEntry.objects.filter(contest=contest1).order_by('-jam_points')
-            return render_to_response('contests.html', RequestContext(request, {'all_entries': all_entries}))
+            if request.is_ajax():
+                template = page_template
+                return render_to_response(template, RequestContext(request, {'all_entries': all_entries, 'page_template': 'entry_index_page.html'}))
+            return render_to_response('contests.html', RequestContext(request, {'all_entries': all_entries, 'page_template': 'entry_index_page.html'}))
         # return render_to_response("index2.html", RequestContext(request, data))
 
 class SignUpView(APIView):
