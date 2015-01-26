@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from api.models import SCTrack, SCUser, SCPeriodicPlayCount, ContestEntry
 from celery import shared_task
 import soundcloud
+from requests.exceptions import HTTPError
 
 client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
 
@@ -22,21 +23,24 @@ def calculate_jam_points(initial_playcount, initial_followers, final_playcount, 
 def update_playcount():
     tracks = SCTrack.objects.all()
     for track in tracks:
-        new_track = client.get('/tracks/{}'.format(track.sc_id))
-        new_user = client.get('/users/{}'.format(track.user.sc_id))
-        all_entries = ContestEntry.objects.filter(track=track, is_active=True)
-        SCPeriodicPlayCount.objects.create(
-            playback_count=new_track.playback_count,
-            follower_count=new_user.followers_count,
-            track=track
-        )
-        for entry in all_entries:
-            new_jam_points = calculate_jam_points(entry.initial_playback_count,
-                                                  entry.initial_follower_count,
-                                                  new_track.playback_count,
-                                                  new_user.followers_count)
-            entry.jam_points = new_jam_points
-            entry.save()
+        try:
+            new_track = client.get('/tracks/{}'.format(track.sc_id))
+            new_user = client.get('/users/{}'.format(track.user.sc_id))
+            all_entries = ContestEntry.objects.filter(track=track, is_active=True)
+            SCPeriodicPlayCount.objects.create(
+                playback_count=new_track.playback_count,
+                follower_count=new_user.followers_count,
+                track=track
+            )
+            for entry in all_entries:
+                new_jam_points = calculate_jam_points(entry.initial_playback_count,
+                                                      entry.initial_follower_count,
+                                                      new_track.playback_count,
+                                                      new_user.followers_count)
+                entry.jam_points = new_jam_points
+                entry.save()
+        except HTTPError as e:
+            print "HTTPError: on track {} with error: {}".format(track.sc_id, e)
 
 @shared_task
 def start_contest():
