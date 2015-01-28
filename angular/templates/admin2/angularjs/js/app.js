@@ -24,7 +24,7 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
     var settings = {
         layout: {
             // pageSidebarClosed: false, // sidebar state
-            pageAutoScrollOnLoad: 1000 // auto scroll to top on page load
+            pageAutoScrollOnLoad: 0 // auto scroll to top on page load
         },
         layoutImgPath: Metronic.getAssetsPath() + 'admin/layout/img/',
         layoutCssPath: Metronic.getAssetsPath() + 'admin/layout/css/'
@@ -41,6 +41,7 @@ MetronicApp.config(['$httpProvider', function($httpProvider) {
     // angular which cookie to add to what header.
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $httpProvider.defaults.contentType = 'application/json';
 }]);
 
 MetronicApp.factory('api', ['$resource', function($resource) {
@@ -74,7 +75,13 @@ MetronicApp.controller('authController', function($scope, api) {
     $('#id_auth_form input').checkAndTriggerAutoFillEvent();
 
     $scope.getCredentials = function(){
-        return {username: $scope.username, password: $scope.password};
+        return {
+                username: $scope.username,
+                first_name: "",
+                last_name: "",
+                email: $scope.email,
+                password: $scope.password
+            };
     };
 
     $scope.login = function(){
@@ -86,7 +93,6 @@ MetronicApp.controller('authController', function($scope, api) {
                 }).
                 catch(function(data){
                     // on incorrect username and password
-                    console.log(data);
                     alert(data.data.detail);
                 });
     };

@@ -84,7 +84,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- authentication  -->
 	<div class="navbar navbar-fixed-bottom" ng-controller="authController" ng-init="user='{{user.username}}'">
         {% verbatim %}
-        <div ng-hide="user" class="navbar-form navbar-right">
+        <div ng-show="user" class="navbar-form navbar-right">
             <input type="submit" class="btn btn-default" ng-click="logout()" value="logout {{user}}"/>
         </div>
         <div ng-hide="user">
@@ -94,6 +94,9 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <div class="form-group">
                     <input ng-model="password" required name="password" type="password" placeholder="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input ng-model="email" required name="email" type="email" placeholder="email" class="form-control">
                 </div>
                 <div class="btn-group">
                     <input type="submit" class="btn btn-default" value="login">
