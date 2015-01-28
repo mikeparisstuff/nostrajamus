@@ -138,10 +138,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "templates/staticfiles2"),
+    os.path.join(BASE_DIR, "angular/assets"),
+    os.path.join(BASE_DIR, "angular/templates/admin2/angularjs")
 )
 # print STATIC_ROOT
 
@@ -150,4 +151,4 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #    'django.template.loaders.eggs.Loader',
 )
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'angular/templates/admin2/angularjs'),)

@@ -1,0 +1,18 @@
+<h1>TEST</h1>
+<input ng-model="state"></input>
+<br>
+{{state}}
+<br>
+<br>
+<input ng-model="selectedValue" ng-hide=false></input>
+<br>
+{{selectedValue}}
+
+<ul>
+	<li ng-repeat="signup in signups.results">
+		<!-- {{countSignups(signups.results)}}<br> -->
+		{{signup.email}} ... {{signup.createdAt}}
+	</li>
+</ul>
+
+<button ng-click="save()" class="btn btn-primary">Save</button>

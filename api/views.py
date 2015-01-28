@@ -7,6 +7,7 @@ from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSeriali
 from django.contrib.auth import authenticate, login, logout
 from rest_framework.views import APIView
 import mailchimp
+from . import authentication
 import os
 
 
@@ -24,6 +25,12 @@ import soundcloud
 client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
 
 
+from django.views.generic.base import TemplateView
+
+
+class OnePageAppView(TemplateView):
+    template_name = 'index.html'
+
 class HomePageView(APIView):
     def get(self, request, format=None):
         # if request.user.is_authenticated():
@@ -31,16 +38,16 @@ class HomePageView(APIView):
         #     print 'Render main page'
         #     return Response("Main Page")
         # else:
-        data = {}
-        if request.user.is_authenticated():
-            user = request.user
-            try:
-                contest1 = user.contests.get(pk=1)
-                contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
-                data['my_track'] = contest_entry.track
-            except:
-                return render_to_response("index2.html", RequestContext(request, {}))
-        return render_to_response("index2.html", RequestContext(request, data))
+        # data = {}
+        # if request.user.is_authenticated():
+        #     user = request.user
+        #     try:
+        #         contest1 = user.contests.get(pk=1)
+        #         contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
+        #         data['my_track'] = contest_entry.track
+        #     except:
+        #         return render_to_response("index2.html", RequestContext(request, {}))
+        return render_to_response("index.html", RequestContext(request))
 
 class LoginView(APIView):
     def get(self, request, format=None):
@@ -62,6 +69,16 @@ class LoginView(APIView):
             print("The username and password were incorrect.")
             return redirect('/login/')
 
+class AuthView(APIView):
+    authentication_classes = (authentication.QuietBasicAuthentication,)
+
+    def post(self, request, *args, **kwargs):
+        login(request, request.user)
+        return Response(ProfileSerializer(request.user, context={'request': request}).data)
+
+    def delete(self, request, *args, **kwargs):
+        logout(request)
+        return Response({})
 
 class LogoutView(APIView):
     def get(self, request, format=None):

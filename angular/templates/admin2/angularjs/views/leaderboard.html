@@ -1,0 +1,355 @@
+<!--BEGIN PAGE HEADER-->
+<h3 class="page-title">
+	Leaderboard <small>Top Tastemakers</small>
+</h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<!-- <div class="row" ng-controller="AdvancedDatatablesDemoCtrl"> -->
+	<!-- <div class="col-md-12"> -->
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<!-- 		<div class="portlet box red-nostra">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-trophy"></i>Leaderboard
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="reload">
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<table class="table table-striped table-bordered table-hover" id="sample_3">
+					<thead>
+						<tr>
+							<th>
+								Username
+							</th>
+							<th>
+								JAM Points
+							</th>
+							<th>
+								Joined
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								vanGOGH
+							</td>
+							<td>
+								9101.3
+							</td>
+							<td>
+								01/01/2015
+							</td>
+						</tr>
+						<tr>
+							<td>
+								t-mipari
+							</td>
+							<td>
+								8749.4
+							</td>
+							<td>
+								11/03/2014
+							</td>
+						</tr>
+						<tr>
+							<td>
+								tolmert
+							</td>
+							<td>
+								6830.9
+							</td>
+							<td>
+								10/31/2014
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div> -->
+		<!-- END EXAMPLE TABLE PORTLET-->
+	<!-- </div> -->
+<!-- </div> -->
+
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<!-- BEGIN PORTLET-->
+		<div class="portlet light ">
+			<div class="portlet-title">
+				<div class="caption caption-md">
+					<i class="icon-bar-chart font-green-haze hide"></i>
+					<span class="caption-subject font-green-haze bold uppercase">Leaderboard</span>
+					<span class="caption-helper hide">weekly stats...</span>
+				</div>
+				<div class="actions">
+					<div class="btn-group btn-group-devided" data-toggle="buttons">
+						<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
+						<input type="radio" name="options" class="toggle" id="option1">Today</label>
+						<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+						<input type="radio" name="options" class="toggle" id="option2">Week</label>
+						<!-- <label class="btn btn-transparent grey-salsa btn-circle btn-sm"> -->
+						<!-- <input type="radio" name="options" class="toggle" id="option2">Month</label> -->
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row number-stats margin-bottom-30">
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="stat-left">
+							<div class="stat-chart">
+								<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
+								<div id="sparkline_bar"></div>
+							</div>
+							<div class="stat-number">
+								<div class="title">
+									JAM Points Total
+								</div>
+								<div class="number">
+									2460
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<div class="stat-right">
+							<div class="stat-chart">
+								<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
+								<div id="sparkline_bar2"></div>
+							</div>
+							<div class="stat-number">
+								<div class="title">
+									This Week
+								</div>
+								<div class="number">
+									+719
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="table-scrollable table-scrollable-borderless">
+					<table class="table table-hover table-light">
+						<thead>
+							<tr class="uppercase">
+								<th colspan="2">
+									Tastemaker
+								</th>
+								<th>
+									Earnings
+								</th>
+								<th>
+									Contests
+								</th>
+								<th>
+									Latest<br>Winnings
+								</th>
+								<th>
+									JAM<br>Points
+								</th>
+							</tr>
+						</thead>
+						<tr>
+							<td class="fit">
+								<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
+							</td>
+							<td>
+								<a href="javascript:;" class="primary-link">Mike</a>
+							</td>
+							<td>
+								$8K
+							</td>
+							<td>
+								10
+							</td>
+							<td>
+								$1K
+							</td>
+							<td>
+								<span class="bold font-green-haze">2460</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="fit">
+								<img class="user-pic" src="/assets/admin/layout/img/avatar5.jpg">
+							</td>
+							<td>
+								<a href="javascript:;" class="primary-link">Tony</a>
+							</td>
+							<td>
+								$5K
+							</td>
+							<td>
+								12
+							</td>
+							<td>
+								$800
+							</td>
+							<td>
+								<span class="bold font-green-haze">1940</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="fit">
+								<img class="user-pic" src="/assets/admin/layout/img/avatar6.jpg">
+							</td>
+							<td>
+								<a href="javascript:;" class="primary-link">Robby</a>
+							</td>
+							<td>
+								$2.5K
+							</td>
+							<td>
+								45
+							</td>
+							<td>
+								$900
+							</td>
+							<td>
+								<span class="bold font-green-haze">1800</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="fit">
+								<img class="user-pic" src="/assets/admin/layout/img/avatar7.jpg">
+							</td>
+							<td>
+								<a href="javascript:;" class="primary-link">Collin</a>
+							</td>
+							<td>
+								$1K
+							</td>
+							<td>
+								8
+							</td>
+							<td>
+								$200
+							</td>
+							<td>
+								<span class="bold font-green-haze">1569</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!-- END PORTLET-->
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12 col-sm-12">
+		<!-- BEGIN PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption caption-md">
+					<i class="icon-bar-chart font-green-haze hide"></i>
+					<span class="caption-subject font-green-haze bold uppercase">Jam of the Week</span>
+					<span class="caption-helper hide">weekly stats...</span>
+				</div>
+				<div class="actions">
+					<div class="btn-group btn-group-devided" data-toggle="buttons">
+						<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
+						<input type="radio" name="options" class="toggle" id="option1">Today</label>
+						<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+						<input type="radio" name="options" class="toggle" id="option2">Week</label>
+<!-- 							<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+						<input type="radio" name="options" class="toggle" id="option2">Month</label> -->
+					</div>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row list-separated">
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="font-grey-mint font-sm">
+							Total Plays
+						</div>
+						<div class="uppercase font-hg font-red-flamingo">
+							137 <span class="font-lg font-grey-mint">M</span>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="font-grey-mint font-sm">
+							Total Followers
+						</div>
+						<div class="uppercase font-hg font-green-haze">
+							760 <span class="font-lg font-grey-mint">K</span>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="font-grey-mint font-sm">
+							Play Increase
+						</div>
+						<div class="uppercase font-hg font-purple">
+							5000 <span class="font-lg font-grey-mint">%</span>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-3 col-xs-6">
+						<div class="font-grey-mint font-sm">
+							Follower Increase
+						</div>
+						<div class="uppercase font-hg font-blue-sharp">
+							300 <span class="font-lg font-grey-mint">%</span>
+						</div>
+					</div>
+				</div>
+				<iframe width="100%" height="260px" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/187158437&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+				<!-- <ul class="list-separated list-inline-xs hide">
+					<li>
+						<div class="font-grey-mint font-sm">
+							Total Sales
+						</div>
+						<div class="uppercase font-hg font-red-flamingo">
+							13760 <span class="font-lg font-grey-mint">$</span>
+						</div>
+					</li>
+					<li>
+					</li>
+					<li class="border">
+						<div class="font-grey-mint font-sm">
+							Revenue
+						</div>
+						<div class="uppercase font-hg font-green-haze">
+							4760 <span class="font-lg font-grey-mint">$</span>
+						</div>
+					</li>
+					<li class="divider">
+					</li>
+					<li>
+						<div class="font-grey-mint font-sm">
+							Expenses
+						</div>
+						<div class="uppercase font-hg font-purple">
+							1760 <span class="font-lg font-grey-mint">$</span>
+						</div>
+					</li>
+					<li class="divider">
+					</li>
+					<li>
+						<div class="font-grey-mint font-sm">
+							Growth
+						</div>
+						<div class="uppercase font-hg font-blue-sharp">
+							9760 <span class="font-lg font-grey-mint">$</span>
+						</div>
+					</li>
+				</ul> -->
+				<!-- <div id="sales_statistics" class="portlet-body-morris-fit morris-chart" style="height: 260px"> -->
+				<!-- </div> -->
+			</div>
+		</div>
+		<!-- END PORTLET-->
+	</div>
+
+</div>
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS -->
+<script>
+	function AdvancedDatatablesDemoCtrl($scope) {
+		Leagues.init();
+	}
+</script>
+<!-- END MAIN JS

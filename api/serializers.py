@@ -6,10 +6,9 @@ from rest_framework import serializers
 from datetime import datetime
 
 class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    contests = serializers.HyperlinkedRelatedField(many=True, view_name='contest-detail', read_only=True)
     class Meta:
         model = Profile
-        fields = ('url', 'username', 'first_name', 'last_name', 'email', 'contests', 'password')
+        fields = ('url', 'username', 'first_name', 'last_name', 'email', 'password')
 
 class ContestEntrySerializer(serializers.HyperlinkedModelSerializer):
 
