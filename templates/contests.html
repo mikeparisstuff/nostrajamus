@@ -427,15 +427,57 @@
                 success: function (data) {
                     console.log("Success");
                     console.log(data);
-                    var playbacks = [];
-                    var followers = [];
-                    var labels = [];
+                    var playbacks = {};
+                    var followers = {};
+{#                    var labels = [];#}
                     for (var i = 0; i < data.length; i++) {
+
                         var periodic_pc = data[i];
-                        playbacks.push(periodic_pc.playback_count);
-                        followers.push(periodic_pc.follower_count);
-                        labels.push(i);
+                        var date = new Date(periodic_pc.created_at);
+                        if (playbacks[date.toDateString()] == undefined) {
+                            playbacks[date.toDateString()] = []
+                        }
+                        if (followers[date.toDateString()] == undefined) {
+                            followers[date.toDateString()] = []
+                        }
+                        console.log(date.toDateString());
+                        playbacks[date.toDateString()].push(periodic_pc.playback_count);
+                        followers[date.toDateString()].push(periodic_pc.follower_count);
+{#                        labels.push(date.getDate());#}
                     }
+                    var plays_by_day = {};
+                    for (key in playbacks) {
+                        var plays = playbacks[key];
+                        var avg = 0;
+                        for (var i = 0; i < plays.length; i++) {
+                            avg += plays[i];
+                        }
+                        plays_by_day[key] = (avg / plays.length);
+                    }
+
+                    var followers_by_day = {};
+                    for (key in followers) {
+                        var follows = followers[key];
+                        var avg = 0;
+                        for (var i = 0; i < follows.length; i++) {
+                            avg += follows[i];
+                        }
+                        followers_by_day[key] = (avg / follows.length);
+                    }
+
+                    var plays_set = [],
+                            labels = [],
+                            follow_set = [];
+                    for (key in plays_by_day) {
+                        plays_set.push(plays_by_day[key]);
+                        var label = key.split(" ");
+                        labels.push(label[1] + " " + label[2] + " " + label[3]);
+                    }
+                    for (key in followers_by_day) {
+                        follow_set.push(followers_by_day[key]);
+                    }
+
+
                     var data = {
                         labels: labels,
                         datasets: [
@@ -447,7 +489,7 @@
                                 pointStrokeColor: "#fff",
                                 pointHighlightFill: "#fff",
                                 pointHighlightStroke: "rgba(220,220,220,1)",
-                                data: followers
+                                data: follow_set
                             },
                             {
                                 label: "Track Playcount",
@@ -457,7 +499,7 @@
                                 pointStrokeColor: "#fff",
                                 pointHighlightFill: "#fff",
                                 pointHighlightStroke: "rgba(151,187,205,1)",
-                                data: playbacks
+                                data: plays_set
                             }
                         ]
                     };
@@ -478,14 +520,18 @@
           // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
           var modal = $(this);
           SC.get('/tracks/'+track_sc_id, function(track) {
-            modal.find('.modal-title').text(track.title);
+              var title = button.data('title');
+            modal.find('.modal-title').text(title);
 {#            modal.find('.modal-body input').val(recipient);#}
             updateGraph(track_id, function(data) {
 {#                myChart.datasets = data.datasets;#}
                 $("#chart-modal-body").html('<canvas id="trackChart" width="850px" height="300px"></canvas>');
                 var tc = "trackChart";
                 var my_ctx = document.getElementById(tc).getContext("2d");
-                myChart = new Chart(my_ctx).Line(data);
+                myChart = new Chart(my_ctx).Line(data, {
+                    bezierCurve : true,
+                    legendTemplate: "<ul class=\"Chart Legend\"><li><span style=\"background-color:#ff0000\">Thing</span></li></ul>"
+                });
 
             });
           });
