@@ -100,8 +100,13 @@
     <header>
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in">Welcome To The</div>
-                <div class="intro-heading">2015 Kick Off Contest</div>
+                {% if user.isAuthenticated %}
+                    <div class="intro-lead-in">Welcome To The</div>
+                    <div class="intro-heading">2015 Kick Off Contest</div>
+                {% else %}
+                    <div class="intro-lead-in">Nostrajamus</div>
+                    <div class="intro-heading">Enter contests. Champion songs. Win big.</div>
+                {% endif %}
                 <a href="#track-section" class="btn btn-circle page-scroll">
                     <i class="fa fa-angle-double-down animated"></i>
                 </a>
