@@ -195,7 +195,7 @@ class ContestMembership(BaseModel):
 
 class SCUser(BaseModel):
 
-     sc_id = models.IntegerField(
+     sc_id = models.BigIntegerField(
          unique=True
      )
 
@@ -279,13 +279,13 @@ class SCUser(BaseModel):
 '''
 class SCTrack(BaseModel):
 
-    sc_id = models.IntegerField(
+    sc_id = models.BigIntegerField(
         unique=True
     )
 
     sc_created_at = models.DateTimeField()
 
-    sc_user_id = models.IntegerField()
+    sc_user_id = models.BigIntegerField()
 
     user = models.ForeignKey(
         SCUser,
@@ -522,6 +522,11 @@ class WatchedSong(BaseModel):
 
     initial_follower_count = models.IntegerField()
 
+    current_playback_count = models.IntegerField()
+
+    current_follower_count = models.IntegerField()
+
+
 class ContestEntry(BaseModel):
     '''
     Like a watched song but for contest entry songs only
@@ -553,6 +558,10 @@ class ContestEntry(BaseModel):
     initial_playback_count = models.IntegerField()
 
     initial_follower_count = models.IntegerField()
+
+    current_playback_count = models.IntegerField(default=0)
+
+    current_follower_count = models.IntegerField(default=0)
 
 class Feedback(BaseModel):
 
