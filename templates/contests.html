@@ -121,7 +121,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="rank-holder text-center">
-                            <h3 class="rank">Place: {{ my_rank }}</h3>
+                            <h3 class="rank">Place: {{ my_rank }}</h3> <h5>out of {{ track_count }}</h5>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -172,6 +172,8 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Current Rankings</h2>
+                    <a href="https://soundcloud.com/nostrajamus/sets/2015-kickoff-contest" target="_blank">Listen To This Playlist on Soundcloud!</a>
+                    <br/>
                 </div>
             </div>
             {% include "entry_index_page.html" %}
@@ -185,13 +187,42 @@
     <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header text-center">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
-                <div class="modal-body" id="chart-modal-body">
+{#                <div class="container">#}
 
-                </div>
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <img width="200" height="200" src="" id="album_art" alt=""/>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <h5>Initial Playcount</h5>
+                            <p id="ip"></p>
+                        </div>
+                        <div class="col-md-4">
+                            <br/>
+                            <h4 class="green" id="percentage"></h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Current Playcount</h5>
+                            <p id="cp"></p>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-12">
+                            <h5>Followers</h5>
+                            <p id="fc">20000</p>
+                        </div>
+
+                    </div>
+{#                </div>#}
+{#                <div class="modal-body" id="chart-modal-body">#}
+
+{#                </div>#}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">Sweet.</button>
                 </div>
@@ -516,6 +547,11 @@
           var button = $(event.relatedTarget); // Button that triggered the modal
           var track_id = button.data('id'); // Extract info from data-* attributes
           var track_sc_id = button.data('sc-id');
+          var ip = button.data('ip');
+          var cp = button.data('cp');
+          var fc = button.data('fc');
+          var album_art_url = button.data('album-art');
+          var percentage = ((cp-ip)/ip)*100;
           // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
           // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
           var modal = $(this);
@@ -523,15 +559,21 @@
               var title = button.data('title');
             modal.find('.modal-title').text(title);
 {#            modal.find('.modal-body input').val(recipient);#}
+            modal.find('#ip').text(insertCommas(ip.toString()));
+            modal.find("#cp").text(insertCommas(cp.toString()));
+            modal.find("#fc").text(insertCommas(fc.toString()));
+            modal.find("#percentage").html("+" + percentage.toFixed(1) + "%");
+            $("#album_art").attr("src", album_art_url);
             updateGraph(track_id, function(data) {
 {#                myChart.datasets = data.datasets;#}
-                $("#chart-modal-body").html('<canvas id="trackChart" width="850px" height="300px"></canvas>');
-                var tc = "trackChart";
-                var my_ctx = document.getElementById(tc).getContext("2d");
-                myChart = new Chart(my_ctx).Line(data, {
-                    bezierCurve : true,
-                    legendTemplate: "<ul class=\"Chart Legend\"><li><span style=\"background-color:#ff0000\">Thing</span></li></ul>"
-                });
+
+{#                $("#chart-modal-body").html('<canvas id="trackChart" width="850px" height="300px"></canvas>');#}
+{#                var tc = "trackChart";#}
+{#                var my_ctx = document.getElementById(tc).getContext("2d");#}
+{#                myChart = new Chart(my_ctx).Line(data, {#}
+{#                    bezierCurve : true,#}
+{#                    legendTemplate: "<ul class=\"Chart Legend\"><li><span style=\"background-color:#ff0000\">Thing</span></li></ul>"#}
+{#                });#}
 
             });
           });
@@ -542,6 +584,24 @@
         $("#closeModalBtn").click(function(event) {
             myChart.clear()
         });
+
+        function insertCommas(s) {
+
+            // get stuff before the dot
+            var d = s.indexOf('.');
+            var s2 = d === -1 ? s : s.slice(0, d);
+
+            // insert commas every 3 digits from the right
+            for (var i = s2.length - 3; i > 0; i -= 3)
+              s2 = s2.slice(0, i) + ',' + s2.slice(i);
+
+            // append fractional part
+            if (d !== -1)
+              s2 += s.slice(d);
+
+            return s2;
+
+        }
 
         $("#chooseContestForm").submit(function( event ) {
 

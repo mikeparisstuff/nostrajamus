@@ -845,7 +845,7 @@ body {
   }
 }
 #graphModal .modal-dialog {
-  width: 900px;
+  /*width: 900px;*/
 }
 section#track-section {
   padding: 50px 0;

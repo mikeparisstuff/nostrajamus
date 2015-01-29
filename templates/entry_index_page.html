@@ -14,7 +14,7 @@
     <div class="col-md-2 rank-holder">
         <div>{{ entry.user.username }}</div>
         <div>{{ entry.jam_points }} Jam Points</div>
-{#        <button type="button" class="btn btn-default" data-toggle="modal" data-title="{{ entry.track.title }}" data-id="{{ entry.id }}" data-sc-id="{{ entry.sc_id }}" data-target="#graphModal">More</button>#}
+        <button type="button" class="btn btn-default" data-toggle="modal" data-title="{{ entry.track.title }}" data-id="{{ entry.id }}" data-sc-id="{{ entry.sc_id }}" data-target="#graphModal" data-ip="{{ entry.initial_playback_count }}" data-cp="{{ entry.current_playback_count }}" data-fc="{{ entry.current_follower_count }}" data-album-art="{{ entry.track.artwork_url }}">Details</button>
     </div>
 </div>
 {% endfor %}
