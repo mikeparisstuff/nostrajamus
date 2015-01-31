@@ -1,66 +1,42 @@
 
 /* Setup general page controller */
-MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http', 'settings', 'contest_entries', 'tracks', function($rootScope, $scope, $http, settings, contest_entries, tracks) {
+MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http', 'settings', 'leaders', 'trending', '$sce', function($rootScope, $scope, $http, settings, leaders, trending, $sce) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
-
-    	$scope.contest_entries = contest_entries;
-    	$scope.tracks = tracks;
-
-    	// Sort TASTEMAKERS by Jam Points
-    	$scope.getLeaders = function(leadersObj) {
-    		leadersObj.sort(function(a, b) { 
-			    return a.jam_points - b.jam_points;
-			})
-			return leadersObj;
-		};
-
-    	// Sort SONGS by Jam Points
-    	$scope.getTrending = function(entriesObj) {
-    		entriesObj.sort(function(a, b) { 
-			    return a.jam_points - b.jam_points;
-			})
-
-    		var trackIDs = [];
-    		console.log(entriesObj.length);
-
-    		for (var i = 0; i < entriesObj.length; i++) {
-    			var url = entriesObj[i].track;
-    			console.log(url);
-    			var category = "";
-				var matches = url.match(/\/api\/(.*)$/);
-				if (matches) {
-				    category = matches[1];   // "whatever"
-				}
-
-				console.log("/api/" + category);
-				var endpoint = "/api/" + category;
-
-				// trackIDs.push(getTrackID(i, endpoint));
-            }
-
-            console.log(trackIDs);
-
-			return trackIDs;
-		};
-
-		// var getTrackID = function(i, endpoint){
-		//   $http.get(endpoint)
-		//     .success(function(data) {
-		//       console.log('Test');
-		//       console.log('i is ', i);
-		//       // console.log($scope.comments[i].id);
-		//       return data;
-		//   	})
-		//   	.error(function(data) {
-		//   		console.log("The request isn't working");
-		//   	});
-		// }
-
-    	// console.log($scope.contest_entries.results);
-
     	// set default layout mode
         $rootScope.settings.layout.pageSidebarClosed = false;
     });
+
+    $scope.leaders = leaders;
+    $scope.trending = trending;
+
+    $scope.getPlayIncrease = function(track) {
+		// get play count increase
+		var currPlayCount = track.current_playback_count;
+		var initPlayCount = track.initial_playback_count;
+
+		var playIncrease = ((currPlayCount - initPlayCount) / (initPlayCount)) * 100;
+
+		return playIncrease;
+    };
+
+    $scope.getFollowIncrease = function(track) {
+		// get follower count increase
+		var currFollowCount = track.current_follower_count;
+		var initFollowCount = track.initial_follower_count;
+		
+		var followIncrease = ((currFollowCount - initFollowCount) / (initFollowCount)) * 100;
+
+		return followIncrease;
+    };
+
+    $scope.getSrc = function(track) {
+    	var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.track.sc_id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+
+    	var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
+
+    	return trustedUrl;
+    }
+
 }]);

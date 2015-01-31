@@ -52,12 +52,12 @@
 <!-- BEGIN MAIN CONTENT -->
 <div>
 	<div class="note note-success note-bordered">
-		<h3>Welcome, Collin! <span class="close" data-close="note"></span></h3>
+		<h3>Welcome, {{myData.first_name}}! <span class="close" data-close="note"></span></h3>
+		<!-- {{authState.user}} -->
 		<p>
 			We're glad you're here.
 		</p>
-		<span class="label label-success">Tutorial</span> Click the Start button and see what everyone else is up to.</span>
-		</p>
+		<span class="label label-success">Start</span> Find contests below and win some cash.</span>
 	</div>
 	<!-- BEGIN DASHBOARD STATS -->
 	<!-- <div class="row"> -->
@@ -173,7 +173,7 @@
 						</ul>
 					</div>
 				</div>
-				<div class="portlet-body">
+				<div class="portlet-body" ng-model="contests" ng-init="filterContests(contests.results)">
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_1_1">
 							<div class="table-scrollable table-scrollable-borderless">
@@ -181,10 +181,10 @@
 									<thead>
 										<tr class="uppercase">
 											<th colspan="2">
-												Contest
+												Open Contests
 											</th>
 											<th>
-												Entries
+												Allowable<br>Submissions
 											</th>
 											<th>
 												Top Prize
@@ -194,24 +194,24 @@
 											</th>
 										</tr>
 									</thead>
-									<tr ng-repeat="contest in contests.results">
+									<tr ng-repeat="openContest in openContests">
 										<td class="fit">
-											<img class="user-pic" src="{{contest.contest_pic_url}}">
+											<img class="user-pic" src="{{openContest.contest_picture}}">
 										</td>
 										<td>
-											<a href="javascript:;" class="primary-link">{{contest.title}}</a>
+											<a href="javascript:;" class="primary-link">{{openContest.title}}</a>
 										</td>
 										<td>
-											{{contest.num_entries}}
+											{{openContest.songs_per_entrant}}
 										</td>
 										<td>
-											<a href="">${{contest.prize}}</a>
+											<a href="">${{openContest.prize}}</a>
 										</td>
 										<td>
-											{{contest.start_time}}
+											{{openContest.start_time}}
 										</td>
 										<td>
-											<span class="btn btn-default red-nostra" ng-show="{{contest.is_live}}">Enter</span>
+											<span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}}">Enter</span>
 										</td>
 									</tr>
 								</table>
@@ -224,10 +224,10 @@
 									<thead>
 										<tr class="uppercase">
 											<th colspan="2">
-												Contest
+												In Progress Contest
 											</th>
 											<th>
-												Entries
+												Allowable<br>Submissions
 											</th>
 											<th>
 												Top Prize
@@ -237,37 +237,37 @@
 											</th>
 										</tr>
 									</thead>
-									<tr ng-repeat="contest in contests.results">
+									<tr ng-repeat="inProgressContest in inProgressContests">
 										<td class="fit">
-											<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
+											<img class="user-pic" src="{{inProgressContest.contest_picture}}">
 										</td>
 										<td>
-											<a href="javascript:;" class="primary-link">{{contest.title}}</a>
+											<a href="javascript:;" class="primary-link">{{inProgressContest.title}}</a>
 										</td>
 										<td>
-											{{contest.num_entries}}
+											{{inProgressContest.songs_per_entrant}}
 										</td>
 										<td>
-											<a href="">${{contest.prize}}</a>
+											<a href="">${{inProgressContest.prize}}</a>
 										</td>
 										<td>
-											{{contest.start_time}}
+											{{inProgressContest.start_time}}
 										</td>
 										<td>
-											<span class="btn btn-default red-nostra" ng-show="{{contest.is_live}}">Enter</span>
+											<span class="btn btn-default red-nostra" ng-show="{{inProgressContest.is_live}}">Enter</span>
 										</td>
 									</tr>
 								</table>
 							</div>
 						</div>
 						<!-- End Tab 2 -->
-						<div class="tab-pane" id="tab_1_2">
+						<div class="tab-pane" id="tab_1_3">
 							<div class="table-scrollable table-scrollable-borderless">
 								<table class="table table-hover table-light">
 									<thead>
 										<tr class="uppercase">
 											<th colspan="2">
-												Contest
+												Completed Contests
 											</th>
 											<th>
 												Entries
@@ -280,30 +280,90 @@
 											</th>
 										</tr>
 									</thead>
-									<tr ng-repeat="contest in contests.results">
+									<tr ng-repeat="completedContest in completedContests">
 										<td class="fit">
-											<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
+											<img class="user-pic" src="{{completedContest.contest_picture}}">
 										</td>
 										<td>
-											<a href="javascript:;" class="primary-link">{{contest.title}}</a>
+											<a href="javascript:;" class="primary-link">{{completedContest.title}}</a>
 										</td>
 										<td>
-											{{contest.num_entries}}
+											{{completedContest.songs_per_entrant}}
 										</td>
 										<td>
-											<a href="">${{contest.prize}}</a>
+											<a href="">${{completedContest.prize}}</a>
 										</td>
 										<td>
-											{{contest.start_time}}
+											{{completedContest.start_time}}
 										</td>
 										<td>
-											<span class="btn btn-default red-nostra" ng-show="{{contest.is_live}}">Enter</span>
+											<span class="btn btn-default red-nostra" ng-show="{{completedContest.is_live}}">Enter</span>
 										</td>
 									</tr>
 								</table>
 							</div>
 						</div>
 						<!-- End Tab 3 -->
+					</div>
+				</div>
+			</div>
+			<!-- END PORTLET-->
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<!-- BEGIN PORTLET-->
+			<div class="portlet light">
+				<div class="portlet-title">
+					<div class="caption caption-md">
+						<i class="icon-bar-chart font-green-haze hide"></i>
+						<span class="caption-subject font-nostra bold uppercase">My Submissions</span>
+						<span class="caption-helper hide">Check out our contests...</span>
+					</div>
+				</div>
+				<div class="portlet-body" ng-model="contests" ng-init="myCurrentContests(myData.my_entries)">
+					<div class="tab-content">
+						<div class="table-scrollable table-scrollable-borderless">
+							<table class="table table-hover table-light">
+								<thead>
+									<tr class="uppercase">
+										<th colspan="2">
+											Contests
+										</th>
+										<th>
+											Allowable<br>Submissions
+										</th>
+										<th>
+											Top Prize
+										</th>
+										<th>
+											Starts
+										</th>
+									</tr>
+								</thead>
+								<tr ng-repeat="myEntry in myEntries">
+									<td class="fit">
+										<img class="user-pic" src="{{myEntry.contest_picture}}">
+									</td>
+									<td>
+										<a href="javascript:;" class="primary-link">{{myEntry.title}}</a>
+									</td>
+									<td>
+										{{myEntry.songs_per_entrant}}
+									</td>
+									<td>
+										<a href="">${{myEntry.prize}}</a>
+									</td>
+									<td>
+										{{myEntry.start_time}}
+									</td>
+									<td>
+										<span class="btn btn-default red-nostra" ng-show="{{myEntry.is_live}}">View</span>
+									</td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -153,10 +153,17 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', function($scope) {
+MetronicApp.controller('HeaderController', ['$scope', '$http', function($scope, $http) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
+
+    $http.get('/api/users/me').then(function(response) {
+        $scope.myData = response.data;
+        // console.log($scope.myData);
+        return response.data;
+    });
+
 }]);
 
 /* Setup Layout Part - Sidebar */
@@ -185,44 +192,43 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
     // Redirect any unmatched url
     $urlRouterProvider.otherwise("/dashboard");
-    // $urlRouterProvider.when("/dashboard","/login");
 
     $stateProvider
 
         // Login
-        .state('login', {
-            url: "/login",
-            templateUrl: "/assets/views/login.html",
-            data: {pageTitle: 'Log In'},
-            controller: "LoginController",
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            '/assets/global/plugins/morris/morris.css',
-                            '/assets/admin/pages/css/tasks.css',
+        // .state('login', {
+        //     url: "/login",
+        //     templateUrl: "/assets/views/login.html",
+        //     data: {pageTitle: 'Log In'},
+        //     controller: "LoginController",
+        //     resolve: {
+        //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+        //             return $ocLazyLoad.load({
+        //                 name: 'MetronicApp',
+        //                 insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+        //                 files: [
+        //                     '/assets/global/plugins/morris/morris.css',
+        //                     '/assets/admin/pages/css/tasks.css',
                             
-                            '/assets/global/plugins/morris/morris.min.js',
-                            '/assets/global/plugins/morris/raphael-min.js',
-                            '/assets/global/plugins/jquery.sparkline.min.js',
+        //                     '/assets/global/plugins/morris/morris.min.js',
+        //                     '/assets/global/plugins/morris/raphael-min.js',
+        //                     '/assets/global/plugins/jquery.sparkline.min.js',
 
-                            '/assets/admin/pages/scripts/index3.js',
-                            '/assets/admin/pages/scripts/tasks.js',
+        //                     '/assets/admin/pages/scripts/index3.js',
+        //                     '/assets/admin/pages/scripts/tasks.js',
 
-                            '/assets/js/controllers/LoginController.js'
-                        ] 
-                    });
-                }],
-                contests: ['$http', function($http) {
-                    return $http.get('/api/contests/').then(function(response) {
-                        // console.log(response.data);
-                        return response.data;
-                    });
-                }]
-            }
-        })
+        //                     '/assets/js/controllers/LoginController.js'
+        //                 ] 
+        //             });
+        //         }],
+        //         contests: ['$http', function($http) {
+        //             return $http.get('/api/contests/').then(function(response) {
+        //                 // console.log(response.data);
+        //                 return response.data;
+        //             });
+        //         }]
+        //     }
+        // })
 
         // Dashboard
         .state('dashboard', {
@@ -248,13 +254,18 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
                             '/assets/admin/pages/scripts/tasks.js',
 
-                            '/assets/js/controllers/DashboardController.js',
-                            '/assets/admin/pages/scripts/nostrajamus.js'
+                            '/assets/js/controllers/DashboardController.js'
                         ] 
                     });
                 }],
                 contests: ['$http', function($http) {
                     return $http.get('/api/contests/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                myData: ['$http', function($http) {
+                    return $http.get('/api/users/me').then(function(response) {
                         // console.log(response.data);
                         return response.data;
                     });
@@ -733,14 +744,14 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         ]
                     });
                 }],
-                contest_entries: ['$http', function($http) {
-                    return $http.get('/api/contest_entries/').then(function(response) {
+                leaders: ['$http', function($http) {
+                    return $http.get('/api/users/leaderboard/').then(function(response) {
                         // console.log(response.data);
                         return response.data;
                     });
                 }],
-                tracks: ['$http', function($http) {
-                    return $http.get('/api/tracks/').then(function(response) {
+                trending: ['$http', function($http) {
+                    return $http.get('/api/tracks/trending').then(function(response) {
                         // console.log(response.data);
                         return response.data;
                     });

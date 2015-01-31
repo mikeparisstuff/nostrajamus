@@ -134,39 +134,37 @@
 					<table class="table table-hover table-light">
 						<thead>
 							<tr class="uppercase">
-								<th width="25%">
+								<th width="33%" class="text-center">
+									Rank
 								</th>
 								<!-- DOC: colspan="2" -->
-								<th width="25%" class="text-center">
+								<th width="33%" class="text-center">
 									Tastemaker
 								</th>
 <!-- 								<th>
 									Contests
 								</th> -->
-								<th width="25%" class="text-center">
+								<th width="33%" class="text-center">
 									JAM Points
-								</th>
-								<th width="25%">
 								</th>
 							</tr>
 						</thead>
-						<tr>
-							<th width="25%">
+						<tr ng-repeat="leader in leaders">
+							<th width="33%" class="text-center">
+								{{$index}}
 							</th>
-							<td class="bold text-center" width="25%">
-								<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
+							<td class="bold text-center" width="33%">
+								<img class="user-pic" src="{{leader.profile_picture}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
 								<!-- <a href="javascript:;" class="primary-link"> -->
-									Mike
+									{{leader.username}}
 								<!-- </a> -->
 							</td>
 <!-- 							<td>
 								10
 							</td> -->
-							<td width="25%" class="text-center">
-								<span class="bold font-nostra-dark">2460</span>
+							<td width="33%" class="text-center">
+								<span class="bold font-nostra-dark">{{leader.total_jam_points}}</span>
 							</td>
-							<th width="25%">
-							</th>
 						</tr>
 					</table>
 				</div>
@@ -183,7 +181,7 @@
 			<div class="portlet-title">
 				<div class="caption caption-md">
 					<i class="icon-bar-chart font-green-haze hide"></i>
-					<span class="caption-subject font-nostra bold uppercase">Trending Jams</span>
+					<span class="caption-subject font-nostra bold uppercase">Upcoming Jams</span>
 					<span class="caption-helper hide">weekly stats...</span>
 				</div>
 <!-- 				<div class="actions">
@@ -198,42 +196,50 @@
 				</div> -->
 			</div>
 			<div class="portlet-body">
-				<div class="row list-separated">
-					<div class="col-md-3 col-sm-3 col-xs-6">
-						<div class="font-grey-mint font-sm">
-							Total Plays
+				<div ng-repeat="track in trending">
+					<div class="row list-separated">
+						<div class="col-md-3 col-sm-3 col-xs-6">
+							<div class="font-grey-mint font-sm">
+								Total Plays
+							</div>
+							<div class="uppercase font-hg font-red-flamingo">
+								{{track.current_playback_count}} <span class="font-lg font-grey-mint">M</span>
+							</div>
 						</div>
-						<div class="uppercase font-hg font-red-flamingo">
-							137 <span class="font-lg font-grey-mint">M</span>
+						<div class="col-md-3 col-sm-3 col-xs-6">
+							<div class="font-grey-mint font-sm">
+								Total Followers
+							</div>
+							<div class="uppercase font-hg font-green-haze">
+								{{track.current_follower_count}} <span class="font-lg font-grey-mint">K</span>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-6">
+							<div class="font-grey-mint font-sm">
+								Play Increase
+							</div>
+							<div class="uppercase font-hg font-purple">
+								{{getPlayIncrease(track)}} <span class="font-lg font-grey-mint">%</span>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-6">
+							<div class="font-grey-mint font-sm">
+								Follower Increase
+							</div>
+							<div class="uppercase font-hg font-blue-sharp">
+								{{getFollowIncrease(track)}} <span class="font-lg font-grey-mint">%</span>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-3 col-xs-6">
-						<div class="font-grey-mint font-sm">
-							Total Followers
+					<div class="row" align="center">
+						<div class="col-md-1 col-sm-1 col-xs-2">
+							#{{$index}}
 						</div>
-						<div class="uppercase font-hg font-green-haze">
-							760 <span class="font-lg font-grey-mint">K</span>
-						</div>
-					</div>
-					<div class="col-md-3 col-sm-3 col-xs-6">
-						<div class="font-grey-mint font-sm">
-							Play Increase
-						</div>
-						<div class="uppercase font-hg font-purple">
-							5000 <span class="font-lg font-grey-mint">%</span>
+						<div class="col-md-11 col-sm-11 col-xs-22">
+							<iframe width="75%" height="200" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-3 col-xs-6">
-						<div class="font-grey-mint font-sm">
-							Follower Increase
-						</div>
-						<div class="uppercase font-hg font-blue-sharp">
-							300 <span class="font-lg font-grey-mint">%</span>
-						</div>
-					</div>
-				</div>
-				<div ng-repeat="track in getTrending(contest_entries.results)"> <!-- // FIX THIS -->
-					<iframe width="100%" height="260px" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{track.sc_id}}&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe> <!--187158437-->
+					<hr>
 				</div>
 				<!-- <ul class="list-separated list-inline-xs hide">
 					<li>
