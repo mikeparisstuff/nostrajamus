@@ -59,21 +59,21 @@
 			<div class="portlet light profile-sidebar-portlet">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="/assets/admin/pages/media/profile/profile_drums.png" class="img-responsive" alt="">
+					<img src="{{getProfilePicture(myInfo.profile_picture)}}" class="img-responsive" alt="">
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name font-nostra-dark">
-						cowllin
+						{{myInfo.username}}
 					</div>
 					<!-- <div class="profile-usertitle-job"> -->
 					<div>
-						Collin Waldoch
+						{{myInfo.first_name}} {{myInfo.last_name}}
 					</div>
 					<!-- <div class="profile-usertitle-location"> -->
 					<div>
-						Charlottesville, VA
+						{{myInfo.location}}
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -81,18 +81,18 @@
 				<div class="profile-userbuttons">
 					<!-- <button type="button" class="btn btn-circle green-haze btn-sm">10 JAM</button> -->
 					<!-- <button type="button" class="btn btn-circle btn-danger btn-sm">7 Contests</button> -->
-					<div class="font-nostra">10</div> Jam Points
-					<div class="font-nostra">7</div> Contests
+					<div class="font-nostra">{{myInfo.total_jam_points}}</div> Jam Points
+					<div class="font-nostra">{{getNumContests(myInfo.my_entries)}}</div> Contests
 				</div>
 				<hr>
-				<div align="center">
+<!-- 				<div align="center">
 					<div class="profile-usertitle-name font-nostra-dark">
 							Current Jam
 							<br>
 					</div>
 					<a href="cannon.html">Cannon</a> by The White Stripes
 				</div>
-				<br><br>
+				<br><br> -->
 				<div align="center">
 					<button type="button" class="btn btn-circle red-nostra btn-md" data-toggle="modal" data-target="#winningsModal">My Winnings</button>
 				</div>

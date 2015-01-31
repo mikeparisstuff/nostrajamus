@@ -37,6 +37,6 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     	var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
 
     	return trustedUrl;
-    }
+    };
 
 }]);

@@ -166,19 +166,19 @@
 					<span class="caption-subject font-nostra bold uppercase">Submitted Jams</span>
 					<span class="caption-helper hide">weekly stats...</span>
 				</div>
-				<div class="actions">
+<!-- 				<div class="actions">
 					<div class="btn-group btn-group-devided" data-toggle="buttons">
 						<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
 						<input type="radio" name="options" class="toggle" id="option1">Jam Points</label>
 						<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
 						<input type="radio" name="options" class="toggle" id="option2">Date</label>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="portlet-body">
-				<div class="row">
+				<div class="row" ng-repeat="track in myInfo.my_entries">
 					<div class="col-sm-12">
-						<iframe width="100%" height="100px" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/187158437&amp;auto_play=false&amp;hide_related=false&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;visual=true"></iframe>
+						<iframe width="100%" height="100px" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
 					</div>
 					<div class="col-sm-12">
 						<div class="row list-separated">
@@ -187,7 +187,7 @@
 									Total Plays
 								</div>
 								<div class="uppercase font-lg font-red-flamingo">
-									137 <span class="font-md font-grey-mint">M</span>
+									{{track.current_playback_count}} <span class="font-md font-grey-mint">M</span>
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-6">
@@ -195,7 +195,7 @@
 									Total Followers
 								</div>
 								<div class="uppercase font-lg font-green-haze">
-									760 <span class="font-md font-grey-mint">K</span>
+									{{track.current_follower_count}} <span class="font-md font-grey-mint">K</span>
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-6">
@@ -203,7 +203,7 @@
 									Play Increase
 								</div>
 								<div class="uppercase font-lg font-purple">
-									5000 <span class="font-md font-grey-mint">%</span>
+									{{getPlayIncrease(track)}} <span class="font-md font-grey-mint">%</span>
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-6">
@@ -211,7 +211,7 @@
 									Follower Increase
 								</div>
 								<div class="uppercase font-lg font-blue-sharp">
-									300 <span class="font-md font-grey-mint">%</span>
+									{{getFollowIncrease(track)}} <span class="font-md font-grey-mint">%</span>
 								</div>
 							</div>
 						</div>
@@ -245,79 +245,35 @@
 			<div class="portlet-body">
 				<!--BEGIN TABS-->
 				<div class="tab-content">
-					<div class="tab-pane active" id="tab_1_1">
+					<!-- <div class="tab-pane active" id="tab_1_1"> -->
 						<div class="scroller" style="height: 320px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
 							<ul class="feeds">
-								<li>
+								<li ng-repeat="reward in myInfo.my_rewards">
 									<div class="col1">
 										<div class="cont">
 											<div class="cont-col1">
 												<div class="label label-sm label-success">
-													<i class="fa fa-bell-o"></i>
+													<i class="fa {{reward.fa_string}}"></i>
 												</div>
 											</div>
 											<div class="cont-col2">
 												<div class="desc">
-													You have 4 pending tasks. <span class="label label-sm label-info">
+													{{reward.title}} <!-- <span class="label label-sm label-info">
 													Take action <i class="fa fa-share"></i>
-													</span>
+													</span> -->
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="col2">
 										<div class="date">
-											Just now
-										</div>
-									</div>
-								</li>
-								<li>
-									<a href="#">
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-success">
-														<i class="fa fa-bell-o"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														New version v1.4 just lunched!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												20 mins
-											</div>
-										</div>
-									</a>
-								</li>
-								<li>
-									<div class="col1">
-										<div class="cont">
-											<div class="cont-col1">
-												<div class="label label-sm label-danger">
-													<i class="fa fa-bolt"></i>
-												</div>
-											</div>
-											<div class="cont-col2">
-												<div class="desc">
-													Database server #12 overloaded. Please fix the issue.
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col2">
-										<div class="date">
-											24 mins
+											{{reward.created_at}}
 										</div>
 									</div>
 								</li>
 							</ul>
 						</div>
-					</div>
+					<!-- </div> -->
 					<!-- <div class="tab-pane" id="tab_1_2">
 						<div class="scroller" style="height: 337px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
 							<ul class="feeds">
@@ -1011,6 +967,6 @@
 </div> -->
 <!-- BEGIN MAIN JS-->
 <script>
-	Profile.init(); // init page demo
+	// Profile.init(); // init page demo
 </script>
 <!-- BEGIN MAIN JS -->
