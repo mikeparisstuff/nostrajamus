@@ -1,6 +1,6 @@
 <!--BEGIN PAGE HEADER-->
 <h3 class="page-title">
-	Leaderboard <small>Top Tastemakers</small>
+	Leaderboard <!-- <small>Top Tastemakers</small> -->
 </h3>
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
@@ -81,27 +81,27 @@
 			<div class="portlet-title">
 				<div class="caption caption-md">
 					<i class="icon-bar-chart font-green-haze hide"></i>
-					<span class="caption-subject font-green-haze bold uppercase">Leaderboard</span>
+					<span class="caption-subject font-nostra bold uppercase">Top Tastemakers</span>
 					<span class="caption-helper hide">weekly stats...</span>
 				</div>
-				<div class="actions">
+<!-- 				<div class="actions">
 					<div class="btn-group btn-group-devided" data-toggle="buttons">
 						<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
 						<input type="radio" name="options" class="toggle" id="option1">Today</label>
 						<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
 						<input type="radio" name="options" class="toggle" id="option2">Week</label>
-						<!-- <label class="btn btn-transparent grey-salsa btn-circle btn-sm"> -->
-						<!-- <input type="radio" name="options" class="toggle" id="option2">Month</label> -->
+						<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+						<input type="radio" name="options" class="toggle" id="option2">Month</label>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="portlet-body">
-				<div class="row number-stats margin-bottom-30">
+<!-- 				<div class="row number-stats margin-bottom-30">
 					<div class="col-md-6 col-sm-6 col-xs-6">
 						<div class="stat-left">
-							<div class="stat-chart">
+							<div class="stat-chart"> -->
 								<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-								<div id="sparkline_bar"></div>
+<!-- 								<div id="sparkline_bar"></div>
 							</div>
 							<div class="stat-number">
 								<div class="title">
@@ -112,12 +112,12 @@
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-6">
+					</div> -->
+<!-- 					<div class="col-md-6 col-sm-6 col-xs-6">
 						<div class="stat-right">
-							<div class="stat-chart">
+							<div class="stat-chart"> -->
 								<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-								<div id="sparkline_bar2"></div>
+<!-- 								<div id="sparkline_bar2"></div>
 							</div>
 							<div class="stat-number">
 								<div class="title">
@@ -129,107 +129,44 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="table-scrollable table-scrollable-borderless">
 					<table class="table table-hover table-light">
 						<thead>
 							<tr class="uppercase">
-								<th colspan="2">
+								<th width="25%">
+								</th>
+								<!-- DOC: colspan="2" -->
+								<th width="25%" class="text-center">
 									Tastemaker
 								</th>
-								<th>
-									Earnings
-								</th>
-								<th>
+<!-- 								<th>
 									Contests
+								</th> -->
+								<th width="25%" class="text-center">
+									JAM Points
 								</th>
-								<th>
-									Latest<br>Winnings
-								</th>
-								<th>
-									JAM<br>Points
+								<th width="25%">
 								</th>
 							</tr>
 						</thead>
 						<tr>
-							<td class="fit">
+							<th width="25%">
+							</th>
+							<td class="bold text-center" width="25%">
 								<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
+								<!-- <a href="javascript:;" class="primary-link"> -->
+									Mike
+								<!-- </a> -->
 							</td>
-							<td>
-								<a href="javascript:;" class="primary-link">Mike</a>
-							</td>
-							<td>
-								$8K
-							</td>
-							<td>
+<!-- 							<td>
 								10
+							</td> -->
+							<td width="25%" class="text-center">
+								<span class="bold font-nostra-dark">2460</span>
 							</td>
-							<td>
-								$1K
-							</td>
-							<td>
-								<span class="bold font-green-haze">2460</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="fit">
-								<img class="user-pic" src="/assets/admin/layout/img/avatar5.jpg">
-							</td>
-							<td>
-								<a href="javascript:;" class="primary-link">Tony</a>
-							</td>
-							<td>
-								$5K
-							</td>
-							<td>
-								12
-							</td>
-							<td>
-								$800
-							</td>
-							<td>
-								<span class="bold font-green-haze">1940</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="fit">
-								<img class="user-pic" src="/assets/admin/layout/img/avatar6.jpg">
-							</td>
-							<td>
-								<a href="javascript:;" class="primary-link">Robby</a>
-							</td>
-							<td>
-								$2.5K
-							</td>
-							<td>
-								45
-							</td>
-							<td>
-								$900
-							</td>
-							<td>
-								<span class="bold font-green-haze">1800</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="fit">
-								<img class="user-pic" src="/assets/admin/layout/img/avatar7.jpg">
-							</td>
-							<td>
-								<a href="javascript:;" class="primary-link">Collin</a>
-							</td>
-							<td>
-								$1K
-							</td>
-							<td>
-								8
-							</td>
-							<td>
-								$200
-							</td>
-							<td>
-								<span class="bold font-green-haze">1569</span>
-							</td>
+							<th width="25%">
+							</th>
 						</tr>
 					</table>
 				</div>
@@ -246,19 +183,19 @@
 			<div class="portlet-title">
 				<div class="caption caption-md">
 					<i class="icon-bar-chart font-green-haze hide"></i>
-					<span class="caption-subject font-green-haze bold uppercase">Jam of the Week</span>
+					<span class="caption-subject font-nostra bold uppercase">Trending Jams</span>
 					<span class="caption-helper hide">weekly stats...</span>
 				</div>
-				<div class="actions">
+<!-- 				<div class="actions">
 					<div class="btn-group btn-group-devided" data-toggle="buttons">
 						<label class="btn btn-transparent grey-salsa btn-circle btn-sm active">
 						<input type="radio" name="options" class="toggle" id="option1">Today</label>
 						<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
 						<input type="radio" name="options" class="toggle" id="option2">Week</label>
-<!-- 							<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
-						<input type="radio" name="options" class="toggle" id="option2">Month</label> -->
+						<label class="btn btn-transparent grey-salsa btn-circle btn-sm">
+						<input type="radio" name="options" class="toggle" id="option2">Month</label>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="portlet-body">
 				<div class="row list-separated">
@@ -295,7 +232,9 @@
 						</div>
 					</div>
 				</div>
-				<iframe width="100%" height="260px" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/187158437&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+				<div ng-repeat="track in getTrending(contest_entries.results)"> <!-- // FIX THIS -->
+					<iframe width="100%" height="260px" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{track.sc_id}}&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe> <!--187158437-->
+				</div>
 				<!-- <ul class="list-separated list-inline-xs hide">
 					<li>
 						<div class="font-grey-mint font-sm">
@@ -348,8 +287,8 @@
 <!-- END MAIN CONTENT -->
 <!-- BEGIN MAIN JS -->
 <script>
-	function AdvancedDatatablesDemoCtrl($scope) {
-		Leagues.init();
-	}
+	// function AdvancedDatatablesDemoCtrl($scope) {
+	// 	Leagues.init();
+	// }
 </script>
 <!-- END MAIN JS

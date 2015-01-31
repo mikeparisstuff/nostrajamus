@@ -35,7 +35,7 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
     return settings;
 }]);
 
-// Setup authenitcation with django
+// Setup authentication with django
 MetronicApp.config(['$httpProvider', function($httpProvider) {
     // django and angular both support csrf tokens. This tells
     // angular which cookie to add to what header.
@@ -43,6 +43,12 @@ MetronicApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     $httpProvider.defaults.contentType = 'application/json';
 }]);
+
+MetronicApp.service('authState', function () {
+    return {
+        user: undefined
+    };
+})
 
 MetronicApp.factory('api', ['$resource', function($resource) {
     function add_auth_header(data, headersGetter){
@@ -64,15 +70,23 @@ MetronicApp.factory('api', ['$resource', function($resource) {
         users: $resource('/api/users\\/', {}, {
             create: {method: 'POST'}
         })
+        // posts: $resource('/api/posts\\/', {}, {
+        //     list:   {method: 'GET', isArray: true},
+        //     create: {method: 'POST'},
+        //     detail: {method: 'GET', url: '/api/posts/:id'},
+        //     delete: {method: 'DELETE', url: '/api/posts/:id'}
+        // })
     };
 }]);
 
-MetronicApp.controller('authController', function($scope, api) {
+MetronicApp.controller('authController', function($scope, api, authState) {
     // Angular does not detect auto-fill or auto-complete. If the browser
     // autofills "username", Angular will be unaware of this and think
     // the $scope.username is blank. To workaround this we use the 
     // autofill-event polyfill [4][5]
     $('#id_auth_form input').checkAndTriggerAutoFillEvent();
+
+    $scope.authState = authState;
 
     $scope.getCredentials = function(){
         return {
@@ -89,7 +103,7 @@ MetronicApp.controller('authController', function($scope, api) {
             $promise.
                 then(function(data){
                     // on good username and password
-                    $scope.user = data.username;
+                    authState.user = data.username;
                 }).
                 catch(function(data){
                     // on incorrect username and password
@@ -99,7 +113,8 @@ MetronicApp.controller('authController', function($scope, api) {
 
     $scope.logout = function(){
         api.auth.logout(function(){
-            $scope.user = undefined;
+            console.log(authState.user);
+            authState.user = undefined;
         });
     };
     $scope.register = function($event){
@@ -180,7 +195,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "/assets/views/login.html",
             data: {pageTitle: 'Log In'},
             controller: "LoginController",
-            authenticate: false,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -200,6 +214,12 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '/assets/js/controllers/LoginController.js'
                         ] 
                     });
+                }],
+                contests: ['$http', function($http) {
+                    return $http.get('/api/contests/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
                 }]
             }
         })
@@ -207,10 +227,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // Dashboard
         .state('dashboard', {
             url: "/dashboard",
-            templateUrl: "/assets/views/dashboard.html",
+            templateUrl: "/assets/views/dashboard.html",            
             data: {pageTitle: 'Home'},
             controller: "DashboardController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -227,8 +246,17 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '/assets/admin/pages/scripts/index3.js',
                             '/assets/admin/pages/scripts/tasks.js',
 
-                            '/assets/js/controllers/DashboardController.js'
+                            '/assets/admin/pages/scripts/tasks.js',
+
+                            '/assets/js/controllers/DashboardController.js',
+                            '/assets/admin/pages/scripts/nostrajamus.js'
                         ] 
+                    });
+                }],
+                contests: ['$http', function($http) {
+                    return $http.get('/api/contests/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
                     });
                 }]
             }
@@ -237,7 +265,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // Test
         // .state('test', {
         //     url: "/test.html",
-        //     templateUrl: "views/test.html",            
+        //     templateUrl: "/assets/views/test.html",            
         //     data: {pageTitle: 'Admin Test Template'},
         //     controller: "TestController",
         //     resolve: {
@@ -256,7 +284,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         //                     '/assets/admin/pages/scripts/index3.js',
         //                     '/assets/admin/pages/scripts/tasks.js',
 
-        //                     'js/controllers/TestController.js'
+        //                     '/assets/js/controllers/TestController.js'
         //                 ] 
         //             });
         //         }],
@@ -275,7 +303,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/file_upload.html",
             data: {pageTitle: 'AngularJS File Upload'},
             controller: "GeneralPageController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
@@ -299,7 +326,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/ui_select.html",
             data: {pageTitle: 'AngularJS Ui Select'},
             controller: "UISelectController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
@@ -325,7 +351,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/ui_bootstrap.html",
             data: {pageTitle: 'AngularJS UI Bootstrap'},
             controller: "GeneralPageController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
@@ -344,7 +369,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/tree.html",
             data: {pageTitle: 'jQuery Tree View'},
             controller: "GeneralPageController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
@@ -368,7 +392,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/form_tools.html",
             data: {pageTitle: 'Form Tools'},
             controller: "GeneralPageController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
@@ -407,7 +430,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/pickers.html",
             data: {pageTitle: 'Date & Time Pickers'},
             controller: "GeneralPageController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
@@ -444,7 +466,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/dropdowns.html",
             data: {pageTitle: 'Custom Dropdowns'},
             controller: "GeneralPageController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load([{
@@ -474,7 +495,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/datatables/advanced.html",
             data: {pageTitle: 'Advanced Datatables'},
             controller: "GeneralPageController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -503,7 +523,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "views/datatables/ajax.html",
             data: {pageTitle: 'Ajax Datatables'},
             controller: "GeneralPageController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -534,7 +553,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "/assets/views/profile/main.html",
             data: {pageTitle: 'User Profile'},
             controller: "UserProfileController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -561,24 +579,21 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state("profile.dashboard", {
             url: "/dashboard",
             templateUrl: "/assets/views/profile/dashboard.html",
-            data: {pageTitle: 'User Profile'},
-            authenticate: true
+            data: {pageTitle: 'User Profile'}
         })
 
         // User Profile Account
         .state("profile.account", {
             url: "/account",
             templateUrl: "/assets/views/profile/account.html",
-            data: {pageTitle: 'User Account'},
-            authenticate: true
+            data: {pageTitle: 'User Account'}
         })
 
         // User Profile Help
         .state("profile.help", {
             url: "/help",
             templateUrl: "/assets/views/profile/help.html",
-            data: {pageTitle: 'User Help'},
-            authenticate: true     
+            data: {pageTitle: 'User Help'}
         })
 
         // My Jams
@@ -587,7 +602,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "/assets/views/jams.html",
             data: {pageTitle: 'My Jams'},
             controller: "JamsController",
-            authenticate: true,
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -718,6 +732,18 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '/assets/js/controllers/LeaderboardController.js'
                         ]
                     });
+                }],
+                contest_entries: ['$http', function($http) {
+                    return $http.get('/api/contest_entries/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                tracks: ['$http', function($http) {
+                    return $http.get('/api/tracks/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
                 }]
             }
         })
@@ -817,15 +843,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 }]);
 
 /* Init global settings and run the app */
-MetronicApp.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state, AuthService) {
-    // Auth
-    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-        if (toState.authenticate && !AuthService.isAuthenticated()){
-            // User isn’t authenticated
-            $state.transitionTo("login");
-            event.preventDefault();
-        }
-    })
-    // /Auth
+MetronicApp.run(["$rootScope", "settings", "$state", function($rootScope, settings, $state) {
     $rootScope.$state = $state; // state to be accessed from view
 }]);

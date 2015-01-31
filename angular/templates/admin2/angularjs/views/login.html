@@ -3,7 +3,7 @@
         <div class="intro-heading font-nostra-dark">Nostrajamus</div>
         <div class="intro-lead-in font-nostra-dark">Enter contests. Champion songs. Win cash and prizes.</div>
         <button type="button" class="btn btn-xl red-nostra" data-toggle="modal" data-target="#playNowModal">Play Now</button>
-        <div class="font-nostra-dark sublogin">First Time Free!</div>
+        <!-- <div class="font-nostra-dark sublogin">First Time Free!</div> -->
 
         <div class="row">
             <div class="col-md-offset-1 col-md-10">
@@ -21,7 +21,11 @@
                             </li>
                             <li>
                                 <a href="#" class="font-nostra-dark bold uppercase" data-target="#tab_1_3" data-toggle="tab">
-                                About Us </a>
+                                Our Story </a>
+                            </li>
+                            <li>
+                                <a href="#" class="font-nostra-dark bold uppercase" data-target="#tab_1_4" data-toggle="tab">
+                                Our Team </a>
                             </li>
                         </ul>
                     </div>
@@ -63,80 +67,172 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab_1_2">
-                                <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-24">
-                                    <div class="dashboard-stat">
-                                        <div class="visual">
-                                            <i class="fa fa-comments font-nostra-dark"></i>
-                                        </div>
-                                        <div class="details font-nostra-dark">
-                                            <div class="number font-nostra-dark">
-                                                $1M
-                                            </div>
-                                            <div class="desc">
-                                                Top JAMs Contest
-                                            </div>
-                                        </div>
-                                        <a class="more pull-right" href="#">
-                                        View more
-                                        </a>
+                                <div class="row" align="left">
+                                    <div class="table-scrollable table-scrollable-borderless">
+                                        <table class="table table-hover table-light">
+                                            <thead>
+                                                <tr class="uppercase">
+                                                    <th colspan="2">
+                                                        Contest
+                                                    </th>
+                                                    <th>
+                                                        Entries
+                                                    </th>
+                                                    <th>
+                                                        Top Prize
+                                                    </th>
+                                                    <th>
+                                                        Starts
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tr ng-repeat="contest in contests.results">
+                                                <td class="fit">
+                                                    <img class="user-pic" src="{{contest.contest_pic_url}}">
+                                                </td>
+                                                <td>
+                                                    <div class="font-nostra-sm">{{contest.title}}</div>
+                                                </td>
+                                                <td>
+                                                    {{contest.num_entries}}
+                                                </td>
+                                                <td>
+                                                    <div class="font-nostra-dark">${{contest.prize}}</div>
+                                                </td>
+                                                <td>
+                                                    {{contest.start_time}}
+                                                </td>
+                                                <td>
+                                                    <span class="btn btn-default red-nostra" ng-show="{{contest.is_live}}">View</span>
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-24">
-                                    <div class="dashboard-stat">
-                                        <div class="visual">
-                                            <i class="fa fa-bar-chart-o font-nostra-dark"></i>
-                                        </div>
-                                        <div class="details font-nostra-dark">
-                                            <div class="number font-nostra-dark">
-                                                $100K
-                                            </div>
-                                            <div class="desc">
-                                                Originals Only
-                                            </div>
-                                        </div>
-                                        <a class="more pull-right" href="#">
-                                        View more
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
                             </div>
                             <div class="tab-pane" id="tab_1_3">
                                 <div class="row">
-                                    <div class="col-sm-2 col-sm-offset-1">
+                                    <div class="col-lg-12 text-center">
+                                        <h2 class="section-heading">The NostraJAMus Story</h2>
+                                        <h3 class="section-subheading text-muted"></h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <ul class="timeline">
+                                            <li>
+                                                <div class="timeline-image">
+                                                    <img class="img-circle img-responsive" src="/assets/global/img/about/1.jpg" alt="">
+                                                </div>
+                                                <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                        <h4>Fall 2014</h4>
+                                                        <h4 class="subheading">Tony and Collin go hiking</h4>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                        <p class="text-muted">iTunes is a teenager. But radio is still the most effective way to launch new artists and glance at our culture’s musical landscape. This wouldn’t bum us out so much by itself, but the 10 most popular songs on the radio receive double the airtime today than those of  ten years ago. There are more ways to create and consume music than ever before. The funnel of popular music should not be narrowing.  It should be expanding. That’s why we created NostraJAMus.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="timeline-inverted">
+                                                <div class="timeline-image">
+                                                    <img class="img-circle img-responsive" src="/assets/global/img/about/winnings.jpg" alt="">
+                                                </div>
+                                                <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                        <h4>Fall 2014</h4>
+                                                        <h4 class="subheading">Born Winners: NostraJAMus wins 2nd place in UVA E-Cup</h4>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                        <p class="text-muted"><b>NostraJAMus is an online platform for music discovery, predictions, and tastemaking.</b> The concept is simple: find a new song you like by an unheralded artist? Support the track on our site. Enter that song in a contest, submit it in a duel with a friend, share it on your profile. We want you to champion the undiscovered musicians dotting the globe. And we want to reward you.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="timeline-image">
+                                                    <img class="img-circle img-responsive" src="/assets/global/img/about/sennheiser.jpg" alt="">
+                                                </div>
+                                                <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                        <h4>Early 2015</h4>
+                                                        <h4 class="subheading">Developing a sweet product</h4>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                        <p class="text-muted">NostraJAMus will give you prizes when your song selections jump up the charts. We’re here to incentivize music discovery and democratize tastemaking. We think that ‘big data’ and sterile analysis of listening habits have hampered new artists, and we’re here to return the power to listeners like you. Oh, and also, we’re a bunch of college kids who love music. For now, we’ll be running open contests on our site as we build out other features like duels, profiles, and tastemaker rankings. </p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="timeline-inverted">
+                                                <div class="timeline-image">
+                                                    <img class="img-circle img-responsive" src="/assets/global/img/about/rocket.jpg" alt=""/>
+                                                </div>
+                                                <div class="timeline-panel">
+                                                    <div class="timeline-heading">
+                                                        <h4>Future</h4>
+                                                    </div>
+                                                    <div class="timeline-body">
+                                                        <p class="text-muted">So here’s our advice right now: spend an extra half hour this week listening to new songs. Songs you’ve never heard before. Songs by artists with weird names. Songs outside your go-to genres. And if you find one that electrifies, submit it in our newest contest.</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="timeline-inverted">
+                                                <div class="timeline-image">
+                                                        <h4><a class="page-scroll jam-with-us white" href="/#/login">Jam
+                                                        With
+                                                        Us!</a></h4>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_1_4">
+                                <div class="row">
+                                    <div class="col-sm-4">
                                         <div class="team-member">
                                             <img src="/assets/global/img/team/collin.jpg" class="img-responsive img-circle" alt="">
                                             <h4 class="font-nostra-dark">Collin</h4>
                                             <p class="text-muted">Strategy</p>
+                                            <a href="mailto:collin@nostrajamus.com">collin@nostrajamus.com</a>
+                                            <p class="text-muted">Supplies the jams. Your new favorite song? He knew about it last year.</p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-4">
                                         <div class="team-member">
                                             <img src="/assets/global/img/team/tony.jpg" class="img-responsive img-circle" alt="">
                                             <h4 class="font-nostra-dark">Tony</h4>
                                             <p class="text-muted">Marketing</p>
+                                            <a href="mailto:tony@nostrajamus.com">tony@nostrajamus.com</a>
+                                            <p class="text-muted">A renaissance man who has perfected the art of the ‘fist pump’ while dancing.</p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-4">
                                         <div class="team-member">
                                             <img src="/assets/global/img/team/vince.jpg" class="img-responsive img-circle" alt="">
                                             <h4 class="font-nostra-dark">Vince</h4>
                                             <p class="text-muted">Frontend</p>
+                                            <a href="mailto:vince@nostrajamus.com">vince@nostrajamus.com</a>
+                                            <p class="text-muted">Buys nice earphones to listen to music, but then uses them as earplugs.</p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 col-sm-offset-2">
                                         <div class="team-member">
                                             <img src="/assets/global/img/team/mike.jpg" class="img-responsive img-circle" alt="">
                                             <h4 class="font-nostra-dark">Michael</h4>
                                             <p class="text-muted">Backend</p>
+                                            <a href="mailto:mike@nostrajamus.com">mike@nostrajamus.com</a>
+                                            <p class="text-muted">Tries to dress up nice for presentations, but then remembers that he’s the backend developer.</p>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-4">
                                         <div class="team-member">
                                             <img src="/assets/global/img/team/robby.jpg" class="img-responsive img-circle" alt="">
                                             <h4 class="font-nostra-dark">Robby</h4>
                                             <p class="text-muted">Design</p>
+                                            <a href="mailto:robby@nostrajamus.com">robby@nostrajamus.com</a>
+                                            <p class="text-muted">Creates original songs in his spare time. Then tries submitting them to NostraJAMus.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -156,26 +252,6 @@
     </div>
 
 </header>
-
-<!-- Modal -->
-<div class="modal fade" id="playNowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="contestModalLabel">Sign Up</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form" align="center">
-            
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

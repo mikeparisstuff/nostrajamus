@@ -72,7 +72,6 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div class="bounce3"></div>
 	</div>
 	<!-- END PAGE SPINNER -->
-
 	<!-- BEGIN HEADER -->
 	<div data-ng-include="'/assets/tpl/header.html'" data-ng-controller="HeaderController" class="page-header navbar navbar-fixed-top">
 	</div>
@@ -80,32 +79,6 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<div class="clearfix">
 	</div>
-
-	<!-- authentication  -->
-	<div class="navbar navbar-fixed-bottom" ng-controller="authController" ng-init="user='{{user.username}}'">
-        {% verbatim %}
-        <div ng-show="user" class="navbar-form navbar-right">
-            <input type="submit" class="btn btn-default" ng-click="logout()" value="logout {{user}}"/>
-        </div>
-        <div ng-hide="user">
-            <form id="id_auth_form" class="navbar-form navbar-right" ng-submit="login()">
-                <div class="form-group">
-                    <input ng-model="username" required name="username" type="text" placeholder="username" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input ng-model="password" required name="password" type="password" placeholder="password" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input ng-model="email" required name="email" type="email" placeholder="email" class="form-control">
-                </div>
-                <div class="btn-group">
-                    <input type="submit" class="btn btn-default" value="login">
-                    <input type="submit" class="btn btn-default" value="register" ng-click="register($event)">
-                </div>
-            </form>
-        </div>
-    </div>
-	<!-- /authentication -->
 
 	<!-- BEGIN CONTAINER -->
 	<div class="container">
@@ -183,6 +156,28 @@ License: You must have a valid license purchased only from themeforest(the above
 		});
 	</script>
 	<!-- END JAVASCRIPTS -->
+
+	<div class="navbar navbar-fixed-bottom" ng-controller="authController" ng-init="authState.user='{{user.username}}'">
+		{% verbatim %}
+	    <div ng-show="authState.user" class="navbar-form navbar-right">
+	        <input type="submit" class="btn btn-default" ng-click="logout()" value="logout {{authState.user}}"/>
+	    </div>
+	    <div ng-hide="authState.user">
+	        <form id="id_auth_form" class="navbar-form navbar-right" ng-submit="login()">
+	            <div class="form-group">
+	                <input ng-model="username" required name="username" type="text" placeholder="username" class="form-control">
+	            </div>
+	            <div class="form-group">
+	                <input ng-model="password" required name="password" type="password" placeholder="password" class="form-control">
+	            </div>
+	            <div class="btn-group">
+	                <input type="submit" class="btn btn-default" value="login">
+	                <input type="submit" class="btn btn-default" value="register" ng-click="register($event)">
+	            </div>
+	        </form>
+	    </div>
+	</div>
+
 </body>
 <!-- END BODY -->
 </html>

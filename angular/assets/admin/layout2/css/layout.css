@@ -1544,7 +1544,8 @@ Page content
   background-color: #fff;
 }
 .page-container-bg-solid .page-content {
-  background: #F1F3FA;
+  /*EDIT: page body background*/
+  background: #fff;
 }
 .page-full-width .page-content {
   margin-left: 0px !important;

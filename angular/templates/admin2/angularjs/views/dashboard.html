@@ -1,6 +1,6 @@
 <!-- BEGIN PAGE HEADER-->
 <h3 class="page-title">
-	Lobby
+	Contests
 </h3>
 <!-- <div class="page-bar">
 	<ul class="page-breadcrumb">
@@ -50,7 +50,7 @@
 </div> -->
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
-<div ng-controller="DashboardController">
+<div>
 	<div class="note note-success note-bordered">
 		<h3>Welcome, Collin! <span class="close" data-close="note"></span></h3>
 		<p>
@@ -60,11 +60,11 @@
 		</p>
 	</div>
 	<!-- BEGIN DASHBOARD STATS -->
-	<div class="row">
+	<!-- <div class="row"> -->
 		<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"> -->
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-24">
+		<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-24"> -->
 			<!-- <div class="dashboard-stat blue-madison"> -->
-			<div class="dashboard-stat">
+			<!-- <div class="dashboard-stat">
 				<div class="visual">
 					<i class="fa fa-comments"></i>
 				</div>
@@ -77,14 +77,14 @@
 					</div>
 				</div>
 				<a class="more pull-right" href="#">
-				View more<!--  <i class="m-icon-swapright m-icon-white"></i> -->
-				</a>
-			</div>
-		</div>
+				View more --><!--  <i class="m-icon-swapright m-icon-white"></i> -->
+				<!-- </a> -->
+			<!-- </div> -->
+		<!-- </div> -->
 		<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"> -->
-		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-24">
+		<!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-24"> -->
 			<!-- <div class="dashboard-stat red-intense"> -->
-			<div class="dashboard-stat">
+			<!-- <div class="dashboard-stat">
 				<div class="visual">
 					<i class="fa fa-bar-chart-o"></i>
 				</div>
@@ -97,10 +97,10 @@
 					</div>
 				</div>
 				<a class="more pull-right" href="#">
-				View more<!--  <i class="m-icon-swapright m-icon-white"></i> -->
-				</a>
+				View more --><!--  <i class="m-icon-swapright m-icon-white"></i> -->
+				<!-- </a>
 			</div>
-		</div>
+		</div> -->
 <!-- 		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			<div class="dashboard-stat green-haze">
 				<div class="visual">
@@ -137,16 +137,19 @@
 				</a>
 			</div>
 		</div> -->
-	</div>
+	<!-- </div> -->
 	<!-- END DASHBOARD STATS -->
-	<div class="row">
-		<div class="" align="center">TIMERRRRRRR</div>
-	</div>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <!-- <h2 class="section-heading">Thanks for joining our 2015 Kickoff Contest</h2> -->
+            <div class="section-subheading text-muted">Next Contest Begins In <span id="countdown"></span></div>
+        </div>
+    </div>
 
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<!-- BEGIN PORTLET-->
-			<div class="portlet light ">
+			<div class="portlet light">
 				<div class="portlet-title">
 					<div class="caption caption-md">
 						<i class="icon-bar-chart font-green-haze hide"></i>
@@ -169,6 +172,7 @@
 							</li>
 						</ul>
 					</div>
+				</div>
 				<div class="portlet-body">
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_1_1">
@@ -183,91 +187,31 @@
 												Entries
 											</th>
 											<th>
-												Prize
+												Top Prize
 											</th>
 											<th>
 												Starts
 											</th>
 										</tr>
 									</thead>
-									<tr>
+									<tr ng-repeat="contest in contests.results">
 										<td class="fit">
-											<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
+											<img class="user-pic" src="{{contest.contest_pic_url}}">
 										</td>
 										<td>
-											<a href="javascript:;" class="primary-link">EDM</a>
+											<a href="javascript:;" class="primary-link">{{contest.title}}</a>
 										</td>
 										<td>
-											100
+											{{contest.num_entries}}
 										</td>
 										<td>
-											$100
+											<a href="">${{contest.prize}}</a>
 										</td>
 										<td>
-											Sat. 8:00 PM
+											{{contest.start_time}}
 										</td>
 										<td>
-											<span class="btn btn-default red-nostra">Enter</span>
-										</td>
-									</tr>
-									<tr>
-										<td class="fit">
-											<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
-										</td>
-										<td>
-											<a href="javascript:;" class="primary-link">EDM</a>
-										</td>
-										<td>
-											100
-										</td>
-										<td>
-											$100
-										</td>
-										<td>
-											Sat. 8:00 PM
-										</td>
-										<td>
-											<span class="btn btn-default red-nostra">Enter</span>
-										</td>
-									</tr>
-									<tr>
-										<td class="fit">
-											<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
-										</td>
-										<td>
-											<a href="javascript:;" class="primary-link">EDM</a>
-										</td>
-										<td>
-											100
-										</td>
-										<td>
-											$100
-										</td>
-										<td>
-											Sat. 8:00 PM
-										</td>
-										<td>
-											<span class="btn btn-default red-nostra">Enter</span>
-										</td>
-									</tr>
-									<tr>
-										<td class="fit">
-											<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
-										</td>
-										<td>
-											<a href="javascript:;" class="primary-link">EDM</a>
-										</td>
-										<td>
-											100
-										</td>
-										<td>
-											$100
-										</td>
-										<td>
-											Sat. 8:00 PM
-										</td>
-										<td>
-											<span class="btn btn-default red-nostra">Enter</span>
+											<span class="btn btn-default red-nostra" ng-show="{{contest.is_live}}">Enter</span>
 										</td>
 									</tr>
 								</table>
@@ -275,241 +219,91 @@
 						</div>
 						<!-- End Tab 1 -->
 						<div class="tab-pane" id="tab_1_2">
-							<div class="scroller" style="height: 337px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
-								<ul class="feeds">
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New user registered
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													Just now
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New order received
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													10 mins
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-danger">
-														<i class="fa fa-bolt"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														Order #24DOP4 has been rejected. <span class="label label-sm label-danger ">
-														Take action <i class="fa fa-share"></i>
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												24 mins
-											</div>
-										</div>
-									</li>
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New user registered
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													Just now
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New user registered
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													Just now
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New user registered
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													Just now
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New user registered
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													Just now
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New user registered
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													Just now
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New user registered
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													Just now
-												</div>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<div class="col1">
-												<div class="cont">
-													<div class="cont-col1">
-														<div class="label label-sm label-success">
-															<i class="fa fa-bell-o"></i>
-														</div>
-													</div>
-													<div class="cont-col2">
-														<div class="desc">
-															New user registered
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="col2">
-												<div class="date">
-													Just now
-												</div>
-											</div>
-										</a>
-									</li>
-								</ul>
+							<div class="table-scrollable table-scrollable-borderless">
+								<table class="table table-hover table-light">
+									<thead>
+										<tr class="uppercase">
+											<th colspan="2">
+												Contest
+											</th>
+											<th>
+												Entries
+											</th>
+											<th>
+												Top Prize
+											</th>
+											<th>
+												Starts
+											</th>
+										</tr>
+									</thead>
+									<tr ng-repeat="contest in contests.results">
+										<td class="fit">
+											<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
+										</td>
+										<td>
+											<a href="javascript:;" class="primary-link">{{contest.title}}</a>
+										</td>
+										<td>
+											{{contest.num_entries}}
+										</td>
+										<td>
+											<a href="">${{contest.prize}}</a>
+										</td>
+										<td>
+											{{contest.start_time}}
+										</td>
+										<td>
+											<span class="btn btn-default red-nostra" ng-show="{{contest.is_live}}">Enter</span>
+										</td>
+									</tr>
+								</table>
 							</div>
 						</div>
+						<!-- End Tab 2 -->
+						<div class="tab-pane" id="tab_1_2">
+							<div class="table-scrollable table-scrollable-borderless">
+								<table class="table table-hover table-light">
+									<thead>
+										<tr class="uppercase">
+											<th colspan="2">
+												Contest
+											</th>
+											<th>
+												Entries
+											</th>
+											<th>
+												Top Prize
+											</th>
+											<th>
+												Starts
+											</th>
+										</tr>
+									</thead>
+									<tr ng-repeat="contest in contests.results">
+										<td class="fit">
+											<img class="user-pic" src="/assets/admin/layout/img/avatar4.jpg">
+										</td>
+										<td>
+											<a href="javascript:;" class="primary-link">{{contest.title}}</a>
+										</td>
+										<td>
+											{{contest.num_entries}}
+										</td>
+										<td>
+											<a href="">${{contest.prize}}</a>
+										</td>
+										<td>
+											{{contest.start_time}}
+										</td>
+										<td>
+											<span class="btn btn-default red-nostra" ng-show="{{contest.is_live}}">Enter</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<!-- End Tab 3 -->
 					</div>
 				</div>
 			</div>
@@ -1317,7 +1111,7 @@
 <!-- END MAIN CONTENT -->
 <!-- BEGIN MAIN JS & CSS -->
 <script>
-	Index.init();    
-	Tasks.initDashboardWidget();
+	// Index.init();    
+	// Tasks.initDashboardWidget();
 </script>
 <!-- BEGIN MAIN JS & CSS

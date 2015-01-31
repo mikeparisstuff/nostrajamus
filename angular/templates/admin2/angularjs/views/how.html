@@ -27,146 +27,165 @@
 <!-- 					<a href="" class="remove">
 					</a> -->
 				</div>
+				<div class="portlet-title tabbable-line pull-right">
+					<ul class="nav nav-tabs">
+						<li class="active">
+							<a data-target="#tab_1_1" data-toggle="tab">
+							Tutorial </a>
+						</li>
+						<li>
+							<a data-target="#tab_1_2" data-toggle="tab">
+							FAQ </a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="portlet-body">
-				<div class="row">
-					<div class="col-md-offset-2 col-md-8">
-						<div ng-controller="ProgressDemoCtrl">
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_1_1">
+						<div class="row">
+							<div class="col-md-offset-2 col-md-8">
+								<div ng-controller="ProgressDemoCtrl">
 
-						    <h3 align="center">
-						    	<button class="btn btn-sm btn-primary red-nostra" type="button" ng-click="back()"><</button>
-						    	Tutorial
-						    	<button class="btn btn-sm btn-primary red-nostra" type="button" ng-click="next()">></button>
-						    </h3>
+								    <h3 align="center">
+								    	<button class="btn btn-sm btn-primary red-nostra" type="button" ng-click="back()"><</button>
+								    	Tutorial
+								    	<button class="btn btn-sm btn-primary red-nostra" type="button" ng-click="next()">></button>
+								    </h3>
 
-						    <progressbar class="progress-striped active" type="danger" max="max" value="dynamic"><span style="white-space:nowrap;">{{dynamic}} / {{max}}</span></progressbar>
-						    
-						    <hr />
+								    <progressbar class="progress-striped active" type="danger" max="max" value="dynamic"><span style="white-space:nowrap;">{{dynamic}} / {{max}}</span></progressbar>
+								    
+								    <hr />
 
+								</div>
+							</div>
+							<!-- <div class="col-md-6">
+								<div ng-controller="ProgressDemoCtrl">
+
+								    <h3>Static</h3>
+								    <div class="row">
+								        <div class="col-sm-4"><progressbar value="55"></progressbar></div>
+								        <div class="col-sm-4"><progressbar class="progress-striped" value="22" type="warning">22%</progressbar></div>
+								        <div class="col-sm-4"><progressbar class="progress-striped active" max="200" value="166" type="danger"><i>166 / 200</i></progressbar></div>
+								    </div>
+
+								    <hr />
+								    <h3>Dynamic <button class="btn btn-sm btn-primary" type="button" ng-click="random()">Randomize</button></h3>
+								    <progressbar max="max" value="dynamic"><span style="white-space:nowrap;">{{dynamic}} / {{max}}</span></progressbar>
+								    
+								    <small><em>No animation</em></small>
+								    <progressbar animate="false" value="dynamic" type="success"><b>{{dynamic}}%</b></progressbar>
+
+								    <small><em>Object (changes type based on value)</em></small>
+								    <progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}} <i ng-show="showWarning">!!! Watch out !!!</i></progressbar>
+								    
+								    <hr />
+								    <h3>Stacked <button class="btn btn-sm btn-primary" type="button" ng-click="randomStacked()">Randomize</button></h3>
+								    <progress><bar ng-repeat="bar in stacked track by $index" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></bar></progress>
+								</div>
+							</div>
+							<div class="col-md-6">
+		                        <p>A progress bar directive that is focused on providing feedback on the progress of a workflow or action.</p>
+								<p>It supports multiple (stacked) bars into the same <code>&lt;progress&gt;</code> element or a single <code>&lt;progressbar&gt;</code> elemtnt with optional <code>max</code> attribute and transition animations.</p>
+
+								<h3>Settings</h3>
+
+								<h4><code>&lt;progressbar&gt;</code></h4>
+
+								<ul>
+								<li><p><code>value</code> <i class="glyphicon glyphicon-eye-open"></i>
+								 :
+								 The current value of progress completed.</p></li>
+								<li><p><code>type</code>
+								 <em>(Default: null)</em> :
+								 Style type. Possible values are 'success', 'warning' etc.</p></li>
+								<li><p><code>max</code>
+								 <em>(Default: 100)</em> :
+								 A number that specifies the total value of bars that is required.</p></li>
+								<li><p><code>animate</code>
+								 <em>(Default: true)</em> :
+								 Whether bars use transitions to achieve the width change.</p></li>
+								</ul>
+
+								<h3>Stacked</h3>
+
+								<p>Place multiple <code>&lt;bars&gt;</code> into the same <code>&lt;progress&gt;</code> element to stack them.
+								<code>&lt;progress&gt;</code> supports <code>max</code> and <code>animate</code> &amp;  <code>&lt;bar&gt;</code> supports  <code>value</code> and <code>type</code> attributes.</p>
+		                    </div> -->
 						</div>
 					</div>
-					<!-- <div class="col-md-6">
-						<div ng-controller="ProgressDemoCtrl">
+					<div class="tab-pane" id="tab_1_2">
+						<div class="row">
+							<div class="col-lg-12">
+							<h3 class="font-nostra">F.A.Q.s</h3>
+							<!-- <div class="subheading">fucking annoying questions….er….frequently asked questions</div> -->
 
-						    <h3>Static</h3>
-						    <div class="row">
-						        <div class="col-sm-4"><progressbar value="55"></progressbar></div>
-						        <div class="col-sm-4"><progressbar class="progress-striped" value="22" type="warning">22%</progressbar></div>
-						        <div class="col-sm-4"><progressbar class="progress-striped active" max="200" value="166" type="danger"><i>166 / 200</i></progressbar></div>
-						    </div>
+							<br>
 
-						    <hr />
-						    <h3>Dynamic <button class="btn btn-sm btn-primary" type="button" ng-click="random()">Randomize</button></h3>
-						    <progressbar max="max" value="dynamic"><span style="white-space:nowrap;">{{dynamic}} / {{max}}</span></progressbar>
-						    
-						    <small><em>No animation</em></small>
-						    <progressbar animate="false" value="dynamic" type="success"><b>{{dynamic}}%</b></progressbar>
+							<h4>What is NostraJAMus?</h4>
+							<div class="faq-answer">
+								NostraJAMus is an online platform for music discovery, prediction, and tastemaking. How’s that for a vision statement - they’re supposed to be vague and grand, right? NostraJAMus is fantasy sports for music. Choose a song, watch it succeed, reap the benefits. NostraJAMus is a home for music discoverers, explorers, and spelunkers. We incentivize you to discover hidden gems and unheralded releases through our song-picking contests.
+							</div>
 
-						    <small><em>Object (changes type based on value)</em></small>
-						    <progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}} <i ng-show="showWarning">!!! Watch out !!!</i></progressbar>
-						    
-						    <hr />
-						    <h3>Stacked <button class="btn btn-sm btn-primary" type="button" ng-click="randomStacked()">Randomize</button></h3>
-						    <progress><bar ng-repeat="bar in stacked track by $index" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 5">{{bar.value}}%</span></bar></progress>
+							<br>
+
+							<h4>What are these ‘contests’?</h4>
+							<div class="faq-answer">
+								Exactly what they sound like. These are contests to gauge what songs are ‘getting big’ or ‘blowing up.’ We’re concerned with the playcount increase during the contest timeframe, but we’re also concerned with the artist’s popularity. So we’re way more impressed when you just <b>know</b> that <a href="http://images.musictimes.com/data/images/full/13901/garrett-borns-facebook.jpg?w=600">Børns</a> (Who? Exactly.) will get to 5 million plays on '<a href="https://www.youtube.com/watch?v=-wiBRhX_QTU">Electric Love</a>' than when you <b>know</b> <a href="http://img2.timeinc.net/ew/i/2014/10/29/taylor-swift.jpg">Taylor Swift</a> will get there on '<a href="https://www.youtube.com/watch?v=e-ORhEE9VVg">Blank Space</a>.’
+							</div>
+
+							<br>
+
+							<h4>Where should I discover new music to submit to these contests?</h4>
+							<div class="faq-answer">
+								Everywhere. Music blogs, artist Facebook pages. YouTube, Spotify, SoundCloud, Pandora. Friends, grandmothers, the loudspeakers in your nearest coffee shop. And we’ll be sharing these discoveries with the entire community on the site, creating an infinite cycle of discovery or maybe just an <a href="https://www.youtube.com/watch?v=AOPFeNqj7UI">infinite loop</a>.
+							</div>
+							
+							<br>
+
+							<h4>What can I win?</h4>
+							<div class="faq-answer">
+								Cash is king, so we’ll do the kingly thing by handing out cash to our winners. But we also want to foster listener/artist interaction, so we’ll be awarding more musical prizes. That DJ RatPrince guy you submitted in our contest is playing a show near you next week? We’ll make sure to get you tickets if your submission does well. Or a concert poster. Let’s support smaller artists and let’s get DJ RatPrince as the opener on U2’s next tour.
+							</div>
+
+							<br>
+
+							<h4>What is a Jam Point?</h4>
+							<div class="faq-answer">
+								It’s our way of measuring how your song’s popularity changes over the life of the contest. We love when songs grow by leaps and bounds (so we take percentage increase into account) but we much less love when the song’s artist is a wildly popular power pumped with marketing muscle of a big record label.
+							</div>
+
+							<br>
+
+							<h4>Why can I only submit SoundCloud links?</h4>
+							<div class="faq-answer">
+								They provide us the easiest data to track fairly for all contestants. We’re working on adding other types of links for contest submissions. 
+							</div>
+
+							<br>
+
+							<h4>What are groups?</h4>
+							<div class="faq-answer">
+								As of now, they’re under construction. We’ll give you a heads up when we’re ready to launch this feature. We think sharing music with friends is dope. It’s that simple. But the process to share music isn’t that simple today. There’s a Spotify inbox and Facebook groups and SoundCloud feeds and good ol’ email and maybe even a burned CD here and there. Our group function is just a closed feed for you and your friends to share one track a day with a brief description, then we’ll aggregate the shared tracks and create playlists for your group. You can start private contests within the group as well.
+							</div>
+
+							<br>
+
+							<h4>Why do you have such a stupid name? And why are three of the letters capitalized?</h4>
+							<div class="faq-answer">
+								The 16th century French clairvoyant Nostradamus famously predicted the rise of the Beatles, Led Zeppelin, and dubstep. He inspires us daily. Each member of our team has a lifesize cardboard cutout of his handsome figure. Also we thought his name conveyed the notion of prediction. JAM is capitalized because it’s an acronym of course. We can’t tell you (yet) what that acronym means, though. Sorry about that.
+							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-                        <p>A progress bar directive that is focused on providing feedback on the progress of a workflow or action.</p>
-						<p>It supports multiple (stacked) bars into the same <code>&lt;progress&gt;</code> element or a single <code>&lt;progressbar&gt;</code> elemtnt with optional <code>max</code> attribute and transition animations.</p>
-
-						<h3>Settings</h3>
-
-						<h4><code>&lt;progressbar&gt;</code></h4>
-
-						<ul>
-						<li><p><code>value</code> <i class="glyphicon glyphicon-eye-open"></i>
-						 :
-						 The current value of progress completed.</p></li>
-						<li><p><code>type</code>
-						 <em>(Default: null)</em> :
-						 Style type. Possible values are 'success', 'warning' etc.</p></li>
-						<li><p><code>max</code>
-						 <em>(Default: 100)</em> :
-						 A number that specifies the total value of bars that is required.</p></li>
-						<li><p><code>animate</code>
-						 <em>(Default: true)</em> :
-						 Whether bars use transitions to achieve the width change.</p></li>
-						</ul>
-
-						<h3>Stacked</h3>
-
-						<p>Place multiple <code>&lt;bars&gt;</code> into the same <code>&lt;progress&gt;</code> element to stack them.
-						<code>&lt;progress&gt;</code> supports <code>max</code> and <code>animate</code> &amp;  <code>&lt;bar&gt;</code> supports  <code>value</code> and <code>type</code> attributes.</p>
-                    </div> -->
-				</div>	
+					<!-- End Tab 2 -->
+				</div>
+				<!-- End Tab Content -->
 			</div>
 		</div>		
 		<!-- END PROGRESSBAR DEMO -->
 
 	</div>
 </div>
-
-<div class="row">
-    <div class="col-md-12">
-        <!-- BEGIN MESSAGE SIDEBAR -->
-        <div class="todo-ui" style="margin-top: 0">
-            <!-- END TODO SIDEBAR -->
-            <!-- BEGIN TODO CONTENT -->
-            <div class="todo-content">
-                <div class="portlet light">
-                    <!-- PROJECT HEAD -->
-<!--                     <div class="portlet-title">
-                        <div class="caption">
-                            <i class="icon-bar-chart font-green-sharp hide"></i>
-                            <span class="caption-helper">PROJECT:</span> &nbsp; <span class="caption-subject font-green-sharp bold uppercase">Tune Website</span>
-                        </div>
-                    </div> -->
-                    <!-- end PROJECT HEAD -->
-                    <div class="portlet-body">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="section-heading">Contact Us</h2>
-                                <h3 class="section-subheading text-muted">We would love to hear your feedback</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <form name="sentMessage" id="contactForm" action="/api/feedback/" method="POST" novalidate>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <input type="text" name="name" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
-                                                <p class="help-block text-danger"></p>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" name="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
-                                                <p class="help-block text-danger"></p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <textarea class="form-control" name="text" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                                                <p class="help-block text-danger"></p>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="col-lg-12 text-center">
-                                            <div id="success"></div>
-                                            <button type="submit" class="btn btn-xl">Send Message</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- END TODO CONTENT -->
-        </div>
-    </div>
-    <!-- END PAGE CONTENT-->
-</div>
-
 <!-- END MAIN CONTENT -->
 
 <!-- BEGIN MAIN JS -->

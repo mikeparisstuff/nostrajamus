@@ -1,7 +1,3 @@
-/**
- * Created by MichaelParis on 1/20/15.
- */
-
 $(function() {
 
     SC.initialize({

@@ -1,10 +1,15 @@
 'use strict';
 
-MetronicApp.controller('DashboardController', function($rootScope, $scope, $http, $timeout) {
+MetronicApp.controller('DashboardController', function($rootScope, $scope, $http, $timeout, contests) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         Metronic.initAjax();
     });
+    $scope.selectedValue = "Bitchhh";
+
+    // console.log(contests);
+
+    $scope.contests = contests;
 
     // set sidebar closed and body solid layout mode
     $rootScope.settings.layout.pageSidebarClosed = false;

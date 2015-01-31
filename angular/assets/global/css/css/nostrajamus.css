@@ -12,11 +12,14 @@
   border-bottom: 1px solid #ff5252;
 }
 .task-config {
-    float: right;
+  float: right;
 }
 .font-nostra {
-    font-size: 20px;
-    color: #ff5252;
+  font-size: 20px;
+  color: #ff5252;
+}
+.font-nostra-sm {
+  color: #ff5252;
 }
 .font-nostra-dark {
     color: #43525c;
@@ -41,6 +44,25 @@
 .btn-center {
   position:relative;
   top:50%;
+}
+.white {
+  color: #fff;
+}
+.subheading {
+  font-style: italic;
+  font-size: 12px;
+}
+.faq-answer {
+  font-size: 12px;
+}
+.under-construction {
+  float: auto;
+  align: center;
+  max-height: 250px;
+  max-width: 250px;
+}
+.user-pic {
+  margin-right: 10px;
 }
 
 /*Portlet Formatting*/
