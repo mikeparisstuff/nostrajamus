@@ -36,4 +36,6 @@ def update_playcount():
                                                   new_track.playback_count,
                                                   new_user.followers_count)
             entry.jam_points = new_jam_points
+            entry.current_playback_count = new_track.playback_count
+            entry.current_follower_count = new_user.followers_count
             entry.save()
