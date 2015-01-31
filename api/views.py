@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 import mailchimp
 from . import authentication
 import os
+from datetime import datetime, date, timedelta
 
 
 MAILCHIMP_API_KEY = '9defc1dba727a90da8da8d294d3fa760-us10'
@@ -33,21 +34,10 @@ class OnePageAppView(TemplateView):
 
 class HomePageView(APIView):
     def get(self, request, format=None):
-        # if request.user.is_authenticated():
-        #     print request.user
-        #     print 'Render main page'
-        #     return Response("Main Page")
-        # else:
-        # data = {}
-        # if request.user.is_authenticated():
-        #     user = request.user
-        #     try:
-        #         contest1 = user.contests.get(pk=1)
-        #         contest_entry = ContestEntry.objects.get(user = user, contest=contest1)
-        #         data['my_track'] = contest_entry.track
-        #     except:
-        #         return render_to_response("index2.html", RequestContext(request, {}))
-        return render_to_response("index.html", RequestContext(request))
+        if request.user.is_authenticated():
+            return render_to_response("index.html", RequestContext(request))
+        else:
+            return render_to_response("landing.html")
 
 class LoginView(APIView):
     def get(self, request, format=None):
@@ -113,6 +103,18 @@ class UserViewSet(viewsets.ModelViewSet):
         )
         user_serializer = ProfileSerializer(user, context={'request': request})
         return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+
+    @list_route(permission_classes=(permissions.IsAuthenticated,))
+    def me(self, request):
+        user = request.user
+        serializer = ProfileSerializer(user, context={'request': request})
+        return Response(serializer.data, status.HTTP_200_OK)
+
+    @list_route(permission_classes=(permissions.AllowAny,))
+    def leaderboard(self, request):
+        leaders = Profile.objects.order_by('-jam_points')[:25]
+        serializer = ProfileSerializer(leaders, many=True, context={'request': request})
+        return Response(serializer.data, status.HTTP_200_OK)
 
     # def list(self, request):
     #     pass
@@ -191,7 +193,7 @@ class ContestViewSet(viewsets.ModelViewSet):
                 initial_follower_count=sc_user.followers_count
             )
             contest.contestentry_set.add(contest_entry)
-            user.contests.add(contest)
+            # user.contests.add(contest)
             return Response({"detail": "success"}, status=status.HTTP_201_CREATED)
         else:
             print track_serializer.errors
@@ -206,6 +208,16 @@ class TrackViewSet(viewsets.ModelViewSet):
         track = self.get_object()
         play_counts = SCPeriodicPlayCount.objects.filter(track=track)
         serializer = SCPeriodicPlayCountSerializer(play_counts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @list_route()
+    def trending(self, request):
+        today = date.today()
+        start = today - timedelta(days=7)
+        today = today + timedelta(days=1)
+        contests = Contest.objects.filter(start_time__range=[start, today])
+        entries = ContestEntry.objects.filter(contest__in=contests).order_by('-jam_points')[:25]
+        serializer = ContestEntrySerializer(entries, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 

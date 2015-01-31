@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
-from api.models import SCTrack, SCUser, SCPeriodicPlayCount, ContestEntry
+from api.models import SCTrack, SCUser, SCPeriodicPlayCount, ContestEntry, Profile
+from django.db.models import Sum
 from celery import shared_task
 import soundcloud
 
@@ -39,3 +40,12 @@ def update_playcount():
             entry.current_playback_count = new_track.playback_count
             entry.current_follower_count = new_user.followers_count
             entry.save()
+
+@shared_task
+def update_user_jam_points():
+    entry_points = ContestEntry.objects.values('user__username').annotate(total_jam_points=Sum('jam_points'))
+    for point in entry_points:
+        user = Profile.objects.get(username=point['user__username'])
+        user.jam_points = point['total_jam_points']
+        user.save()
+

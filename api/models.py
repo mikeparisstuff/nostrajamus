@@ -83,11 +83,45 @@ class Profile(AbstractUser):
         blank = True
     )
 
+    location = models.CharField(
+        max_length=512,
+        default=''
+    )
+
+    jam_points = models.IntegerField(
+        default=0,
+        db_index=True
+    )
+
+    @property
+    def my_contest_entries(self):
+        contest_entries = ContestEntry.objects.filter(is_active=True, user=self).order_by('-created_at')
+        return contest_entries
+
+    @property
+    def contest_count(self):
+        return self.my_contest_entries.count()
+
+    @property
+    def total_jam_points(self):
+        contest_entries = self.my_contest_entries
+        total = 0
+        for entry in contest_entries:
+            total += entry.jam_points
+        return total
+
+    @property
+    def my_rewards(self):
+        rewards = UserReward.objects.filter(user=self).order_by('-created_at')
+        return rewards
     # contests = models.ManyToManyField(
     #     Contest,
     #     blank=True,
     #     null=True
     # )
+
+def get_contest_picture_upload_path(self, filename):
+    return 'contests/contest_{}_pic.jpg'.format(self.id)
 
 class Contest(BaseModel):
 
@@ -104,6 +138,12 @@ class Contest(BaseModel):
     @property
     def entries(self):
         return self.contestentry_set.all()
+
+    contest_picture = models.FileField(
+        upload_to = get_contest_picture_upload_path,
+        null = True,
+        blank = True
+    )
 
     description = models.CharField(
         max_length=256,
@@ -175,7 +215,7 @@ class Contest(BaseModel):
     )
 
     class Meta:
-        ordering = ('created_at',)
+        ordering = ('-start_time',)
 
 
 class ContestMembership(BaseModel):
@@ -563,6 +603,9 @@ class ContestEntry(BaseModel):
 
     current_follower_count = models.IntegerField(default=0)
 
+    class Meta:
+        order_with_respect_to = 'contest'
+
 class Feedback(BaseModel):
 
     text = models.CharField(
@@ -581,3 +624,17 @@ class Feedback(BaseModel):
         blank=True,
         null=True
     )
+
+class Reward(BaseModel):
+
+    title = models.CharField(max_length=128)
+
+    description = models.CharField(max_length=256)
+
+    fa_string = models.CharField(max_length=64, default='fa-trophy')
+
+class UserReward(BaseModel):
+
+    rewards = models.ForeignKey(Reward)
+
+    user = models.ForeignKey(Profile)

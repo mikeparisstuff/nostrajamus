@@ -1,30 +1,11 @@
 __author__ = 'MichaelParis'
 
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, Reward
 from rest_framework.exceptions import ValidationError
 from rest_framework import serializers
 from datetime import datetime
 
-class ProfileSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Profile
-        fields = ('url', 'username', 'first_name', 'last_name', 'email', 'password')
-
-class ContestEntrySerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model = ContestEntry
-
-class ContestSerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model = Contest
-        fields = ('title', 'num_entries', 'description', 'prize', 'is_live')
-
-def reformat_date(date_str):
-    return datetime.strptime(date_str[:-6], "%Y/%m/%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
-
-class SCUserSerializer(serializers.HyperlinkedModelSerializer):
+class SCUserSerializer(serializers.ModelSerializer):
 
     def to_internal_value(self, data):
         curated_data = data
@@ -44,21 +25,21 @@ class SCUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SCUser
 
-class SCTrackSerializer(serializers.HyperlinkedModelSerializer):
+class SCTrackSerializer(serializers.ModelSerializer):
 
     user = SCUserSerializer()
 
     def to_internal_value(self, data):
         curated_data = data
         curated_data['sc_created_at'] = reformat_date(data['created_at'])
-        if 'last_modified' in data:
+        if data.get('last_modified'):
             curated_data['sc_last_modified'] = reformat_date(data['last_modified'])
+            del(curated_data['last_modified'])
         curated_data['sc_id'] = data['id']
         curated_data['sc_user_id'] = data['user_id']
         del(curated_data['created_at'])
         del(curated_data['id'])
         del(curated_data['user_id'])
-        del(curated_data['last_modified'])
         if curated_data.has_key('created_with'):
             del(curated_data['created_with'])
         return curated_data
@@ -79,6 +60,49 @@ class SCTrackSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SCTrack
         # fields = ('id', 'sc_id', 'title', 'stream_url', 'release_year')
+
+class ContestEntrySerializer(serializers.ModelSerializer):
+
+    track = SCTrackSerializer(read_only=True)
+
+    class Meta:
+        model = ContestEntry
+
+class RewardSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Reward
+
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
+
+    def get_my_entries(self, obj):
+        entries = obj.my_contest_entries
+        serializer = ContestEntrySerializer(entries, many=True)
+        return serializer.data
+
+    def get_total_jam_points(self, obj):
+        return obj.total_jam_points
+
+    def get_my_rewards(self, obj):
+        rewards = obj.my_rewards
+        serializer = RewardSerializer(rewards, many=True)
+        return serializer.data
+
+    my_entries = serializers.SerializerMethodField()
+    total_jam_points = serializers.SerializerMethodField()
+    my_rewards = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Profile
+        fields = ('url', 'username', 'my_entries', 'my_rewards', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
+
+class ContestSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Contest
+
+def reformat_date(date_str):
+    return datetime.strptime(date_str[:-6], "%Y/%m/%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
 
 class SCPeriodicPlayCountSerializer(serializers.HyperlinkedModelSerializer):
 
