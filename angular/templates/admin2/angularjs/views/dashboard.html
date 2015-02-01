@@ -55,9 +55,9 @@
 		<h3>Welcome, {{myData.first_name}}! <span class="close" data-close="note"></span></h3>
 		<!-- {{authState.user}} -->
 		<p>
-			We're glad you're here.
+			First time here? Check out the <a href="/#how">Learn</a> page. Otherwise, check out our upcoming contests below.
 		</p>
-		<span class="label label-success">Start</span> Find contests below and win some cash.</span>
+		<!-- <span class="label label-success">Start</span> --> 
 	</div>
 	<!-- BEGIN DASHBOARD STATS -->
 	<!-- <div class="row"> -->
@@ -139,10 +139,33 @@
 		</div> -->
 	<!-- </div> -->
 	<!-- END DASHBOARD STATS -->
+	<!-- Modal -->
+	<div class="modal fade" id="contestDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header title-bg">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title white" id="myModalLabel">{{title}}</h4>
+	            </div>
+	            <div class="modal-body">
+            		<p><h5>Entry Fee</h5>${{entry_fee}}</p>
+					<p><h5>Prize</h5> ${{prize}}</p>
+					<p><h5>Description</h5> {{description}}</p>
+					<p><h5>Start Time</h5> {{start_time}}</p>
+					<p><h5>End Time</h5> {{end_time}}</p>
+	            </div>
+	            <div class="modal-footer title-bg">
+	                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal">View</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+
     <div class="row">
         <div class="col-lg-12 text-center">
             <!-- <h2 class="section-heading">Thanks for joining our 2015 Kickoff Contest</h2> -->
-            <div class="section-subheading text-muted">Next Contest Begins In <span id="countdown"></span></div>
+            <div class="section-subheading text-muted">Next contest begins in <span id="countdown"></span></div>
         </div>
     </div>
 
@@ -180,11 +203,11 @@
 								<table class="table table-hover table-light">
 									<thead>
 										<tr class="uppercase">
-											<th colspan="2">
+											<th colspan="1">
 												Open Contests
 											</th>
 											<th>
-												Allowable<br>Submissions
+												Criteria
 											</th>
 											<th>
 												Top Prize
@@ -223,17 +246,17 @@
 								<table class="table table-hover table-light">
 									<thead>
 										<tr class="uppercase">
-											<th colspan="2">
-												In Progress Contest
+											<th colspan="1">
+												In Progress Contests
 											</th>
 											<th>
-												Allowable<br>Submissions
+												Criteria
 											</th>
 											<th>
 												Top Prize
 											</th>
 											<th>
-												Starts
+												Ends
 											</th>
 										</tr>
 									</thead>
@@ -251,10 +274,10 @@
 											<a href="">${{inProgressContest.prize}}</a>
 										</td>
 										<td>
-											{{inProgressContest.start_time}}
+											{{inProgressContest.end_time}}
 										</td>
 										<td>
-											<span class="btn btn-default red-nostra" ng-show="{{inProgressContest.is_live}}">Enter</span>
+											<span class="btn btn-default red-nostra" ng-show="{{inProgressContest.is_live}}">View</span>
 										</td>
 									</tr>
 								</table>
@@ -266,26 +289,24 @@
 								<table class="table table-hover table-light">
 									<thead>
 										<tr class="uppercase">
-											<th colspan="2">
+											<th colspan="1">
 												Completed Contests
 											</th>
 											<th>
-												Entries
+												Criteria
 											</th>
 											<th>
 												Top Prize
 											</th>
 											<th>
-												Starts
+												Ended
 											</th>
 										</tr>
 									</thead>
 									<tr ng-repeat="completedContest in completedContests">
-										<td class="fit">
-											<img class="user-pic" src="{{completedContest.contest_picture}}">
-										</td>
 										<td>
-											<a href="javascript:;" class="primary-link">{{completedContest.title}}</a>
+											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, compeletedContest.end_time)">
+											{{completedContest.title}}</a>
 										</td>
 										<td>
 											{{completedContest.songs_per_entrant}}
@@ -294,10 +315,10 @@
 											<a href="">${{completedContest.prize}}</a>
 										</td>
 										<td>
-											{{completedContest.start_time}}
+											{{completedContest.end_time}}
 										</td>
 										<td>
-											<span class="btn btn-default red-nostra" ng-show="{{completedContest.is_live}}">Enter</span>
+											<a href="/#contests"><span class="btn btn-default red-nostra">View</span></a>
 										</td>
 									</tr>
 								</table>
@@ -328,17 +349,17 @@
 							<table class="table table-hover table-light">
 								<thead>
 									<tr class="uppercase">
-										<th colspan="2">
+										<th colspan="1">
 											Contests
 										</th>
 										<th>
-											Allowable<br>Submissions
+											Criteria
 										</th>
 										<th>
 											Top Prize
 										</th>
 										<th>
-											Starts
+											Date
 										</th>
 									</tr>
 								</thead>
@@ -356,11 +377,12 @@
 										<a href="">${{myEntry.prize}}</a>
 									</td>
 									<td>
-										{{myEntry.start_time}}
+										{{myEntry.start_time}} - {{myEntry.end_time}}
 									</td>
 									<td>
 										<span class="btn btn-default red-nostra" ng-show="{{myEntry.is_live}}">View</span>
 									</td>
+									
 								</tr>
 							</table>
 						</div>
@@ -1167,6 +1189,7 @@
 			<!-- END PORTLET-->
 		<!-- </div> -->
 	<!-- </div> -->
+
 </div>
 <!-- END MAIN CONTENT -->
 <!-- BEGIN MAIN JS & CSS -->

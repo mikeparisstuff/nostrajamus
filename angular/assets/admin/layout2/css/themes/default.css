@@ -431,7 +431,7 @@ body {
   background-image: url("../../../layout2/img/concert.JPG");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: 25% 25%;
+  background-size: cover;
 }
 
 body.page-boxed {

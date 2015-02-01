@@ -1,6 +1,8 @@
+<div id="scrollArea">
+
 <!--BEGIN PAGE HEADER-->
 <h3 class="page-title">
-	Leaderboard <!-- <small>Top Tastemakers</small> -->
+	Leaderboard <small><a ng-click="gotoTastemakers()">Top Tastemakers</a> and <a ng-click="gotoUpcomingJams()">Upcoming Jams</a></small>
 </h3>
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
@@ -73,7 +75,7 @@
 		<!-- END EXAMPLE TABLE PORTLET-->
 	<!-- </div> -->
 <!-- </div> -->
-
+<a id="tastemakers"></a>
 <div class="row">
 	<div class="col-md-12 col-sm-12">
 		<!-- BEGIN PORTLET-->
@@ -133,7 +135,8 @@
 				<div class="table-scrollable table-scrollable-borderless">
 					<table class="table table-hover table-light">
 						<thead>
-							<tr class="uppercase">
+							<!-- <tr class="uppercase"> -->
+							<tr>
 								<th width="33%" class="text-center">
 									Rank
 								</th>
@@ -145,13 +148,13 @@
 									Contests
 								</th> -->
 								<th width="33%" class="text-center">
-									JAM Points
+									Jam Points
 								</th>
 							</tr>
 						</thead>
 						<tr ng-repeat="leader in leaders">
 							<th width="33%" class="text-center">
-								{{$index}}
+								{{$index+1}}
 							</th>
 							<td class="bold text-center" width="33%">
 								<img class="user-pic" src="{{leader.profile_picture}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
@@ -174,6 +177,7 @@
 	</div>
 </div>
 
+<a id="upcomingjams"></a>
 <div class="row">
 	<div class="col-md-12 col-sm-12">
 		<!-- BEGIN PORTLET-->
@@ -197,21 +201,13 @@
 			</div>
 			<div class="portlet-body">
 				<div ng-repeat="track in trending">
-					<div class="row list-separated">
+					<div class="row list-separated text-center">
 						<div class="col-md-3 col-sm-3 col-xs-6">
 							<div class="font-grey-mint font-sm">
-								Total Plays
+								Initial Playcount
 							</div>
 							<div class="uppercase font-hg font-red-flamingo">
-								{{track.current_playback_count}} <span class="font-lg font-grey-mint">M</span>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="font-grey-mint font-sm">
-								Total Followers
-							</div>
-							<div class="uppercase font-hg font-green-haze">
-								{{track.current_follower_count}} <span class="font-lg font-grey-mint">K</span>
+								{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-3 col-xs-6">
@@ -219,23 +215,38 @@
 								Play Increase
 							</div>
 							<div class="uppercase font-hg font-purple">
-								{{getPlayIncrease(track)}} <span class="font-lg font-grey-mint">%</span>
+								<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-3 col-xs-6">
+							<div class="font-grey-mint font-sm">
+								Current Playcount
+							</div>
+							<div class="uppercase font-hg font-purple">
+								{{getCurrentPlaycount(track)}} <span class="font-lg font-grey-mint"></span>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-6">
+							<div class="font-grey-mint font-sm">
+								Total Followers
+							</div>
+							<div class="uppercase font-hg font-green-haze">
+								{{track.current_follower_count}} <span class="font-lg font-grey-mint"></span>
+							</div>
+						</div><!-- 						<div class="col-md-3 col-sm-3 col-xs-6">
 							<div class="font-grey-mint font-sm">
 								Follower Increase
 							</div>
 							<div class="uppercase font-hg font-blue-sharp">
 								{{getFollowIncrease(track)}} <span class="font-lg font-grey-mint">%</span>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="row" align="center">
-						<div class="col-md-1 col-sm-1 col-xs-2">
-							#{{$index}}
-						</div>
-						<div class="col-md-11 col-sm-11 col-xs-22">
+<!-- 						<div class="col-md-1 col-sm-1 col-xs-2">
+							{{$index}}
+						</div> -->
+						<div class="col-md-12 col-sm-12 col-xs-24">
 							<iframe width="75%" height="200" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
 						</div>
 					</div>
@@ -287,9 +298,9 @@
 		</div>
 		<!-- END PORTLET-->
 	</div>
-
 </div>
 
+</div>
 <!-- END MAIN CONTENT -->
 <!-- BEGIN MAIN JS -->
 <script>

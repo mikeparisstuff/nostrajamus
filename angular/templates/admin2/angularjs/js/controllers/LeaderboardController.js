@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http', 'settings', 'leaders', 'trending', '$sce', function($rootScope, $scope, $http, settings, leaders, trending, $sce) {
+MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http', 'settings', 'leaders', 'trending', '$sce', '$location', '$anchorScroll', function($rootScope, $scope, $http, settings, leaders, trending, $sce, $location, $anchorScroll) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -39,4 +39,21 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     	return trustedUrl;
     };
 
+    $scope.gotoTastemakers = function() {
+      // set the location.hash to the id of
+      // the element you wish to scroll to.
+      $location.hash('tastemakers');
+
+      // call $anchorScroll()
+      $anchorScroll();
+    };
+
+    $scope.gotoUpcomingJams = function(x) {
+      // set the location.hash to the id of
+      // the element you wish to scroll to.
+      $location.hash('upcomingjams');
+
+      // call $anchorScroll()
+      $anchorScroll();
+    };
 }]);

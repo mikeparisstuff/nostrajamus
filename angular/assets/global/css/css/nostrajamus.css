@@ -8,6 +8,10 @@
     padding-right: 10px;
     font-size: 30px;
 }
+/*.logo-nostra {
+  max-width: 200px;
+  margin-top: 20px;
+}*/
 .page-top {
   border-bottom: 1px solid #ff5252;
 }
@@ -64,6 +68,19 @@
 .user-pic {
   margin-right: 10px;
 }
+.table{
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 200px;
+}
+/*th, td {
+  border: 1px solid black;
+  overflow: hidden;
+  width: 100px;
+}*/
+.title-bg {
+  background-color: #43525c;
+}
 
 /*Portlet Formatting*/
 .portlet > .portlet-title > .nav-tabs.center-tabs {
@@ -83,6 +100,13 @@ Red-nostra
   color: #FFFFFF;
   background-color: #ff5252;
   border-color: "";
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.red-nostra-modal.btn {
+  color: #FFFFFF;
+  background-color: #ff5252;
+  border-color: #ff5252;
   opacity: 1;
   filter: alpha(opacity=100);
 }

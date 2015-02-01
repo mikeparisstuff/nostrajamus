@@ -54,6 +54,10 @@
 								    </h3>
 
 								    <progressbar class="progress-striped active" type="danger" max="max" value="dynamic"><span style="white-space:nowrap;">{{dynamic}} / {{max}}</span></progressbar>
+
+								    <div class="row text-center">
+	                                    <button type="button" class="btn btn-primary red-nostra" data-toggle="modal" data-target="#rulesModal">What are Jam Points?</button>
+	                                </div>
 								    
 								    <hr />
 
@@ -187,6 +191,37 @@
 	</div>
 </div>
 <!-- END MAIN CONTENT -->
+
+<!-- Modal -->
+<div class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Scoring</h4>
+            </div>
+            <div class="modal-body">
+                <h5>The Basics</h5>
+                <p>Your song wins Jam Points based on playcount and artist popularity. The song with the most Jam Points at the end of the contest wins.</p>
+                <p>The best songs begin with fewer streams and are by lesser-known artists. Balancing artist popularity with play counts will be important. Like deciding between a donut and a bagel. We have our best people working on the ideal balance, but for now just pick your favorite jam.</p>
+                <hr/>
+                <h5>A Few Examples</h5>
+                <p class="score-example">Choose a song with <span class="red">5 million</span> plays that increased to <span class="red">6 million</span> plays and an artist with over <span class="red">1 million</span> followers?</p>
+                <img src="/assets/global/img/scoring/vancejoy.png" class="scoring-img" alt=""/>
+                <h5 class="red">Play Count Increase: 20%  |  Number of Followers: 1.4 million</h5>
+                <h4 class="red">Not Great</h4>
+
+                <p class="score-example">Choose a song with <span class="green">5 thousand</span> plays that skyrockets to <span class="green">105 thousand</span> plays and an artist with <span class="green">4 thousand</span> followers?</p>
+                <img src="/assets/global/img/scoring/misun.png" class="scoring-img" alt=""/>
+                <h5 class="green">Play Count Increase: 2,000%  |  Number of Followers: 4 thousand</h5>
+                <h4 class="green">Jackpot</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- BEGIN MAIN JS -->
 <script>

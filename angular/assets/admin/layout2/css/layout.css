@@ -240,6 +240,7 @@ Page Header
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:focus {
   background: none;
+  font-weight: bold;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-menu {
   margin-top: 9px;

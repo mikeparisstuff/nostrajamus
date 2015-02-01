@@ -81,8 +81,8 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 
 	$scope.convertDateTime = function(contest, contestsList) {
 		//convert datetimes
-		contestsList[contest].start_time = new Date(contestsList[contest].start_time).toString();
-		contestsList[contest].end_time = new Date(contestsList[contest].end_time).toString();
+		contestsList[contest].start_time = new Date(contestsList[contest].start_time).toLocaleDateString();
+		contestsList[contest].end_time = new Date(contestsList[contest].end_time).toLocaleDateString();
 	};
 
 	$scope.myCurrentContests = function(myEntryList) {
@@ -92,6 +92,15 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 			myEntries.push(myEntryList[entry]);
 		}
 		$scope.myEntries = myEntries;
+	}
+
+	$scope.passModal = function(title, entry_fee, prize, description, start_time, end_time) {
+		$scope.title = title;
+		$scope.entry_fee = entry_fee;
+		$scope.prize = prize;
+		$scope.description = description;
+		$scope.start_time = start_time;
+		$scope.end_time = end_time;
 	}
 
     // set sidebar closed and body solid layout mode
