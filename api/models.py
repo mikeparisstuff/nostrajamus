@@ -141,7 +141,11 @@ class Contest(BaseModel):
 
     @property
     def winning_entry(self):
-        return self.contestentry_set.latest('jam_points')
+        try:
+            return self.contestentry_set.latest('jam_points')
+        except:
+            return None
+
 
     contest_picture = models.FileField(
         upload_to = get_contest_picture_upload_path,

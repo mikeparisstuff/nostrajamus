@@ -94,16 +94,22 @@ class FullProfileSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_my_entries(self, obj):
         entries = obj.my_contest_entries
-        serializer = ContestEntrySerializer(entries, many=True)
-        return serializer.data
+        if entries:
+            serializer = ContestEntrySerializer(entries, many=True)
+            return serializer.data
+        else:
+            return None
 
     def get_total_jam_points(self, obj):
         return obj.total_jam_points
 
     def get_my_rewards(self, obj):
         rewards = obj.my_rewards
-        serializer = RewardSerializer(rewards, many=True)
-        return serializer.data
+        if rewards:
+            serializer = RewardSerializer(rewards, many=True)
+            return serializer.data
+        else:
+            return None
 
     my_entries = serializers.SerializerMethodField()
     total_jam_points = serializers.SerializerMethodField()
@@ -117,8 +123,11 @@ class ContestSerializer(serializers.ModelSerializer):
 
     def get_winning_entry(self, obj):
         winner = obj.winning_entry
-        serializer = ContestEntrySerializer(winner)
-        return serializer.data
+        if winner:
+            serializer = ContestEntrySerializer(winner)
+            return serializer.data
+        else:
+            return None
 
     winning_entry = serializers.SerializerMethodField()
 
