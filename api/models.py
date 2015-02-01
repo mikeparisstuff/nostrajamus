@@ -137,12 +137,21 @@ class Contest(BaseModel):
 
     @property
     def entries(self):
-        return self.contestentry_set.all()
+        return self.contestentry_set.all().order_by('-jam_points')
+
+    @property
+    def winning_entry(self):
+        return self.contestentry_set.latest('jam_points')
 
     contest_picture = models.FileField(
         upload_to = get_contest_picture_upload_path,
         null = True,
         blank = True
+    )
+
+    soundcloud_playlist_link = models.URLField(
+        blank=True,
+        null=True
     )
 
     description = models.CharField(
@@ -605,6 +614,7 @@ class ContestEntry(BaseModel):
 
     class Meta:
         order_with_respect_to = 'contest'
+        ordering = ('-jam_points')
 
 class Feedback(BaseModel):
 
@@ -638,3 +648,15 @@ class UserReward(BaseModel):
     rewards = models.ForeignKey(Reward)
 
     user = models.ForeignKey(Profile)
+
+class ResetPasswordToken(BaseModel):
+
+    email = models.EmailField()
+
+    token = models.CharField(
+        max_length=16
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )

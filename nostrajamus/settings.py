@@ -98,8 +98,6 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-        # 'rest_framework.permissions.IsAuthenticated',
-        # 'rest_framework.permissions.IsAdminUser'
     ],
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -153,3 +151,10 @@ TEMPLATE_LOADERS = (
 #    'django.template.loaders.eggs.Loader',
 )
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'angular/templates/admin2/angularjs'),)
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'nostrajamus.music@gmail.com'
+EMAIL_HOST_PASSWORD = 'Nostra123'
+EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

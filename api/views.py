@@ -2,13 +2,15 @@ from django.shortcuts import render, render_to_response, RequestContext, redirec
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback
-from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken
+from api.serializers import ProfileSerializer, ContestSerializer, FullProfileSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer
 from django.contrib.auth import authenticate, login, logout
+from django.core.mail import send_mail
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from rest_framework.views import APIView
 import mailchimp
 from . import authentication
-import os
+import os, string, random
 from datetime import datetime, date, timedelta
 
 
@@ -86,6 +88,8 @@ class Contest1View(APIView):
 
         return render_to_response('contests.html', {'my_track': contest_entry})
 
+def id_generator(size=8, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
@@ -104,10 +108,43 @@ class UserViewSet(viewsets.ModelViewSet):
         user_serializer = ProfileSerializer(user, context={'request': request})
         return Response(user_serializer.data, status=status.HTTP_201_CREATED)
 
+    @list_route(methods=("POST",))
+    def initiate_password_reset(self, request, *args, **kwargs):
+        try:
+            email = request.data['email']
+            token = id_generator()
+            reset_token = ResetPasswordToken.objects.create(email=email, token=token)
+            send_mail('Nostrajamus Password Reset',
+                      "Please use this token to reset your password: {}".format(token),
+                      "nostrajamus.music@gmail.com",
+                      ["{}".format(email)],
+                      fail_silently=False
+            )
+            return Response({"detail": "Sent password reset token"}, status=status.HTTP_200_OK)
+        except KeyError as e:
+            return Response({"detail": "Please send an email"}, status=status.HTTP_400_BAD_REQUEST)
+
+    @list_route(methods=("POST",))
+    def reset_password(self, request):
+        try:
+            token = request.data['token']
+            new_password = request.data['new_password']
+            reset_token = ResetPasswordToken.objects.get(token=token, is_active=True)
+            user = Profile.objects.get(email=reset_token.email)
+            user.set_password(new_password)
+            user.save()
+            reset_token.is_active = False
+            reset_token.save()
+            return Response({"detail": "Successfully reset password"}, status=status.HTTP_200_OK)
+        except KeyError as e:
+            return Response({"detail": "Please send a token and new_password"}, status=status.HTTP_400_BAD_REQUEST)
+        except ResetPasswordToken.DoesNotExist:
+            return Response({"detail": "We could not find a matching, active reset token"}, status=status.HTTP_400_BAD_REQUEST)
+
     @list_route(permission_classes=(permissions.IsAuthenticated,))
     def me(self, request):
         user = request.user
-        serializer = ProfileSerializer(user, context={'request': request})
+        serializer = FullProfileSerializer(user, context={'request': request})
         return Response(serializer.data, status.HTTP_200_OK)
 
     @list_route(permission_classes=(permissions.AllowAny,))
@@ -144,7 +181,17 @@ class ContestViewSet(viewsets.ModelViewSet):
     @detail_route()
     def entries(self, request, pk=None):
         contest = self.get_object()
-        serializer = ContestEntrySerializer(contest.entries, many=True, context={'request': request})
+        queryset = contest.entries
+        paginator = Paginator(queryset, 3)
+        page = request.QUERY_PARAMS.get('page')
+        try:
+            entries = paginator.page(page)
+        except PageNotAnInteger:
+            entries = paginator.page(1)
+        except EmptyPage:
+            entries = paginator.page(paginator.num_pages)
+
+        serializer = PaginatedContestEntrySerializer(entries, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @detail_route(methods=("POST",))

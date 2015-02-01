@@ -1,7 +1,8 @@
 __author__ = 'MichaelParis'
 
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, Reward
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, Reward, ResetPasswordToken
 from rest_framework.exceptions import ValidationError
+from rest_framework.pagination import PaginationSerializer
 from rest_framework import serializers
 from datetime import datetime
 
@@ -61,19 +62,35 @@ class SCTrackSerializer(serializers.ModelSerializer):
         model = SCTrack
         # fields = ('id', 'sc_id', 'title', 'stream_url', 'release_year')
 
+class ProfileSerializer(serializers.ModelSerializer):
+
+    def get_total_jam_points(self, obj):
+        return obj.total_jam_points
+
+    total_jam_points = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Profile
+        fields = ( 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
+
 class ContestEntrySerializer(serializers.ModelSerializer):
 
     track = SCTrackSerializer(read_only=True)
+    user = ProfileSerializer(read_only=True)
 
     class Meta:
         model = ContestEntry
+
+class PaginatedContestEntrySerializer(PaginationSerializer):
+    class Meta:
+        object_serializer_class = ContestEntrySerializer
 
 class RewardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reward
 
-class ProfileSerializer(serializers.HyperlinkedModelSerializer):
+class FullProfileSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_my_entries(self, obj):
         entries = obj.my_contest_entries
@@ -96,7 +113,14 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
         model = Profile
         fields = ('url', 'username', 'my_entries', 'my_rewards', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
 
-class ContestSerializer(serializers.HyperlinkedModelSerializer):
+class ContestSerializer(serializers.ModelSerializer):
+
+    def get_winning_entry(self, obj):
+        winner = obj.winning_entry
+        serializer = ContestEntrySerializer(winner)
+        return serializer.data
+
+    winning_entry = serializers.SerializerMethodField()
 
     class Meta:
         model = Contest
@@ -116,3 +140,7 @@ class SCPeriodicPlayCountSerializer(serializers.HyperlinkedModelSerializer):
 class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Feedback
+
+class ResetPasswordTokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ResetPasswordToken
