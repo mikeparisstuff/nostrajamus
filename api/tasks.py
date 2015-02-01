@@ -32,15 +32,15 @@ def update_playcount():
                 follower_count=new_user.followers_count,
                 track=track
             )
-            for entry in all_entries:
-                new_jam_points = calculate_jam_points(entry.initial_playback_count,
-                                                      entry.initial_follower_count,
-                                                      new_track.playback_count,
-                                                      new_user.followers_count)
-                entry.jam_points = new_jam_points
-                entry.current_playback_count = new_track.playback_count
-                entry.current_follower_count = new_user.followers_count
-                entry.save()
+            # for entry in all_entries:
+            #     new_jam_points = calculate_jam_points(entry.initial_playback_count,
+            #                                           entry.initial_follower_count,
+            #                                           new_track.playback_count,
+            #                                           new_user.followers_count)
+            #     entry.jam_points = new_jam_points
+            #     entry.current_playback_count = new_track.playback_count
+            #     entry.current_follower_count = new_user.followers_count
+            #     entry.save()
         except HTTPError as e:
             print "HTTPError: on track {} with error: {}".format(track.sc_id, e)
 
