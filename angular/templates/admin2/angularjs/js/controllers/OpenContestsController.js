@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', 'myData', function($rootScope, $scope, settings, contestInfo, contestEntries, myData) {
+MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', 'myData', '$http', '$sce', function($rootScope, $scope, settings, contestInfo, contestEntries, myData, $http, $sce) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -49,50 +49,83 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 	}, 1000);
 	// End Countdown Timer
 
-    // SC.initialize({
-    //     client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
-    // });
+	// SoundCloud
+	SC.initialize({
+        client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
+    });
+	var url = "https://api.soundcloud.com/tracks";
+	$scope.getTracks = function(val) {
+	    return $http.get(url, {
+	      params: {
+	      	client_id: "f0b7083f9e4c053ca072c48a26e8567a",
+	        q: val,
+	      }
+	    }).then(function(response){
+	    	// console.log(response);
+	    	return response.data;
+	      // return response.data.map(function(item){
+	      //   return {
+	      //   	"label": item.title,
+	      //   	"select": item
+	      //   }
+	      // });
+	    });
+  	};
 
-    // var songObj;
-    // $("#search").autocomplete({
-    //     source: function(request, response) {
-    //         // find all sounds of buskers licensed under 'creative commons share alike'
-    //         // alert("Source");
-    //         SC.get('/tracks', { q: request.term}, function(tracks) {
-    //             // alert(tracks);
-    //             var titles = [];
-    //             for (var i = 0; i < tracks.length; i++) {
-    //                 if (i > 20) { break; }
-    //                 var item = { label: tracks[i].title, value: tracks[i] };
-    //                 titles[i] = item;
-    //             }
-    //             response(titles);
-    //         });
-    //     },
+  	$scope.onSelect = function(item, model, label) {
+  		console.log(item);
+  		$scope.track = item;
 
-    //     select: function(event, ui) {
-    //         // var song_title = ui.item.label;
-    //         var song_id = ui.item.value.id;
-    //         var song_play_count = ui.item.value.playback_count;
-    //         var user_id = ui.item.value.user.id;
-    //         var sc_frame = '<iframe width="100%" height="166px" scrolling="no" frameborder="yes" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + song_id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>';
-    //         // var modal_btn = '<button type="button" class="btn btn-primary btn-lg btn-sc" data-toggle="modal" data-target="#myModal">Preview Song<img src="img/sm-sc.png" class="sc-img"/></button>';
-    //         // document.getElementById("search").innerHTML = song_title;
-    //         SC.get("/users/"+user_id, {limit: 1}, function(user){
-    //             document.getElementById("follower_count_embed").innerHTML = "&nbsp | &nbsp Follower Count: " + user.followers_count;
-    //         });
-    //         document.getElementById("playcount_embed").innerHTML = "Play Count: "+song_play_count;
-    //         document.getElementById("sc-embed").innerHTML = sc_frame;
-    //         event.preventDefault();
-    //         $(this).val(ui.item.label);
-    //         songObj = ui.item;
-    //     },
+  		var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + item.id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
 
-    //     focus: function( event, ui ) {
-    //         // console.log(ui.item);
-    //         event.preventDefault();
-    //         $(this).val(ui.item.label);
+    	var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
+
+    	$scope.track_url = trustedUrl;
+
+    	// var trackFrame = '<iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="' + SCUrl + '"></iframe>';
+
+    	// document.getElementById("sc-embed").innerHTML = trackFrame;
+  	}
+
+  	$scope.postTrack = function(track) {
+  		$http({
+            url: '/api/contests/' + $scope.contestInfo.id + '/enter/' ,
+            method: "POST",
+            data:
+            {
+            	"track": track
+            },
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+                alert("Thanks for submitting!");
+            }).error(function (data, status, headers, config) {
+                // $scope.status = status;
+                alert("Try again.");
+            });
+  	}
+
+ //    $scope.getTracks = function(val) {
+	// 	return SC.get('/tracks', {q: val}, function(tracks) {
+	//         // alert(tracks);
+	//         var titles = [];
+	//         for (var i = 0; i < tracks.length; i++) {
+	//             if (i > 20) { break; }
+	//             var item = { label: tracks[i].title, value: tracks[i] };
+	//             titles[i] = item;
+	//         }
+	//         return titles;
+ //    	});    	
+	// };
+
+    // SC.get('/tracks', {q: $scope.autocomplete}, function(tracks) {
+    //     // alert(tracks);
+    //     var titles = [];
+    //     for (var i = 0; i < tracks.length; i++) {
+    //         if (i > 20) { break; }
+    //         var item = { label: tracks[i].title, value: tracks[i] };
+    //         titles[i] = item;
     //     }
+    //     return titles;
     // });
 
 }]);

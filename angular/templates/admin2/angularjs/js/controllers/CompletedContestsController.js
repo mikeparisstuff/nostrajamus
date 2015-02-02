@@ -27,4 +27,5 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
     $scope.numberOfPages=function() {
         return Math.ceil($scope.contestEntries.results.length/$scope.pageSize);                
     };
+
 }]);

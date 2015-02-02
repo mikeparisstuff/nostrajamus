@@ -103,6 +103,23 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		$scope.end_time = end_time;
 	}
 
+	$scope.result1 = '';
+    $scope.options1 = null;
+    $scope.details1 = '';
+
+    $scope.result2 = '';
+    $scope.options2 = {
+      country: 'ca',
+      types: '(cities)'
+    };    $scope.details2 = '';
+    
+    $scope.result3 = '';
+    $scope.options3 = {
+      country: 'gb',
+      types: 'establishment'
+    };
+    $scope.details3 = '';
+
     // set sidebar closed and body solid layout mode
     $rootScope.settings.layout.pageSidebarClosed = false;
 });

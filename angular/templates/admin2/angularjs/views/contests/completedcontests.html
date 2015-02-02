@@ -35,7 +35,7 @@
                     	<p><h5>Contest Winner</h5> <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{getSrc(contestInfo.winning_entry)}}"></iframe></p>
                     </div>
                     <div class="col-lg-6 text-center">
-                    	<p><h5>Contest Winner</h5> <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{getSrc(contestInfo.editors_pick)}}"></iframe></p>
+                    	<p><h5>Editor's Pick</h5> <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{getSrc(contestInfo.editors_pick)}}"></iframe></p>
                     </div>
                 </div>
 
@@ -78,5 +78,55 @@
 	function AdvancedDatatablesDemoCtrl($scope) {
 		// CompletedContests.init();
 	}
+
+	function SCinit() {
+
+    	SC.initialize({
+	        client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
+	    });
+
+	    var songObj;
+	    $("#search").autocomplete({
+	        source: function(request, response) {
+	            // find all sounds of buskers licensed under 'creative commons share alike'
+	            // alert("Source");
+	            SC.get('/tracks', { q: request.term}, function(tracks) {
+	                // alert(tracks);
+	                var titles = [];
+	                for (var i = 0; i < tracks.length; i++) {
+	                    if (i > 20) { break; }
+	                    var item = { label: tracks[i].title, value: tracks[i] };
+	                    titles[i] = item;
+	                }
+	                response(titles);
+	            });
+	        },
+
+	        select: function(event, ui) {
+	            // var song_title = ui.item.label;
+	            var song_id = ui.item.value.id;
+	            var song_play_count = ui.item.value.playback_count;
+	            var user_id = ui.item.value.user.id;
+	            var sc_frame = '<iframe width="100%" height="166px" scrolling="no" frameborder="yes" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + song_id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>';
+	            // var modal_btn = '<button type="button" class="btn btn-primary btn-lg btn-sc" data-toggle="modal" data-target="#myModal">Preview Song<img src="img/sm-sc.png" class="sc-img"/></button>';
+	            // document.getElementById("search").innerHTML = song_title;
+	            SC.get("/users/"+user_id, {limit: 1}, function(user){
+	                document.getElementById("follower_count_embed").innerHTML = "&nbsp | &nbsp Follower Count: " + user.followers_count;
+	            });
+	            document.getElementById("playcount_embed").innerHTML = "Play Count: "+song_play_count;
+	            document.getElementById("sc-embed").innerHTML = sc_frame;
+	            event.preventDefault();
+	            $(this).val(ui.item.label);
+	            songObj = ui.item;
+	        },
+
+	        focus: function( event, ui ) {
+	            // console.log(ui.item);
+	            event.preventDefault();
+	            $(this).val(ui.item.label);
+	        }
+	    });
+
+    };
 </script>
 <!-- END MAIN JS

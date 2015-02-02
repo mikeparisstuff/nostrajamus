@@ -8,7 +8,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.bootstrap", 
     "oc.lazyLoad",
     "ngSanitize",
-    "ngResource", //authentication with django
+    "ngResource" //authentication with django
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
