@@ -194,57 +194,89 @@ class ContestViewSet(viewsets.ModelViewSet):
         serializer = PaginatedContestEntrySerializer(entries, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @detail_route(methods=("POST",))
+    @detail_route(methods=("POST",), permission_classes=(permissions.IsAuthenticated,))
     def enter(self, request, pk=None):
-        contest = self.get_object()
-        print request.data
-        track_data = request.data.get("track")
-        track_id = track_data['id']
-        user_data = request.data.get("user")
-        sc_user = client.get('/users/{}'.format(track_data['user']['id']))
-        track_serializer = SCTrackSerializer(data=track_data)
-        print dir(track_serializer)
-        if track_serializer.is_valid():
-            print track_serializer.errors
-            try:
-                track = SCTrack.objects.get(sc_id = track_id)
-            except SCTrack.DoesNotExist:
-                # The track already exists
-                track = track_serializer.save()
-            user = Profile.objects.create_user(
-                first_name=user_data['first_name'],
-                last_name=user_data['last_name'],
-                email=user_data['email'],
-                password=user_data['password'],
-                username=user_data['username']
-            )
+        try:
+            contest = self.get_object()
+            track_data = request.data['track']
+            sc_user = client.get('/users/{}'.format(track_data['user']['id']))
+            track_id = track_data['id']
+            track_serializer = SCTrackSerializer(data=track_data)
+            if track_serializer.is_valid():
+                try:
+                    track = SCTrack.objects.get(sc_id=track_id)
+                except SCTrack.DoesNotExist:
+                    track = track_serializer.save()
+                user = request.user
+                contest_entry = ContestEntry.objects.create(
+                    user = user,
+                    contest = contest,
+                    track = track,
+                    initial_playback_count = track_data["playback_count"],
+                    initial_follower_count = sc_user.followers_count
+                )
+                entry_serializer = ContestEntrySerializer(contest_entry)
+                return Response(entry_serializer.data, status=status.HTTP_200_OK)
+        except KeyError as e:
+            return Response({
+                "detail": "You need to submit a track."
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except Contest.DoesNotExist as e:
+            return Response({
+                "detail": "Could not find Contest with id={}".format(pk)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
-            # Add them to the mailing list
-            try:
-                m = get_mailchimp_api()
-                m.lists.subscribe(MAILCHIMP_LIST_ID, {'email': user_data['email'], 'double_optin': False, 'send_welcome': True})
-            except mailchimp.ListAlreadySubscribedError:
-                pass
-            except mailchimp.Error, e:
-                pass
-
-            user = authenticate(username=user_data['username'], password=user_data['password'])
-            login(request, user)
-
-            # Add a new Contest entry with the
-            contest_entry = ContestEntry.objects.create(
-                user=user,
-                contest=contest,
-                track=track,
-                initial_playback_count=track_data["playback_count"],
-                initial_follower_count=sc_user.followers_count
-            )
-            contest.contestentry_set.add(contest_entry)
-            # user.contests.add(contest)
-            return Response({"detail": "success"}, status=status.HTTP_201_CREATED)
-        else:
-            print track_serializer.errors
-            return Response({'detail': 'Invalid data to enter in contest'}, status=status.HTTP_400_BAD_REQUEST)
+    # @detail_route(methods=("POST",))
+    # def enter(self, request, pk=None):
+    #     contest = self.get_object()
+    #     print request.data
+    #     track_data = request.data.get("track")
+    #     track_id = track_data['id']
+    #     user_data = request.data.get("user")
+    #     sc_user = client.get('/users/{}'.format(track_data['user']['id']))
+    #     track_serializer = SCTrackSerializer(data=track_data)
+    #     print dir(track_serializer)
+    #     if track_serializer.is_valid():
+    #         print track_serializer.errors
+    #         try:
+    #             track = SCTrack.objects.get(sc_id = track_id)
+    #         except SCTrack.DoesNotExist:
+    #             # The track already exists
+    #             track = track_serializer.save()
+    #         user = Profile.objects.create_user(
+    #             first_name=user_data['first_name'],
+    #             last_name=user_data['last_name'],
+    #             email=user_data['email'],
+    #             password=user_data['password'],
+    #             username=user_data['username']
+    #         )
+    #
+    #         # Add them to the mailing list
+    #         try:
+    #             m = get_mailchimp_api()
+    #             m.lists.subscribe(MAILCHIMP_LIST_ID, {'email': user_data['email'], 'double_optin': False, 'send_welcome': True})
+    #         except mailchimp.ListAlreadySubscribedError:
+    #             pass
+    #         except mailchimp.Error, e:
+    #             pass
+    #
+    #         user = authenticate(username=user_data['username'], password=user_data['password'])
+    #         login(request, user)
+    #
+    #         # Add a new Contest entry with the
+    #         contest_entry = ContestEntry.objects.create(
+    #             user=user,
+    #             contest=contest,
+    #             track=track,
+    #             initial_playback_count=track_data["playback_count"],
+    #             initial_follower_count=sc_user.followers_count
+    #         )
+    #         contest.contestentry_set.add(contest_entry)
+    #         # user.contests.add(contest)
+    #         return Response({"detail": "success"}, status=status.HTTP_201_CREATED)
+    #     else:
+    #         print track_serializer.errors
+    #         return Response({'detail': 'Invalid data to enter in contest'}, status=status.HTTP_400_BAD_REQUEST)
 
 class TrackViewSet(viewsets.ModelViewSet):
     queryset = SCTrack.objects.all()
@@ -275,6 +307,51 @@ class PeriodicPlayCountViewSet(viewsets.ModelViewSet):
 class SCUserViewSet(viewsets.ModelViewSet):
     queryset = SCUser.objects.all()
     serializer_class = SCUserSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            fname = request.data['first_name']
+            lname = request.data['last_name']
+            email = request.data['email']
+            password = request.data['password']
+            username = request.data['username']
+            profile_picture = request.data.get('profile_picture', None)
+            user = Profile.objects.create_user(
+                first_name=fname,
+                last_name=lname,
+                email=email,
+                password=password,
+                username=username
+            )
+            if profile_picture:
+                user.profile_picture = profile_picture
+                user.save()
+            user_serializer = ProfileSerializer(user)
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        except KeyError as e:
+            return Response({
+                "detail": "Missing some fields with error: {}".format(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            fname = request.data['first_name']
+            lname = request.data['last_name']
+            email = request.data['email']
+            profile_picture = request.data.get('profile_picture', None)
+            user = request.user
+            user.first_name = fname
+            user.last_name = lname
+            user.email = email
+            if profile_picture:
+                user.profile_picture = profile_picture
+            user.save()
+            user_serializer = ProfileSerializer(user)
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        except KeyError as e:
+            return Response({
+                "detail": "Missing some fields with error: {}".format(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
 class FeedbackViewSet(viewsets.ModelViewSet):
     queryset = Feedback.objects.all()

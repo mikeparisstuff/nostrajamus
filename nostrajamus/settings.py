@@ -79,6 +79,7 @@ if instance_id == 'PROD':
         'HOST': 'nostrajamusprod.cqgo2wxdycyf.us-east-1.rds.amazonaws.com',
         'PORT': os.environ['RDS_PORT']
     }
+    AWS_STORAGE_BUCKET_NAME = 'nostrajamus-prod'
 else:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -89,6 +90,7 @@ else:
         'HOST': '',
         'PORT': '',
     }
+    AWS_STORAGE_BUCKET_NAME = 'nostrajamus-dev'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -141,7 +143,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "angular/assets"),
     os.path.join(BASE_DIR, "angular/templates/admin2/angularjs"),
-    os.path.join(BASE_DIR, "templates/staticfiles2")
 )
 # print STATIC_ROOT
 
@@ -158,3 +159,8 @@ EMAIL_HOST_USER = 'nostrajamus.music@gmail.com'
 EMAIL_HOST_PASSWORD = 'Nostra123'
 EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# S3
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_ACCESS_KEY_ID = 'AKIAIT6SLV63QQTHWCRQ'
+AWS_SECRET_ACCESS_KEY = '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'

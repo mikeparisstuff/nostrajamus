@@ -12,15 +12,15 @@
     <title>NostraJAMus</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+    <link href="/assets/nostraV1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/nostraV1/img/favicon.ico">
 
     <!-- Custom CSS -->
-    <link href="/assets/css/agency.css" rel="stylesheet">
+    <link href="/assets/nostraV1/css/agency.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.css"/>
 
     <!-- Custom Fonts -->
-    <link href="/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/nostraV1/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -71,9 +71,6 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#services">How To Play</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#portfolio">Contest</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#about">About</a>
@@ -167,12 +164,12 @@
                     <hr/>
                     <h5>A Few Examples</h5>
                     <p class="score-example">Choose a song with <span class="red">5 million</span> plays that increased to <span class="red">6 million</span> plays and an artist with over <span class="red">1 million</span> followers?</p>
-                    <img src="/assets/img/scoring/vancejoy.png" class="scoring-img" alt=""/>
+                    <img src="/assets/nostraV1/img/scoring/vancejoy.png" class="scoring-img" alt=""/>
                     <h5 class="red">Play Count Increase: 20%  |  Number of Followers: 1.4 million</h5>
                     <h4 class="red">Not Great</h4>
 
                     <p class="score-example">Choose a song with <span class="green">5 thousand</span> plays that skyrockets to <span class="green">105 thousand</span> plays and an artist with <span class="green">4 thousand</span> followers?</p>
-                    <img src="/assets/img/scoring/misun.png" class="scoring-img" alt=""/>
+                    <img src="/assets/nostraV1/img/scoring/misun.png" class="scoring-img" alt=""/>
                     <h5 class="green">Play Count Increase: 2,000%  |  Number of Followers: 4 thousand</h5>
                     <h4 class="green">Jackpot</h4>
                 </div>
@@ -194,14 +191,14 @@
                 <div class="modal-body">
                     <h4 class="green">Good Examples</h4>
                     <h4 class="center">(uploaded by record label or artist)</h4>
-                    <img src="/assets/img/scoring/good1.png" class="scoring-img" alt=""/>
-                    <img src="/assets/img/scoring/good2.png" class="scoring-img" alt=""/>
+                    <img src="/assets/nostraV1/img/scoring/good1.png" class="scoring-img" alt=""/>
+                    <img src="/assets/nostraV1/img/scoring/good2.png" class="scoring-img" alt=""/>
 
                     <hr/>
                     <h4 class="red">Bad Examples</h4>
                     <h4 class="center">(uploaded by random internet stranger)</h4>
-                    <img src="/assets/img/scoring/bad1.png" class="scoring-img" alt=""/>
-                    <img src="/assets/img/scoring/bad2.png" class="scoring-img" alt=""/>
+                    <img src="/assets/nostraV1/img/scoring/bad1.png" class="scoring-img" alt=""/>
+                    <img src="/assets/nostraV1/img/scoring/bad2.png" class="scoring-img" alt=""/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
@@ -210,202 +207,114 @@
         </div>
     </div>
 
-    {% if user.is_authenticated %}
-
-        <section id="portfolio" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Thanks for joining our 2015 Kickoff Contest</h2>
-                    <div class="section-subheading text-muted">Contest Begins In <span id="countdown"></span></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <br/>
-                    <div class="text-center text-muted">As a reminder, you entered . . .</div>
-                    <br/>
-                    <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ my_track.sc_id }}&amp;color=ff3333&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
-                    <br/><br/>
-                    <div class="text-center text-muted text-large">Please invite your friends and family and enemies to enter the contest. We'll be adding more prizes as we get more contestants. It's a win-win-win situation (is that how that works?)</div>
-                </div>
-            </div>
-
-
-    {% else %}
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Join Our 2015 Kickoff Contest</h2>
-                    <div class="section-subheading text-muted">Submission Deadline In <span id="countdown"></span></div>
-                    <br/><br/><br/>
-                    <p class="subheading-button"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#officialTrackModal">Remember Official Uploads Only</button></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <form name="contestEntryForm" id="contestEntryForm" novalidate>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name *" id="first_name" required data-validation-required-message="Please enter your name.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name *" id="last_name" required data-validation-required-message="Please enter your name.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Username (alias) *" id="username" required data-validation-required-message="Please enter your email address.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password *" id="password1" required data-validation-required-message="Please enter a password">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Confirm password *" id="password2" required data-validation-required-message="Please enter a confirmation password">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <input type="text" name="" class="form-control" id="search" value="" type="text" placeholder="Start typing to search Soundcloud . . . Results will appear below.">
-                                    <br>
-                                    <div id="sc-embed"></div>
-                                    <br><br>
-                                    <div class="text-center text-muted"><span id="playcount_embed"></span><span id="follower_count_embed"></span></div>
-                                    </input>
-                                </div>
-                            </div>
-
+{#    {% if user.is_authenticated %}#}
+{##}
+{#        <section id="portfolio" class="bg-light-gray">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-lg-12 text-center">#}
+{#                    <h2 class="section-heading">Thanks for joining our 2015 Kickoff Contest</h2>#}
+{#                    <div class="section-subheading text-muted">Contest Begins In <span id="countdown"></span></div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-lg-12">#}
+{#                    <br/>#}
+{#                    <div class="text-center text-muted">As a reminder, you entered . . .</div>#}
+{#                    <br/>#}
+{#                    <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ my_track.sc_id }}&amp;color=ff3333&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>#}
+{#                    <br/><br/>#}
+{#                    <div class="text-center text-muted text-large">Please invite your friends and family and enemies to enter the contest. We'll be adding more prizes as we get more contestants. It's a win-win-win situation (is that how that works?)</div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{##}
+{#    {% else %}#}
+{#    <!-- Portfolio Grid Section -->#}
+{#    <section id="portfolio" class="bg-light-gray">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-lg-12 text-center">#}
+{#                    <h2 class="section-heading">Join Our 2015 Kickoff Contest</h2>#}
+{#                    <div class="section-subheading text-muted">Submission Deadline In <span id="countdown"></span></div>#}
+{#                    <br/><br/><br/>#}
+{#                    <p class="subheading-button"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#officialTrackModal">Remember Official Uploads Only</button></p>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="col-lg-12">#}
+{#                    <form name="contestEntryForm" id="contestEntryForm" novalidate>#}
+{#                        <div class="row">#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="form-group">#}
+{#                                    <input type="text" class="form-control" placeholder="First Name *" id="first_name" required data-validation-required-message="Please enter your name.">#}
+{#                                    <p class="help-block text-danger"></p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="form-group">#}
+{#                                    <input type="text" class="form-control" placeholder="Last Name *" id="last_name" required data-validation-required-message="Please enter your name.">#}
+{#                                    <p class="help-block text-danger"></p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="form-group">#}
+{#                                    <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">#}
+{#                                    <p class="help-block text-danger"></p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="form-group">#}
+{#                                    <input type="email" class="form-control" placeholder="Username (alias) *" id="username" required data-validation-required-message="Please enter your email address.">#}
+{#                                    <p class="help-block text-danger"></p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="form-group">#}
+{#                                    <input type="password" class="form-control" placeholder="Password *" id="password1" required data-validation-required-message="Please enter a password">#}
+{#                                    <p class="help-block text-danger"></p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-md-6">#}
+{#                                <div class="form-group">#}
+{#                                    <input type="password" class="form-control" placeholder="Confirm password *" id="password2" required data-validation-required-message="Please enter a confirmation password">#}
+{#                                    <p class="help-block text-danger"></p>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="col-lg-12">#}
+{#                                <div class="form-group">#}
+{#                                    <input type="text" name="" class="form-control" id="search" value="" type="text" placeholder="Start typing to search Soundcloud . . . Results will appear below.">#}
+{#                                    <br>#}
+{#                                    <div id="sc-embed"></div>#}
+{#                                    <br><br>#}
+{#                                    <div class="text-center text-muted"><span id="playcount_embed"></span><span id="follower_count_embed"></span></div>#}
+{#                                    </input>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
 {#                            <div class="col-lg-12">#}
 {#                                <canvas id="example-chart" width="800" height="400"></canvas>#}
 {#                                <p class="text-muted">Example graph for Asap Rocky - Fuckin' Problems. Will have dates for x-axis, less data points, and a longer time period. This just started recording data last night.</p>#}
 {#                            </div>#}
-
-                            <div class="clearfix"></div>
-                            <div class="col-lg-12 text-center">
-                                <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Join Contest</button>
-                                <div id="errors"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            {% endif %}
-
-
-{#            <div class="row">#}
-{#                <div class="col-md-4 col-sm-6 portfolio-item">#}
-{#                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">#}
-{#                        <div class="portfolio-hover">#}
-{#                            <div class="portfolio-hover-content">#}
-{#                                <i class="fa fa-plus fa-3x"></i>#}
+{##}
+{#                            <div class="clearfix"></div>#}
+{#                            <div class="col-lg-12 text-center">#}
+{#                                <div id="success"></div>#}
+{#                                <button type="submit" class="btn btn-xl">Join Contest</button>#}
+{#                                <div id="errors"></div>#}
 {#                            </div>#}
 {#                        </div>#}
-{#                        <img src="/assets/img/portfolio/roundicons.png" class="img-responsive" alt="">#}
-{#                    </a>#}
-{#                    <div class="portfolio-caption">#}
-{#                        <h4>Round Icons</h4>#}
-{#                        <p class="text-muted">Graphic Design</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="col-md-4 col-sm-6 portfolio-item">#}
-{#                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">#}
-{#                        <div class="portfolio-hover">#}
-{#                            <div class="portfolio-hover-content">#}
-{#                                <i class="fa fa-plus fa-3x"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <img src="/assets/img/portfolio/startup-framework.png" class="img-responsive" alt="">#}
-{#                    </a>#}
-{#                    <div class="portfolio-caption">#}
-{#                        <h4>Startup Framework</h4>#}
-{#                        <p class="text-muted">Website Design</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="col-md-4 col-sm-6 portfolio-item">#}
-{#                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">#}
-{#                        <div class="portfolio-hover">#}
-{#                            <div class="portfolio-hover-content">#}
-{#                                <i class="fa fa-plus fa-3x"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <img src="/assets/img/portfolio/treehouse.png" class="img-responsive" alt="">#}
-{#                    </a>#}
-{#                    <div class="portfolio-caption">#}
-{#                        <h4>Treehouse</h4>#}
-{#                        <p class="text-muted">Website Design</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="col-md-4 col-sm-6 portfolio-item">#}
-{#                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">#}
-{#                        <div class="portfolio-hover">#}
-{#                            <div class="portfolio-hover-content">#}
-{#                                <i class="fa fa-plus fa-3x"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <img src="/assets/img/portfolio/golden.png" class="img-responsive" alt="">#}
-{#                    </a>#}
-{#                    <div class="portfolio-caption">#}
-{#                        <h4>Golden</h4>#}
-{#                        <p class="text-muted">Website Design</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="col-md-4 col-sm-6 portfolio-item">#}
-{#                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">#}
-{#                        <div class="portfolio-hover">#}
-{#                            <div class="portfolio-hover-content">#}
-{#                                <i class="fa fa-plus fa-3x"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <img src="/assets/img/portfolio/escape.png" class="img-responsive" alt="">#}
-{#                    </a>#}
-{#                    <div class="portfolio-caption">#}
-{#                        <h4>Escape</h4>#}
-{#                        <p class="text-muted">Website Design</p>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="col-md-4 col-sm-6 portfolio-item">#}
-{#                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">#}
-{#                        <div class="portfolio-hover">#}
-{#                            <div class="portfolio-hover-content">#}
-{#                                <i class="fa fa-plus fa-3x"></i>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <img src="/assets/img/portfolio/dreams.png" class="img-responsive" alt="">#}
-{#                    </a>#}
-{#                    <div class="portfolio-caption">#}
-{#                        <h4>Dreams</h4>#}
-{#                        <p class="text-muted">Website Design</p>#}
-{#                    </div>#}
+{#                    </form>#}
 {#                </div>#}
 {#            </div>#}
-
-        </div>
-    </section>
+{##}
+{#            {% endif %}#}
+{##}
+{#        </div>#}
+{#    </section>#}
 
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="bg-light-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -418,7 +327,7 @@
                     <ul class="timeline">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="/assets/img/about/1.jpg" alt="">
+                                <img class="img-circle img-responsive" src="/assets/nostraV1/img/about/1.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -439,7 +348,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="/assets/img/about/winnings.jpg" alt="">
+                                <img class="img-circle img-responsive" src="/assets/nostraV1/img/about/winnings.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -453,7 +362,7 @@
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="/assets/img/about/sennheiser.jpg" alt="">
+                                <img class="img-circle img-responsive" src="/assets/nostraV1/img/about/sennheiser.jpg" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -467,7 +376,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="/assets/img/about/rocket.jpg" alt=""/>
+                                <img class="img-circle img-responsive" src="/assets/nostraV1/img/about/rocket.jpg" alt=""/>
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -503,7 +412,7 @@
             <div class="row">
                 <div class="col-sm-2 col-sm-offset-1">
                     <div class="team-member">
-                        <img src="/assets/img/team/collin.jpg" class="img-responsive img-circle" alt="">
+                        <img src="/assets/nostraV1/img/team/collin.jpg" class="img-responsive img-circle" alt="">
                         <h4>Collin Waldoch</h4>
                         <p class="text-muted">Strategy</p>
                         <a href="mailto:collin@nostrajamus.com">collin@nostrajamus.com</a>
@@ -521,7 +430,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="team-member">
-                        <img src="/assets/img/team/tony.jpg" class="img-responsive img-circle" alt="">
+                        <img src="/assets/nostraV1/img/team/tony.jpg" class="img-responsive img-circle" alt="">
                         <h4>Tony Olmert</h4>
                         <p class="text-muted">Marketing</p>
                         <a href="mailto:tony@nostrajamus.com">tony@nostrajamus.com</a>
@@ -538,7 +447,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="team-member">
-                        <img src="/assets/img/team/mike.jpg" class="img-responsive img-circle" alt="">
+                        <img src="/assets/nostraV1/img/team/mike.jpg" class="img-responsive img-circle" alt="">
                         <h4>Michael Paris</h4>
                         <p class="text-muted">Backend</p>
                         <a href="mailto:mike@nostrajamus.com">mike@nostrajamus.com</a>
@@ -555,7 +464,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="team-member">
-                        <img src="/assets/img/team/robby.jpg" class="img-responsive img-circle" alt="">
+                        <img src="/assets/nostraV1/img/team/robby.jpg" class="img-responsive img-circle" alt="">
                         <h4>Robby Koch</h4>
                         <p class="text-muted">Social Media Intern</p>
                         <a href="mailto:robby@nostrajamus.com">robby@nostrajamus.com</a>
@@ -572,7 +481,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="team-member">
-                        <img src="/assets/img/team/vince.jpg" class="img-responsive img-circle" alt="">
+                        <img src="/assets/nostraV1/img/team/vince.jpg" class="img-responsive img-circle" alt="">
                         <h4>Vince Ning</h4>
                         <p class="text-muted">Frontend</p>
                         <a href="mailto:vince@nostrajamus.com">vince@nostrajamus.com</a>
@@ -602,22 +511,22 @@
 {#            <div class="row">#}
 {#                <div class="col-md-3 col-sm-6">#}
 {#                    <a href="#">#}
-{#                        <img src="/assets/img/logos/envato.jpg" class="img-responsive img-centered" alt="">#}
+{#                        <img src="/assets/nostraV1/img/logos/envato.jpg" class="img-responsive img-centered" alt="">#}
 {#                    </a>#}
 {#                </div>#}
 {#                <div class="col-md-3 col-sm-6">#}
 {#                    <a href="#">#}
-{#                        <img src="/assets/img/logos/designmodo.jpg" class="img-responsive img-centered" alt="">#}
+{#                        <img src="/assets/nostraV1/img/logos/designmodo.jpg" class="img-responsive img-centered" alt="">#}
 {#                    </a>#}
 {#                </div>#}
 {#                <div class="col-md-3 col-sm-6">#}
 {#                    <a href="#">#}
-{#                        <img src="/assets/img/logos/themeforest.jpg" class="img-responsive img-centered" alt="">#}
+{#                        <img src="/assets/nostraV1/img/logos/themeforest.jpg" class="img-responsive img-centered" alt="">#}
 {#                    </a>#}
 {#                </div>#}
 {#                <div class="col-md-3 col-sm-6">#}
 {#                    <a href="#">#}
-{#                        <img src="/assets/img/logos/creative-market.jpg" class="img-responsive img-centered" alt="">#}
+{#                        <img src="/assets/nostraV1/img/logos/creative-market.jpg" class="img-responsive img-centered" alt="">#}
 {#                    </a>#}
 {#                </div>#}
 {#            </div>#}
@@ -713,7 +622,7 @@
                             <!-- Project Details Go Here -->
                             <h2>Project Name</h2>
                             <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive" src="/assets/img/portfolio/roundicons-free.png" alt="">
+                            <img class="img-responsive" src="/assets/nostraV1/img/portfolio/roundicons-free.png" alt="">
                             <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                             <p>
                                 <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>
@@ -731,24 +640,24 @@
     </div>
 
     <!-- jQuery -->
-    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/nostraV1/js/jquery.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/nostraV1/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="/assets/js/classie.js"></script>
-    <script src="/assets/js/cbpAnimatedHeader.js"></script>
+    <script src="/assets/nostraV1/js/classie.js"></script>
+    <script src="/assets/nostraV1/js/cbpAnimatedHeader.js"></script>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
 
-    <script src="/assets/js/jqBootstrapValidation.js"></script>
-{#    <script src="/assets/js/contact_me.js"></script>#}
+    <script src="/assets/nostraV1/js/jqBootstrapValidation.js"></script>
+{#    <script src="/assets/nostraV1/js/contact_me.js"></script>#}
 
-    <script src="/assets/js/agency.js"></script>
-    <script type="text/javascript" src="/assets/js/nostrajamus.js"></script>
+    <script src="/assets/nostraV1/js/agency.js"></script>
+    <script type="text/javascript" src="/assets/nostraV1/js/nostrajamus.js"></script>
 
     <script>
         // set the date we're counting down to
