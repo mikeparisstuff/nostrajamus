@@ -316,6 +316,7 @@ class SCUserViewSet(viewsets.ModelViewSet):
             password = request.data['password']
             username = request.data['username']
             profile_picture = request.data.get('profile_picture', None)
+            location = request.data.get('location', None)
             user = Profile.objects.create_user(
                 first_name=fname,
                 last_name=lname,
@@ -325,6 +326,9 @@ class SCUserViewSet(viewsets.ModelViewSet):
             )
             if profile_picture:
                 user.profile_picture = profile_picture
+                user.save()
+            if location:
+                user.location = location
                 user.save()
             user_serializer = ProfileSerializer(user)
             return Response(user_serializer.data, status=status.HTTP_200_OK)
@@ -339,12 +343,16 @@ class SCUserViewSet(viewsets.ModelViewSet):
             lname = request.data['last_name']
             email = request.data['email']
             profile_picture = request.data.get('profile_picture', None)
+            location = request.data.get('location', None)
             user = request.user
             user.first_name = fname
             user.last_name = lname
             user.email = email
             if profile_picture:
                 user.profile_picture = profile_picture
+            if location:
+                user.location = location
+                user.save()
             user.save()
             user_serializer = ProfileSerializer(user)
             return Response(user_serializer.data, status=status.HTTP_200_OK)
