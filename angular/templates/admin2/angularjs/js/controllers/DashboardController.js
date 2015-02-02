@@ -1,6 +1,6 @@
 'use strict';
 
-MetronicApp.controller('DashboardController', function($rootScope, $scope, $http, $timeout, contests, myData) {
+MetronicApp.controller('DashboardController', function($rootScope, $scope, $http, $timeout, contests, myData, $window) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         Metronic.initAjax();
@@ -94,31 +94,28 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		$scope.myEntries = myEntries;
 	}
 
-	$scope.passModal = function(title, entry_fee, prize, description, start_time, end_time) {
+	$scope.passModal = function(title, entry_fee, prize, description, start_time, end_time, status, contest_id) {
 		$scope.title = title;
 		$scope.entry_fee = entry_fee;
 		$scope.prize = prize;
 		$scope.description = description;
 		$scope.start_time = start_time;
 		$scope.end_time = end_time;
+		$scope.status = status;
+		$scope.contest_id = contest_id;
 	}
 
-	$scope.result1 = '';
-    $scope.options1 = null;
-    $scope.details1 = '';
-
-    $scope.result2 = '';
-    $scope.options2 = {
-      country: 'ca',
-      types: '(cities)'
-    };    $scope.details2 = '';
-    
-    $scope.result3 = '';
-    $scope.options3 = {
-      country: 'gb',
-      types: 'establishment'
-    };
-    $scope.details3 = '';
+	$scope.goToContest = function(status, contest_id) {
+		if (status == 'open') {
+			$window.location.href = '#/opencontests/' + contest_id;
+		}
+		else if (status == 'inProgress') {
+			$window.location.href = '#/inprogresscontests/' + contest_id;
+		}
+		else if (status == 'completed') {
+			$window.location.href = '#/completedcontests/' + contest_id;
+		}
+	}
 
     // set sidebar closed and body solid layout mode
     $rootScope.settings.layout.pageSidebarClosed = false;

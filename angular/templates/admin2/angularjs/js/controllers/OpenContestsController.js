@@ -73,7 +73,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
   	};
 
   	$scope.onSelect = function(item, model, label) {
-  		console.log(item);
+  		// console.log(item);
   		$scope.track = item;
 
   		var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + item.id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
@@ -97,9 +97,11 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             },
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
+        	  	console.log(data);
                 alert("Thanks for submitting!");
             }).error(function (data, status, headers, config) {
                 // $scope.status = status;
+        	  	console.log(data);
                 alert("Try again.");
             });
   	}

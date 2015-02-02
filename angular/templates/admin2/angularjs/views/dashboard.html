@@ -149,13 +149,15 @@
 	            </div>
 	            <div class="modal-body">
             		<p><h5>Entry Fee</h5>${{entry_fee}}</p>
-					<p><h5>Prize</h5> ${{prize}}</p>
+					<p><h5>Prize</h5> {{prize}}</p>
 					<p><h5>Description</h5> {{description}}</p>
 					<p><h5>Start Time</h5> {{start_time}}</p>
 					<p><h5>End Time</h5> {{end_time}}</p>
 	            </div>
 	            <div class="modal-footer title-bg">
-	                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal">View</button>
+	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open'">Enter</button>
+	               	<button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'">View</button>
+	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'">View</button>
 	            </div>
 	        </div>
 	    </div>
@@ -218,17 +220,18 @@
 										</tr>
 									</thead>
 									<tr ng-repeat="openContest in openContests">
-										<td class="fit">
+										<!-- <td class="fit">
 											<img class="user-pic" src="{{openContest.contest_picture}}">
-										</td>
+										</td> -->
 										<td>
-											<a href="javascript:;" class="primary-link">{{openContest.title}}</a>
+											<img class="user-pic" src="{{openContest.contest_picture}}">
+											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(openContest.title, openContest.entry_fee, openContest.prize, openContest.description, openContest.start_time, openContest.end_time, 'open', openContest.id)">{{openContest.title}}</a>
 										</td>
 										<td>
 											{{openContest.songs_per_entrant}}
 										</td>
 										<td>
-											<a href="">${{openContest.prize}}</a>
+											<a href="">{{openContest.prize}}</a>
 										</td>
 										<td>
 											{{openContest.start_time}}
@@ -261,17 +264,18 @@
 										</tr>
 									</thead>
 									<tr ng-repeat="inProgressContest in inProgressContests">
-										<td class="fit">
+<!-- 										<td class="fit">
 											<img class="user-pic" src="{{inProgressContest.contest_picture}}">
-										</td>
+										</td> -->
 										<td>
-											<a href="javascript:;" class="primary-link">{{inProgressContest.title}}</a>
+											<img class="user-pic" src="{{inProgressContest.contest_picture}}">
+											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'inProgress', inProgressContest.id)">{{inProgressContest.title}}</a>
 										</td>
 										<td>
 											{{inProgressContest.songs_per_entrant}}
 										</td>
 										<td>
-											<a href="">${{inProgressContest.prize}}</a>
+											<a href="">{{inProgressContest.prize}}</a>
 										</td>
 										<td>
 											{{inProgressContest.end_time}}
@@ -305,14 +309,15 @@
 									</thead>
 									<tr ng-repeat="completedContest in completedContests">
 										<td>
-											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, compeletedContest.end_time)">
+											<img class="user-pic" src="{{completedContest.contest_picture}}">
+											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, compeletedContest.end_time, 'completed', completedContest.id)">
 											{{completedContest.title}}</a>
 										</td>
 										<td>
 											{{completedContest.songs_per_entrant}}
 										</td>
 										<td>
-											<a href="">${{completedContest.prize}}</a>
+											<a href="">{{completedContest.prize}}</a>
 										</td>
 										<td>
 											{{completedContest.end_time}}
