@@ -216,13 +216,16 @@ class Contest(BaseModel):
     )
 
     start_time = models.DateTimeField(
-        auto_now_add=True,
         blank = True,
         null = True
     )
 
     end_time = models.DateTimeField(
-        auto_now_add=True,
+        blank = True,
+        null = True
+    )
+
+    editors_pick = models.BigIntegerField(
         blank = True,
         null = True
     )

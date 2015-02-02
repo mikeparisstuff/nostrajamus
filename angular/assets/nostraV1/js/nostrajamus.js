@@ -237,11 +237,11 @@ $(function() {
                 ),
                 success: function(data) {
                     console.log('SUCCESS: ' + data);
-                    window.location = "/forgot/";
+                    window.location.href = "/forgot/";
                 },
                 error: function(error) {
                     console.log(error);
-                    alert("Sorry there was an issue. It may have been an issue on our side or it may help to clear your cookies and try again.")
+//                    alert("Sorry there was an issue. It may have been an issue on our side or it may help to clear your cookies and try again.")
                 }
             });
 
@@ -251,7 +251,7 @@ $(function() {
 
     $("#resetPasswordForm").submit(function( event ) {
         var errorMessage = '';
-        for (var i = 0; i < event.target.length-1; i++) {
+        for (var i = 0; i < event.target.length - 1; i++) {
             event.preventDefault();
             if (event.target[i].value == null || event.target[i].value == '') {
                 errorMessage = "Please fill out all fields.";
@@ -267,29 +267,29 @@ $(function() {
         } else {
             console.log(JSON.stringify(
                 {
-                    "token": $("token").val(),
+                    "token": $("#token").val(),
                     "new_password": $("#new_password").val()
                 }
             ));
 
             $.ajax({
                 type: 'POST',
-                url: '/api/users/reset_password', //http://127.0.0.1:8000/
+                url: '/api/users/reset_password/', //http://127.0.0.1:8000/
                 dataType: 'json',
                 crossDomain: 'true',
                 contentType: "application/json",
                 data: JSON.stringify(
                     {
-                        "token": $("token").val(),
+                        "token": $("#token").val(),
                         "new_password": $("#new_password").val()
                     }
                 ),
-                success: function(data) {
+                success: function (data) {
                     alert("You've successfully reset your password.")
                     console.log('SUCCESS: ' + data);
-                    window.location = "/login/";
+                    window.location.href = "/login/";
                 },
-                error: function(error) {
+                error: function (error) {
                     console.log(error);
                     alert("Incorrect token, try again.");
                     // alert("Sorry there was an issue uploading that song. It may have been an issue on our side or it may help to clear your cookies and try again.")
@@ -297,4 +297,5 @@ $(function() {
             });
 
         }
+    });
 });

@@ -41,6 +41,10 @@ class HomePageView(APIView):
         else:
             return render_to_response("landing.html")
 
+class ForgetView(APIView):
+    def get(self, request, format=None):
+        return render_to_response("forgot.html")
+
 class LoginView(APIView):
     def get(self, request, format=None):
         return render_to_response('login.html')
@@ -118,6 +122,8 @@ class UserViewSet(viewsets.ModelViewSet):
             if location:
                 user.location = location
                 user.save()
+            authenticated = authenticate(username=username, password=password)
+            login(request, authenticated)
             user_serializer = ProfileSerializer(user)
             return Response(user_serializer.data, status=status.HTTP_200_OK)
         except KeyError as e:
@@ -223,7 +229,7 @@ class ContestViewSet(viewsets.ModelViewSet):
     def entries(self, request, pk=None):
         contest = self.get_object()
         queryset = contest.entries
-        paginator = Paginator(queryset, 3)
+        paginator = Paginator(queryset, 5)
         page = request.QUERY_PARAMS.get('page')
         try:
             entries = paginator.page(page)
