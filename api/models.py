@@ -88,7 +88,9 @@ class Profile(AbstractUser):
         default=''
     )
 
-    jam_points = models.IntegerField(
+    jam_points = models.DecimalField(
+        decimal_places=1,
+        max_digits=8,
         default=0,
         db_index=True
     )
@@ -607,7 +609,9 @@ class ContestEntry(BaseModel):
         SCTrack
     )
 
-    jam_points = models.IntegerField(
+    jam_points = models.DecimalField(
+        decimal_places=1,
+        max_digits=8,
         default = 0
     )
 
