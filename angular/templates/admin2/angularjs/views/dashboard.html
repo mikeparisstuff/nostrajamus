@@ -234,7 +234,7 @@
 											{{openContest.start_time}}
 										</td>
 										<td>
-											<span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}}">Enter</span>
+											<a href="#/opencontests/{{openContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}}">Enter</span></a>
 										</td>
 									</tr>
 								</table>
@@ -277,7 +277,7 @@
 											{{inProgressContest.end_time}}
 										</td>
 										<td>
-											<span class="btn btn-default red-nostra" ng-show="{{inProgressContest.is_live}}">View</span>
+											<a href="#/inprogresscontests/{{inProgressContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{inProgressContest.is_live}}">View</span></a>
 										</td>
 									</tr>
 								</table>
@@ -318,7 +318,7 @@
 											{{completedContest.end_time}}
 										</td>
 										<td>
-											<a href="/#contests"><span class="btn btn-default red-nostra">View</span></a>
+											<a href="#/completedcontests/{{completedContest.id}}"><span class="btn btn-default red-nostra">View</span></a>
 										</td>
 									</tr>
 								</table>
@@ -339,7 +339,7 @@
 				<div class="portlet-title">
 					<div class="caption caption-md">
 						<i class="icon-bar-chart font-green-haze hide"></i>
-						<span class="caption-subject font-nostra bold uppercase">My Submissions</span>
+						<span class="caption-subject font-nostra bold uppercase">My Contests</span>
 						<span class="caption-helper hide">Check out our contests...</span>
 					</div>
 				</div>
@@ -380,7 +380,8 @@
 										{{myEntry.start_time}} - {{myEntry.end_time}}
 									</td>
 									<td>
-										<span class="btn btn-default red-nostra" ng-show="{{myEntry.is_live}}">View</span>
+										<a href="#/inprogresscontests/{{myEntry.contest}}"><span class="btn btn-default red-nostra" ng-show="{{myEntry.is_live}}">View</span></a>
+										<a href="#/completedcontests/{{myEntry.contest}}"><span class="btn btn-default red-nostra" ng-hide="{{myEntry.is_live}}">View</span></a>
 									</td>
 									
 								</tr>

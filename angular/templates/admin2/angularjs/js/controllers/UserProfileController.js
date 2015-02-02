@@ -13,10 +13,19 @@ MetronicApp.controller('UserProfileController', function($rootScope, $scope, $ht
     });
 
     $scope.getProfilePicture = function(pic) {
-    	var src = '/assets/admin/pages/media/profile/profile_drums.png';
-
+    	var src = '';
+        
     	if (pic == null) {
-    		return src;
+            var randomPic = Math.random()*100;
+            if (randomPic < 100/3) {
+                return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
+            }
+            else if (randomPic >= 100/3 && randomPic <= 200/3) {
+                return src = '/assets/admin/pages/media/profile/profile-swan.jpg';
+            }
+            else if (randomPic > 200/3) {
+                return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
+            }
     	}
     	else {
     		return pic;
@@ -58,6 +67,10 @@ MetronicApp.controller('UserProfileController', function($rootScope, $scope, $ht
 
 		return followIncrease;
     };
+
+    // $scope.saveChanges = function() {
+    //     $http.put().success(successCallback);
+    // }
 
     // set sidebar closed and body solid layout mode
     $rootScope.settings.layout.pageSidebarClosed = true;

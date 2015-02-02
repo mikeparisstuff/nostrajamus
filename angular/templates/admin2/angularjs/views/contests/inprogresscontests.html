@@ -1,0 +1,103 @@
+<!--BEGIN PAGE HEADER-->
+<h3 class="page-title">
+	{{Contest.title}}
+</h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row" ng-controller="AdvancedDatatablesDemoCtrl">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box red-nostra">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-globe"></i>Contest Summary
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="reload">
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <p><h5>Contest Entries</h5>{{contestEntries.count}}</p>
+                        <p><h5>Entry Fee</h5>{{contestInfo.entry_fee}}</p>
+                        <p><h5>Prize</h5> {{contestInfo.prize}}</p>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <p><h5>Start Time</h5> {{contestInfo.start_time}}</p>
+                        <p><h5>End Time</h5> {{contestInfo.end_time}}</p>
+                        <p><h5>Status</h5> In Progress</p>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+
+<div class="row">
+	<h3 align="center">Current Standings</h3>
+    <div class="row" ng-repeat="entry in contestEntries.results | startFrom:currentPage*pageSize | limitTo:pageSize">
+        <div class="col-md-2">
+            <div class="text-center rank-holder">
+                <br><br>
+                <h1 class="counter">{{$index+1}}</h1>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(entry)}}"></iframe>
+        </div>
+        <div class="col-md-2 text-center rank-holder">
+            <br><br><br>
+            <div>{{entry.user.username}}</div>
+            <div>{{entry.jam_points}} Jam Points</div>
+            <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-title="{{ entry.track.title }}" data-id="{{ entry.id }}" data-sc-id="{{ entry.sc_id }}" data-target="#graphModal" data-ip="{{ entry.initial_playback_count }}" data-cp="{{ entry.current_playback_count }}" data-fc="{{ entry.current_follower_count }}" data-album-art="{{ entry.track.artwork_url }}">Details</button> -->
+        </div>
+    </div>
+</div>
+<div class="row" align="center">
+    <button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Prev
+    </button>
+    {{currentPage+1}}/{{numberOfPages()}}
+    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=contestEntries.results.length/pageSize-1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+</div>
+<!-- END MAIN CONTENT -->
+
+<!-- Modal -->
+<div class="modal fade" id="officialTrackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Official Tracks Only</h4>
+            </div>
+            <div class="modal-body">
+                <h4 class="green">Good Examples</h4>
+                <h4 class="center">(uploaded by record label or artist)</h4>
+                <img src="/assets/global/img/scoring/good1.png" class="scoring-img" alt=""/>
+                <img src="/assets/global/img/scoring/good2.png" class="scoring-img" alt=""/>
+
+                <hr/>
+                <h4 class="red">Bad Examples</h4>
+                <h4 class="center">(uploaded by random internet stranger)</h4>
+                <img src="/assets/global/img/scoring/bad1.png" class="scoring-img" alt=""/>
+                <img src="/assets/global/img/scoring/bad2.png" class="scoring-img" alt=""/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BEGIN MAIN JS -->
+<script>
+	function AdvancedDatatablesDemoCtrl($scope) {
+		// CompletedContests.init();
+	}
+</script>
+<!-- END MAIN JS

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NostraJAMus | Login</title>
+    <title>NostraJAMus | Forgot Password</title>
 
    <!-- Bootstrap Core CSS -->
     <link href="/assets/nostraV1/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+
     <!-- Google Analytics -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -46,6 +46,7 @@
         ga('create', 'UA-58603725-1', 'auto');
         ga('send', 'pageview');
     </script>
+
 </head>
 
 <body id="page-top" class="index">
@@ -72,28 +73,38 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Login</h2>
-                    <h3 class="section-subheading text-muted">Not signed up yet? <a href="#" data-toggle="modal" data-target="#registerModal">Register now</a></h3>
+                    <h2 class="section-heading">Forgot Password</h2>
+                    <h3 class="section-subheading text-muted">Grab your reset token from your email and set your new password</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="login" id="loginForm" method="POST" action="/login/" novalidate>
+                    <form name="reset" id="resetPasswordForm" method="POST" action="/api/users/reset_password/" novalidate>
                         <div class="row">
-                            <div class="col-md-offset-3 col-md-6">
+                                <div class="col-md-6">
                                 <div class="form-group">
-                                    <input name="username" type="text" class="form-control" placeholder="Username *" id="username_login" required data-validation-required-message="Please enter your username.">
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="form-group">
-                                    <input name="password" type="password" class="form-control" placeholder="Password *" id="password" required data-validation-required-message="Please enter your password.">
+                                    <input type="text" class="form-control text-center" placeholder="Your Token (check email) *" id="token" required data-validation-required-message="Please enter your email address.">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control text-center" placeholder="New Password *" id="new_password" required data-validation-required-message="Please enter your new password.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control text-center" placeholder="New Password *" id="confirm_password" required data-validation-required-message="Please enter your new password.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+
                             <div class="clearfix"></div>
                             <div class="col-lg-12 text-center">
                                 <div id="success"></div>
-                                <button type="submit" class="btn btn-xl">Log In</button>
+                                <button type="submit" class="btn btn-xl">Submit</button>
+                                <div id="errors"></div>
                             </div>
                         </div>
                     </form>
@@ -101,7 +112,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3 class="section-subheading text-muted">Forgot your password? <a href="#" data-toggle="modal" data-target="#forgotModal">Click here</a></h3>
+                    <h3 class="section-subheading text-muted">Back to <a href="/login/">Login</a></h3>
                 </div>
             </div>
         </div>
@@ -202,57 +213,6 @@
                                     <div class="col-lg-12 text-center">
                                         <div id="success"></div>
                                         <button type="submit" class="btn btn-xl">Jam With Us</button>
-                                        <div id="errors"></div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="modal-footer title-bg">
-                    <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal">Sweet.</button>
-                </div> -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header title-bg">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title white" id="myModalLabel">Forgot Password</h4>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <!-- <h2 class="section-heading">Jam with us</h2> -->
-                            <!-- <div class="section-subheading text-muted">Submission Deadline In <span id="countdown"></span></div>
-                            <br/><br/><br/> -->
-                            <!-- <p class="subheading-button"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#officialTrackModal">Remember Official Uploads Only</button></p> -->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form name="forgotPasswordForm" id="forgotPasswordForm" novalidate>
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-6">
-                                        <div class="text-muted text-center">After you submit, check your email for a token to enter on the page.</div>
-                                    </div>
-                                    <br><br><br>
-                                    <div class="col-md-offset-3 col-md-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control text-center" placeholder="Your Email *" id="email_forgotten" required data-validation-required-message="Please enter your email address.">
-                                            <p class="help-block text-danger"></p>
-                                        </div>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-                                    <div class="col-lg-12 text-center">
-                                        <div id="success"></div>
-                                        <button type="submit" class="btn btn-xl">Submit</button>
                                         <div id="errors"></div>
                                     </div>
                                 </div>

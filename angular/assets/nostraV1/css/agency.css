@@ -304,7 +304,7 @@ header .intro-text .intro-heading {
 }
 @media (min-width: 768px) {
   header .intro-text {
-    padding-top: 300px;
+    /*padding-top: 300px;*/
     padding-bottom: 200px;
   }
   header .intro-text .intro-lead-in {
@@ -318,9 +318,9 @@ header .intro-text .intro-heading {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 75px;
+    font-size: 60px;
     line-height: 75px;
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
   }
 }
 section {
@@ -328,7 +328,7 @@ section {
 }
 section h2.section-heading {
   font-size: 40px;
-  margin-top: 0;
+  margin-top: 10px;
   margin-bottom: 15px;
 }
 section h3.section-subheading {
@@ -483,7 +483,7 @@ section h3.section-subheading {
   background-color: #ff5252;
   color: white;
   border-radius: 100%;
-  border: 7px solid #f1f1f1;
+  border: 7px solid #bebebe; /*#f1f1f1*/
   text-align: center;
 }
 .timeline > li .timeline-image h4 {
@@ -515,8 +515,9 @@ section h3.section-subheading {
   margin-top: 0;
   color: inherit;
 }
-.timeline .timeline-heading h4.subheading {
+.timeline .timeline-heading h4.subheading-timeline {
   text-transform: none;
+  font-size: 15px;
 }
 .timeline .timeline-body > p,
 .timeline .timeline-body > ul {
@@ -551,6 +552,7 @@ section h3.section-subheading {
 @media (min-width: 768px) {
   .timeline:before {
     left: 50%;
+    background-color: #bebebe;
   }
   .timeline > li {
     margin-bottom: 100px;

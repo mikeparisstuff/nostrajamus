@@ -1,0 +1,118 @@
+BEGIN PAGE HEADER-->
+<h3 class="page-title">
+	{{contestInfo.title}}
+</h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row" ng-controller="AdvancedDatatablesDemoCtrl">
+	<div class="col-md-12">
+		<!-- BEGIN EXAMPLE TABLE PORTLET-->
+		<div class="portlet box red-nostra">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-globe"></i>Contest Summary
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="reload">
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <p><h5>Contest Entries</h5>{{contestEntries.count}}</p>
+                        <p><h5>Entry Fee</h5>{{contestInfo.entry_fee}}</p>
+                        <p><h5>Prize</h5> {{contestInfo.prize}}</p>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <p><h5>Start Time</h5> {{contestInfo.start_time}}</p>
+                        <p><h5>End Time</h5> {{contestInfo.end_time}}</p>
+                        <p><h5>Status</h5> Open (Enter Below)</p>
+                    </div>
+                </div>
+			</div>
+		</div>
+		<!-- END EXAMPLE TABLE PORTLET-->
+	</div>
+</div>
+
+<div class="row">
+	<!-- <h3 align="center">Enter Now</h3> -->
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+    	    	<h2 class="section-heading">{{contestInfo.title}} Contest</h2>
+                <h3>{{contestInfo.description}}<h3/>
+                <div class="section-subheading text-muted">Submission Deadline In <span id="countdown-open"></span></div>
+    	    </div>
+        </div>
+        <div class="row">
+            <br>
+            <div class="col-lg-12 text-center">
+                <p class="subheading-button"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#officialTrackModal">Remember Official Uploads Only</button></p>
+            </div>
+            <br>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form name="contestEntryForm" id="contestEntryForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" name="" class="form-control" id="search" value="" type="text" placeholder="Start typing to search Soundcloud . . . Results will appear below.">
+                                <br>
+                                <div id="sc-embed"></div>
+                                <br><br>
+                                <div class="text-center text-muted"><span id="playcount_embed"></span><span id="follower_count_embed"></span></div>
+                                </input>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-md-12 text-center">
+                            <div id="success"></div>
+                            <button type="submit" class="btn btn-xl">Join Contest</button>
+                            <div id="errors"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+
+<!-- Modal -->
+<div class="modal fade" id="officialTrackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Official Tracks Only</h4>
+            </div>
+            <div class="modal-body">
+                <h4 class="green">Good Examples</h4>
+                <h4 class="center">(uploaded by record label or artist)</h4>
+                <img src="/assets/global/img/scoring/good1.png" class="scoring-img" alt=""/>
+                <img src="/assets/global/img/scoring/good2.png" class="scoring-img" alt=""/>
+
+                <hr/>
+                <h4 class="red">Bad Examples</h4>
+                <h4 class="center">(uploaded by random internet stranger)</h4>
+                <img src="/assets/global/img/scoring/bad1.png" class="scoring-img" alt=""/>
+                <img src="/assets/global/img/scoring/bad2.png" class="scoring-img" alt=""/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BEGIN MAIN JS -->
+<script>
+	function AdvancedDatatablesDemoCtrl($scope) {
+		// CompletedContests.init();
+	}
+</script>
+<!-- END MAIN JS 

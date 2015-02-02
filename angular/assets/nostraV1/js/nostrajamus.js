@@ -102,40 +102,40 @@ $(function() {
             document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
             $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
         } else {
-            console.log(JSON.stringify({
-                "track": songObj.value,
-                "user": {
+            console.log(JSON.stringify(
+                {
+                    "username": $("#username").val(),
                     "first_name": $("#first_name").val(),
                     "last_name": $("#last_name").val(),
-                    "username": $("#username").val(),
+                    "email": $("#email").val(),
                     "password": $("#password1").val(),
-                    "email": $("#email").val()
+                    "profile_picture": null,
+                    "location": ""
                 }
-            }));
+            ));
 
             $.ajax({
                 type: 'POST',
-                url: '/api/contests/1/enter/', //http://127.0.0.1:8000/
+                url: '/api/users/', //http://127.0.0.1:8000/
                 dataType: 'json',
                 crossDomain: 'true',
                 contentType: "application/json",
-                data: JSON.stringify({
-                    "track": songObj.value,
-                    "user": {
+                data: JSON.stringify(
+                    {
+                        "username": $("#username").val(),
                         "first_name": $("#first_name").val(),
                         "last_name": $("#last_name").val(),
-                        "username": $("#username").val(),
+                        "email": $("#email").val(),
                         "password": $("#password1").val(),
-                        "email": $("#email").val()
+                        "profile_picture": null,
+                        "location": ""
                     }
-                }),
+                ),
                 success: function(data) {
-//                                alert('data: ' + data);
                     console.log('SUCCESS: ' + data);
                     window.location.reload(true);
                 },
                 error: function(error) {
-//                                alert(error);
                     console.log(error);
                     alert("Sorry there was an issue uploading that song. It may have been an issue on our side or it may help to clear your cookies and try again.")
                 }
@@ -209,4 +209,92 @@ $(function() {
 //
 //                }
     });
+
+    $("#forgotPasswordForm").submit(function( event ) {
+        var errorMessage = '';
+
+        if ($("#email_forgotten").val().length == 0) {
+            errorMessage = "Please enter an email.";
+            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        } else {
+            console.log(JSON.stringify(
+                {
+                    "email": $("#email_forgotten").val()
+                }
+            ));
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/users/initiate_password_reset/', //http://127.0.0.1:8000/
+                dataType: 'json',
+                crossDomain: 'true',
+                contentType: "application/json",
+                data: JSON.stringify(
+                    {
+                        "email": $("#email_forgotten").val()
+                    }
+                ),
+                success: function(data) {
+                    console.log('SUCCESS: ' + data);
+                    window.location = "/forgot/";
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Sorry there was an issue. It may have been an issue on our side or it may help to clear your cookies and try again.")
+                }
+            });
+
+        }
+
+    });
+
+    $("#resetPasswordForm").submit(function( event ) {
+        var errorMessage = '';
+        for (var i = 0; i < event.target.length-1; i++) {
+            event.preventDefault();
+            if (event.target[i].value == null || event.target[i].value == '') {
+                errorMessage = "Please fill out all fields.";
+                document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+                $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+                return false;
+            }
+        }
+        if ($("#new_password").val() != $("#confirm_password").val()) {
+            errorMessage = "Your passwords do not match.";
+            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        } else {
+            console.log(JSON.stringify(
+                {
+                    "token": $("token").val(),
+                    "new_password": $("#new_password").val()
+                }
+            ));
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/users/reset_password', //http://127.0.0.1:8000/
+                dataType: 'json',
+                crossDomain: 'true',
+                contentType: "application/json",
+                data: JSON.stringify(
+                    {
+                        "token": $("token").val(),
+                        "new_password": $("#new_password").val()
+                    }
+                ),
+                success: function(data) {
+                    alert("You've successfully reset your password.")
+                    console.log('SUCCESS: ' + data);
+                    window.location = "/login/";
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Incorrect token, try again.");
+                    // alert("Sorry there was an issue uploading that song. It may have been an issue on our side or it may help to clear your cookies and try again.")
+                }
+            });
+
+        }
 });

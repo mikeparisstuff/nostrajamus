@@ -138,6 +138,15 @@ MetronicApp.controller('authController', function($scope, api, authState) {
 
 // /Setup authentication with django
 
+//We already have a limitTo filter built-in to angular,
+//let's make a startFrom filter
+MetronicApp.filter('startFrom', function() {
+  return function(input, start) {
+    start = +start; //parse to int
+    return input.slice(start);
+  }
+});
+
 /* Setup App Main Controller */
 MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
     $scope.$on('$viewContentLoaded', function() {
@@ -266,6 +275,132 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }],
                 myData: ['$http', function($http) {
                     return $http.get('/api/users/me').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }]
+            }
+        })
+
+        // Open Contests
+        .state('opencontests/:contestID', {
+            url: "/opencontests/:contestID",
+            templateUrl: "/assets/views/contests/opencontests.html",
+            data: {pageTitle: 'Open Contests'},
+            controller: "OpenContestsController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            '/assets/global/plugins/select2/select2.css',
+                            '/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+                            '/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css',
+                            '/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css',
+
+                            '/assets/global/plugins/select2/select2.min.js',
+                            '/assets/global/plugins/datatables/all.min.js',
+                            '/assets/js/scripts/table-advanced.js',
+
+                            '/assets/js/controllers/OpenContestsController.js'
+                        ]
+                    });
+                }],
+                contestInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/contests/' + $stateParams.contestID).then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                contestEntries: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/contests/' + $stateParams.contestID + '/entries/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                myData: ['$http', function($http) {
+                    return $http.get('/api/users/me').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }]
+            }
+        })
+
+        // In Progress Contests
+        .state('inprogresscontests/:contestID', {
+            url: "/inprogresscontests/:contestID",
+            templateUrl: "/assets/views/contests/inprogresscontests.html",
+            data: {pageTitle: 'In Progress Contests'},
+            controller: "InProgressContestsController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            '/assets/global/plugins/select2/select2.css',
+                            '/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+                            '/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css',
+                            '/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css',
+
+                            '/assets/global/plugins/select2/select2.min.js',
+                            '/assets/global/plugins/datatables/all.min.js',
+                            '/assets/js/scripts/table-advanced.js',
+
+                            '/assets/js/controllers/InProgressContestsController.js'
+                        ]
+                    });
+                }],
+                contestInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/contests/' + $stateParams.contestID).then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                contestEntries: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/contests/' + $stateParams.contestID + '/entries/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }]
+            }
+        })
+
+        // Completed Contests
+        .state('completedcontests/:contestID', {
+            url: "/completedcontests/:contestID",
+            templateUrl: "/assets/views/contests/completedcontests.html",
+            data: {pageTitle: 'Completed Contests'},
+            controller: "CompletedContestsController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            '/assets/global/plugins/select2/select2.css',
+                            '/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+                            '/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css',
+                            '/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css',
+
+                            '/assets/global/plugins/select2/select2.min.js',
+                            '/assets/global/plugins/datatables/all.min.js',
+                            '/assets/js/scripts/table-advanced.js',
+
+                            '/assets/js/controllers/CompletedContestsController.js'
+                        ]
+                    });
+                }],
+                contestInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/contests/' + $stateParams.contestID).then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                contestEntries: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/contests/' + $stateParams.contestID + '/entries/').then(function(response) {
                         // console.log(response.data);
                         return response.data;
                     });
@@ -635,34 +770,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         //     }
         // })
 
-        // Current Contests
-        .state('contests', {
-            url: "/contests",
-            templateUrl: "/assets/views/contests.html",
-            data: {pageTitle: 'My Contests'},
-            controller: "DashboardController",
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
-                        files: [
-                            '/assets/global/plugins/select2/select2.css',
-                            '/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
-                            '/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css',
-                            '/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css',
-
-                            '/assets/global/plugins/select2/select2.min.js',
-                            '/assets/global/plugins/datatables/all.min.js',
-                            '/assets/js/scripts/table-advanced.js',
-
-                            '/assets/js/controllers/DashboardController.js'
-                        ]
-                    });
-                }]
-            }
-        })
-
         // History
         // .state('history', {
         //     url: "/history",
@@ -819,7 +926,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '/assets/js/controllers/HowController.js'
                         ] 
                     }]);
-                }] 
+                }]
             }
         })
 

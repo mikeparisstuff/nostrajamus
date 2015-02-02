@@ -157,7 +157,7 @@
 								{{$index+1}}
 							</th>
 							<td class="bold text-center" width="33%">
-								<img class="user-pic" src="{{leader.profile_picture}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
+								<img class="user-pic" src="{{getProfilePicture(leader.profile_picture)}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
 								<!-- <a href="javascript:;" class="primary-link"> -->
 									{{leader.username}}
 								<!-- </a> -->
@@ -199,8 +199,8 @@
 					</div>
 				</div> -->
 			</div>
-			<div class="portlet-body">
-				<div ng-repeat="track in trending">
+			<div class="portlet-body text-center">
+				<div ng-repeat="track in trending | startFrom:currentPage*pageSize | limitTo:pageSize">
 					<div class="row list-separated text-center">
 						<div class="col-md-3 col-sm-3 col-xs-6">
 							<div class="font-grey-mint font-sm">
@@ -215,7 +215,7 @@
 								Play Increase
 							</div>
 							<div class="uppercase font-hg font-purple">
-								<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}
+								<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}%
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-3 col-xs-6">
@@ -223,7 +223,7 @@
 								Current Playcount
 							</div>
 							<div class="uppercase font-hg font-purple">
-								{{getCurrentPlaycount(track)}} <span class="font-lg font-grey-mint"></span>
+								{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>
 							</div>
 						</div>
 						<div class="col-md-3 col-sm-3 col-xs-6">
@@ -252,6 +252,17 @@
 					</div>
 					<hr>
 				</div>
+
+
+				<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+			        Prev
+			    </button>
+			    {{currentPage+1}}/{{numberOfPages()}}
+			    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.length/pageSize-1" ng-click="currentPage=currentPage+1">
+			        Next
+			    </button>
+
+			    
 				<!-- <ul class="list-separated list-inline-xs hide">
 					<li>
 						<div class="font-grey-mint font-sm">

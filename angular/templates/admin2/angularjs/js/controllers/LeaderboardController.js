@@ -5,7 +5,7 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     	// initialize core components
     	Metronic.initAjax();
     	// set default layout mode
-        $rootScope.settings.layout.pageSidebarClosed = false;
+      $rootScope.settings.layout.pageSidebarClosed = false;
     });
 
     $scope.leaders = leaders;
@@ -22,13 +22,13 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     };
 
     $scope.getFollowIncrease = function(track) {
-		// get follower count increase
-		var currFollowCount = track.current_follower_count;
-		var initFollowCount = track.initial_follower_count;
-		
-		var followIncrease = ((currFollowCount - initFollowCount) / (initFollowCount)) * 100;
+  		// get follower count increase
+  		var currFollowCount = track.current_follower_count;
+  		var initFollowCount = track.initial_follower_count;
+  		
+  		var followIncrease = ((currFollowCount - initFollowCount) / (initFollowCount)) * 100;
 
-		return followIncrease;
+  		return followIncrease;
     };
 
     $scope.getSrc = function(track) {
@@ -56,4 +56,33 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
       // call $anchorScroll()
       $anchorScroll();
     };
+
+    $scope.getProfilePicture = function(pic) {
+      var src = '';
+        
+      if (pic == null) {
+            var randomPic = Math.random()*100;
+            if (randomPic < 100/3) {
+                return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
+            }
+            else if (randomPic >= 100/3 && randomPic <= 200/3) {
+                return src = '/assets/admin/pages/media/profile/profile-swan.jpg';
+            }
+            else if (randomPic > 200/3) {
+                return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
+            }
+      }
+      else {
+        return pic;
+      }
+    };
+
+    // pagination
+    $scope.currentPage = 0;
+    $scope.pageSize = 3;
+
+    $scope.numberOfPages=function() {
+        return Math.ceil($scope.trending.length/$scope.pageSize);                
+    };
+
 }]);

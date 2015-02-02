@@ -12,8 +12,25 @@
   max-width: 200px;
   margin-top: 20px;
 }*/
+#registerButton {
+  /*background-color: #ff5252;*/
+  border-radius: 5px;
+  border: 2px solid #ff5252;
+}
+#registerButton:hover {
+  /*background-color: #ccc;*/
+  border-radius: 5px;
+  border: 2px solid #ff5252;
+}
 .page-top {
   border-bottom: 1px solid #ff5252;
+}/*
+section#services {
+  background-color: #222;
+}*/
+.nostra-header {
+  max-height: 20%;
+  max-width: 20%;
 }
 .task-config {
   float: right;
@@ -80,6 +97,35 @@
 }*/
 .title-bg {
   background-color: #43525c;
+}
+.img-tutorial {
+  max-width: 600px;
+}
+@media (max-width: 800px) {
+  .img-tutorial {
+    max-width: 425px;
+  }
+}
+@media (max-width: 500px) {
+  .img-tutorial {
+    max-width: 300px;
+  }
+}
+.section-subheading {
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+.img-profile {
+  border: 2px solid;
+  border-radius: 25px;
+  border-color: #333;
+}
+.title {
+  color: #ddd;
+}
+.subheading-leaders {
+  font-size: 12px;
 }
 
 /*Portlet Formatting*/
@@ -301,4 +347,12 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;*/
+}
+@media (min-width: 768px) {
+  section.thin-section {
+    padding: 25px 0;
+  }
+  section.thick-section {
+    padding: 40px 0;
+  }
 }

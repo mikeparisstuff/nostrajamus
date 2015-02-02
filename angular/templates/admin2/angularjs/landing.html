@@ -25,7 +25,7 @@
     <link href='http://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-
+    <link href="/assets/global/css/css/nostrajamus.css" id="style_components" rel="stylesheet" type="text/css"/>
 
     <script src="http://connect.soundcloud.com/sdk.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -34,7 +34,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -81,6 +80,9 @@
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
+                    <li id="registerButton">
+                        <a class="page-scroll" href="#" data-toggle="modal" data-target="#registerModal">Register</a>
+                    </li>
                     <li>
                         <a href="{% if user.is_authenticated %}/logout/{% else %}/login/{% endif %}">{% if user.is_authenticated %}Logout{% else %}Login{% endif %}</a>
                     </li>
@@ -95,9 +97,12 @@
     <header>
         <div class="container page">
             <div class="intro-text">
-                <div class="intro-heading">Nostrajamus</div>
-                <div class="intro-lead-in">Music Discovery, Prediction, and Tastemaking</div>
+                <img class="nostra-header" src="/assets/global/img/jamus_no_backg.png">
+                <div class="intro-heading">Enter Contests<br>Champion Songs<br>Win Cash</div>
+                <!-- <div class="intro-lead-in">NostraJAMus</div> -->
 {#                <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>#}
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registerModal">Register</button>
+                <br>
                 <a href="#services" class="btn btn-circle page-scroll">
                     <i class="fa fa-angle-double-down animated"></i>
                 </a>
@@ -106,45 +111,65 @@
     </header>
 
     <!-- Services Section -->
-    <section id="services">
+    <section id="services" class="thin-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">HOW TO PLAY</h2>
-                    <h3 class="section-subheading text-muted">NostraJAMus is a platform for music discovery, prediction, and tastemaking!<br><br> The concept is simple:</h3>
+                    <h3 class="section-subheading text-muted">Prove your tastes in three simple steps</h3>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-music fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Discover</h4>
-                    <p class="text-muted">
-                        Pick any song you want from an official Soundcloud account.
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
-                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fa fa-line-chart fa-stack-1x fa-inverse"></i>
-                    </span>
-                    <h4 class="service-heading">Sign Up</h4>
-                    <p class="text-muted">Enter your song into our 2015 Kickoff Contest for free. We’ll only use your personal info to send you awesome prizes.</p>
-                </div>
-                <div class="col-md-4">
-                    <span class="fa-stack fa-4x">
+            <!-- <div class="col-md-4"> -->
+                <!-- <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-music fa-stack-1x fa-inverse"></i>
+                </span> -->
+                <span>
+                    <img src="/assets/global/img/tutorial/how_to_play_1.png">
+                </span>
+                <!-- <h4 class="service-heading">Discover</h4>
+                <p class="text-muted">
+                    Pick any song you want from an official Soundcloud account.
+                </p> -->
+            </div>
+        </div>
+    </section>
+    <section class="bg-light-gray thin-section">
+        <div class="container">
+                <!-- </div> -->
+                <!-- <div class="col-md-4"> -->
+            <div class="row text-center">
+                <!-- <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-line-chart fa-stack-1x fa-inverse"></i>
+                </span> -->
+                <span>
+                    <img src="/assets/global/img/tutorial/how_to_play_2.png">
+                </span>
+                <!-- <h4 class="service-heading">Sign Up</h4>
+                <p class="text-muted">Enter your song into our 2015 Kickoff Contest for free. We’ll only use your personal info to send you awesome prizes.</p> -->
+            </div>
+        </div>
+    </section>
+    <section class="thin-section">
+        <div class="container">
+            <div class="row text-center">
+                <!-- <div class="col-md-4"> -->
+                    <!-- <span class="fa-stack fa-4x">
                         <i class="fa fa-circle fa-stack-2x text-primary"></i>
                         <i class="fa fa-usd fa-stack-1x fa-inverse"></i>
+                    </span> -->
+                    <span>
+                        <img src="/assets/global/img/tutorial/how_to_play_3.png">
                     </span>
-                    <h4 class="service-heading">Win</h4>
-                    <p class="text-muted">If your song wins the most Jam Points, we’ll reward you with cash, swag, and fame. Actually though real money.</p>
-                </div>
+                    <!-- <h4 class="service-heading">Win</h4>
+                    <p class="text-muted">If your song wins the most Jam Points, we’ll reward you with cash, swag, and fame. Actually though real money.</p> -->
+                <!-- </div> -->
             </div>
             <div class="row text-center">
                 <br/>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rulesModal">What are Jam Points?</button>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#rulesModal">What are Jam Points?</button>
             </div>
         </div>
     </section>
@@ -203,6 +228,83 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Sweet.</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header title-bg">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title white" id="myModalLabel">Register</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <!-- <h2 class="section-heading">Jam with us</h2> -->
+                            <!-- <div class="section-subheading text-muted">Submission Deadline In <span id="countdown"></span></div>
+                            <br/><br/><br/> -->
+                            <!-- <p class="subheading-button"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#officialTrackModal">Remember Official Uploads Only</button></p> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form name="contestEntryForm" id="contestEntryForm" novalidate>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="First Name *" id="first_name" required data-validation-required-message="Please enter your name.">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Last Name *" id="last_name" required data-validation-required-message="Please enter your name.">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Username (alias) *" id="username" required data-validation-required-message="Please enter your email address.">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="Password *" id="password1" required data-validation-required-message="Please enter a password">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="Confirm password *" id="password2" required data-validation-required-message="Please enter a confirmation password">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-12 text-center">
+                                        <div id="success"></div>
+                                        <button type="submit" class="btn btn-xl">Jam With Us</button>
+                                        <div id="errors"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="modal-footer title-bg">
+                    <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal">Sweet.</button>
+                </div> -->
             </div>
         </div>
     </div>
@@ -314,7 +416,7 @@
 {#    </section>#}
 
     <!-- About Section -->
-    <section id="about" class="bg-light-gray">
+    <section id="about" class="bg-light-gray thick-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -327,12 +429,12 @@
                     <ul class="timeline">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="/assets/nostraV1/img/about/1.jpg" alt="">
+                                <img class="img-circle img-responsive" src="/assets/global/img/about/jam_time.png" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>Fall 2014</h4>
-                                    <h4 class="subheading">Tony and Collin go hiking</h4>
+                                    <h4 class="subheading-timeline">NostraJAMus is born</h4>
                                 </div>
                                 <div class="timeline-body">
                                     <p class="text-muted">iTunes is a teenager. But radio is still the most effective way to launch new artists and glance at our culture’s musical landscape. This wouldn’t bum us out so much by itself, but the 10 most popular songs on the radio receive double the airtime today than those of  ten years ago. There are more ways to create and consume music than ever before. The funnel of popular music should not be narrowing.  It should be expanding. That’s why we created NostraJAMus.</p>
@@ -353,10 +455,10 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>Fall 2014</h4>
-                                    <h4 class="subheading">Born Winners: NostraJAMus wins 2nd place in UVA E-Cup</h4>
+                                    <h4 class="subheading-timeline">Places 2nd in Entrepreneurship Cup</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted"><b>NostraJAMus is an online platform for music discovery, predictions, and tastemaking.</b> The concept is simple: find a new song you like by an unheralded artist? Support the track on our site. Enter that song in a contest, submit it in a duel with a friend, share it on your profile. We want you to champion the undiscovered musicians dotting the globe. And we want to reward you.</p>
+                                    <p class="text-muted"><b>NostraJAMus is an online platform for music discovery, predictions, and tastemaking.</b> The concept is simple: find a new song you like by an unheralded artist? Support the track on our site. Enter that song in a contest, share it with your groups, share it on your profile. We want you to champion the undiscovered musicians dotting the globe. And we want to reward you.</p>
                                 </div>
                             </div>
                         </li>
@@ -367,10 +469,10 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4>Early 2015</h4>
-                                    <h4 class="subheading">Developing a sweet product</h4>
+                                    <h4 class="subheading-timeline">Developing a sweet product</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted">NostraJAMus will give you prizes when your song selections jump up the charts. We’re here to incentivize music discovery and democratize tastemaking. We think that ‘big data’ and sterile analysis of listening habits have hampered new artists, and we’re here to return the power to listeners like you. Oh, and also, we’re a bunch of college kids who love music. For now, we’ll be running open contests on our site as we build out other features like duels, profiles, and tastemaker rankings. </p>
+                                    <p class="text-muted">NostraJAMus will give you prizes when your song selections jump up the charts. We’re here to incentivize music discovery and democratize tastemaking. We think that ‘big data’ and sterile analysis of listening habits have hampered new artists, and we’re here to return the power to listeners like you. Oh, and also, we’re a bunch of college kids who love music. Stay tuned for additional cool features. </p>
                                 </div>
                             </div>
                         </li>
@@ -389,9 +491,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                    <h4><a class="page-scroll jam-with-us" href="#portfolio">Jam
-                                    With
-                                    Us!</a></h4>
+                                    <h4><a class="page-scroll jam-with-us" href="#" data-toggle="modal" data-target="#registerModal">Register</a>
                             </div>
                         </li>
                     </ul>
@@ -401,7 +501,7 @@
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="bg-light-gray">
+    <section id="team">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -466,9 +566,9 @@
                     <div class="team-member">
                         <img src="/assets/nostraV1/img/team/robby.jpg" class="img-responsive img-circle" alt="">
                         <h4>Robby Koch</h4>
-                        <p class="text-muted">Social Media Intern</p>
+                        <p class="text-muted">Design</p>
                         <a href="mailto:robby@nostrajamus.com">robby@nostrajamus.com</a>
-                        <p class="text-muted">Creates original songs in his spare time. Then tries submitting them to NostraJAMus.</p>
+                        <p class="text-muted">Creates original songs in his spare time. Names the songs after desert animals.</p>
 {#                        <ul class="list-inline social-buttons">#}
 {#                            <li><a href="#"><i class="fa fa-twitter"></i></a>#}
 {#                            </li>#}
@@ -581,13 +681,15 @@
                 </div>
                 <div class="col-md-4">
                     <ul class="list-inline social-buttons">
-                        <li><a href="https://twitter.com/NostraJAMusVA"><i class="fa fa-twitter"></i></a>
+                        <li><a href="https://twitter.com/NostraJAMusVA" target="_blank"><i class="fa fa-twitter"></i></a>
                         </li>
-                        <li><a href="https://www.facebook.com/nostrajamus.music"><i class="fa fa-facebook"></i></a>
+                        <li><a href="https://www.facebook.com/nostrajamus.music" target="_blank"><i class="fa fa-facebook"></i></a>
                         </li>
-                        <li><a href="https://soundcloud.com/nostrajamus"><i class="fa fa-soundcloud"></i></a>
+                        <li><a href="https://soundcloud.com/nostrajamus" target="_blank"><i class="fa fa-soundcloud"></i></a>
                         </li>
-                        <li><a href="https://play.spotify.com/user/collinwaldoch/playlist/0QmOLxaXpiDhToT2jxTVgL?play=true&utm_source=open.spotify.com&utm_medium=open"><i class="fa fa-spotify"></i></a>
+                        <li><a href="https://play.spotify.com/user/collinwaldoch/playlist/0QmOLxaXpiDhToT2jxTVgL?play=true&utm_source=open.spotify.com&utm_medium=open" target="_blank"><i class="fa fa-spotify"></i></a>
+                        </li>
+                        <li><a href="http://nostrajamus.tumblr.com/" target="_blank"><i class="fa fa-tumblr"></i></a>
                         </li>
                     </ul>
                 </div>

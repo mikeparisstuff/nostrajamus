@@ -92,50 +92,51 @@ $(function() {
             errorMessage = "Please enter an email.";
             document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
             $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
-        } else if($("#email").val().indexOf('@') === -1) {
+        } else if ($("#email").val().indexOf('@') === -1) {
             errorMessage = "Invalid email address."
             document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
             $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
-        } else if (songObj === null) {
-            console.log("Song is null");
-            errorMessage = "Please select a valid song";
-            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
-            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
-        } else {
-            console.log(JSON.stringify({
-                "track": songObj.value,
-                "user": {
+        } // else if (songObj === null) {
+        //     console.log("Song is null");
+        //     errorMessage = "Please select a valid song";
+        //     document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+        //     $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        // } 
+        else {
+            console.log(JSON.stringify(
+                {
+                    "username": $("#username").val(),
                     "first_name": $("#first_name").val(),
                     "last_name": $("#last_name").val(),
-                    "username": $("#username").val(),
+                    "email": $("#email").val(),
                     "password": $("#password1").val(),
-                    "email": $("#email").val()
+                    "profile_picture": null,
+                    "location": ""
                 }
-            }));
+            ));
 
             $.ajax({
                 type: 'POST',
-                url: '/api/contests/1/enter/', //http://127.0.0.1:8000/
+                url: '/api/users/', //http://127.0.0.1:8000/
                 dataType: 'json',
                 crossDomain: 'true',
                 contentType: "application/json",
-                data: JSON.stringify({
-                    "track": songObj.value,
-                    "user": {
+                data: JSON.stringify(
+                    {
+                        "username": $("#username").val(),
                         "first_name": $("#first_name").val(),
                         "last_name": $("#last_name").val(),
-                        "username": $("#username").val(),
+                        "email": $("#email").val(),
                         "password": $("#password1").val(),
-                        "email": $("#email").val()
+                        "profile_picture": null,
+                        "location": ""
                     }
-                }),
+                ),
                 success: function(data) {
-//                                alert('data: ' + data);
                     console.log('SUCCESS: ' + data);
                     window.location.reload(true);
                 },
                 error: function(error) {
-//                                alert(error);
                     console.log(error);
                     alert("Sorry there was an issue uploading that song. It may have been an issue on our side or it may help to clear your cookies and try again.")
                 }
@@ -143,70 +144,6 @@ $(function() {
 
         }
 
-
-
-//                if (event.target[2].value != event.target[3].value) {
-//                    event.preventDefault();
-//                    errorMessage = "Emails do not match.";
-//                    document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
-//                    $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
-//                }
-//                else {
-//                    if(event.target[2].value.indexOf('@') === -1) {
-//                        event.preventDefault();
-//                        errorMessage = "Invalid email address."
-//                        document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
-//                        $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
-//                    }
-//                    else if (songObj == null) {
-//                        console.log(songObj);
-//                        event.preventDefault();
-//                        errorMessage = "Invalid song selection."
-//                        document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
-//                        $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
-//                    }
-//                    else {
-//
-//                        // MICHAEL: AJAX CALL FOR FORM SUBMISSION
-//                        console.log(JSON.stringify({
-//                                "track": songObj.value,
-//                                "user": {
-//                                    "first_name": event.target[0].value,
-//                                    "last_name": event.target[1].value,
-//                                    "username": event.target[4].value,
-//                                    "email": event.target[2].value
-//                                }
-//                            }));
-//                        $.ajax({
-//                            type: 'POST',
-//                            url: '/api/contests/1/enter/', //http://127.0.0.1:8000/
-//                            dataType: 'json',
-//                            crossDomain: 'true',
-//                            contentType: "application/json",
-//                            data: JSON.stringify({
-//                                "track": songObj.value,
-//                                "user": {
-//                                    "first_name": event.target[0].value,
-//                                    "last_name": event.target[1].value,
-//                                    "username": event.target[4].value,
-//                                    "email": event.target[2].value
-//                                }
-//                            }),
-//                            success: function(data) {
-////                                alert('data: ' + data);
-//                                console.log('SUCCESS: ' + data);
-//                            },
-//                            error: function(error) {
-////                                alert(error);
-//                                console.log(error);
-//                            }
-//                        });
-//
-//                        // /MICHAEL: AJAX CALL FOR FORM SUBMISSION
-//
-//                        event.preventDefault();
-//                    }
-//
-//                }
     });
+
 });
