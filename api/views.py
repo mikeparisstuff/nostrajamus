@@ -96,17 +96,58 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
     permission_classes = (permissions.AllowAny,)
 
-    def create(self, request):
-        data = request.data
-        user = Profile.objects.create_user(
-            first_name=data['first_name'],
-            last_name=data['last_name'],
-            email=data['email'],
-            password=data['password'],
-            username=data['username']
-        )
-        user_serializer = ProfileSerializer(user, context={'request': request})
-        return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+    def create(self, request, *args, **kwargs):
+        try:
+            fname = request.data['first_name']
+            lname = request.data['last_name']
+            email = request.data['email']
+            password = request.data['password']
+            username = request.data['username']
+            profile_picture = request.data.get('profile_picture', None)
+            location = request.data.get('location', None)
+            user = Profile.objects.create_user(
+                first_name=fname,
+                last_name=lname,
+                email=email,
+                password=password,
+                username=username
+            )
+            if profile_picture:
+                user.profile_picture = profile_picture
+                user.save()
+            if location:
+                user.location = location
+                user.save()
+            user_serializer = ProfileSerializer(user)
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        except KeyError as e:
+            return Response({
+                "detail": "Missing some fields with error: {}".format(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, *args, **kwargs):
+        try:
+            fname = request.data['first_name']
+            lname = request.data['last_name']
+            email = request.data['email']
+            profile_picture = request.data.get('profile_picture', None)
+            location = request.data.get('location', None)
+            user = request.user
+            user.first_name = fname
+            user.last_name = lname
+            user.email = email
+            if profile_picture:
+                user.profile_picture = profile_picture
+            if location:
+                user.location = location
+                user.save()
+            user.save()
+            user_serializer = ProfileSerializer(user)
+            return Response(user_serializer.data, status=status.HTTP_200_OK)
+        except KeyError as e:
+            return Response({
+                "detail": "Missing some fields with error: {}".format(e)
+            }, status=status.HTTP_400_BAD_REQUEST)
 
     @list_route(methods=("POST",))
     def initiate_password_reset(self, request, *args, **kwargs):
@@ -307,59 +348,6 @@ class PeriodicPlayCountViewSet(viewsets.ModelViewSet):
 class SCUserViewSet(viewsets.ModelViewSet):
     queryset = SCUser.objects.all()
     serializer_class = SCUserSerializer
-
-    def create(self, request, *args, **kwargs):
-        try:
-            fname = request.data['first_name']
-            lname = request.data['last_name']
-            email = request.data['email']
-            password = request.data['password']
-            username = request.data['username']
-            profile_picture = request.data.get('profile_picture', None)
-            location = request.data.get('location', None)
-            user = Profile.objects.create_user(
-                first_name=fname,
-                last_name=lname,
-                email=email,
-                password=password,
-                username=username
-            )
-            if profile_picture:
-                user.profile_picture = profile_picture
-                user.save()
-            if location:
-                user.location = location
-                user.save()
-            user_serializer = ProfileSerializer(user)
-            return Response(user_serializer.data, status=status.HTTP_200_OK)
-        except KeyError as e:
-            return Response({
-                "detail": "Missing some fields with error: {}".format(e)
-            }, status=status.HTTP_400_BAD_REQUEST)
-
-    def update(self, request, *args, **kwargs):
-        try:
-            fname = request.data['first_name']
-            lname = request.data['last_name']
-            email = request.data['email']
-            profile_picture = request.data.get('profile_picture', None)
-            location = request.data.get('location', None)
-            user = request.user
-            user.first_name = fname
-            user.last_name = lname
-            user.email = email
-            if profile_picture:
-                user.profile_picture = profile_picture
-            if location:
-                user.location = location
-                user.save()
-            user.save()
-            user_serializer = ProfileSerializer(user)
-            return Response(user_serializer.data, status=status.HTTP_200_OK)
-        except KeyError as e:
-            return Response({
-                "detail": "Missing some fields with error: {}".format(e)
-            }, status=status.HTTP_400_BAD_REQUEST)
 
 class FeedbackViewSet(viewsets.ModelViewSet):
     queryset = Feedback.objects.all()
