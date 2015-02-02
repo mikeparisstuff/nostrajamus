@@ -7,14 +7,14 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0032_auto_20150202_1530'),
+        ('api', '0019_auto_20150121_1722'),
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='contest',
-            name='editors_pick',
-            field=models.BigIntegerField(null=True, blank=True),
+        migrations.AlterField(
+            model_name='contestentry',
+            name='jam_points',
+            field=models.DecimalField(default=0, max_digits=9, decimal_places=1),
             preserve_default=True,
         ),
     ]

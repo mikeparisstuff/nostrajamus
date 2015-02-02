@@ -7,19 +7,17 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('api', '0026_auto_20150131_0316'),
+        ('api', '0020_auto_20150122_0435'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ResetPasswordToken',
+            name='ContestIdea',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True, null=True)),
                 ('modified_at', models.DateTimeField(auto_now=True, null=True)),
-                ('email', models.EmailField(max_length=75)),
-                ('token', models.CharField(max_length=16)),
-                ('is_active', models.BooleanField(default=True)),
+                ('idea', models.CharField(default=b'', max_length=256, blank=True)),
             ],
             options={
                 'abstract': False,
