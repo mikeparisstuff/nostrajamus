@@ -342,8 +342,8 @@ class TrackViewSet(viewsets.ModelViewSet):
         today = date.today()
         start = today - timedelta(days=7)
         today = today + timedelta(days=1)
-        contests = Contest.objects.filter(start_time__range=[start, today])
-        entries = ContestEntry.objects.filter(contest__in=contests).order_by('-jam_points')[:25]
+        entries = ContestEntry.objects.filter(created_at__range=[start, today]).order_by('-jam_points')[:25]
+        # entries = ContestEntry.objects.filter(contest__in=contests).order_by('-jam_points')[:25]
         serializer = ContestEntrySerializer(entries, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
