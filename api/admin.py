@@ -4,7 +4,7 @@ from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSo
 # Register your models here.
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('id', 'first_name', 'last_name', 'username', 'email')
+    list_display = ('id', 'first_name', 'last_name', 'username', 'email', 'jam_points')
 
 class ContestAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'num_entries')
@@ -16,10 +16,10 @@ class SCPeriodicPlayCountAdmin(admin.ModelAdmin):
     list_display = ('id', 'track', 'playback_count', 'follower_count')
 
 class WatchedSongAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'track', 'initial_playback_count', 'initial_follower_count', 'is_active')
+    list_display = ('id', 'user', 'track', 'initial_playback_count', 'initial_follower_count', 'current_playback_count', 'current_follower_count', 'is_active')
 
 class ContestEntryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'track', 'contest', 'jam_points', 'initial_playback_count', 'initial_follower_count', 'is_active')
+    list_display = ('id', 'user', 'track', 'contest', 'jam_points', 'initial_playback_count', 'initial_follower_count', 'current_playback_count', 'current_follower_count', 'is_active')
 
 class SCUserAdmin(admin.ModelAdmin):
     list_display = ('id', 'sc_id', 'username', 'permalink_url')

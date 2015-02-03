@@ -105,8 +105,13 @@ class Profile(AbstractUser):
         return self.my_contest_entries.count()
 
     @property
+    def all_contest_entries(self):
+        contest_entries = ContestEntry.objects.filter(user=self)
+        return contest_entries
+
+    @property
     def total_jam_points(self):
-        contest_entries = self.my_contest_entries
+        contest_entries = self.all_contest_entries
         total = 0
         for entry in contest_entries:
             total += entry.jam_points
