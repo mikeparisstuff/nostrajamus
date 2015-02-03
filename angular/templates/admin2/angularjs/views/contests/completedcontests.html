@@ -1,6 +1,6 @@
 <!--BEGIN PAGE HEADER-->
 <h3 class="page-title">
-	{{Contest.title}}
+	{{contestInfo.title}}
 </h3>
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
@@ -17,7 +17,7 @@
 					</a>
 				</div>
 			</div>
-			<div class="portlet-body">
+			<div class="portlet-body dark-bg-nostra">
 				<div class="row">
                     <div class="col-lg-6 text-center">
                         <p><h5>Contest Entries</h5>{{contestEntries.count}}</p>
@@ -35,7 +35,7 @@
                     	<p><h5>Contest Winner</h5> <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{getSrc(contestInfo.winning_entry)}}"></iframe></p>
                     </div>
                     <div class="col-lg-6 text-center">
-                    	<p><h5>Editor's Pick</h5> <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{getSrc(contestInfo.editors_pick)}}"></iframe></p>
+                    	<p><h5>Editor's Pick</h5> <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{getSrcEditor(contestInfo.editors_pick)}}"></iframe></p>
                     </div>
                 </div>
 

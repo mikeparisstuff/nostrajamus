@@ -87,7 +87,7 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 
 	$scope.myCurrentContests = function(myEntryList) {
 		var myEntries = [];
-		for (entry in myEntryList) {
+		for (var entry in myEntryList) {
 			$scope.convertDateTime(entry, myEntryList);
 			myEntries.push(myEntryList[entry]);
 		}

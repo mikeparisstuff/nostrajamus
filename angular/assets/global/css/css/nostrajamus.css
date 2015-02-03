@@ -194,6 +194,10 @@ Red-nostra
 .portlet.red-nostra {
   background-color: #ff5252;
 }
+.portlet > .portlet-body.dark-bg-nostra,
+.portlet.red-nostra {
+  background-color: #f7f7f7;
+}
 
 .portlet.solid.red-nostra > .portlet-title,
 .portlet.solid.red-nostra > .portlet-body {
@@ -224,6 +228,7 @@ Red-nostra
 
 .portlet.box.red-nostra {
   border: 1px solid #ff5252;
+  background-color: #bebebe;
   border-top: 0;
 }
 .portlet.box.red-nostra > .portlet-title {

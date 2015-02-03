@@ -209,7 +209,7 @@
 												Open Contests
 											</th>
 											<th>
-												Criteria
+												Entry Fee
 											</th>
 											<th>
 												Top Prize
@@ -228,7 +228,7 @@
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(openContest.title, openContest.entry_fee, openContest.prize, openContest.description, openContest.start_time, openContest.end_time, 'open', openContest.id)">{{openContest.title}}</a>
 										</td>
 										<td>
-											{{openContest.songs_per_entrant}}
+											{{openContest.entry_fee}}
 										</td>
 										<td>
 											<a href="">{{openContest.prize}}</a>
@@ -253,7 +253,7 @@
 												In Progress Contests
 											</th>
 											<th>
-												Criteria
+												Entry Fee
 											</th>
 											<th>
 												Top Prize
@@ -272,7 +272,7 @@
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'inProgress', inProgressContest.id)">{{inProgressContest.title}}</a>
 										</td>
 										<td>
-											{{inProgressContest.songs_per_entrant}}
+											{{inProgressContest.entry_fee}}
 										</td>
 										<td>
 											<a href="">{{inProgressContest.prize}}</a>
@@ -297,7 +297,7 @@
 												Completed Contests
 											</th>
 											<th>
-												Criteria
+												Entry Fee
 											</th>
 											<th>
 												Top Prize
@@ -314,7 +314,7 @@
 											{{completedContest.title}}</a>
 										</td>
 										<td>
-											{{completedContest.songs_per_entrant}}
+											{{completedContest.entry_fee}}
 										</td>
 										<td>
 											<a href="">{{completedContest.prize}}</a>
@@ -358,7 +358,7 @@
 											Contests
 										</th>
 										<th>
-											Criteria
+											Entry Fee
 										</th>
 										<th>
 											Top Prize

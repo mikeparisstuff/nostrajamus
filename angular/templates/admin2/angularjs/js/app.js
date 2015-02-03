@@ -8,7 +8,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.bootstrap", 
     "oc.lazyLoad",
     "ngSanitize",
-    "ngResource" //authentication with django
+    "ngResource", //authentication with django
+    // "angularFileUpload" //file upload
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -714,8 +715,15 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
                             '/assets/admin/pages/scripts/profile.js',
 
-                            '/assets/js/controllers/UserProfileController.js'
-                        ]                    
+                            '/assets/js/controllers/UserProfileController.js',
+
+                            // angular file upload plugins
+                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload.min.js',
+                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload-shim.min.js',
+                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload-all.js',
+                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload.js'
+                            // /angular file upload plugins
+                        ]              
                     });
                 }]
             }
