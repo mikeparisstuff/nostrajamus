@@ -13,8 +13,22 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     $scope.contestEntries = contestEntries;
     $scope.myData = myData;
 
-    $scope.contestInfo.start_time = new Date($scope.contestInfo.start_time).toString();
-    $scope.contestInfo.end_time = new Date($scope.contestInfo.end_time).toString();
+    $scope.timeOffset = function(date, offset) {
+    	var d = new Date(date);
+
+    	var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+
+    	var nd = new Date(utc + (3600000*offset));
+
+    	var formattedTime = moment(nd).format("MM/DD/YYYY, h:mm A");
+    	return formattedTime;
+    }
+
+    // $scope.contestInfo.start_time = new Date($scope.contestInfo.start_time).toLocaleString('en-US');
+    // $scope.contestInfo.end_time = new Date($scope.contestInfo.end_time).toLocaleString('en-US');
+
+    $scope.contestInfo.start_time = $scope.timeOffset($scope.contestInfo.start_time, '+0');
+    $scope.contestInfo.end_time = $scope.timeOffset($scope.contestInfo.end_time, '+0');
 
 	// Start Countdown Timer
 	// set the date we're counting down to
@@ -97,11 +111,11 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             },
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
-        	  	console.log(data);
+        	  	// console.log(data);
                 alert("Thanks for submitting!");
             }).error(function (data, status, headers, config) {
                 // $scope.status = status;
-        	  	console.log(data);
+        	  	// console.log(data);
                 alert("Try again.");
             });
   	}
