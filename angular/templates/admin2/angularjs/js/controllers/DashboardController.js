@@ -37,7 +37,7 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 	    seconds = parseInt(seconds_left % 60);
 
 	    // format countdown string + set tag value
-	    if (contests.results) {
+	    if (hours >= 0) {
 	    	document.getElementById('countdown').innerHTML = 'Next contest begins in <span class="days">' + days + ' <b>Days</b></span> <span class="hours">' + hours + ' <b>Hours</b></span> <span class="minutes">' + minutes + ' <b>Minutes</b></span> <span class="seconds">' + seconds + ' <b>Seconds</b></span>';
 	    }
 	    else {
