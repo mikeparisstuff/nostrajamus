@@ -26,6 +26,9 @@ class SCUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SCUser
 
+def reformat_date(date_str):
+    return datetime.strptime(date_str[:-6], "%Y/%m/%d %H:%M:%S") #.strftime("%Y-%m-%d %H:%M:%S")
+
 class SCTrackSerializer(serializers.ModelSerializer):
 
     user = SCUserSerializer()
@@ -33,14 +36,17 @@ class SCTrackSerializer(serializers.ModelSerializer):
     def to_internal_value(self, data):
         curated_data = data
         curated_data['sc_created_at'] = reformat_date(data['created_at'])
-        if data.get('last_modified'):
+        if data.has_key('last_modified'):
             curated_data['sc_last_modified'] = reformat_date(data['last_modified'])
             del(curated_data['last_modified'])
         curated_data['sc_id'] = data['id']
         curated_data['sc_user_id'] = data['user_id']
-        del(curated_data['created_at'])
-        del(curated_data['id'])
-        del(curated_data['user_id'])
+        if curated_data.has_key('created_at'):
+            del(curated_data['created_at'])
+        if curated_data.has_key('id'):
+            del(curated_data['id'])
+        if curated_data.has_key('user_id'):
+            del(curated_data['user_id'])
         if curated_data.has_key('created_with'):
             del(curated_data['created_with'])
         return curated_data
@@ -133,9 +139,6 @@ class ContestSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contest
-
-def reformat_date(date_str):
-    return datetime.strptime(date_str[:-6], "%Y/%m/%d %H:%M:%S").strftime("%Y-%m-%d %H:%M:%S")
 
 class SCPeriodicPlayCountSerializer(serializers.HyperlinkedModelSerializer):
 

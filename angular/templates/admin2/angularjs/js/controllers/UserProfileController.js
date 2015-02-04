@@ -1,6 +1,6 @@
 'use strict';
 
-MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$scope", function($rootScope, $scope, $http, $timeout) {
+MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", function($rootScope, $scope, $http, $timeout) {
     $scope.$on('$viewContentLoaded', function() {   
         Metronic.initAjax(); // initialize core components
         Layout.setSidebarMenuActiveLink('set', $('#sidebar_menu_link_profile')); // set profile link active in sidebar menu 

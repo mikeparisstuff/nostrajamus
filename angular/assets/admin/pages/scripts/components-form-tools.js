@@ -281,6 +281,16 @@ var ComponentsFormTools = function () {
 
     var handleBootstrapTouchSpin = function() {
 
+        $("#touchspin_1").TouchSpin({          
+            buttondown_class: 'btn btn-primary red-nostra',
+            buttonup_class: 'btn btn-primary red-nostra',
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000,
+            prefix: '$'
+        }); 
+
         $("#touchspin_demo1").TouchSpin({          
             buttondown_class: 'btn green',
             buttonup_class: 'btn green',
@@ -369,6 +379,13 @@ var ComponentsFormTools = function () {
         $.extend($.inputmask.defaults, {
             'autounmask': true
         });
+
+        $("#mask_start_date").inputmask("datetime12", {
+            "placeholder": "mm/dd/yyyy hh:mm --"
+        }); //multi-char placeholder
+        $("#mask_end_date").inputmask("datetime12", {
+            "placeholder": "mm/dd/yyyy hh:mm --"
+        }); //multi-char placeholder
 
         $("#mask_date").inputmask("d/m/y", {
             autoUnmask: true

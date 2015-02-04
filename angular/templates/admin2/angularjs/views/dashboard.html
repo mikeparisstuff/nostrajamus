@@ -167,7 +167,7 @@
     <div class="row">
         <div class="col-lg-12 text-center">
             <!-- <h2 class="section-heading">Thanks for joining our 2015 Kickoff Contest</h2> -->
-            <div class="section-subheading text-muted">Next contest begins in <span id="countdown"></span></div>
+            <div class="section-subheading text-muted" id="countdown"></div>
         </div>
     </div>
 
@@ -178,7 +178,7 @@
 				<div class="portlet-title">
 					<div class="caption caption-md">
 						<i class="icon-bar-chart font-green-haze hide"></i>
-						<span class="caption-subject font-nostra bold uppercase">Contests</span>
+						<span class="caption-subject font-nostra bold uppercase">NostraJAMus Contests</span>
 						<span class="caption-helper hide">Check out our contests...</span>
 					</div>
 					<div class="portlet-title tabbable-line pull-right">
@@ -217,6 +217,8 @@
 											<th>
 												Starts
 											</th>
+											<th>
+											</th>
 										</tr>
 									</thead>
 									<tr ng-repeat="openContest in openContests">
@@ -237,7 +239,7 @@
 											{{openContest.start_time}}
 										</td>
 										<td>
-											<a href="#/opencontests/{{openContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}}">Enter</span></a>
+											<a href="#/opencontests/{{openContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}}">Enter</span></a> <!-- CHANGE THIS TO NG-HIDE? -->
 										</td>
 									</tr>
 								</table>
@@ -260,6 +262,8 @@
 											</th>
 											<th>
 												Ends
+											</th>
+											<th>
 											</th>
 										</tr>
 									</thead>
@@ -305,6 +309,8 @@
 											<th>
 												Ended
 											</th>
+											<th>
+											</th>
 										</tr>
 									</thead>
 									<tr ng-repeat="completedContest in completedContests">
@@ -344,11 +350,11 @@
 				<div class="portlet-title">
 					<div class="caption caption-md">
 						<i class="icon-bar-chart font-green-haze hide"></i>
-						<span class="caption-subject font-nostra bold uppercase">My Contests</span>
+						<span class="caption-subject font-nostra bold uppercase">My Current Contests</span>
 						<span class="caption-helper hide">Check out our contests...</span>
 					</div>
 				</div>
-				<div class="portlet-body" ng-model="contests" ng-init="myCurrentContests(myData.my_entries)">
+				<div class="portlet-body">
 					<div class="tab-content">
 						<div class="table-scrollable table-scrollable-borderless">
 							<table class="table table-hover table-light">
@@ -364,31 +370,31 @@
 											Top Prize
 										</th>
 										<th>
-											Date
+											Dates
+										</th>
+										<th>
 										</th>
 									</tr>
 								</thead>
-								<tr ng-repeat="myEntry in myEntries">
-									<td class="fit">
-										<img class="user-pic" src="{{myEntry.contest_picture}}">
+								<tr ng-repeat="myContest in myContestInfo">
+									<td>
+										<img class="user-pic" src="{{myContest.contest_picture}}">
+										<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(myContest.title, myContest.entry_fee, myContest.prize, myContest.description, myContest.start_time, compeletedContest.end_time, 'completed', myContest.id)">
+										{{myContest.title}}</a>
 									</td>
 									<td>
-										<a href="javascript:;" class="primary-link">{{myEntry.title}}</a>
+										{{myContest.entry_fee}}
 									</td>
 									<td>
-										{{myEntry.songs_per_entrant}}
+										<a href="">{{myContest.prize}}</a>
 									</td>
 									<td>
-										<a href="">{{myEntry.prize}}</a>
+										{{myContest.start_time}} - {{myContest.end_time}}
 									</td>
 									<td>
-										{{myEntry.start_time}} - {{myEntry.end_time}}
+										<a href="#/inprogresscontests/{{myContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{myContest.is_live}}">View</span></a>
+										<a href="#/inprogresscontests/{{myContest.id}}"><span class="btn btn-default red-nostra" ng-hide="{{myContest.is_live}}">Enter</span></a>
 									</td>
-									<td>
-										<a href="#/inprogresscontests/{{myEntry.contest}}"><span class="btn btn-default red-nostra" ng-show="{{myEntry.is_live}}">View</span></a>
-										<a href="#/completedcontests/{{myEntry.contest}}"><span class="btn btn-default red-nostra" ng-hide="{{myEntry.is_live}}">View</span></a>
-									</td>
-									
 								</tr>
 							</table>
 						</div>

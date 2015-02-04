@@ -262,8 +262,9 @@ class ContestViewSet(viewsets.ModelViewSet):
                     initial_playback_count = track_data["playback_count"],
                     initial_follower_count = sc_user.followers_count
                 )
-                entry_serializer = ContestEntrySerializer(contest_entry)
-                return Response(entry_serializer.data, status=status.HTTP_200_OK)
+                # entry_serializer = ContestEntrySerializer(contest_entry, context={'request': request})
+                # return Response(entry_serializer.data, status=status.HTTP_200_OK)
+                return Response("Data")
         except KeyError as e:
             return Response({
                 "detail": "You need to submit a track."
@@ -341,8 +342,8 @@ class TrackViewSet(viewsets.ModelViewSet):
         today = date.today()
         start = today - timedelta(days=7)
         today = today + timedelta(days=1)
-        contests = Contest.objects.filter(start_time__range=[start, today])
-        entries = ContestEntry.objects.filter(contest__in=contests).order_by('-jam_points')[:25]
+        entries = ContestEntry.objects.filter(created_at__range=[start, today]).order_by('-jam_points')[:25]
+        # entries = ContestEntry.objects.filter(contest__in=contests).order_by('-jam_points')[:25]
         serializer = ContestEntrySerializer(entries, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

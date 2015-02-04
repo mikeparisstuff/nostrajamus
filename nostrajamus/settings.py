@@ -117,6 +117,10 @@ CELERYBEAT_SCHEDULE = {
     'update-playcounts': {
         'task': 'api.tasks.update_playcount',
         'schedule': timedelta(minutes=20)
+    },
+    'update-player-jampoints': {
+        'task': 'api.tasks.update_user_jam_points',
+        'schedule': timedelta(minutes=20)
     }
 }
 

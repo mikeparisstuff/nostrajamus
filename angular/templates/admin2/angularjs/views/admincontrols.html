@@ -1,0 +1,262 @@
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+	Admin Controls <!-- <small>jquery form plugins</small> -->
+</h3>
+<!-- <div class="page-bar">
+	<ul class="page-breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<a href="#/dashboard.html">Home</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#/form-tools">jQuery Plugins</a>
+			<i class="fa fa-angle-right"></i>
+		</li>
+		<li>
+			<a href="#/form-tools">Form Tools</a>
+		</li>
+	</ul>
+	<div class="page-toolbar">
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true">
+			Actions <i class="fa fa-angle-down"></i>
+			</button>
+			<ul class="dropdown-menu pull-right" role="menu">
+				<li>
+					<a href="#">
+					<i class="icon-user"></i> New User </a>
+				</li>
+				<li>
+					<a href="#">
+					<i class="icon-present"></i> New Event <span class="badge badge-success">4</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+					<i class="icon-basket"></i> New order </a>
+				</li>
+				<li class="divider">
+				</li>
+				<li>
+					<a href="#">
+					<i class="icon-flag"></i> Pending Orders <span class="badge badge-danger">4</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+					<i class="icon-users"></i> Pending Users <span class="badge badge-warning">12</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div> -->
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="note note-success note-bordered">
+	<p>
+		For Nostradamus' eyes only.
+	</p>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PORTLET-->
+		<div class="portlet box red-nostra">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-gift"></i>Create Contest Form
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<!-- BEGIN FORM-->
+				<form action="#" id="form-username" class="form-horizontal form-bordered">
+					<div class="form-body">
+						<div class="form-group">
+							<label class="control-label col-md-3">Title</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" ng-model="form.title">
+								{{form.title}}
+							</div>
+						</div>
+<!-- 						<div class="form-group">
+							<label class="control-label col-md-3">Contest Picture:</label>
+							<div class="col-md-9">
+								<div class="fileinput fileinput-new" data-provides="fileinput">
+									<div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+										<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""/>
+									</div>
+									<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+									</div>
+									<div>
+										<span class="btn default btn-file">
+										<span class="fileinput-new">
+										Select image </span>
+										<span class="fileinput-exists">
+										Change </span>
+										<input type="file" name="..." ng-model="form.contest_picture">
+										</span>
+										<a href="#" class="btn red fileinput-exists" data-dismiss="fileinput">
+										Remove </a>
+									</div>
+								</div>
+								<div class="clearfix margin-top-10">
+									<span class="label label-danger">
+									NOTE!</span>
+									 THIS DOESN'T WORK YET...
+								</div>
+							</div>
+						</div> -->
+						<div class="form-group">
+							<label class="control-label col-md-3">SoundCloud Playlist Link</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" ng-model="form.soundcloud_playlist_link">
+							</div>
+							{{form.soundcloud_playlist_link}}
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Description</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" ng-model="form.description">
+							</div>
+							{{form.description}}
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Prize</label>
+							<div class="col-md-9">
+								<div class="input-inline input-medium">
+									<input type="text" class="form-control" ng-model="form.prize">
+									<span class="help-block">
+										Put $ first
+									</span>
+									{{form.prize}}
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Max Entries</label>
+							<div class="col-md-4">
+								<input type="text" value="-1" class="form-control disabled" ng-model="form.max_entries">
+								<span class="help-block">
+									-1 if unlimited
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Type</label>
+								<div class="col-md-8">
+								<select class="bs-select form-control input-medium" ng-model="form.type">
+									<!-- <option>Head To Head</option> -->
+									<option>POOL</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Entry Fee</label>
+							<div class="col-md-8">
+								<span style="float:left">$</span>
+								<select class="bs-select form-control input-medium" ng-model="form.entry_fee">
+									<option>0</option>
+									<option>1</option>
+									<option>2</option>
+									<option>5</option>
+									<option>10</option>
+								</select>
+								{{form.entry_fee}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Opponent Type</label>
+							<div class="col-md-8">
+								<select class="bs-select form-control input-medium" ng-model="form.opponent_type">
+									<option>ANYONE</option>
+									<option>FRIENDS</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Prize Payout</label>
+							<div class="col-md-8">
+								<select class="bs-select form-control input-medium" ng-model="form.prize_payout">
+									<option>WINNERTAKESALL</option>
+									<!-- <option>Top 3</option> -->
+									<!-- <option>Top Third</option> -->
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Songs per Entrant</label>
+							<div class="col-md-8">
+								<select class="bs-select form-control input-medium" ng-model="form.songs_per_entrant">
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+								</select>
+								{{form.songs_per_entrant}}
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Is Live?</label>
+							<div class="col-md-9">
+								<input type="checkbox" value="true" ng-model="form.is_live"/>
+							</div>
+							{{form.is_live}}
+						</div><!-- 
+						<div class="form-group">
+							<label class="control-label col-md-3">Start Time</label>
+							<div class="col-md-4">
+								<input class="form-control" id="mask_start_date" type="text" ng-model="form.start_time"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">End Time</label>
+							<div class="col-md-4">
+								<input class="form-control" id="mask_end_date" type="text" ng-model="form.end_time"/>
+							</div>
+						</div> -->
+						<div class="form-group">
+							<label class="control-label col-md-3">Editor's Pick</label>
+							<div class="col-md-8">
+								<input type="text"class="form-control" ng-model="form.editors_pick">
+								<span class="help-block">
+									SoundCloud Track ID #
+								</span>
+								{{form.editors_pick}}
+							</div>
+						</div>
+<!-- 						<div class="form-group">
+							<label class="control-label col-md-3">Creator</label>
+							<div class="col-md-8">
+								<select class="bs-select form-control input-medium" ng-model="form.creator">
+								</select>
+								<span class="help-block">
+									Disabled
+								</span>
+							</div>
+						</div> -->
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-3 col-md-9">
+								<button type="submit" ng-click="submitForm()" class="btn btn-primary red-nostra"><i class="fa fa-check"></i> Submit</button>
+								<!-- <button type="cancel" class="btn default">Cancel</button> -->
+							</div>
+						</div>
+					</div>
+				</form>
+				<!-- END FORM-->
+			</div>
+		</div>
+		<!-- END PORTLET-->
+	</div>
+</div>
+<!-- END MAIN CONTENT -->
+<script>
+	ComponentsFormTools.init(); // init todo page
+</script>

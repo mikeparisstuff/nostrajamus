@@ -36,6 +36,29 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
     return settings;
 }]);
 
+// HTTP Request Service for My Contests
+// MetronicApp.factory('contestData', ['$resource', '$q', function ($resource, $q) {
+
+//     var factory = {
+//         query: function (value) {
+
+//             // here you can play with 'value'
+
+//             var data = $resource('/api/contests/' + value, {}, {
+//                 query: {
+//                     method: 'GET',
+//                     isArray: false
+//                 }
+//             });
+//             var deferred = $q.defer();
+//             deferred.resolve(data);
+//             return deferred.promise;
+//         }
+
+//     }
+//     return factory;
+// }]);
+
 // Setup authentication with django
 MetronicApp.config(['$httpProvider', function($httpProvider) {
     // django and angular both support csrf tokens. This tells
@@ -961,6 +984,44 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
                             '/assets/js/controllers/MessageController.js'
                         ]                    
+                    });
+                }]
+            }
+        })
+
+        // Admin Controls
+        .state("admincontrols", {
+            url: "/admincontrols",
+            templateUrl: "/assets/views/admincontrols.html",
+            data: {pageTitle: 'Admin Controls'},
+            controller: "AdminController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',  
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            '/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css',
+                            '/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css',
+                            '/assets/global/plugins/jquery-tags-input/jquery.tagsinput.css',
+                            '/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css',
+                            '/assets/global/plugins/typeahead/typeahead.css',
+
+                            '/assets/global/plugins/fuelux/js/spinner.min.js',
+                            '/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js',
+                            '/assets/global/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js',
+                            '/assets/global/plugins/jquery.input-ip-address-control-1.0.min.js',
+                            '/assets/global/plugins/bootstrap-pwstrength/pwstrength-bootstrap.min.js',
+                            '/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
+                            '/assets/global/plugins/jquery-tags-input/jquery.tagsinput.min.js',
+                            '/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js',
+                            '/assets/global/plugins/bootstrap-touchspin/bootstrap.touchspin.js',
+                            '/assets/global/plugins/typeahead/handlebars.min.js',
+                            '/assets/global/plugins/typeahead/typeahead.bundle.min.js',
+                            '/assets/admin/pages/scripts/components-form-tools.js',
+
+                            '/assets/js/controllers/AdminController.js'
+                        ]              
                     });
                 }]
             }

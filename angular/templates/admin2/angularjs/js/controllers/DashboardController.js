@@ -37,7 +37,12 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 	    seconds = parseInt(seconds_left % 60);
 
 	    // format countdown string + set tag value
-	    document.getElementById('countdown').innerHTML = '<span class="days">' + days + ' <b>Days</b></span> <span class="hours">' + hours + ' <b>Hours</b></span> <span class="minutes">' + minutes + ' <b>Minutes</b></span> <span class="seconds">' + seconds + ' <b>Seconds</b></span>';
+	    if (contests.results) {
+	    	document.getElementById('countdown').innerHTML = 'Next contest begins in <span class="days">' + days + ' <b>Days</b></span> <span class="hours">' + hours + ' <b>Hours</b></span> <span class="minutes">' + minutes + ' <b>Minutes</b></span> <span class="seconds">' + seconds + ' <b>Seconds</b></span>';
+	    }
+	    else {
+	    	document.getElementById('countdown').innerHTML = 'Sorry, there are no upcoming contests at this time.';
+	    }
 
 	}, 1000);
 	// End Countdown Timer
@@ -86,12 +91,13 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 	};
 
 	$scope.myCurrentContests = function(myEntryList) {
-		var myEntries = [];
-		for (var entry in myEntryList) {
-			$scope.convertDateTime(entry, myEntryList);
-			myEntries.push(myEntryList[entry]);
+		if (myEntryList) {
+			for (var i=0; i < myEntryList.length; i++) {
+				$scope.convertDateTime(i, myEntryList);
+			}
+			return myEntryList;
 		}
-		$scope.myEntries = myEntries;
+		
 	}
 
 	$scope.passModal = function(title, entry_fee, prize, description, start_time, end_time, status, contest_id) {
@@ -116,6 +122,35 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 			$window.location.href = '#/completedcontests/' + contest_id;
 		}
 	}
+
+	// My Contest Info
+	$scope.myContestInfo = [];
+
+   	var getContestInfo = function(i, contestNum){
+    	$http({
+            url: '/api/contests/' + contestNum,
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+    	  	// console.log(data);
+    	  	$scope.myContestInfo.push(data);
+    	  	$scope.convertDateTime(i, $scope.myContestInfo);
+    	  	// console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+    	  	// console.log(data);
+    	  	// console.log("FAILURE");
+        });
+	};
+
+	if (myData.my_entries) {
+		for (var i=0; i < myData.my_entries.length; i++) {
+			var contestNum = myData.my_entries[i].contest;
+			getContestInfo(i, contestNum);
+		}
+	}
+	// End My Contest Info
 
     // set sidebar closed and body solid layout mode
     $rootScope.settings.layout.pageSidebarClosed = false;
