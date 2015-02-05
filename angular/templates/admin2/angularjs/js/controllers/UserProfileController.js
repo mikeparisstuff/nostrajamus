@@ -1,6 +1,6 @@
 'use strict';
 
-MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", function($rootScope, $scope, $http, $timeout, $upload) {
+MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", function($rootScope, $scope, $http, $timeout, $upload, $sce) {
     $scope.$on('$viewContentLoaded', function() {   
         Metronic.initAjax(); // initialize core components
         Layout.setSidebarMenuActiveLink('set', $('#sidebar_menu_link_profile')); // set profile link active in sidebar menu 
@@ -56,7 +56,7 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
 
 		var playIncrease = ((currPlayCount - initPlayCount) / (initPlayCount)) * 100;
 
-		return playIncrease;
+		return playIncrease.toFixed(2);
     };
 
     $scope.getFollowIncrease = function(track) {
@@ -66,7 +66,7 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
 		
 		var followIncrease = ((currFollowCount - initFollowCount) / (initFollowCount)) * 100;
 
-		return followIncrease;
+		return followIncrease.toFixed(2);
     };
 
     $scope.selectedFile = [];
