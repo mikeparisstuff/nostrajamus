@@ -21,7 +21,7 @@ MetronicApp.controller('AdminController', ['$rootScope', '$scope', 'settings', '
 	    opponent_type: null, 
 	    prize_payout: null, 
 	    songs_per_entrant: null, 
-	    is_live: false, 
+	    is_live: false,
 	    start_time: null, 
 	    end_time: null, 
 	    editors_pick: null, 
@@ -34,6 +34,13 @@ MetronicApp.controller('AdminController', ['$rootScope', '$scope', 'settings', '
     	// $scope.form.type = "POOL";
     	// $scope.form.opponent_type = "ANYONE";
     	// $scope.form.prize_payout = "WINNERTAKESALL";
+        // alert($scope.form.start_time);
+        var start_time = $scope.form.start_time.split(" ");
+        $scope.form.start_time = start_time[0] + 'T' + start_time[1];
+        console.log($scope.form.start_time);
+        var end_time = $scope.form.end_time.split(" ");
+        $scope.form.end_time = end_time[0] + 'T' + end_time[1];
+        console.log($scope.form.start_time);
 
     	$scope.form.max_entries = parseInt($scope.form.max_entries);
     	$scope.form.entry_fee = parseInt($scope.form.entry_fee);

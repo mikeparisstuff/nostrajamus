@@ -380,11 +380,11 @@ var ComponentsFormTools = function () {
             'autounmask': true
         });
 
-        $("#mask_start_date").inputmask("datetime12", {
-            "placeholder": "mm/dd/yyyy hh:mm --"
+        $("#mask_start_date").inputmask("datetime", {
+            "placeholder": "mm/dd/yyyy hh:mm:ss"
         }); //multi-char placeholder
-        $("#mask_end_date").inputmask("datetime12", {
-            "placeholder": "mm/dd/yyyy hh:mm --"
+        $("#mask_end_date").inputmask("datetime", {
+            "placeholder": "mm/dd/yyyy hh:mm:ss"
         }); //multi-char placeholder
 
         $("#mask_date").inputmask("d/m/y", {

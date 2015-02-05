@@ -149,10 +149,10 @@
 	            </div>
 	            <div class="modal-body">
             		<p><h5>Entry Fee</h5>${{entry_fee}}</p>
-					<p><h5>Prize</h5> {{prize}}</p>
-					<p><h5>Description</h5> {{description}}</p>
-					<p><h5>Start Time</h5> {{start_time}}</p>
-					<p><h5>End Time</h5> {{end_time}}</p>
+					<p><h5>Prize</h5>{{prize}}</p>
+					<p><h5>Description</h5>{{description}}</p>
+					<p><h5>Start Time (ET)</h5>{{start_time}}</p>
+					<p><h5>End Time (ET)</h5>{{end_time}}</p>
 	            </div>
 	            <div class="modal-footer title-bg">
 	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open'">Enter</button>
@@ -215,7 +215,7 @@
 												Top Prize
 											</th>
 											<th>
-												Starts
+												Starts (ET)
 											</th>
 											<th>
 											</th>
@@ -230,7 +230,7 @@
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(openContest.title, openContest.entry_fee, openContest.prize, openContest.description, openContest.start_time, openContest.end_time, 'open', openContest.id)">{{openContest.title}}</a>
 										</td>
 										<td>
-											{{openContest.entry_fee}}
+											${{openContest.entry_fee}}
 										</td>
 										<td>
 											<a href="">{{openContest.prize}}</a>
@@ -261,7 +261,7 @@
 												Top Prize
 											</th>
 											<th>
-												Ends
+												Ends (ET)
 											</th>
 											<th>
 											</th>
@@ -276,7 +276,7 @@
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'inProgress', inProgressContest.id)">{{inProgressContest.title}}</a>
 										</td>
 										<td>
-											{{inProgressContest.entry_fee}}
+											${{inProgressContest.entry_fee}}
 										</td>
 										<td>
 											<a href="">{{inProgressContest.prize}}</a>
@@ -307,7 +307,7 @@
 												Top Prize
 											</th>
 											<th>
-												Ended
+												Ended (ET)
 											</th>
 											<th>
 											</th>
@@ -320,7 +320,7 @@
 											{{completedContest.title}}</a>
 										</td>
 										<td>
-											{{completedContest.entry_fee}}
+											${{completedContest.entry_fee}}
 										</td>
 										<td>
 											<a href="">{{completedContest.prize}}</a>
@@ -370,7 +370,7 @@
 											Top Prize
 										</th>
 										<th>
-											Dates
+											Dates (ET)
 										</th>
 										<th>
 										</th>
@@ -383,7 +383,7 @@
 										{{myContest.title}}</a>
 									</td>
 									<td>
-										{{myContest.entry_fee}}
+										${{myContest.entry_fee}}
 									</td>
 									<td>
 										<a href="">{{myContest.prize}}</a>

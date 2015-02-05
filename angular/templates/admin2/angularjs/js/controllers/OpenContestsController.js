@@ -12,6 +12,26 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     $scope.contestInfo = contestInfo;
     $scope.contestEntries = contestEntries;
     $scope.myData = myData;
+    $scope.mySubmittedTrackID = null;
+    $scope.hasSubmitted = false;
+
+    // console.log(myData.my_entries);
+    // console.log(contestInfo);
+
+    for (var i=0; i < myData.my_entries.length; i++) {
+    	if (myData.my_entries[i].contest == contestInfo.id) {
+    		$scope.mySubmittedTrack = myData.my_entries[i].track;
+    		$scope.hasSubmitted = true;
+    	}
+    }
+
+    $scope.getSrc = function(track) {
+    	var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.sc_id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+
+    	var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
+
+    	return trustedUrl;
+    };
 
     $scope.timeOffset = function(date, offset) {
     	var d = new Date(date);
@@ -58,7 +78,12 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 	    seconds = parseInt(seconds_left % 60);
 
 	    // format countdown string + set tag value
-	    document.getElementById('countdown-open').innerHTML = '<span class="days">' + days + ' <b>Days</b></span> <span class="hours">' + hours + ' <b>Hours</b></span> <span class="minutes">' + minutes + ' <b>Minutes</b></span> <span class="seconds">' + seconds + ' <b>Seconds</b></span>';
+	    if ($scope.hasSubmitted) {
+	    	document.getElementById('countdown-submitted').innerHTML = '<span class="days">' + days + ' <b>Days</b></span> <span class="hours">' + hours + ' <b>Hours</b></span> <span class="minutes">' + minutes + ' <b>Minutes</b></span> <span class="seconds">' + seconds + ' <b>Seconds</b></span>';
+	    }
+	    else {
+		    document.getElementById('countdown-open').innerHTML = '<span class="days">' + days + ' <b>Days</b></span> <span class="hours">' + hours + ' <b>Hours</b></span> <span class="minutes">' + minutes + ' <b>Minutes</b></span> <span class="seconds">' + seconds + ' <b>Seconds</b></span>';
+	    }
 
 	}, 1000);
 	// End Countdown Timer
@@ -68,6 +93,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
     });
 	var url = "https://api.soundcloud.com/tracks";
+
 	$scope.getTracks = function(val) {
 	    return $http.get(url, {
 	      params: {
@@ -113,6 +139,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         }).success(function (data, status, headers, config) {
         	  	// console.log(data);
                 alert("Thanks for submitting!");
+                location.reload();
             }).error(function (data, status, headers, config) {
                 // $scope.status = status;
         	  	// console.log(data);
