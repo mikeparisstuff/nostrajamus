@@ -25,16 +25,17 @@
 .page-top {
   border-bottom: 1px solid #ff5252;
 }
-.navbar-default {
-    padding: 0;
-    /*margin: 0;*/
-}
 
 .dropdown-user > .dropdown-menu {
     margin-top: 0;
 }
+.page-top>.navbar-default {
+    padding: 0;
+    /*margin: 0;*/
+}
 
 @media (max-width: 768px) {
+
     .page-top > nav {
         height: 67px;
     }
