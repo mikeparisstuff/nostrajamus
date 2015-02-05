@@ -68,16 +68,16 @@ class SCTrackSerializer(serializers.ModelSerializer):
         model = SCTrack
         # fields = ('id', 'sc_id', 'title', 'stream_url', 'release_year')
 
-# class ProfileSerializer(serializers.ModelSerializer):
-#
-#     def get_total_jam_points(self, obj):
-#         return obj.total_jam_points
-#
-#     total_jam_points = serializers.SerializerMethodField()
-#
-#     class Meta:
-#         model = Profile
-#         fields = ( 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
+class ShallowProfileSerializer(serializers.ModelSerializer):
+
+    def get_total_jam_points(self, obj):
+        return obj.total_jam_points
+
+    total_jam_points = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Profile
+        fields = ( 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
 
 class ShallowContestEntrySerializer(serializers.ModelSerializer):
 
@@ -119,7 +119,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ContestEntrySerializer(serializers.ModelSerializer):
 
     track = SCTrackSerializer(read_only=True)
-    user = ProfileSerializer(read_only=True)
+    user = ShallowProfileSerializer(read_only=True)
 
     class Meta:
         model = ContestEntry
