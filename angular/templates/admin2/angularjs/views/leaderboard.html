@@ -157,10 +157,12 @@
 								{{$index+1}}
 							</th>
 							<td class="bold text-center" width="33%">
-								<img class="user-pic" src="{{getProfilePicture(leader.profile_picture)}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
-								<!-- <a href="javascript:;" class="primary-link"> -->
-									{{leader.username}}
-								<!-- </a> -->
+                                <div class="row">
+                                    <div class="col-md-2 col-md-offset-2">
+                                        <img class="user-pic" src="{{getProfilePicture(leader.profile_picture)}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
+                                    </div>
+                                    <div class="col-md-6">{{leader.username}}</div>
+                                </div>
 							</td>
 <!-- 							<td>
 								10
