@@ -97,7 +97,7 @@ class Profile(AbstractUser):
 
     @property
     def my_contest_entries(self):
-        contest_entries = ContestEntry.objects.filter(is_active=True, user=self).order_by('-created_at')
+        contest_entries = ContestEntry.objects.filter(user=self).order_by('-created_at')
         return contest_entries
 
     @property

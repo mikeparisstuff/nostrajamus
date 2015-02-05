@@ -68,40 +68,30 @@ class SCTrackSerializer(serializers.ModelSerializer):
         model = SCTrack
         # fields = ('id', 'sc_id', 'title', 'stream_url', 'release_year')
 
-class ProfileSerializer(serializers.ModelSerializer):
+# class ProfileSerializer(serializers.ModelSerializer):
+#
+#     def get_total_jam_points(self, obj):
+#         return obj.total_jam_points
+#
+#     total_jam_points = serializers.SerializerMethodField()
+#
+#     class Meta:
+#         model = Profile
+#         fields = ( 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
 
-    def get_total_jam_points(self, obj):
-        return obj.total_jam_points
-
-    total_jam_points = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Profile
-        fields = ( 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
-
-class ContestEntrySerializer(serializers.ModelSerializer):
+class ShallowContestEntrySerializer(serializers.ModelSerializer):
 
     track = SCTrackSerializer(read_only=True)
-    user = ProfileSerializer(read_only=True)
 
     class Meta:
         model = ContestEntry
 
-class PaginatedContestEntrySerializer(PaginationSerializer):
-    class Meta:
-        object_serializer_class = ContestEntrySerializer
-
-class RewardSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Reward
-
-class FullProfileSerializer(serializers.HyperlinkedModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
 
     def get_my_entries(self, obj):
         entries = obj.my_contest_entries
         if entries:
-            serializer = ContestEntrySerializer(entries, many=True)
+            serializer = ShallowContestEntrySerializer(entries, many=True)
             return serializer.data
         else:
             return None
@@ -123,7 +113,25 @@ class FullProfileSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('url', 'username', 'my_entries', 'my_rewards', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
+        fields = ('url', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points', 'my_rewards', 'my_entries')
+        read_only_fields = ('total_jam_points', 'my_rewards', 'my_entries')
+
+class ContestEntrySerializer(serializers.ModelSerializer):
+
+    track = SCTrackSerializer(read_only=True)
+    user = ProfileSerializer(read_only=True)
+
+    class Meta:
+        model = ContestEntry
+
+class PaginatedContestEntrySerializer(PaginationSerializer):
+    class Meta:
+        object_serializer_class = ContestEntrySerializer
+
+class RewardSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Reward
 
 class ContestSerializer(serializers.ModelSerializer):
 
@@ -140,7 +148,7 @@ class ContestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contest
 
-class SCPeriodicPlayCountSerializer(serializers.HyperlinkedModelSerializer):
+class SCPeriodicPlayCountSerializer(serializers.ModelSerializer):
 
     track_title = serializers.ReadOnlyField(source='track.title')
     soundcloud_id = serializers.ReadOnlyField(source='track.sc_id')
@@ -149,7 +157,7 @@ class SCPeriodicPlayCountSerializer(serializers.HyperlinkedModelSerializer):
         model = SCPeriodicPlayCount
         fields = ('track_title', 'soundcloud_id', 'playback_count', 'follower_count', 'created_at', 'modified_at')
 
-class FeedbackSerializer(serializers.HyperlinkedModelSerializer):
+class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
 

@@ -3,7 +3,7 @@ from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
 from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken
-from api.serializers import ProfileSerializer, ContestSerializer, FullProfileSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer
+from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -191,7 +191,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(permission_classes=(permissions.IsAuthenticated,))
     def me(self, request):
         user = request.user
-        serializer = FullProfileSerializer(user, context={'request': request})
+        serializer = ProfileSerializer(user, context={'request': request})
         return Response(serializer.data, status.HTTP_200_OK)
 
     @list_route(permission_classes=(permissions.AllowAny,))
