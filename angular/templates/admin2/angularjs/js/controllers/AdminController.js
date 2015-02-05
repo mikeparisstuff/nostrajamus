@@ -36,10 +36,12 @@ MetronicApp.controller('AdminController', ['$rootScope', '$scope', 'settings', '
     	// $scope.form.prize_payout = "WINNERTAKESALL";
         // alert($scope.form.start_time);
         var start_time = $scope.form.start_time.split(" ");
-        $scope.form.start_time = start_time[0] + 'T' + start_time[1];
+        var start_date = start_time[0].split("/")
+        $scope.form.start_time = start_date[2] + "-" + start_date[1] + "-" + start_date[0] + 'T' + start_time[1];
         console.log($scope.form.start_time);
         var end_time = $scope.form.end_time.split(" ");
-        $scope.form.end_time = end_time[0] + 'T' + end_time[1];
+        var end_date = end_time[0].split("/");
+        $scope.form.end_time = end_date[2] + "-" + end_date[1] + "-" + end_date[0] + 'T' + end_time[1];
         console.log($scope.form.start_time);
 
     	$scope.form.max_entries = parseInt($scope.form.max_entries);
@@ -59,6 +61,7 @@ MetronicApp.controller('AdminController', ['$rootScope', '$scope', 'settings', '
                 alert("Contest created! Thanks for submitting!");
             }).error(function (data, status, headers, config) {
                 // $scope.status = status;
+                console.log("ERROR");
         	  	console.log(data);
                 alert("Try again.");
             });

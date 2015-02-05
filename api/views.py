@@ -225,6 +225,15 @@ class ContestViewSet(viewsets.ModelViewSet):
     serializer_class = ContestSerializer
     permission_classes = (permissions.AllowAny,)
 
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        serializer = ContestSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     @detail_route()
     def entries(self, request, pk=None):
         contest = self.get_object()
