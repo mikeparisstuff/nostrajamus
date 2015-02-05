@@ -99,7 +99,8 @@ section#services {
   background-color: #43525c;
 }
 .img-tutorial {
-  max-width: 600px;
+  /*max-width: 600px;*/
+    width: 100%;
 }
 @media (max-width: 800px) {
   .img-tutorial {
