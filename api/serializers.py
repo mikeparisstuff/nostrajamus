@@ -77,7 +77,7 @@ class ShallowProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ( 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
+        fields = ( 'id', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
 
 class ShallowContestEntrySerializer(serializers.ModelSerializer):
 
@@ -86,7 +86,7 @@ class ShallowContestEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = ContestEntry
 
-class ProfileSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_my_entries(self, obj):
         entries = obj.my_contest_entries
@@ -113,8 +113,8 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('url', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points', 'my_rewards', 'my_entries')
-        read_only_fields = ('total_jam_points', 'my_rewards', 'my_entries')
+        fields = ('id', 'url', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points', 'my_rewards', 'my_entries')
+        read_only_fields = ('id', 'total_jam_points', 'my_rewards', 'my_entries')
 
 class ContestEntrySerializer(serializers.ModelSerializer):
 

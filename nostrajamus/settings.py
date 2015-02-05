@@ -64,6 +64,10 @@ ROOT_URLCONF = 'nostrajamus.urls'
 
 WSGI_APPLICATION = 'nostrajamus.wsgi.application'
 
+# S3
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_ACCESS_KEY_ID = 'AKIAIT6SLV63QQTHWCRQ'
+AWS_SECRET_ACCESS_KEY = '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'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -96,6 +100,12 @@ else:
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FileUploadParser'
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
     ),
@@ -164,8 +174,3 @@ EMAIL_HOST_USER = 'nostrajamus.music@gmail.com'
 EMAIL_HOST_PASSWORD = 'Nostra123'
 EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# S3
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-AWS_ACCESS_KEY_ID = 'AKIAIT6SLV63QQTHWCRQ'
-AWS_SECRET_ACCESS_KEY = '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'

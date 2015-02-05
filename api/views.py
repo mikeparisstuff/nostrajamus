@@ -136,7 +136,7 @@ class UserViewSet(viewsets.ModelViewSet):
             fname = request.data['first_name']
             lname = request.data['last_name']
             email = request.data['email']
-            profile_picture = request.data.get('profile_picture', None)
+            profile_picture = request.FILES.get('file', None)
             location = request.data.get('location', None)
             user = request.user
             user.first_name = fname
@@ -148,12 +148,16 @@ class UserViewSet(viewsets.ModelViewSet):
                 user.location = location
                 user.save()
             user.save()
-            user_serializer = ProfileSerializer(user)
+            user_serializer = ProfileSerializer(user, context={'request': request})
             return Response(user_serializer.data, status=status.HTTP_200_OK)
         except KeyError as e:
             return Response({
                 "detail": "Missing some fields with error: {}".format(e)
             }, status=status.HTTP_400_BAD_REQUEST)
+        except Exception, e:
+            a = e
+            print e
+
 
     @list_route(methods=("POST",))
     def initiate_password_reset(self, request, *args, **kwargs):

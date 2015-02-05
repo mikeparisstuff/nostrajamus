@@ -25,18 +25,22 @@
 				<div class="tab-content">
 					<!-- PERSONAL INFO TAB -->
 					<div class="tab-pane active" id="tab_1_1">
-						<form role="form" method="POST" action="/api/users/" novalidate>
+						<form ng-submit="uploadFile()">
 							<div class="form-group">
 								<label name="first_name" class="control-label">First Name</label>
-								<input type="text" value="{{myInfo.first_name}}" placeholder="First Name" class="form-control"/>
+								<input type="text" ng-model="myInfo.first_name" placeholder="First Name" class="form-control"/>
 							</div>
 							<div class="form-group">
 								<label name="last_name" class="control-label">Last Name</label>
-								<input type="text" value="{{myInfo.last_name}}" placeholder="Last Name" class="form-control"/>
+								<input type="text" ng-model="myInfo.last_name" placeholder="Last Name" class="form-control"/>
+							</div>
+                            <div class="form-group">
+								<label name="email" class="control-label">Email</label>
+								<input type="text" ng-model="myInfo.email" placeholder="Email" class="form-control"/>
 							</div>
 							<div class="form-group">
 								<label name="location" class="control-label">Location</label>
-								<input type="text" value="{{myInfo.location}}" placeholder="Location" class="form-control"/>
+								<input type="text" ng-model="myInfo.location" placeholder="Location" class="form-control"/>
 							</div>
 <!-- 							<div class="form-group">
 								<label class="control-label">Interests</label>
@@ -71,7 +75,7 @@
 										Select image </span>
 										<span class="fileinput-exists">
 										Change </span>
-										<input type="file" name="...">
+										<input type="file" name="..." ng-file-select="onFileSelect($files)">
 										</span>
 										<a href="#" class="btn default fileinput-exists" data-dismiss="fileinput">
 										Remove </a>
@@ -88,12 +92,17 @@
 									<a href="#" class="btn default">
 									Cancel </a>
 								</div> -->
-							</form>
+                            <div class="progress" style="margin-top: 20px;">
+                                <div class="progress-bar" progress-bar="uploadProgress" role="progressbar">
+                                  <span ng-bind="uploadProgress"></span>
+                                  <span>%</span>
+                                </div>
+                            </div>
 
 							<div class="margiv-top-10">
 								<button type="submit" class="btn red-nostra">
 								Save Changes </button>
-								<a href="/#profile/dashboard" class="btn default">
+								<a href="/#/profile/dashboard" class="btn default">
 								Cancel </a>
 							</div>
 						</form>

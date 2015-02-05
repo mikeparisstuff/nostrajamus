@@ -8,7 +8,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.bootstrap", 
     "oc.lazyLoad",
     "ngSanitize",
-    "ngResource", //authentication with django
+    "ngResource",
+     "angularFileUpload"//authentication with django
     // "angularFileUpload" //file upload
 ]); 
 
@@ -734,10 +735,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '/assets/admin/pages/css/tasks.css',
 
                             // angular file upload plugins
-                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload.min.js',
-                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload-shim.min.js',
-                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload-all.js',
-                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload.js',
+//                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload.min.js',
+//                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload-shim.min.js',
+//                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload-all.js',
+//                            '/assets/global/plugins/angularjs/plugins/angular-file-upload/angular-file-upload-bower-2.2.2/angular-file-upload.js',
                             // /angular file upload plugins
                             
                             '/assets/global/plugins/jquery.sparkline.min.js',
@@ -1027,6 +1028,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }]
             }
         })
+
+
 
 }]);
 
