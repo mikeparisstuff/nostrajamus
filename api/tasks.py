@@ -27,7 +27,7 @@ def update_playcount():
         try:
             new_track = client.get('/tracks/{}'.format(track.sc_id))
             new_user = client.get('/users/{}'.format(track.user.sc_id))
-            all_entries = ContestEntry.objects.filter(track=track, is_active=True)
+            all_entries = ContestEntry.objects.filter(track=track)
             SCPeriodicPlayCount.objects.create(
                 playback_count=new_track.playback_count,
                 follower_count=new_user.followers_count,
