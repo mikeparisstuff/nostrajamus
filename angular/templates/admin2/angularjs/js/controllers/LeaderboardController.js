@@ -16,7 +16,7 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
 		var currPlayCount = track.current_playback_count;
 		var initPlayCount = track.initial_playback_count;
 
-		var playIncrease = ((currPlayCount - initPlayCount) / (initPlayCount)) * 100;
+		var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(2);
 
 		return playIncrease;
     };
