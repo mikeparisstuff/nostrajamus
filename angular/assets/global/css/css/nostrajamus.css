@@ -24,7 +24,32 @@
 }
 .page-top {
   border-bottom: 1px solid #ff5252;
-}/*
+}
+.navbar-default {
+    padding: 0;
+    /*margin: 0;*/
+}
+
+.dropdown-user > .dropdown-menu {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .page-top > nav {
+        height: 67px;
+    }
+    .navbar-header > .navbar-toggle {
+        margin-top: 16px;
+    }
+    .navbar-collapse {
+        background-color: #222222;
+    }
+    #nostra-nav-collapse {
+        margin-top: 9px;
+        overflow: visible;
+    }
+}
+/*
 section#services {
   background-color: #222;
 }*/
