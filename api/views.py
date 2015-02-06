@@ -124,7 +124,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 user.save()
             authenticated = authenticate(username=username, password=password)
             login(request, authenticated)
-            user_serializer = ProfileSerializer(user)
+            user_serializer = ProfileSerializer(user, context={'request': request})
             return Response(user_serializer.data, status=status.HTTP_200_OK)
         except KeyError as e:
             return Response({
