@@ -372,9 +372,10 @@
 									<td class="bold text-center" width="33%">
 		                                <div class="row">
 		                                    <div class="col-md-2 col-md-offset-2">
-		                                        <img class="user-pic" src="{{getProfilePicture(leader.profile_picture)}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
+		                                    	<!-- class="user-pic" -->
+		                                        <img class="img-responsive img-circle" src="{{getProfilePicture(leader.profile_picture)}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
 		                                    </div>
-		                                    <div class="col-md-6">{{leader.username}}</div>
+		                                    <a href="#/profile/{{leader.id}}/dashboard"><div class="col-md-6">{{leader.username}}</div></a>
 		                                </div>
 									</td>
 									<td width="33%" class="text-center">

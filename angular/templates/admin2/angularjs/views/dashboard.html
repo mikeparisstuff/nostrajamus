@@ -226,7 +226,7 @@
 											<img class="user-pic" src="{{openContest.contest_picture}}">
 										</td> -->
 										<td>
-											<img class="user-pic" src="{{openContest.contest_picture}}">
+											<img class="user-pic" src="{{getProfilePicture(openContest.contest_picture)}}">
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(openContest.title, openContest.entry_fee, openContest.prize, openContest.description, openContest.start_time, openContest.end_time, 'open', openContest.id)">{{openContest.title}}</a>
 										</td>
 										<td>
@@ -272,7 +272,7 @@
 											<img class="user-pic" src="{{inProgressContest.contest_picture}}">
 										</td> -->
 										<td>
-											<img class="user-pic" src="{{inProgressContest.contest_picture}}">
+											<img class="user-pic" src="{{getProfilePicture(inProgressContest.contest_picture)}}">
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'inProgress', inProgressContest.id)">{{inProgressContest.title}}</a>
 										</td>
 										<td>
@@ -315,7 +315,7 @@
 									</thead>
 									<tr ng-repeat="completedContest in completedContests">
 										<td>
-											<img class="user-pic" src="{{completedContest.contest_picture}}">
+											<img class="user-pic" src="{{getProfilePicture(completedContest.contest_picture)}}">
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, compeletedContest.end_time, 'completed', completedContest.id)">
 											{{completedContest.title}}</a>
 										</td>
@@ -378,7 +378,7 @@
 								</thead>
 								<tr ng-repeat="myContest in myContestInfo">
 									<td>
-										<img class="user-pic" src="{{myContest.contest_picture}}">
+										<img class="user-pic" src="{{getProfilePicture(myContest.contest_picture)}}">
 										<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(myContest.title, myContest.entry_fee, myContest.prize, myContest.description, myContest.start_time, compeletedContest.end_time, 'completed', myContest.id)">
 										{{myContest.title}}</a>
 									</td>

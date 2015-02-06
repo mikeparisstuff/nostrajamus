@@ -59,7 +59,7 @@
 			<div class="portlet light profile-sidebar-portlet">
 				<!-- SIDEBAR USERPIC -->
 				<div class="profile-userpic">
-					<img src="{{getProfilePicture(myInfo.profile_picture)}}" class="img-responsive img-profile" alt="">
+					<img src="{{getProfilePicture(myInfo.profile_picture)}}" class="img-responsive img-circle img-profile" alt="">
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
@@ -93,7 +93,7 @@
 					<a href="cannon.html">Cannon</a> by The White Stripes
 				</div>
 				<br><br> -->
-				<div align="center">
+				<div align="center" ng-show="me == 'me'">
 					<button type="button" class="btn btn-circle red-nostra btn-md" data-toggle="modal" data-target="#winningsModal">My Winnings</button>
 				</div>
 

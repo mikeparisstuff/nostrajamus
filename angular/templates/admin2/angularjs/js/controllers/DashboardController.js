@@ -9,6 +9,26 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
     $scope.contests = contests;
     $scope.myData = myData;
 
+    $scope.getProfilePicture = function(pic) {
+      var src = '';
+        
+      if (pic == null) {
+            // var randomPic = Math.random()*100;
+            // if (randomPic < 100/3) {
+                return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
+            // }
+            // else if (randomPic >= 100/3 && randomPic <= 200/3) {
+            //     return src = '/assets/admin/pages/media/profile/profile-swan.jpg';
+            // }
+            // else if (randomPic > 200/3) {
+            //     return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
+            // }
+      }
+      else {
+        return pic;
+      }
+    };
+
     $scope.filterContests = function(contestsList) {
     	contestsList.reverse();
 
