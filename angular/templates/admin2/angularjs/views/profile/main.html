@@ -51,7 +51,7 @@
 <!-- END PAGE HEADER-->
 
 <!-- BEGIN PAGE CONTENT-->
-<div class="row" ng-controller="UserProfileController">
+<div class="row">
 	<div class="col-md-12">
 		<!-- BEGIN PROFILE SIDEBAR -->
 		<div class="profile-sidebar">
@@ -106,7 +106,7 @@
 							<i class="icon-home"></i>
 							Overview </a>
 						</li>
-						<li ng-class="{active: $state.includes('profile.account')}">
+						<li ng-show="me=='me'" ng-class="{active: $state.includes('profile.account')}">
 							<a ui-sref="profile.account">
 							<i class="icon-settings"></i>
 							Edit Profile</a>

@@ -9,7 +9,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "oc.lazyLoad",
     "ngSanitize",
     "ngResource",
-     "angularFileUpload"//authentication with django
+    "angularFileUpload"//authentication with django
     // "angularFileUpload" //file upload
 ]); 
 
@@ -141,7 +141,9 @@ MetronicApp.controller('authController', function($scope, api, authState) {
             console.log(authState.user);
             authState.user = undefined;
         });
+        $window.reload();
     };
+
     $scope.register = function($event){
         // prevent login form from firing
         $event.preventDefault();
@@ -718,9 +720,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         //     }
         // })
 
-        // User Profile
+        // My User Profile
         .state("profile", {
-            url: "/profile",
+            url: "/profile/:userID",
             templateUrl: "/assets/views/profile/main.html",
             data: {pageTitle: 'User Profile'},
             controller: "UserProfileController",
@@ -750,6 +752,16 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
                         ]
                     });
+                }],
+                myInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
+                        console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                me: ['$http', '$stateParams', function($http, $stateParams) {
+                    console.log($stateParams.userID);
+                    return $stateParams.userID;
                 }]
             }
         })
@@ -758,7 +770,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state("profile.dashboard", {
             url: "/dashboard",
             templateUrl: "/assets/views/profile/dashboard.html",
-            data: {pageTitle: 'User Profile'}
+            data: {pageTitle: 'My Profile'}
         })
 
         // User Profile Account
@@ -767,6 +779,55 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "/assets/views/profile/account.html",
             data: {pageTitle: 'User Account'}
         })
+
+        // Other User Profile
+        // .state("profiles/:userID", {
+        //     url: "/profiles/:userID",
+        //     templateUrl: "/assets/views/profiles/main.html",
+        //     data: {pageTitle: 'User Profiles'},
+        //     controller: "UserProfilesController",
+        //     resolve: {
+        //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+        //             return $ocLazyLoad.load({
+        //                 name: 'MetronicApp',  
+        //                 insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+        //                 files: [
+        //                     '/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css',
+        //                     '/assets/admin/pages/css/profile.css',
+        //                     '/assets/admin/pages/css/tasks.css',
+                            
+        //                     '/assets/global/plugins/jquery.sparkline.min.js',
+        //                     '/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js',
+
+        //                     '/assets/admin/pages/scripts/profile.js',
+
+        //                     '/assets/js/controllers/UserProfilesController.js',
+        //                 ]
+        //             });
+        //         }],
+                // myInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                //     return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
+                //         // console.log(response.data);
+                //         return response.data;
+                //     });
+                // }]
+        //     }
+        // })
+
+        // Other Profile Dashboard
+        // .state("profiles.dashboard/:userID", {
+        //     url: "/dashboard/:userID",
+        //     templateUrl: "/assets/views/profiles/dashboard.html",
+        //     data: {pageTitle: 'Profile'},
+        //     resolve: {
+        //         myInfo: ['$http', '$stateParams', function($http, $stateParams) {
+        //             return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
+        //                 console.log(response.data);
+        //                 return response.data;
+        //             });
+        //         }]
+        //     }
+        // })
 
         // User Profile Help
         // .state("profile.help", {

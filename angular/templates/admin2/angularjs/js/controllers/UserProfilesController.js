@@ -1,18 +1,12 @@
 'use strict';
 
-MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", "myInfo", "me", function($rootScope, $scope, $http, $timeout, $upload, $sce, myInfo, me) {
+MetronicApp.controller('UserProfilesController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", "myInfo", function($rootScope, $scope, $http, $timeout, $upload, $sce, myInfo) {
     $scope.$on('$viewContentLoaded', function() {   
         Metronic.initAjax(); // initialize core components
         Layout.setSidebarMenuActiveLink('set', $('#sidebar_menu_link_profile')); // set profile link active in sidebar menu 
     });
 
     $scope.myInfo = myInfo;
-    $scope.me = me;
-    // $http.get('/api/users/me').then(function(response) {
-    //      $scope.myInfo = response.data;
-    //     // console.log($scope.myInfo);
-    //     return response.data;
-    // });
 
     $scope.getProfilePicture = function(pic) {
     	var src = '';
@@ -120,4 +114,4 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
             }
         };
     }
-]);;
+]);

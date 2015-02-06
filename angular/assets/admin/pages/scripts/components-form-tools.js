@@ -381,10 +381,10 @@ var ComponentsFormTools = function () {
         });
 
         $("#mask_start_date").inputmask("datetime", {
-            "placeholder": "mm/dd/yyyy hh:mm:ss"
+            "placeholder": "dd/mm/yyyy hh:mm:ss"
         }); //multi-char placeholder
         $("#mask_end_date").inputmask("datetime", {
-            "placeholder": "mm/dd/yyyy hh:mm:ss"
+            "placeholder": "dd/mm/yyyy hh:mm:ss"
         }); //multi-char placeholder
 
         $("#mask_date").inputmask("d/m/y", {

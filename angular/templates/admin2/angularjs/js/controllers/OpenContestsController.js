@@ -18,11 +18,13 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     // console.log(myData.my_entries);
     // console.log(contestInfo);
 
-    for (var i=0; i < myData.my_entries.length; i++) {
-    	if (myData.my_entries[i].contest == contestInfo.id) {
-    		$scope.mySubmittedTrack = myData.my_entries[i].track;
-    		$scope.hasSubmitted = true;
-    	}
+    if (myData.my_entries != null) {
+        for (var i=0; i < myData.my_entries.length; i++) {
+            if (myData.my_entries[i].contest == contestInfo.id) {
+                $scope.mySubmittedTrack = myData.my_entries[i].track;
+                $scope.hasSubmitted = true;
+            }
+        }
     }
 
     $scope.getSrc = function(track) {

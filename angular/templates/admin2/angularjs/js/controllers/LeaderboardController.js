@@ -11,6 +11,55 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     $scope.leaders = leaders;
     $scope.trending = trending;
 
+    var dayTracks = [];
+    var weekTracks = [];
+    var monthTracks = [];
+
+    var now = new Date();
+    var day = new Date();
+    var week = new Date();
+    var month = new Date();
+
+    day.setDate(day.getDate()-1);
+    week.setDate(week.getDate()-7);
+    month.setDate(month.getDate()-30);
+
+    // console.log(day);
+    // console.log(week);
+    // console.log(month);
+    // console.log(now);
+
+    day = Date.parse(day);
+    week = Date.parse(week);
+    month = Date.parse(month);
+    now = Date.parse(now);
+
+    for (var i=0; i < $scope.trending.length; i++) {
+      // console.log($scope.trending[i].created_at);
+      var timeCreated = new Date($scope.trending[i].created_at);
+      timeCreated = Date.parse(timeCreated);
+      // console.log(timeCreated);
+      if (month < timeCreated) {
+        monthTracks.push($scope.trending[i]);
+        if (week < timeCreated) {
+          weekTracks.push($scope.trending[i]);
+          if (day < timeCreated) {
+            dayTracks.push($scope.trending[i]);
+          }
+        }
+      }
+    }
+
+    $scope.monthTracks = monthTracks;
+    $scope.weekTracks = weekTracks;
+    $scope.dayTracks = dayTracks;
+
+    $scope.timeSelect = 'day';
+
+    console.log($scope.monthTracks);
+    console.log($scope.weekTracks);
+    console.log($scope.dayTracks);
+
     $scope.getPlayIncrease = function(track) {
 		// get play count increase
 		var currPlayCount = track.current_playback_count;
@@ -61,16 +110,17 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
       var src = '';
         
       if (pic == null) {
-            var randomPic = Math.random()*100;
-            if (randomPic < 100/3) {
-                return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
-            }
-            else if (randomPic >= 100/3 && randomPic <= 200/3) {
-                return src = '/assets/admin/pages/media/profile/profile-swan.jpg';
-            }
-            else if (randomPic > 200/3) {
-                return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
-            }
+            // var randomPic = Math.random()*100;
+            // if (randomPic < 100/3) {
+            //     return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
+            // }
+            // else if (randomPic >= 100/3 && randomPic <= 200/3) {
+            //     return src = '/assets/admin/pages/media/profile/profile-swan.jpg';
+            // }
+            // else if (randomPic > 200/3) {
+            //     return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
+            // }
+            return src = '/assets/admin/pages/media/profile/profile-car.jpg';
       }
       else {
         return pic;
