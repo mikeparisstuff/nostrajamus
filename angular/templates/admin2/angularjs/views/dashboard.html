@@ -238,7 +238,7 @@
 										<td>
 											{{openContest.start_time}}
 										</td>
-										<td>
+										<td align="right">
 											<a href="#/opencontests/{{openContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}}">Enter</span></a> <!-- CHANGE THIS TO NG-HIDE? -->
 										</td>
 									</tr>
@@ -284,7 +284,7 @@
 										<td>
 											{{inProgressContest.end_time}}
 										</td>
-										<td>
+										<td align="right">
 											<a href="#/inprogresscontests/{{inProgressContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{inProgressContest.is_live}}">View</span></a>
 										</td>
 									</tr>
@@ -328,7 +328,7 @@
 										<td>
 											{{completedContest.end_time}}
 										</td>
-										<td>
+										<td align="right">
 											<a href="#/completedcontests/{{completedContest.id}}"><span class="btn btn-default red-nostra">View</span></a>
 										</td>
 									</tr>
@@ -391,7 +391,7 @@
 									<td>
 										{{myContest.start_time}} - {{myContest.end_time}}
 									</td>
-									<td>
+									<td align="right">
 										<a href="#/inprogresscontests/{{myContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{myContest.is_live}}">View</span></a>
 										<a href="#/inprogresscontests/{{myContest.id}}"><span class="btn btn-default red-nostra" ng-hide="{{myContest.is_live}}">Enter</span></a>
 									</td>

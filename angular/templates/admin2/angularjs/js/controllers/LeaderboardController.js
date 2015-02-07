@@ -132,7 +132,15 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     $scope.pageSize = 3;
 
     $scope.numberOfPages=function() {
-        return Math.ceil($scope.trending.length/$scope.pageSize);                
+      if ($scope.timeSelect == 'day') {
+        return Math.ceil($scope.dayTracks.length/$scope.pageSize);
+      }
+      else if ($scope.timeSelect == 'week') {
+        return Math.ceil($scope.weekTracks.length/$scope.pageSize);
+      }
+      else if ($scope.timeSelect == 'month') {
+        return Math.ceil($scope.monthTracks.length/$scope.pageSize);   
+      }        
     };
 
 }]);

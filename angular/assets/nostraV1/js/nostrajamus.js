@@ -137,7 +137,7 @@ $(function() {
                 },
                 error: function(error) {
                     console.log(error);
-                    alert("Sorry there was an issue uploading that song. It may have been an issue on our side or it may help to clear your cookies and try again.")
+                    alert("Sorry there was an issue during registration. It may have been an issue on our side or it may help to clear your cookies and try again.")
                 }
             });
 

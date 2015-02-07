@@ -74,7 +74,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
 <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
 <!-- DOC: Apply "page-boxed" class to the body element to have container -->
-<body ng-controller="AppController" class="page-header-fixed page-container-bg-solid page-sidebar-fixed page-sidebar-closed page-sidebar-menu-closed page-on-load page-full-width" ng-class="{'page-sidebar-closed': settings.layout.pageSidebarClosed}" ng-controller="authController" ng-init="authState.user='{{user.username}}'">
+<body ng-controller="AppController" class="page-header-fixed page-header-fixed-mobile page-container-bg-solid page-sidebar-fixed page-sidebar-closed page-sidebar-menu-closed page-on-load page-full-width" ng-class="{'page-sidebar-closed': settings.layout.pageSidebarClosed}" ng-controller="authController" ng-init="authState.user='{{user.username}}'">
 {% verbatim %}
 
 	<!-- BEGIN PAGE SPINNER -->
