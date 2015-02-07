@@ -135,7 +135,6 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 			}
 			return myEntryList;
 		}
-		
 	}
 
 	$scope.passModal = function(title, entry_fee, prize, description, start_time, end_time, status, contest_id) {
