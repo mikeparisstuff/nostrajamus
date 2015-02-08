@@ -37,7 +37,8 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
         var completedContests = [];
 
 		var now = new Date();
-		now = Date.parse(now);
+		// now = Date.parse(now);
+
 		// var contestStartDate = Date.parse(contestsList[0].start_time);
 		// var contestEndDate = Date.parse(contestsList[0].end_time);
 		// console.log(now);
@@ -46,8 +47,15 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		// console.log(contestStartDate == contestEndDate);
 
 		for (var contest in contestsList) {
-			var start_time = Date.parse(contestsList[contest].start_time);
-			var end_time = Date.parse(contestsList[contest].end_time);
+			// var start_time = Date.parse(contestsList[contest].start_time);
+			// var end_time = Date.parse(contestsList[contest].end_time);
+
+			var start_time = new Date(contestsList[contest].start_time).addHours(5);
+			var end_time = new Date(contestsList[contest].end_time).addHours(5);
+
+			// console.log(now);
+			// console.log(start_time);
+			// console.log(end_time);
 
 			if (now < start_time) {
 				$scope.convertDateTime(contest, contestsList);
@@ -106,6 +114,11 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		}, 1000);
 		// End Countdown Timer
 	};
+
+	Date.prototype.addHours = function(h){
+	    this.setHours(this.getHours()+h);
+	    return this;
+	}
 
     $scope.timeOffset = function(date, offset) {
     	var d = new Date(date);
