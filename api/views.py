@@ -233,12 +233,12 @@ class ContestViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.data
         serializer = ContestSerializer(data=data)
-        start = serializer.data['start_time']
-        end = serializer.data['end_time']
-        # start_contest.apply_async(eta=datetime(2015, 1, 23, 16, 0, 0,tzinfo=timezone('US/Eastern')))
-        start_contest.apply_async(eta=start)
-        end_contest.apply_async(eta=end)
         if serializer.is_valid():
+            start = serializer.data['start_time']
+            end = serializer.data['end_time']
+            # start_contest.apply_async(eta=datetime(2015, 1, 23, 16, 0, 0,tzinfo=timezone('US/Eastern')))
+            start_contest.apply_async(eta=start)
+            end_contest.apply_async(eta=end)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
@@ -364,6 +364,17 @@ class TrackViewSet(viewsets.ModelViewSet):
         # entries = ContestEntry.objects.filter(created_at__range=[start, today]).order_by('-jam_points')[:25]
         entries = ContestEntry.objects.all().order_by('-jam_points')
         serializer = ContestEntrySerializer(entries, many=True)
+        # queryset = ContestEntry.objects.all().order_by('-jam_points')
+        # paginator = Paginator(queryset, 10)
+        # page = request.QUERY_PARAMS.get('page')
+        # try:
+        #     entries = paginator.page(page)
+        # except PageNotAnInteger:
+        #     entries = paginator.page(1)
+        # except EmptyPage:
+        #     entries = paginator.page(paginator.num_pages)
+        #
+        # serializer = PaginatedContestEntrySerializer(entries, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
