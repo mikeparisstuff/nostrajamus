@@ -126,11 +126,23 @@ CELERY_IMPORTS = ('api.tasks',)
 CELERYBEAT_SCHEDULE = {
     'update-playcounts': {
         'task': 'api.tasks.update_playcount',
-        'schedule': timedelta(minutes=20)
+        'schedule': timedelta(minutes=30)
     },
     'update-player-jampoints': {
         'task': 'api.tasks.update_user_jam_points',
-        'schedule': timedelta(minutes=20)
+        'schedule': timedelta(minutes=30)
+    },
+    'update-weekly-rankings': {
+        'task': 'api.tasks.update_weekly_rankings',
+        'schedule': timedelta(minutes=60)
+    },
+    'update-monthly-rankings': {
+        'task': 'api.tasks.update_monthly_rankings',
+        'schedule': timedelta(minutes=60)
+    },
+    'update-alltime-rankings': {
+        'task': 'api.tasks.update_all_time_rankings',
+        'schedule': timedelta(minutes=60)
     }
 }
 
