@@ -138,10 +138,13 @@ MetronicApp.controller('authController', function($scope, api, authState) {
 
     $scope.logout = function(){
         api.auth.logout(function(){
-            console.log(authState.user);
+            // console.log(authState.user);
             authState.user = undefined;
         });
-        $window.location.href = ("http://nostrajamus.com");
+        if (!authState.user) {
+            window.location.href = "/";
+        }
+
     };
 
     $scope.register = function($event){
