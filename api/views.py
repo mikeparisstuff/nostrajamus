@@ -2,8 +2,8 @@ from django.shortcuts import render, render_to_response, RequestContext, redirec
 from rest_framework import viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken
-from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken, PeriodicRanking
+from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer, PaginatedRankingSerializer
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -358,12 +358,29 @@ class TrackViewSet(viewsets.ModelViewSet):
 
     @list_route()
     def trending(self, request):
-        today = date.today()
-        start = today - timedelta(days=7)
-        today = today + timedelta(days=1)
+        filter = request.QUERY_PARAMS.get('filter')
+        if filter == 'weekly':
+            queryset = PeriodicRanking.objects.filter(type='WEEKLY')
+        elif filter == 'monthly':
+            queryset = PeriodicRanking.objects.filter(type='MONTHLY')
+        elif filter == 'alltime':
+            queryset = PeriodicRanking.objects.filter(type='ALLTIME')
+        else:
+            queryset = PeriodicRanking.objects.filter(type='WEEKLY')
+
+        paginator = Paginator(queryset, 10)
+        page = request.QUERY_PARAMS.get('page')
+        try:
+            entries = paginator.page(page)
+        except PageNotAnInteger:
+            entries = paginator.page(1)
+        except EmptyPage:
+            entries = paginator.page(paginator.num_pages)
+
+        serializer = PaginatedRankingSerializer(entries, context={'request': request})
         # entries = ContestEntry.objects.filter(created_at__range=[start, today]).order_by('-jam_points')[:25]
-        entries = ContestEntry.objects.all().order_by('-jam_points')
-        serializer = ContestEntrySerializer(entries, many=True)
+        # entries = ContestEntry.objects.all().order_by('-jam_points')
+        # serializer = ContestEntrySerializer(entries, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 

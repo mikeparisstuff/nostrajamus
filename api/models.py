@@ -553,6 +553,12 @@ class SCTrack(BaseModel):
         null=True
     )
 
+    def __repr__(self):
+        return self.title
+
+    def __str__(self):
+        return "{}".format(self.id)
+
 
 class SCPeriodicPlayCount(BaseModel):
 
@@ -677,3 +683,39 @@ class ResetPasswordToken(BaseModel):
     is_active = models.BooleanField(
         default=True
     )
+
+WEEKLY = "WEEKLY"
+MONTHLY = "MONTHLY"
+ALLTIME = "ALLTIME"
+RANKING_OPTIONS = (
+    (WEEKLY, "Weekly"),
+    (MONTHLY, "Monthly"),
+    (ALLTIME, "AllTime")
+)
+class PeriodicRanking(BaseModel):
+    track = models.ForeignKey(
+        SCTrack
+    )
+
+    jam_points = models.DecimalField(
+        decimal_places=1,
+        max_digits=8,
+        default=0
+    )
+
+    type = models.CharField(
+        max_length=16,
+        choices=RANKING_OPTIONS,
+        default=WEEKLY
+    )
+
+    initial_playback_count = models.IntegerField()
+
+    initial_follower_count = models.IntegerField()
+
+    current_playback_count = models.IntegerField(default=0)
+
+    current_follower_count = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ('type', '-jam_points',)

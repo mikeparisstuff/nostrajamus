@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSong, ContestEntry, SCUser, Feedback, ResetPasswordToken
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSong, ContestEntry, SCUser, Feedback, ResetPasswordToken, PeriodicRanking
 
 # Register your models here.
 
@@ -30,6 +30,9 @@ class FeedbackAdmin(admin.ModelAdmin):
 class ResetTokenAdmin(admin.ModelAdmin):
     list_display = ('id', 'token', 'is_active')
 
+class PeriodicRankingAdmin(admin.ModelAdmin):
+    list_display = ('id', 'type', 'track', 'initial_playback_count', 'current_playback_count', 'jam_points')
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(SCTrack, SCTrackAdmin)
 admin.site.register(Contest, ContestAdmin)
@@ -39,3 +42,4 @@ admin.site.register(ContestEntry, ContestEntryAdmin)
 admin.site.register(SCUser, SCUserAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(ResetPasswordToken, ResetTokenAdmin)
+admin.site.register(PeriodicRanking, PeriodicRankingAdmin)

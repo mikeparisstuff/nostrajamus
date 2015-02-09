@@ -1,10 +1,12 @@
 from __future__ import absolute_import
 
-from api.models import SCTrack, SCUser, SCPeriodicPlayCount, ContestEntry, Profile, Contest
+from api.models import SCTrack, SCUser, SCPeriodicPlayCount, ContestEntry, Profile, Contest, PeriodicRanking
 from django.db.models import Sum
 from requests.exceptions import HTTPError
 from celery import shared_task
 import soundcloud
+from datetime import timedelta, datetime
+from django.utils import timezone
 
 client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
 
@@ -17,6 +19,9 @@ def calculate_jam_points(initial_playcount, initial_followers, final_playcount, 
     playcount_unit = (final_playcount ** (7.0/8.0)) * (((final_playcount - initial_playcount)/initial_playcount) ** ( 8.0/7.0))
     denom = (initial_playcount ** (0.5)) + (initial_followers ** (0.5))
     jam_points = (follow_unit + playcount_unit)/denom
+    if jam_points < 0:
+        print "Found Negative Jam Points"
+        print "{}, {}, {}, {}: {}".format(initial_playcount, initial_followers, final_playcount, final_followers, jam_points)
     return (jam_points**0.5)
 
 
@@ -45,6 +50,97 @@ def update_playcount():
         except HTTPError as e:
             print 'Error getting track with id: {}'.format(track.sc_id)
             print 'ERROR: {}'.format(e)
+
+@shared_task
+def update_weekly_rankings():
+    tracks = SCTrack.objects.all()
+    for track in tracks:
+        # Update Weekly
+        last_week = timezone.now() - timedelta(days=7)
+        most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        weekly = SCPeriodicPlayCount.objects.filter(created_at__lte=last_week, track=track).order_by('-created_at')[:1]
+        if len(weekly) > 0:
+            weekly = weekly[0]
+        else:
+            weekly = SCPeriodicPlayCount.objects.filter(track=track).earliest('created_at')
+        jam_points = calculate_jam_points(weekly.playback_count, weekly.follower_count, most_recent.playback_count, most_recent.follower_count )
+        try:
+            week_entry = PeriodicRanking.objects.get(track = track, type='WEEKLY')
+            week_entry.jam_points = jam_points
+            week_entry.initial_playback_count = weekly.playback_count
+            week_entry.initial_follower_count = weekly.follower_count
+            week_entry.current_playback_count = most_recent.playback_count
+            week_entry.current_follower_count = most_recent.follower_count
+            week_entry.save()
+        except PeriodicRanking.DoesNotExist:
+            PeriodicRanking.objects.create(
+                track = track,
+                type = 'WEEKLY',
+                jam_points = jam_points,
+                initial_playback_count = weekly.playback_count,
+                initial_follower_count = weekly.follower_count,
+                current_playback_count = most_recent.playback_count,
+                current_follower_count = most_recent.follower_count
+            )
+
+@shared_task
+def update_monthly_rankings():
+    tracks = SCTrack.objects.all()
+    for track in tracks:
+        # Update Weekly
+        last_month = timezone.now() - timedelta(days=30)
+        most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        monthly = SCPeriodicPlayCount.objects.filter(created_at__lte=last_month, track=track).order_by('-created_at')[:1]
+        if len(monthly) > 0:
+            monthly = monthly[0]
+        else:
+            monthly = SCPeriodicPlayCount.objects.filter(track=track).earliest('created_at')
+        jam_points = calculate_jam_points(monthly.playback_count, monthly.follower_count, most_recent.playback_count, most_recent.follower_count )
+        try:
+            month_entry = PeriodicRanking.objects.get(track = track, type='MONTHLY')
+            month_entry.jam_points = jam_points
+            month_entry.initial_playback_count = monthly.playback_count
+            month_entry.initial_follower_count = monthly.follower_count
+            month_entry.current_playback_count = most_recent.playback_count
+            month_entry.current_follower_count = most_recent.follower_count
+            month_entry.save()
+        except PeriodicRanking.DoesNotExist:
+            PeriodicRanking.objects.create(
+                track = track,
+                type = 'MONTHLY',
+                jam_points = jam_points,
+                initial_playback_count = monthly.playback_count,
+                initial_follower_count = monthly.follower_count,
+                current_playback_count = most_recent.playback_count,
+                current_follower_count = most_recent.follower_count
+            )
+
+@shared_task
+def update_all_time_rankings():
+    tracks = SCTrack.objects.all()
+    for track in tracks:
+        # Update Weekly
+        most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        all_time = SCPeriodicPlayCount.objects.filter(track=track).earliest('created_at')
+        jam_points = calculate_jam_points(all_time.playback_count, all_time.follower_count, most_recent.playback_count, most_recent.follower_count )
+        try:
+            week_entry = PeriodicRanking.objects.get(track = track, type='ALLTIME')
+            week_entry.jam_points = jam_points
+            week_entry.initial_playback_count = all_time.playback_count
+            week_entry.initial_follower_count = all_time.follower_count
+            week_entry.current_playback_count = most_recent.playback_count
+            week_entry.current_follower_count = most_recent.follower_count
+            week_entry.save()
+        except PeriodicRanking.DoesNotExist:
+            PeriodicRanking.objects.create(
+                track = track,
+                type = 'ALLTIME',
+                jam_points = jam_points,
+                initial_playback_count = all_time.playback_count,
+                initial_follower_count = all_time.follower_count,
+                current_playback_count = most_recent.playback_count,
+                current_follower_count = most_recent.follower_count
+            )
 
 @shared_task
 def update_user_jam_points():
