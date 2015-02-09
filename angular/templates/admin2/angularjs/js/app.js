@@ -141,7 +141,7 @@ MetronicApp.controller('authController', function($scope, api, authState) {
             console.log(authState.user);
             authState.user = undefined;
         });
-        $window.reload();
+        $window.location.href = ("http://nostrajamus.com");
     };
 
     $scope.register = function($event){
