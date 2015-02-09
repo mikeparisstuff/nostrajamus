@@ -971,21 +971,15 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         // console.log(response.data);
                         return response.data;
                     });
-                }],
-                trending: ['$http', function($http) {
-                    return $http.get('/api/tracks/trending').then(function(response) {
-                        // console.log(response.data);
-                        return response.data;
-                    });
                 }]
             }
         })
 
         .state('discover', {
             url: "/discover",
-            templateUrl: "/assets/views/discover2.html",
+            templateUrl: "/assets/views/discover.html",
             data: {pageTitle: 'Discover'},
-            controller: "LeaderboardController",
+            controller: "DiscoverController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -1001,14 +995,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '/assets/global/plugins/datatables/all.min.js',
                             '/assets/js/scripts/table-advanced.js',
 
-                            '/assets/js/controllers/LeaderboardController.js'
+                            '/assets/js/controllers/DiscoverController.js'
                         ]
-                    });
-                }],
-                leaders: ['$http', function($http) {
-                    return $http.get('/api/users/leaderboard/').then(function(response) {
-                        // console.log(response.data);
-                        return response.data;
                     });
                 }],
                 trending: ['$http', function($http) {
