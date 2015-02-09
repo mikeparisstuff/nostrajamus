@@ -233,11 +233,11 @@ class ContestViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.data
         serializer = ContestSerializer(data=data)
-        start = serializer.data['start_time']
-        end = serializer.data['end_time']
-        # start_contest.apply_async(eta=datetime(2015, 1, 23, 16, 0, 0,tzinfo=timezone('US/Eastern')))
-        start_contest.apply_async(eta=start)
-        end_contest.apply_async(eta=end)
+        # start = serializer.data['start_time']
+        # end = serializer.data['end_time']
+        # # start_contest.apply_async(eta=datetime(2015, 1, 23, 16, 0, 0,tzinfo=timezone('US/Eastern')))
+        # start_contest.apply_async(eta=start)
+        # end_contest.apply_async(eta=end)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
