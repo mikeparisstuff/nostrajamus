@@ -12,6 +12,7 @@ import mailchimp
 from . import authentication
 import os, string, random
 from datetime import datetime, date, timedelta
+from .tasks import start_contest, end_contest
 
 
 MAILCHIMP_API_KEY = '9defc1dba727a90da8da8d294d3fa760-us10'
@@ -232,6 +233,11 @@ class ContestViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         data = request.data
         serializer = ContestSerializer(data=data)
+        start = serializer.data['start_time']
+        end = serializer.data['end_time']
+        # start_contest.apply_async(eta=datetime(2015, 1, 23, 16, 0, 0,tzinfo=timezone('US/Eastern')))
+        start_contest.apply_async(eta=start)
+        end_contest.apply_async(eta=end)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -355,8 +361,8 @@ class TrackViewSet(viewsets.ModelViewSet):
         today = date.today()
         start = today - timedelta(days=7)
         today = today + timedelta(days=1)
-        entries = ContestEntry.objects.filter(created_at__range=[start, today]).order_by('-jam_points')[:25]
-        # entries = ContestEntry.objects.filter(contest__in=contests).order_by('-jam_points')[:25]
+        # entries = ContestEntry.objects.filter(created_at__range=[start, today]).order_by('-jam_points')[:25]
+        entries = ContestEntry.objects.all().order_by('-jam_points')
         serializer = ContestEntrySerializer(entries, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

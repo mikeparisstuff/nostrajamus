@@ -35,6 +35,8 @@
 		<!-- END EXAMPLE TABLE PORTLET-->
 	</div>
 </div>
+<input id="ContestID" type="hidden" value="{{contestInfo.id}}"/>
+<input id="ContestTitle" type="hidden" value="{{contestInfo.title}}"/>
 
 <div class="row">
     <div class="col-lg-12 text-center">
@@ -74,6 +76,7 @@
         Next
     </button>
 </div>
+
 <!-- <div class="row" align="center">
     <button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
         Prev

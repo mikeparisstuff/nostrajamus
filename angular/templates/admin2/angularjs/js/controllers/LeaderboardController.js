@@ -39,15 +39,15 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
       var timeCreated = new Date($scope.trending[i].created_at);
       timeCreated = Date.parse(timeCreated);
       // console.log(timeCreated);
-      if (month < timeCreated) {
+//      if (month < timeCreated) {
         monthTracks.push($scope.trending[i]);
-        if (week < timeCreated) {
+        if (month < timeCreated) {
           weekTracks.push($scope.trending[i]);
-          if (day < timeCreated) {
-            dayTracks.push($scope.trending[i]);
-          }
+            if (week < timeCreated) {
+                dayTracks.push($scope.trending[i]);
+            }
         }
-      }
+//      }
     }
 
     $scope.monthTracks = monthTracks;

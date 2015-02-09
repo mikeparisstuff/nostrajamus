@@ -95,6 +95,7 @@ class Profile(AbstractUser):
         db_index=True
     )
 
+
     @property
     def my_contest_entries(self):
         contest_entries = ContestEntry.objects.filter(user=self).order_by('-created_at')

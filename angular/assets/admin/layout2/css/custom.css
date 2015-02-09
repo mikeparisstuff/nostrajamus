@@ -17,3 +17,15 @@ Rounded Portlets
 	border-radius: 0px 0px 4px 4px !important;
 }
 */
+
+.green {
+    /*color: #2ecc71;*/
+    color: #2980b9;
+}
+.green:hover {
+    color: #fff;
+}
+
+.contact-form {
+    min-height: 84px;
+}
