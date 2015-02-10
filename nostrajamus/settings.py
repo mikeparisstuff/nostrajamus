@@ -17,7 +17,7 @@ from datetime import timedelta
 import djcelery
 djcelery.setup_loader()
 BROKER_URL = 'django://'
-
+DEBUG = True
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -28,7 +28,7 @@ SECRET_KEY = 'dqc5qtm6h6$u853(jf@%^!-qe(e==-=0b9njzo(g)6o8a))l)z'
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -86,7 +86,6 @@ if instance_id == 'PROD':
         'HOST': 'nostrajamusprod.cqgo2wxdycyf.us-east-1.rds.amazonaws.com',
         'PORT': os.environ['RDS_PORT']
     }
-    DEBUG = False
     AWS_STORAGE_BUCKET_NAME = 'nostrajamus-prod'
     BROKER_URL = 'sqs://sqs.us-east-1.amazonaws.com/755639026061/nostrajamus-prod'
     # CELERY_DEFAULT_QUEUE = 'nostrajamus-prod'
@@ -100,7 +99,6 @@ else:
         'HOST': '',
         'PORT': '',
     }
-    DEBUG = True
     AWS_STORAGE_BUCKET_NAME = 'nostrajamus-dev'
     BROKER_URL = 'sqs://sqs.us-east-1.amazonaws.com/755639026061/nostrajamus-dev'
     # CELERY_DEFAULT_QUEUE = 'nostrajamus-dev'
