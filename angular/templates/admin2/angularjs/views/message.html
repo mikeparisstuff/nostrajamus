@@ -8,86 +8,7 @@
     <div class="col-md-12">
         <!-- BEGIN MESSAGE SIDEBAR -->
         <div class="todo-ui" style="margin-top: 0">
-            <!-- <div class="todo-sidebar">
-                <div class="portlet light">
-                    <div class="portlet-title">
-                        <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
-                            <span class="caption-subject font-green-sharp bold uppercase">PROJECTS </span>
-                            <span class="caption-helper visible-sm-inline-block visible-xs-inline-block">click to view project list</span>
-                        </div>
-                        <div class="actions">
-                            <div class="btn-group">
-                                <a class="btn green-haze btn-circle btn-sm todo-projects-config" href="#" data-toggle="dropdown" dropdown-menu-hover data-close-others="true">
-                                <i class="icon-settings"></i> &nbsp; <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="#">
-                                        <i class="i"></i> New Project </a>
-                                    </li>
-                                    <li class="divider">
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                        Pending <span class="badge badge-danger">
-                                        4 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                        Completed <span class="badge badge-success">
-                                        12 </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                        Overdue <span class="badge badge-warning">
-                                        9 </span>
-                                        </a>
-                                    </li>
-                                    <li class="divider">
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                        <i class="i"></i> Archived Projects </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="portlet-body todo-project-list-content">
-                        <div class="todo-project-list">
-                            <ul class="nav nav-pills nav-stacked">
-                                <li>
-                                    <a href="#">
-                                    <span class="badge badge-success"> 6 </span> AirAsia Ads </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="badge badge-success"> 2 </span> HSBC Promo </a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">
-                                    <span class="badge badge-success badge-active"> 3 </span> GlobalEx System </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="badge badge-default"> 14 </span> Empire City </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="badge badge-success"> 6 </span> AirAsia Ads </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <span class="badge badge-success"> 2 </span> Loop Inc Promo </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- END TODO SIDEBAR -->
+
             <!-- BEGIN TODO CONTENT -->
             <div class="todo-content">
                 <div class="portlet light">
@@ -109,21 +30,21 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <form name="sentMessage" id="contactForm" action="/api/feedback/" method="POST" novalidate>
+                                <form name="sentMessage" id="contactForm" ng-submit="submitMessage()" novalidate>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="text" name="name" class="form-control" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
+                                                <input type="text" class="form-control" ng-model="formData.name" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name.">
                                                 <p class="help-block text-danger"></p>
                                             </div>
                                             <div class="form-group">
-                                                <input type="email" name="email" class="form-control" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
+                                                <input type="email" class="form-control" ng-model="formData.email" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address.">
                                                 <p class="help-block text-danger"></p>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <textarea class="form-control contact-form" name="text" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                                                <textarea class="form-control contact-form" ng-model="formData.message" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
                                                 <p class="help-block text-danger"></p>
                                             </div>
                                         </div>
@@ -131,6 +52,7 @@
                                         <div class="col-lg-12 text-center">
                                             <div id="success"></div>
                                             <button type="submit" class="btn btn-xl">Send Message</button>
+                                            <h5 ng-show="showThanks">Thanks for the feedback!</h5>
                                         </div>
                                     </div>
                                 </form>
@@ -145,6 +67,3 @@
     <!-- END PAGE CONTENT-->
 </div>
 <!-- END PAGE CONTENT-->
-<script>
-    Message.init(); // init todo page
-</script>

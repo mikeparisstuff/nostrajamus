@@ -408,4 +408,4 @@ class FeedbackViewSet(viewsets.ModelViewSet):
             text = data['text'],
             email = data['email']
         )
-        return redirect('/')
+        return Response({"detail": "Success"}, status=status.HTTP_200_OK)

@@ -92,7 +92,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
             // console.log(data);
             // console.log("FAILURE");
         });
-    }
+    };
 
     $scope.nextPage = function() {
         $scope.currentPage = $scope.currentPage + 1;
