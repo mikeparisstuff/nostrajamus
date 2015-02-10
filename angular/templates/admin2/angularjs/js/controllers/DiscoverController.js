@@ -23,69 +23,84 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     };
 
     $scope.getWeekly = function() {
-      $scope.timeSelect = 'weekly';
+      if ($scope.timeSelect == 'weekly') {
+        return;
+      }
+      else {
+        $scope.timeSelect = 'weekly';
 
-      $http({
-          url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
-          method: "GET",
-          // data: JSON.stringify($scope.form),
-          headers: {'Content-Type': 'application/json'}
-      }).success(function (data, status, headers, config) {
-          // console.log(data);
-          $scope.trending = data;
-          console.log($scope.trending);
-          // console.log("SUCCESS");
-      }).error(function (data, status, headers, config) {
-          // $scope.status = status;
-          // console.log(data);
-          // console.log("FAILURE");
-      });
+        $http({
+            url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            // console.log(data);
+            $scope.trending = data;
+            // console.log($scope.trending);
+            // console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            // console.log(data);
+            // console.log("FAILURE");
+        });
 
-      $scope.currentPage = 1;
+        $scope.currentPage = 1;
+      }
     }
 
     $scope.getMonthly = function() {
-      $scope.timeSelect = 'monthly';
+      if ($scope.timeSelect == 'monthly') {
+        return;
+      }
+      else {
+        $scope.timeSelect = 'monthly';
 
-      $http({
-          url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
-          method: "GET",
-          // data: JSON.stringify($scope.form),
-          headers: {'Content-Type': 'application/json'}
-      }).success(function (data, status, headers, config) {
-          // console.log(data);
-          $scope.trending = data;
-          console.log($scope.trending);
-          // console.log("SUCCESS");
-      }).error(function (data, status, headers, config) {
-          // $scope.status = status;
-          // console.log(data);
-          // console.log("FAILURE");
-      });
+        $http({
+            url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            // console.log(data);
+            $scope.trending = data;
+            // console.log($scope.trending);
+            // console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            // console.log(data);
+            // console.log("FAILURE");
+        });
 
-      $scope.currentPage = 1;
+        $scope.currentPage = 1;
+      }
     }
 
     $scope.getAllTime = function() {
-      $scope.timeSelect = 'alltime';
+      if ($scope.timeSelect == 'alltime') {
+        return;
+      }
+      else {
+        $scope.timeSelect = 'alltime';
 
-      $http({
-          url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
-          method: "GET",
-          // data: JSON.stringify($scope.form),
-          headers: {'Content-Type': 'application/json'}
-      }).success(function (data, status, headers, config) {
-          // console.log(data);
-          $scope.trending = data;
-          console.log($scope.trending);
-          // console.log("SUCCESS");
-      }).error(function (data, status, headers, config) {
-          // $scope.status = status;
-          // console.log(data);
-          // console.log("FAILURE");
-      });
+        $http({
+            url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            // console.log(data);
+            $scope.trending = data;
+            // console.log($scope.trending);
+            // console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            // console.log(data);
+            // console.log("FAILURE");
+        });
 
-      $scope.currentPage = 1;
+        $scope.currentPage = 1;
+      }
     }
 
     $scope.prevPage = function() {
