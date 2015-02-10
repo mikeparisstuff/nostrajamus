@@ -16,7 +16,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 
     // pagination
     $scope.currentPage = 1;
-    $scope.pageSize = 10;
+    $scope.pageSize = 7;
 
     $scope.numberOfPages=function() {
         return Math.ceil($scope.trending.count/$scope.pageSize);                
