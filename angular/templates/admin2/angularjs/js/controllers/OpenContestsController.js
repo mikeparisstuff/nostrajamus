@@ -164,6 +164,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     	// document.getElementById("sc-embed").innerHTML = trackFrame;
   	};
 
+
   	$scope.postTrack = function(track) {
         // console.log(track);
   		$http({
@@ -176,8 +177,23 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
         	  	// console.log(data);
-                alert("Thanks for submitting!");
-                location.reload();
+
+
+                $http.get('/api/users/me').then(function (response) {
+                    // console.log(response.data);
+                    $scope.myData = response.data;
+                    if ($scope.myData.my_entries != null) {
+                        for (var i=0; i < $scope.myData.my_entries.length; i++) {
+                            if ($scope.myData.my_entries[i].contest == $scope.contestInfo.id) {
+                                $scope.mySubmittedTrack = $scope.myData.my_entries[i].track;
+                                $scope.hasSubmitted = true;
+                            }
+                        }
+                    }
+                });
+//                alert("Thanks for submitting!");
+
+//                location.reload();
             }).error(function (data, status, headers, config) {
                 // $scope.status = status;
         	  	// console.log(data);
