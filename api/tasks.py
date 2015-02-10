@@ -142,15 +142,27 @@ def update_all_time_rankings():
                 current_follower_count = most_recent.follower_count
             )
 
+# @shared_task
+# def update_user_jam_points():
+#     entry_points = ContestEntry.objects.values('user__id').annotate(total_jam_points=Sum('jam_points'))
+#     # entry_points = ContestEntry.objects.values('user__username').annotate(total_jam_points=Sum('jam_points'))
+#     for i, point in enumerate(entry_points):
+#         user = Profile.objects.get(pk=point['user__id'])
+#         user.jam_points = point['total_jam_points']
+#         print "{}: Updating points for user: {} with points: {}".format(i, user.username, point['total_jam_points'])
+#         user.save()
 @shared_task
 def update_user_jam_points():
-    entry_points = ContestEntry.objects.values('user__id').annotate(total_jam_points=Sum('jam_points'))
-    # entry_points = ContestEntry.objects.values('user__username').annotate(total_jam_points=Sum('jam_points'))
-    for i, point in enumerate(entry_points):
-        user = Profile.objects.get(pk=point['user__id'])
-        user.jam_points = point['total_jam_points']
-        print "{}: Updating points for user: {} with points: {}".format(i, user.username, point['total_jam_points'])
-        user.save()
+    profiles = Profile.objects.all()
+    for prof in profiles:
+        entries = ContestEntry.objects.filter(user=prof)
+        if len(entries) == 0:
+            print "Found no contest entries for that user."
+            continue
+        else:
+            sum = reduce(lambda x, jam: x + jam.jam_points, entries, 0)
+            prof.jam_points = sum
+            prof.save()
 
 @shared_task
 def start_contest(contest_id):
