@@ -1,4 +1,4 @@
-<!-- BEGIN PAGE HEADER-->
+BEGIN PAGE HEADER-->
 <h3 class="page-title">
 	Contests
 </h3>
@@ -163,6 +163,30 @@
 	    </div>
 	</div>
 
+	<!-- Modal -->
+	<div class="modal fade" id="prizeDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header title-bg">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title white" id="myModalLabel">{{title}}</h4>
+	            </div>
+	            <div class="modal-body">
+	            	<h5>Prizes</h5>
+	            	<p ng-repeat="prize in prizes">{{prize}}</p>
+	            	... and more NostraJAMus swag!
+					<!-- <p ng-repeat="category in prizeCategories">{{category}}</p> -->
+					<!-- <p ng-repeat="value in prizeValues">{{value}}</p> -->
+	            </div>
+	            <div class="modal-footer title-bg">
+	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open'">Enter</button>
+	               	<button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'">View</button>
+	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'">View</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
 
     <div class="row">
         <div class="col-lg-12 text-center">
@@ -233,7 +257,7 @@
 											${{openContest.entry_fee}}
 										</td>
 										<td>
-											<a href="">{{openContest.prize}}</a>
+											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#prizeDetailsModal" ng-click="passModal(openContest.title, openContest.entry_fee, openContest.prize, openContest.description, openContest.start_time, openContest.end_time, 'open', openContest.id)">{{openContest.prize}}</a>
 										</td>
 										<td>
 											{{openContest.start_time}}
@@ -1209,4 +1233,4 @@
 	// Index.init();    
 	// Tasks.initDashboardWidget();
 </script>
-<!-- BEGIN MAIN JS & CSS -->
+<!-- BEGIN MAIN JS & CSS

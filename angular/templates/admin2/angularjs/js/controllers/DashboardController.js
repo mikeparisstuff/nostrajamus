@@ -153,7 +153,25 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 	$scope.passModal = function(title, entry_fee, prize, description, start_time, end_time, status, contest_id) {
 		$scope.title = title;
 		$scope.entry_fee = entry_fee;
+
 		$scope.prize = prize;
+		var prizes = prize.split(",");
+		$scope.prizes = prizes;
+		var prizeCategories = [];
+		var prizeValues = [];
+
+		for (var i in prizes) {
+			var eachPrize = prizes[i].split(":");
+			prizeCategories.push(eachPrize[0].trim());
+			prizeValues.push(eachPrize[1].trim());
+		}
+
+		$scope.prizeCategories = prizeCategories;
+		$scope.prizeValues = prizeValues;
+
+		// console.log($scope.prizeCategories);
+		// console.log($scope.prizeValues);
+
 		$scope.description = description;
 		$scope.start_time = start_time;
 		$scope.end_time = end_time;
