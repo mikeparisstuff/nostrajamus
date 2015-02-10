@@ -288,7 +288,7 @@ class ContestViewSet(viewsets.ModelViewSet):
                 )
                 # entry_serializer = ContestEntrySerializer(contest_entry, context={'request': request})
                 # return Response(entry_serializer.data, status=status.HTTP_200_OK)
-                return Response("Data")
+                return Response({"detail": "Successfully submitted track"}, status=status.HTTP_200_OK)
         except KeyError as e:
             return Response({
                 "detail": "You need to submit a track."
@@ -296,6 +296,11 @@ class ContestViewSet(viewsets.ModelViewSet):
         except Contest.DoesNotExist as e:
             return Response({
                 "detail": "Could not find Contest with id={}".format(pk)
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except Exception, e:
+            print e
+            return Response({
+                "detail": e
             }, status=status.HTTP_400_BAD_REQUEST)
 
     # @detail_route(methods=("POST",))

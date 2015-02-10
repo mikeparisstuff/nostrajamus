@@ -397,7 +397,7 @@ class SCTrack(BaseModel):
     )
 
     description = models.CharField(
-        max_length=1024,
+        max_length=2048,
         blank=True,
         null=True
     )
