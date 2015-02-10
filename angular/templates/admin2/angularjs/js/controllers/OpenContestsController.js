@@ -95,24 +95,58 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
     });
 	var url = "https://api.soundcloud.com/tracks";
+    var urlResolve = "https://api.soundcloud.com/resolve.json";
 
 	$scope.getTracks = function(val) {
-	    return $http.get(url, {
-	      params: {
-	      	client_id: "f0b7083f9e4c053ca072c48a26e8567a",
-	        q: val,
-	      }
-	    }).then(function(response){
-	    	// console.log(response);
-	    	return response.data;
-	      // return response.data.map(function(item){
-	      //   return {
-	      //   	"label": item.title,
-	      //   	"select": item
-	      //   }
-	      // });
-	    });
+        var begin = val.slice(0,8);
+        if (begin == "https://") {
+            // console.log("SEARCH FOR SONGS")
+            return $http.get(urlResolve, {
+              params: {
+                client_id: "f0b7083f9e4c053ca072c48a26e8567a",
+                url: val,
+              }
+            }).then(function(response){
+                console.log(response.data);
+                $scope.getSCUrl(response.data);
+                return (response.data);
+              // return response.data.map(function(item){
+              //   return {
+              //    "label": item.title,
+              //    "select": item
+              //   }
+              // });
+            });
+        }
+        else {
+            return $http.get(url, {
+              params: {
+                client_id: "f0b7083f9e4c053ca072c48a26e8567a",
+                q: val,
+              }
+            }).then(function(response){
+                console.log(response.data);
+                return response.data;
+              // return response.data.map(function(item){
+              //   return {
+              //    "label": item.title,
+              //    "select": item
+              //   }
+              // });
+            });
+        }
   	};
+
+    $scope.getSCUrl = function(item) {
+        // console.log(item);
+        $scope.track = item;
+
+        var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + item.id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+
+        var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
+
+        $scope.track_url = trustedUrl;
+    };
 
   	$scope.onSelect = function(item, model, label) {
   		// console.log(item);
@@ -127,9 +161,10 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     	// var trackFrame = '<iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="' + SCUrl + '"></iframe>';
 
     	// document.getElementById("sc-embed").innerHTML = trackFrame;
-  	}
+  	};
 
   	$scope.postTrack = function(track) {
+        // console.log(track);
   		$http({
             url: '/api/contests/' + $scope.contestInfo.id + '/enter/' ,
             method: "POST",
@@ -147,7 +182,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         	  	// console.log(data);
                 alert("Try again.");
             });
-  	}
+  	};
 
  //    $scope.getTracks = function(val) {
 	// 	return SC.get('/tracks', {q: val}, function(tracks) {
