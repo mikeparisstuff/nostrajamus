@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plangular</title>
+  <meta name="description" content="Create your own custom SoundCloud player with just HTML and CSS. Built with AngularJS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="docs/favicon.png" />
+  <link rel="docs/apple-touch-icon-precomposed" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="docs/autobass.css"/>
+  <link href="http://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/0.10.6/vue.min.js"></script>
+  <script src="v-plangular.min.js"></script>
+
+  <!--
+  <script src="docs/app.js"></script>
+  -->
+
+</head>
+<body id="vm" class="theme-dark-red">
+
+
+  <header class="table full-height center bg-darken-2 transition-bg"
+    v-component="plangular" v-src="'http://soundcloud.com/jxnblk/plangular'">
+    <div class="relative table-cell py4">
+      <div class="relative mb4 vhs-zoom-in">
+        <div class="absolute-fill transition-opacity"
+          v-show="player.currentTrack == track"
+          v-style="opacity: player.currentTime | logowave">
+          <svg viewBox="0 0 1024 64" style="width:100%;height:100%" v-show="player.playing == track">
+            <path d="M0 32 H1024" stroke="currentColor" stroke-width="3" class="vhs-flicker">
+          </svg>
+          <img src="docs/images/waveform-new.svg" style="height:100%" class="absolute-fill full-width"/>
+        </div>
+        <div class="relative px2">
+          <button v-on="click: playPause()" class="h1 button button-circle vhs-flicker-in vhs-delay-1">
+            <svg class="vhs-pop-in" v-if="player.playing != track" v-plangular-icon="'play'"></svg>
+            <svg class="vhs-pop-in" v-if="player.playing == track" v-plangular-icon="'pause'"></svg>
+            <span class="hide">Play/Pause</span>
+          </button>
+        </div>
+      </div>
+      <div class="px2">
+        <h1 class="vhs-flicker-in">
+          Plangular
+          <small class="inline-block vhs-flicker-in vhs-delay-3">v2</small>
+        </h1>
+        <p class="vhs-fade-in vhs-delay-4">Create custom SoundCloud players with HTML and CSS</p>
+        <div class="m2 vhs-zoom-in vhs-delay-2">
+          <a href="http://github.com/jxnblk/plangular" class="button vhs-flicker-in vhs-delay-2">View on Github</a>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+
+  <section id="examples" class="container px2 py4">
+    <h2 class="mb1">Examples</h2>
+
+    <div class="table mb1 rounded"
+      v-component="plangular" v-src="'http://soundcloud.com/mrsjxn/no-love'"
+      v-class="player.playing == track ? 'bg-red-alpha' : 'bg-darken-2'">
+      <div class="table-cell p1">
+        <button class="button-icon" v-on="click: playPause()">
+          <svg class="vhs-pop-in" v-if="player.playing != track" v-plangular-icon="'play'"></svg>
+          <svg class="vhs-pop-in" v-if="player.playing == track" v-plangular-icon="'pause'"></svg>
+        </button>
+      </div>
+      <h3 class="table-cell p1 full-width">{{ user.username }} - {{ title }}</h3>
+      <small class="monospace h6 table-cell px1 nowrap">
+        {{ currentTime | prettyTime }} / {{ duration | prettyTime }}
+      </small>
+    </div>
+
+    <div class="table mb1 rounded" v-component="plangular" v-src="'http://soundcloud.com/jxnblk/really-wanna'"
+      v-class="player.playing == track ? 'bg-red-alpha' : 'bg-darken-2'">
+      <div class="table-cell p1">
+        <button class="button-icon" v-on="click: playPause()">
+          <svg class="vhs-pop-in" v-if="player.playing != track" v-plangular-icon="'play'"></svg>
+          <svg class="vhs-pop-in" v-if="player.playing == track" v-plangular-icon="'pause'"></svg>
+        </button>
+      </div>
+      <div class="table-cell px1 full-width">
+        <div class="mt1">{{ user.username }}</div>
+        <h3 class="m0">{{ title }} </h3>
+        <progress class="full-width"
+          v-on="click: player.seek($event)"
+          value="{{ currentTime / duration || 0 }}">
+            {{ currentTime / duration }}
+        </progress>
+      </div>
+    </div>
+
+    <div class="bg-darken-2 rounded" v-component="plangular" v-src="'http://soundcloud.com/jxnblk/sets/yello'">
+      <div class="p2 bg-darken-1">
+        <div class="table">
+          <h3 class="table-cell full-width m0">{{ user.username }}</h3>
+          <small class="monospace h6 table-cell nowrap">{{ currentTime | prettyTime }} - {{ duration | prettyTime }}</small>
+        </div>
+        <h1 class="m0">{{ title }}</h1>
+        <div class="table">
+          <div class="table-cell">
+            <button class="button-icon" v-on="click: previous()">
+              <svg v-plangular-icon="'previous'"></svg>
+            </button>
+          </div>
+          <div class="table-cell">
+            <button class="h2 button-icon" v-on="click: playPause(player.playlistIndex)">
+              <svg v-if="player.tracks[player.i] != track || !player.playing" v-plangular-icon="'play'"></svg>
+              <svg v-if="player.tracks[player.i] == track && player.playing" v-plangular-icon="'pause'"></svg>
+            </button>
+          </div>
+          <div class="table-cell">
+            <button class="button-icon" v-on="click: next()">
+              <svg v-plangular-icon="'next'"></svg>
+            </button>
+          </div>
+          <div class="table-cell full-width">
+            <div class="px1">
+              <progress class="" v-on="click: seek($event)" value="{{ currentTime / duration || 0 }}">{{ currentTime / duration }}</progress>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-repeat="t : tracks" class="">
+        <a href="#{{ t.title }}" class="block px2 py1 nav-item"
+          v-on="click: playPause($index)"
+          v-class="player.currentTrack == t ? 'bg-darken-3' : ''">
+          <span class="mr1">{{ $index }}.</span>
+          {{ t.user.username }} - {{ t.title }}
+        </a>
+      </div>
+    </div>
+
+    <div class="center py2">
+      <a href="docs/vuejs" class="button">More Examples</a>
+    </div>
+  </section>
+
+
+  <section id="features" class="container px2 py4">
+    <h2>Features</h2>
+    <ul>
+      <li>Highly Customizable</li>
+      <li>Versions for both Angular and Vuejs</li>
+      <li>No Javasript Knowledge Required</li>
+    </ul>
+  </section>
+
+
+  <section id="get-started" class="container px2 py4">
+    <h2>Get Started</h2>
+    <p>Learn more on Github and start creating your own players.</p>
+    <div class="py2">
+      <a href="http://github.com/jxnblk/plangular" class="button mr1 mb1">Github</a>
+      <a href="https://github.com/jxnblk/plangular/archive/v2.0-beta.1.zip" class="button">Download v2.0 beta</a>
+    </div>
+
+    <div class="py2">
+      <h2>CDN</h2>
+      <h3 class="">Vuejs Version</h3>
+      <input type="text" readonly class="input-readonly monospace red bg-red-alpha" value="http://d2v52k3cl9vedd.cloudfront.net/plangular/2.0-beta-1/v-plangular.min.js" onclick="select()">
+      <h3 class="">Angular Version</h3>
+      <input type="text" readonly class="input-readonly monospace red bg-red-alpha" value="http://d2v52k3cl9vedd.cloudfront.net/plangular/2.0-beta-1/ng-plangular.min.js" onclick="select()">
+    </div>
+ 
+  </section>
+
+
+  <footer class="px2 py4 bg-darken-2">
+    <div class="container">
+      <nav class="mb1">
+        <a href="." class="nav-item py1 mr1">Home</a>
+        <a href="docs/vuejs" class="nav-item py1 mr1 red">Examples</a>
+        <a href="http://github.com/jxnblk/plangular" class="nav-item py1">Github</a>
+      </nav>
+      <p class="h6 m0">Made with love by <a href="http://jxnblk.com">Jxnblk</a>.</p>
+    </div>
+  </footer>
+
+
+<script> var vm = new Vue({ el: '#vm' }); </script>
+
+</body>
+</html>
