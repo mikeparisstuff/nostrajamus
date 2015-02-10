@@ -206,7 +206,7 @@ MetronicApp.controller('HeaderController', ['$scope', '$http', function($scope, 
     $scope.getProfilePicture = function(pic) {
       var src = '';
         
-      if (pic == null) {
+      // if (pic == null) {
             // var randomPic = Math.random()*100;
             // if (randomPic < 100/3) {
             //     return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
@@ -217,11 +217,11 @@ MetronicApp.controller('HeaderController', ['$scope', '$http', function($scope, 
             // else if (randomPic > 200/3) {
             //     return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
             // }
-            return src = '/assets/admin/pages/media/profile/profile-car.jpg';
-      }
-      else {
+            // return src = '/assets/admin/pages/media/profile/profile-car.jpg';
+      // }
+      // else {
         return pic;
-      }
+      // }
     };
 
 }]);
@@ -779,12 +779,12 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }],
                 myInfo: ['$http', '$stateParams', function($http, $stateParams) {
                     return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
-                        console.log(response.data);
+                        // console.log(response.data);
                         return response.data;
                     });
                 }],
                 me: ['$http', '$stateParams', function($http, $stateParams) {
-                    console.log($stateParams.userID);
+                    // console.log($stateParams.userID);
                     return $stateParams.userID;
                 }]
             }

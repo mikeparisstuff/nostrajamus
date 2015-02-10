@@ -61,7 +61,7 @@
             <br><br><br>
             <div><a href="#/profile/{{entry.user.id}}/dashboard">{{entry.user.username}}</a></div>
             <div>{{entry.jam_points}} Jam Points</div>
-            <button type="button" class="btn btn-default" data-toggle="modal" ng-click="updateModal(entry)" data-target="#graphModal">Details</button>
+            <button type="button" class="btn btn-default dark-nostra-modal" data-toggle="modal" ng-click="updateModal(entry)" data-target="#graphModal">Details</button>
             <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-title="{{ entry.track.title }}" data-id="{{ entry.id }}" data-sc-id="{{ entry.sc_id }}" data-target="#graphModal" data-ip="{{ entry.initial_playback_count }}" data-cp="{{ entry.current_playback_count }}" data-fc="{{ entry.current_follower_count }}" data-album-art="{{ entry.track.artwork_url }}">Details</button> -->
         </div>
     </div>
@@ -80,9 +80,9 @@
 <div class="modal fade" id="graphModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header text-center">
+            <div class="modal-header text-center title-bg">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{{ modalEntry.track.title }}</h4>
+                <h4 class="modal-title white">{{ modalEntry.track.title }}</h4>
             </div>
 
                 <div class="row text-center">
@@ -93,26 +93,26 @@
                 <div class="row text-center">
                     <div class="col-md-4">
                         <h5>Initial Playcount</h5>
-                        <p id="ip">{{ modalEntry.initial_playback_count }}</p>
+                        <p id="ip">{{ insertCommas(modalEntry.initial_playback_count) }}</p>
                     </div>
                     <div class="col-md-4">
                         <br/>
-                        <h4 class="green" id="percentage">{{ modalEntry.percentage_increase }}</h4>
+                        <h4 class="green" id="percentage">+ {{ insertCommas(modalEntry.percentage_increase) }} %</h4>
                     </div>
                     <div class="col-md-4">
                         <h5>Current Playcount</h5>
-                        <p id="cp">{{ modalEntry.current_playback_count }}</p>
+                        <p id="cp">{{ insertCommas(modalEntry.current_playback_count) }}</p>
                     </div>
                 </div>
                 <div class="row text-center">
                     <div class="col-md-12">
                         <h5>Followers</h5>
-                        <p id="fc">{{ modalEntry.current_follower_count }}</p>
+                        <p id="fc">{{ insertCommas(modalEntry.current_follower_count) }}</p>
                     </div>
 
                 </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">Sweet.</button>
+            <div class="modal-footer title-bg">
+                <button type="button" class="btn btn-default red-nostra-modal" id="closeModalBtn" data-dismiss="modal">Sweet.</button>
             </div>
         </div>
     </div>

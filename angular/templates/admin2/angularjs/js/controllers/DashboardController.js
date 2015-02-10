@@ -115,6 +115,17 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		// End Countdown Timer
 	};
 
+	$scope.isEnabled = function(start) {
+		var oneWeek = new Date().addHours(24*7);
+		var startTime = new Date(start).addHours(5);
+		if (startTime < oneWeek) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	Date.prototype.addHours = function(h){
 	    this.setHours(this.getHours()+h);
 	    return this;

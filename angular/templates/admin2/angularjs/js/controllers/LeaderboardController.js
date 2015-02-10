@@ -31,22 +31,22 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     $scope.getProfilePicture = function(pic) {
       var src = '';
         
-      if (pic == null) {
-            // var randomPic = Math.random()*100;
-            // if (randomPic < 100/3) {
-            //     return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
-            // }
-            // else if (randomPic >= 100/3 && randomPic <= 200/3) {
-            //     return src = '/assets/admin/pages/media/profile/profile-swan.jpg';
-            // }
-            // else if (randomPic > 200/3) {
-            //     return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
-            // }
-            return src = '/assets/admin/pages/media/profile/profile-car.jpg';
-      }
-      else {
+      // if (pic == null) {
+      //       // var randomPic = Math.random()*100;
+      //       // if (randomPic < 100/3) {
+      //       //     return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
+      //       // }
+      //       // else if (randomPic >= 100/3 && randomPic <= 200/3) {
+      //       //     return src = '/assets/admin/pages/media/profile/profile-swan.jpg';
+      //       // }
+      //       // else if (randomPic > 200/3) {
+      //       //     return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
+      //       // }
+      //       return src = '/assets/admin/pages/media/profile/profile-car.jpg';
+      // }
+      // else {
         return pic;
-      }
+      // }
     };
 
 }]);

@@ -158,7 +158,8 @@
                                 <div class="row">
                                     <div class="col-md-2 col-md-offset-2">
                                         <!-- class="user-pic" -->
-                                        <img class="img-responsive img-circle" src="{{getProfilePicture(leader.profile_picture)}}"> <!-- /assets/admin/layout/img/avatar4.jpg -->
+                                        <img class="img-responsive img-circle" src="{{getProfilePicture(leader.profile_picture)}}" ng-show="getProfilePicture(leader.profile_picture)"> <!-- /assets/admin/layout/img/avatar4.jpg -->
+                                        <i class="fa fa-user fa-lg" ng-hide="getProfilePicture(leader.profile_picture)"></i>
                                     </div>
                                     <a href="#/profile/{{leader.id}}/dashboard"><div class="col-md-6">{{leader.username}}</div></a>
                                 </div>

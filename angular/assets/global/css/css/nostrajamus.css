@@ -27,7 +27,7 @@
 }
 
 .dropdown-user > .dropdown-menu {
-    margin-top: 0;
+  margin-top: 0;
 }
 .page-top>.navbar-default {
   padding: 0;
@@ -168,6 +168,10 @@ section#services {
 .subheading-leaders {
   font-size: 12px;
 }
+.profpic-default {
+  max-width: 100px;
+  max-height: 100px;
+}
 
 /*Portlet Formatting*/
 .portlet > .portlet-title > .nav-tabs.center-tabs {
@@ -194,6 +198,13 @@ Red-nostra
   color: #FFFFFF;
   background-color: #ff5252;
   border-color: #ff5252;
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.dark-nostra-modal.btn {
+  color: #FFFFFF;
+  background-color: #555;
+  border-color: #555;
   opacity: 1;
   filter: alpha(opacity=100);
 }

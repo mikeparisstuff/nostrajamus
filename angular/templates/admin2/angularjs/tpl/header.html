@@ -135,7 +135,8 @@
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown style -->
 					<li class="dropdown dropdown-user dropdown-dark">
 						<a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
-						<img alt="" class="img-responsive img-circle" src="{{getProfilePicture(myData.profile_picture)}}"/> <!-- /assets/admin/layout2/img/avatar3_small.jpg -->
+						<img alt="" class="img-responsive img-circle" src="{{getProfilePicture(myData.profile_picture)}}" ng-show="getProfilePicture(myData.profile_picture)"/> <!-- /assets/admin/layout2/img/avatar3_small.jpg -->
+						<i class="fa fa-user fa-lg" ng-hide="getProfilePicture(myData.profile_picture)"></i>
 						<span class="username username-hide-on-mobile">
 						{{authState.user}} </span>
 						<i class="fa fa-angle-down"></i>

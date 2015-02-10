@@ -15,9 +15,9 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
     // });
 
     $scope.getProfilePicture = function(pic) {
-    	var src = '';
+      var src = '';
         
-    	if (pic == null) {
+      // if (pic == null) {
             // var randomPic = Math.random()*100;
             // if (randomPic < 100/3) {
             //     return src = '/assets/admin/pages/media/profile/profile-landscape.jpg';
@@ -28,11 +28,11 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
             // else if (randomPic > 200/3) {
             //     return src = '/assets/admin/pages/media/profile/profile-car.jpg'; 
             // }
-            return src = '/assets/admin/pages/media/profile/profile-car.jpg'
-    	}
-    	else {
-    		return pic;
-    	}
+            // return src = '/assets/admin/pages/media/profile/profile-car.jpg';
+      // }
+      // else {
+        return pic;
+      // }
     };
 
     $scope.getNumContests = function(entriesList) {

@@ -177,8 +177,12 @@
 			</div>
 			<div class="portlet-body">
 				<div class="row" ng-repeat="track in myInfo.my_entries">
-					<div class="col-sm-12">
+					<div class="col-sm-9">
 						<iframe width="100%" height="100px" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
+					</div>
+					<br>
+					<div class="col-sm-3 text-center">
+						<h5>Jam Points</h5>{{track.jam_points}}
 					</div>
 					<div class="col-sm-12">
 						<div class="row list-separated text-center">
