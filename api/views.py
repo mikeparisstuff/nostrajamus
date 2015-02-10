@@ -201,7 +201,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @list_route(permission_classes=(permissions.AllowAny,))
     def leaderboard(self, request):
-        leaders = Profile.objects.order_by('-jam_points')[:25]
+        leaders = Profile.objects.all().order_by('-jam_points')[:25]
         serializer = ProfileSerializer(leaders, many=True, context={'request': request})
         return Response(serializer.data, status.HTTP_200_OK)
 
