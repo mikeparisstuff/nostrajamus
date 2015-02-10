@@ -184,13 +184,14 @@ $(function() {
                 ),
                 success: function(data) {
                     console.log('SUCCESS: ' + data);
-                    window.location.reload(true);
+                    window.location.href = "/#/dashboard";
                 },
                 error: function(error) {
                     console.log(error);
                     alert("Sorry there was an issue during registration. It may have been an issue on our side or it may help to clear your cookies and try again.")
                 }
             });
+            return false;
 
         }
 
