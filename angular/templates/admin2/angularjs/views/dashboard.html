@@ -60,10 +60,8 @@ BEGIN PAGE HEADER-->
 		<!-- <span class="label label-success">Start</span> --> 
 	</div>
 	<!-- BEGIN DASHBOARD STATS -->
-	<div class="row">
-		<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"> -->
+	<!-- <div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-24">
-			<!-- <div class="dashboard-stat blue-madison"> -->
 			<div class="dashboard-stat">
 				<div class="visual">
 					<i class="fa fa-comments"></i>
@@ -81,9 +79,7 @@ BEGIN PAGE HEADER-->
 				</a>
 			</div>
 		</div>
-		<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"> -->
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-24">
-			<!-- <div class="dashboard-stat red-intense"> -->
 			<div class="dashboard-stat">
 				<div class="visual">
 					<i class="fa fa-bar-chart-o"></i>
@@ -100,7 +96,7 @@ BEGIN PAGE HEADER-->
 				View more <i class="m-icon-swapright m-icon-white"></i>
 				</a>
 			</div>
-		</div>
+		</div> -->
 		<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 			<div class="dashboard-stat green-haze">
 				<div class="visual">
@@ -250,7 +246,7 @@ BEGIN PAGE HEADER-->
 											<img class="user-pic" src="{{openContest.contest_picture}}">
 										</td> -->
 										<td>
-											<img class="user-pic" src="{{getProfilePicture(openContest.contest_picture)}}">
+											<!-- <img class="user-pic" src="{{getProfilePicture(openContest.contest_picture)}}"> -->
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(openContest.title, openContest.entry_fee, openContest.prize, openContest.description, openContest.start_time, openContest.end_time, 'open', openContest.id)">{{openContest.title}}</a>
 										</td>
 										<td>
@@ -296,7 +292,7 @@ BEGIN PAGE HEADER-->
 											<img class="user-pic" src="{{inProgressContest.contest_picture}}">
 										</td> -->
 										<td>
-											<img class="user-pic" src="{{getProfilePicture(inProgressContest.contest_picture)}}">
+											<!-- <img class="user-pic" src="{{getProfilePicture(inProgressContest.contest_picture)}}"> -->
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'inProgress', inProgressContest.id)">{{inProgressContest.title}}</a>
 										</td>
 										<td>
@@ -339,7 +335,7 @@ BEGIN PAGE HEADER-->
 									</thead>
 									<tr ng-repeat="completedContest in completedContests">
 										<td>
-											<img class="user-pic" src="{{getProfilePicture(completedContest.contest_picture)}}">
+											<!-- <img class="user-pic" src="{{getProfilePicture(completedContest.contest_picture)}}"> -->
 											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, compeletedContest.end_time, 'completed', completedContest.id)">
 											{{completedContest.title}}</a>
 										</td>
@@ -402,7 +398,7 @@ BEGIN PAGE HEADER-->
 								</thead>
 								<tr ng-repeat="myContest in myContestInfo">
 									<td>
-										<img class="user-pic" src="{{getProfilePicture(myContest.contest_picture)}}">
+										<!-- <img class="user-pic" src="{{getProfilePicture(myContest.contest_picture)}}"> -->
 										<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(myContest.title, myContest.entry_fee, myContest.prize, myContest.description, myContest.start_time, compeletedContest.end_time, 'completed', myContest.id)">
 										{{myContest.title}}</a>
 									</td>
