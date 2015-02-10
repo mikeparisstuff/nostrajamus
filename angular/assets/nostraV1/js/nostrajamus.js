@@ -115,6 +115,89 @@ $(function() {
         }
     });
 
+
+    $("#registrationForm").submit(function( event ) {
+        var errorMessage = '';
+        for (var i = 0; i < event.target.length-1; i++) {
+            event.preventDefault();
+            if (event.target[i].value == null || event.target[i].value == '') {
+                errorMessage = "Please fill out all fields.";
+                document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+                $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+                return false;
+            }
+        }
+        if ($("#first_name").val().length == 0) {
+            errorMessage = "Please enter your first name.";
+            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        }
+        else if ($("#last_name").val().length == 0) {
+            errorMessage = "Please enter your last name.";
+            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        } else if ($("#password1").val() != $("#password2").val()) {
+            errorMessage = "Your passwords do not match.";
+            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        } else if ($("#email").val().length == 0) {
+            errorMessage = "Please enter an email.";
+            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        } else if($("#email").val().indexOf('@') === -1) {
+            errorMessage = "Invalid email address."
+            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        } else if (songObj === null) {
+            console.log("Song is null");
+            errorMessage = "Please select a valid song";
+            document.getElementById("errors").innerHTML = "<div><b style='color:red'>" + errorMessage + "</b>";
+            $('#errors').fadeIn('fast').delay(5000).fadeOut('fast');
+        } else {
+            console.log(JSON.stringify(
+                {
+                    "username": $("#username").val(),
+                    "first_name": $("#first_name").val(),
+                    "last_name": $("#last_name").val(),
+                    "email": $("#email").val(),
+                    "password": $("#password1").val(),
+                    "profile_picture": null,
+                    "location": ""
+                }
+            ));
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/users/', //http://127.0.0.1:8000/
+                dataType: 'json',
+                crossDomain: 'true',
+                contentType: "application/json",
+                data: JSON.stringify(
+                    {
+                        "username": $("#username").val(),
+                        "first_name": $("#first_name").val(),
+                        "last_name": $("#last_name").val(),
+                        "email": $("#email").val(),
+                        "password": $("#password1").val(),
+                        "profile_picture": null,
+                        "location": ""
+                    }
+                ),
+                success: function(data) {
+                    console.log('SUCCESS: ' + data);
+                    window.location.href = "/#/dashboard";
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Sorry there was an issue during registration. It may have been an issue on our side or it may help to clear your cookies and try again.")
+                }
+            });
+            return false;
+
+        }
+    });
+
+
     $("#contestEntryForm").submit(function( event ) {
         var errorMessage = '';
         for (var i = 0; i < event.target.length-1; i++) {
