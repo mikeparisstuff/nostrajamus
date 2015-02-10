@@ -368,7 +368,7 @@ class TrackViewSet(viewsets.ModelViewSet):
         else:
             queryset = PeriodicRanking.objects.filter(type='WEEKLY')
 
-        paginator = Paginator(queryset, 10)
+        paginator = Paginator(queryset, 7)
         page = request.QUERY_PARAMS.get('page')
         try:
             entries = paginator.page(page)
