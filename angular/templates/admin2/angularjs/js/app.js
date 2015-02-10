@@ -170,12 +170,12 @@ MetronicApp.controller('authController', function($scope, api, authState) {
 
 //We already have a limitTo filter built-in to angular,
 //let's make a startFrom filter
-MetronicApp.filter('startFrom', function() {
-  return function(input, start) {
-    start = +start; //parse to int
-    return input.slice(start);
-  }
-});
+// MetronicApp.filter('startFrom', function() {
+//   return function(input, start) {
+//     start = +start; //parse to int
+//     return input.slice(start);
+//   }
+// });
 
 /* Setup App Main Controller */
 MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
@@ -1003,7 +1003,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     });
                 }],
                 trending: ['$http', function($http) {
-                    return $http.get('/api/tracks/trending').then(function(response) {
+                    return $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
                         // console.log(response.data);
                         return response.data;
                     });

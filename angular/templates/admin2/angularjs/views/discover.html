@@ -20,11 +20,11 @@
 				</div>
 				<div class="actions pull-right">
                     <div class="btn-group btn-group-devided" data-toggle="buttons">
-                        <label class="btn btn-transparent grey-salsa btn-circle btn-sm active" ng-click="timeSelect='day'">
+                        <label class="btn btn-transparent grey-salsa btn-circle btn-sm active" ng-click="getWeekly()">
                         <input type="radio" name="options" class="toggle">Week</label>
-                        <label class="btn btn-transparent grey-salsa btn-circle btn-sm" ng-click="timeSelect='week'">
+                        <label class="btn btn-transparent grey-salsa btn-circle btn-sm" ng-click="getMonthly()">
                         <input type="radio" name="options" class="toggle">Month</label>
-                        <label class="btn btn-transparent grey-salsa btn-circle btn-sm" ng-click="timeSelect='month'">
+                        <label class="btn btn-transparent grey-salsa btn-circle btn-sm" ng-click="getAllTime()">
                         <input type="radio" name="options" class="toggle">All Time</label>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="tab_1_1">
 
-						<div class="row" ng-show="timeSelect=='day'">
+						<div class="row" ng-show="timeSelect=='weekly'">
 							<div class="col-md-12 col-sm-12">
 								<!-- BEGIN PORTLET-->
 								<div class="portlet light">
@@ -46,7 +46,7 @@
 										</div>
 									</div> -->
 									<div class="portlet-body text-center">
-										<div ng-repeat="track in dayTracks | startFrom:currentPage*pageSize | limitTo:pageSize">
+										<div ng-repeat="track in trending.results | limitTo:pageSize">
                                             <div class="row" align="center">
 												<div class="col-md-12 col-sm-12 col-xs-24">
 													<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
@@ -89,145 +89,11 @@
 											<hr>
 										</div>
 
-										<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+										<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 1" ng-click="prevPage()">
 									        Prev
 									    </button>
-									    {{currentPage+1}}/{{numberOfPages()}}
-									    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.length/pageSize-1" ng-click="currentPage=currentPage+1">
-									        Next
-									    </button>
-									</div>
-								</div>
-								<!-- END PORTLET-->
-							</div>
-						</div>
-						<div class="row" ng-show="timeSelect=='week'">
-							<div class="col-md-12 col-sm-12">
-								<!-- BEGIN PORTLET-->
-								<div class="portlet light">
-									<!-- <div class="portlet-title">
-										<div class="caption caption-md">
-											<i class="icon-bar-chart font-green-haze hide"></i>
-											<span class="caption-subject font-nostra bold uppercase">Upcoming Jams</span>
-											<span class="caption-helper hide">weekly stats...</span>
-										</div>
-									</div> -->
-									<div class="portlet-body text-center">
-										<div ng-repeat="track in weekTracks | startFrom:currentPage*pageSize | limitTo:pageSize">
-                                            <div class="row" align="center">
-												<div class="col-md-12 col-sm-12 col-xs-24">
-													<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
-												</div>
-											</div>
-											<div class="row list-separated text-center">
-												<div class="col-md-3 col-sm-3 col-xs-6">
-													<div class="font-grey-mint font-sm">
-														Initial Playcount
-													</div>
-													<div class="uppercase font-hg font-red-flamingo">
-														{{track.initial_playback_count}} <span class="font-lg font-grey-mint"></span>
-													</div>
-												</div>
-												<div class="col-md-3 col-sm-3 col-xs-6">
-													<div class="font-grey-mint font-sm">
-														Play Increase
-													</div>
-													<div class="uppercase font-hg font-purple">
-														<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}%
-													</div>
-												</div>
-												<div class="col-md-3 col-sm-3 col-xs-6">
-													<div class="font-grey-mint font-sm">
-														Current Playcount
-													</div>
-													<div class="uppercase font-hg font-purple">
-														{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>
-													</div>
-												</div>
-												<div class="col-md-3 col-sm-3 col-xs-6">
-													<div class="font-grey-mint font-sm">
-														Total Followers
-													</div>
-													<div class="uppercase font-hg font-green-haze">
-														{{track.current_follower_count}} <span class="font-lg font-grey-mint"></span>
-													</div>
-												</div>
-											</div>
-											<hr>
-										</div>
-
-										<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-									        Prev
-									    </button>
-									    {{currentPage+1}}/{{numberOfPages()}}
-									    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.length/pageSize-1" ng-click="currentPage=currentPage+1">
-									        Next
-									    </button>
-									</div>
-								</div>
-								<!-- END PORTLET-->
-							</div>
-						</div>
-						<div class="row" ng-show="timeSelect=='month'">
-							<div class="col-md-12 col-sm-12">
-								<!-- BEGIN PORTLET-->
-								<div class="portlet light">
-									<!-- <div class="portlet-title">
-										<div class="caption caption-md">
-											<i class="icon-bar-chart font-green-haze hide"></i>
-											<span class="caption-subject font-nostra bold uppercase">Upcoming Jams</span>
-											<span class="caption-helper hide">weekly stats...</span>
-										</div>
-									</div> -->
-									<div class="portlet-body text-center">
-										<div ng-repeat="track in monthTracks | startFrom:currentPage*pageSize | limitTo:pageSize">
-                                            <div class="row" align="center">
-												<div class="col-md-12 col-sm-12 col-xs-24">
-													<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
-												</div>
-											</div>
-											<div class="row list-separated text-center">
-												<div class="col-md-3 col-sm-3 col-xs-6">
-													<div class="font-grey-mint font-sm">
-														Initial Playcount
-													</div>
-													<div class="uppercase font-hg font-red-flamingo">
-														{{track.initial_playback_count}} <span class="font-lg font-grey-mint"></span>
-													</div>
-												</div>
-												<div class="col-md-3 col-sm-3 col-xs-6">
-													<div class="font-grey-mint font-sm">
-														Play Increase
-													</div>
-													<div class="uppercase font-hg font-purple">
-														<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}%
-													</div>
-												</div>
-												<div class="col-md-3 col-sm-3 col-xs-6">
-													<div class="font-grey-mint font-sm">
-														Current Playcount
-													</div>
-													<div class="uppercase font-hg font-purple">
-														{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>
-													</div>
-												</div>
-												<div class="col-md-3 col-sm-3 col-xs-6">
-													<div class="font-grey-mint font-sm">
-														Total Followers
-													</div>
-													<div class="uppercase font-hg font-green-haze">
-														{{track.current_follower_count}} <span class="font-lg font-grey-mint"></span>
-													</div>
-												</div>
-											</div>
-											<hr>
-										</div>
-
-										<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
-									        Prev
-									    </button>
-									    {{currentPage+1}}/{{numberOfPages()}}
-									    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.length/pageSize-1" ng-click="currentPage=currentPage+1">
+									    {{currentPage}}/{{numberOfPages()}}
+									    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.count/pageSize" ng-click="nextPage()">
 									        Next
 									    </button>
 									</div>
@@ -236,7 +102,147 @@
 							</div>
 						</div>
 					</div>
+						<!-- END TAB 1 -->
+					<div class="tab-pane active" id="tab_1_2">
+						<div class="row" ng-show="timeSelect=='monthly'">
+							<div class="col-md-12 col-sm-12">
+								<!-- BEGIN PORTLET-->
+								<div class="portlet light">
+									<!-- <div class="portlet-title">
+										<div class="caption caption-md">
+											<i class="icon-bar-chart font-green-haze hide"></i>
+											<span class="caption-subject font-nostra bold uppercase">Upcoming Jams</span>
+											<span class="caption-helper hide">weekly stats...</span>
+										</div>
+									</div> -->
+									<div class="portlet-body text-center">
+										<div ng-repeat="track in trending.results | limitTo:pageSize">
+                                            <div class="row" align="center">
+												<div class="col-md-12 col-sm-12 col-xs-24">
+													<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
+												</div>
+											</div>
+											<div class="row list-separated text-center">
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Initial Playcount
+													</div>
+													<div class="uppercase font-hg font-red-flamingo">
+														{{track.initial_playback_count}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Play Increase
+													</div>
+													<div class="uppercase font-hg font-purple">
+														<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}%
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Current Playcount
+													</div>
+													<div class="uppercase font-hg font-purple">
+														{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Total Followers
+													</div>
+													<div class="uppercase font-hg font-green-haze">
+														{{track.current_follower_count}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+											</div>
+											<hr>
+										</div>
 
+										<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 1" ng-click="prevPage()">
+									        Prev
+									    </button>
+									    {{currentPage}}/{{numberOfPages()}}
+									    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.count/pageSize" ng-click="nextPage()">
+									        Next
+									    </button>
+									</div>
+								</div>
+								<!-- END PORTLET-->
+							</div>
+						</div>
+					</div>
+						<!-- END TAB 2 -->
+					<div class="tab-pane active" id="tab_1_3">
+						<div class="row" ng-show="timeSelect=='alltime'">
+							<div class="col-md-12 col-sm-12">
+								<!-- BEGIN PORTLET-->
+								<div class="portlet light">
+									<!-- <div class="portlet-title">
+										<div class="caption caption-md">
+											<i class="icon-bar-chart font-green-haze hide"></i>
+											<span class="caption-subject font-nostra bold uppercase">Upcoming Jams</span>
+											<span class="caption-helper hide">weekly stats...</span>
+										</div>
+									</div> -->
+									<div class="portlet-body text-center">
+										<div ng-repeat="track in trending.results | limitTo:pageSize">
+                                            <div class="row" align="center">
+												<div class="col-md-12 col-sm-12 col-xs-24">
+													<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
+												</div>
+											</div>
+											<div class="row list-separated text-center">
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Initial Playcount
+													</div>
+													<div class="uppercase font-hg font-red-flamingo">
+														{{track.initial_playback_count}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Play Increase
+													</div>
+													<div class="uppercase font-hg font-purple">
+														<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}%
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Current Playcount
+													</div>
+													<div class="uppercase font-hg font-purple">
+														{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Total Followers
+													</div>
+													<div class="uppercase font-hg font-green-haze">
+														{{track.current_follower_count}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+											</div>
+											<hr>
+										</div>
+
+										<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 1" ng-click="prevPage()">
+									        Prev
+									    </button>
+									    {{currentPage}}/{{numberOfPages()}}
+									    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.count/pageSize" ng-click="nextPage()">
+									        Next
+									    </button>
+									</div>
+								</div>
+								<!-- END PORTLET-->
+							</div>
+						</div>
+					</div>
+					<!-- END TAB 3 -->
 
 				</div>
 			</div>

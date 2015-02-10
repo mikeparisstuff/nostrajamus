@@ -76,7 +76,6 @@ MetronicApp.controller('InProgressContestsController', ['$rootScope', '$scope', 
         return Math.ceil($scope.contestEntries.count/$scope.pageSize);                
     };
 
-
     $scope.prevPage = function() {
         $scope.currentPage = $scope.currentPage - 1;
 

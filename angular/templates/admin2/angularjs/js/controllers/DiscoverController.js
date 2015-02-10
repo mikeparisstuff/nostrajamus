@@ -10,64 +10,185 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     });
 
     $scope.trending = trending;
+    // console.log($scope.trending);
 
-    var dayTracks = [];
-    var weekTracks = [];
-    var monthTracks = [];
+    $scope.timeSelect = 'weekly';
 
-    var now = new Date();
-    var day = new Date();
-    var week = new Date();
-    var month = new Date();
+    // pagination
+    $scope.currentPage = 1;
+    $scope.pageSize = 10;
 
-    day.setDate(day.getDate()-1);
-    week.setDate(week.getDate()-7);
-    month.setDate(month.getDate()-30);
+    $scope.numberOfPages=function() {
+        return Math.ceil($scope.trending.count/$scope.pageSize);                
+    };
 
-    // console.log(day);
-    // console.log(week);
-    // console.log(month);
-    // console.log(now);
+    $scope.getWeekly = function() {
+      $scope.timeSelect = 'weekly';
 
-    day = Date.parse(day);
-    week = Date.parse(week);
-    month = Date.parse(month);
-    now = Date.parse(now);
+      $http({
+          url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+          method: "GET",
+          // data: JSON.stringify($scope.form),
+          headers: {'Content-Type': 'application/json'}
+      }).success(function (data, status, headers, config) {
+          // console.log(data);
+          $scope.trending = data;
+          console.log($scope.trending);
+          // console.log("SUCCESS");
+      }).error(function (data, status, headers, config) {
+          // $scope.status = status;
+          // console.log(data);
+          // console.log("FAILURE");
+      });
 
-    for (var i=0; i < $scope.trending.length; i++) {
-      // console.log($scope.trending[i].created_at);
-      var timeCreated = new Date($scope.trending[i].created_at);
-      timeCreated = Date.parse(timeCreated);
-      // console.log(timeCreated);
-//      if (month < timeCreated) {
-        monthTracks.push($scope.trending[i]);
-        if (month < timeCreated) {
-          weekTracks.push($scope.trending[i]);
-            if (week < timeCreated) {
-                dayTracks.push($scope.trending[i]);
-            }
-        }
-//      }
+      $scope.currentPage = 1;
     }
 
-    $scope.monthTracks = monthTracks;
-    $scope.weekTracks = weekTracks;
-    $scope.dayTracks = dayTracks;
+    $scope.getMonthly = function() {
+      $scope.timeSelect = 'monthly';
 
-    $scope.timeSelect = 'day';
+      $http({
+          url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+          method: "GET",
+          // data: JSON.stringify($scope.form),
+          headers: {'Content-Type': 'application/json'}
+      }).success(function (data, status, headers, config) {
+          // console.log(data);
+          $scope.trending = data;
+          console.log($scope.trending);
+          // console.log("SUCCESS");
+      }).error(function (data, status, headers, config) {
+          // $scope.status = status;
+          // console.log(data);
+          // console.log("FAILURE");
+      });
 
-    console.log($scope.monthTracks);
-    console.log($scope.weekTracks);
-    console.log($scope.dayTracks);
+      $scope.currentPage = 1;
+    }
+
+    $scope.getAllTime = function() {
+      $scope.timeSelect = 'alltime';
+
+      $http({
+          url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+          method: "GET",
+          // data: JSON.stringify($scope.form),
+          headers: {'Content-Type': 'application/json'}
+      }).success(function (data, status, headers, config) {
+          // console.log(data);
+          $scope.trending = data;
+          console.log($scope.trending);
+          // console.log("SUCCESS");
+      }).error(function (data, status, headers, config) {
+          // $scope.status = status;
+          // console.log(data);
+          // console.log("FAILURE");
+      });
+
+      $scope.currentPage = 1;
+    }
+
+    $scope.prevPage = function() {
+        $scope.currentPage = $scope.currentPage - 1;
+
+        // console.log($scope.currentPage);
+
+        $http({
+            url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=" + $scope.currentPage,
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            // console.log(data);
+            $scope.trending = data;
+            console.log($scope.trending);
+            // console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            // console.log(data);
+            // console.log("FAILURE");
+        });
+    }
+
+    $scope.nextPage = function() {
+        $scope.currentPage = $scope.currentPage + 1;
+
+        console.log($scope.currentPage);
+
+        $http({
+            url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=" + $scope.currentPage,
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            // console.log(data);
+            $scope.trending = data;
+            console.log($scope.trending);
+            // console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            // console.log(data);
+            // console.log("FAILURE");
+        });
+    }
+
+//     var dayTracks = [];
+//     var weekTracks = [];
+//     var monthTracks = [];
+
+//     var now = new Date();
+//     var day = new Date();
+//     var week = new Date();
+//     var month = new Date();
+
+//     day.setDate(day.getDate()-1);
+//     week.setDate(week.getDate()-7);
+//     month.setDate(month.getDate()-30);
+
+//     // console.log(day);
+//     // console.log(week);
+//     // console.log(month);
+//     // console.log(now);
+
+//     day = Date.parse(day);
+//     week = Date.parse(week);
+//     month = Date.parse(month);
+//     now = Date.parse(now);
+
+//     for (var i=0; i < $scope.trending.length; i++) {
+//       // console.log($scope.trending[i].created_at);
+//       var timeCreated = new Date($scope.trending[i].created_at);
+//       timeCreated = Date.parse(timeCreated);
+//       // console.log(timeCreated);
+// //      if (month < timeCreated) {
+//         monthTracks.push($scope.trending[i]);
+//         if (month < timeCreated) {
+//           weekTracks.push($scope.trending[i]);
+//             if (week < timeCreated) {
+//                 dayTracks.push($scope.trending[i]);
+//             }
+//         }
+// //      }
+//     }
+
+//     $scope.monthTracks = monthTracks;
+//     $scope.weekTracks = weekTracks;
+//     $scope.dayTracks = dayTracks;
+
+//     $scope.timeSelect = 'day';
+
+//     console.log($scope.monthTracks);
+//     console.log($scope.weekTracks);
+//     console.log($scope.dayTracks);
 
     $scope.getPlayIncrease = function(track) {
-		// get play count increase
-		var currPlayCount = track.current_playback_count;
-		var initPlayCount = track.initial_playback_count;
+  		// get play count increase
+  		var currPlayCount = track.current_playback_count;
+  		var initPlayCount = track.initial_playback_count;
 
-		var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(2);
+  		var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(2);
 
-		return playIncrease;
+  		return playIncrease;
     };
 
     $scope.getFollowIncrease = function(track) {
@@ -86,23 +207,6 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     	var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
 
     	return trustedUrl;
-    };
-
-
-    // pagination
-    $scope.currentPage = 0;
-    $scope.pageSize = 3;
-
-    $scope.numberOfPages=function() {
-      if ($scope.timeSelect == 'day') {
-        return Math.ceil($scope.dayTracks.length/$scope.pageSize);
-      }
-      else if ($scope.timeSelect == 'week') {
-        return Math.ceil($scope.weekTracks.length/$scope.pageSize);
-      }
-      else if ($scope.timeSelect == 'month') {
-        return Math.ceil($scope.monthTracks.length/$scope.pageSize);   
-      }        
     };
 
 }]);
