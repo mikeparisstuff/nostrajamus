@@ -285,7 +285,7 @@
 										<td align="right">
 											<a href="#/opencontests/{{openContest.id}}">
 												<span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}} && isEnabled(openContest.start_time)">Enter</span>
-												<span class="btn btn-default red-nostra" ng-hide="isEnabled(openContest.start_time)" ng-disabled="true">Coming Soon</span>
+												<span class="btn btn-default" ng-hide="isEnabled(openContest.start_time)" ng-disabled="true">Coming Soon</span>
 											</a>
 										</td>
 									</tr>
