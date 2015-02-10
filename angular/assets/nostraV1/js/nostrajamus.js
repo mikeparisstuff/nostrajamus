@@ -1,5 +1,56 @@
 $(function() {
 
+    $.ajaxSetup({
+         beforeSend: function(xhr, settings) {
+             function getCookie(name) {
+                 var cookieValue = null;
+                 if (document.cookie && document.cookie != '') {
+                     var cookies = document.cookie.split(';');
+                     for (var i = 0; i < cookies.length; i++) {
+                         var cookie = jQuery.trim(cookies[i]);
+                         // Does this cookie string begin with the name we want?
+                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                         break;
+                     }
+                 }
+             }
+             return cookieValue;
+             }
+             if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                 // Only send the token to relative URLs i.e. locally.
+                 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+             }
+         }
+    });
+
+    $("#loginForm").submit(function(event) {
+        console.log(event);
+        console.log($("#username_login").val());
+        console.log($("#password_login").val());
+
+        $.ajax({
+            type: 'POST',
+            url: '/login/', //http://127.0.0.1:8000/
+            dataType: 'json',
+            crossDomain: 'true',
+            contentType: "application/json",
+            data: JSON.stringify({
+                    "username": $("#username_login").val(),
+                    "password": $("#password_login").val()
+            }),
+            success: function(data) {
+                console.log('SUCCESS: ' + data);
+                window.location.href = "/#/dashboard";
+            },
+            error: function(error) {
+                console.log(error);
+                alert("Sorry, we could not find you. Try again.")
+            }
+        });
+        return false;
+    });
+
     SC.initialize({
         client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
     });

@@ -57,14 +57,14 @@ class LoginView(APIView):
             if user.is_active:
                 login(request, user)
                 print("User is valid, active and authenticated")
-                return redirect('/')
+                return Response({"detail": "Successfully logged user in"}, status=status.HTTP_200_OK)
             else:
                 print("The password is valid, but the account has been disabled!")
-                return redirect('/')
+                return Response({"detail": "The password is valid, but the account has been disabled!"}, status=status.HTTP_403_FORBIDDEN)
         else:
             # the authentication system was unable to verify the username and password
             print("The username and password were incorrect.")
-            return redirect('/login/')
+            return Response({"detail": "The username and password were incorrect."}, status=status.HTTP_403_FORBIDDEN)
 
 class AuthView(APIView):
     authentication_classes = (authentication.QuietBasicAuthentication,)
