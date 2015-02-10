@@ -24,8 +24,7 @@ BROKER_URL = 'django://'
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'dqc5qtm6h6$u853(jf@%^!-qe(e==-=0b9njzo(g)6o8a))l)z'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in production
 
 TEMPLATE_DEBUG = True
 
@@ -68,6 +67,9 @@ WSGI_APPLICATION = 'nostrajamus.wsgi.application'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = 'AKIAIT6SLV63QQTHWCRQ'
 AWS_SECRET_ACCESS_KEY = '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'
+os.environ.setdefault("AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY_ID)
+os.environ.setdefault("AWS_SECRET_ACCESS_KEY", AWS_SECRET_ACCESS_KEY)
+BROKER_BACKEND = "SQS"
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -84,7 +86,10 @@ if instance_id == 'PROD':
         'HOST': 'nostrajamusprod.cqgo2wxdycyf.us-east-1.rds.amazonaws.com',
         'PORT': os.environ['RDS_PORT']
     }
+    DEBUG = False
     AWS_STORAGE_BUCKET_NAME = 'nostrajamus-prod'
+    BROKER_URL = 'sqs://sqs.us-east-1.amazonaws.com/755639026061/nostrajamus-prod'
+    # CELERY_DEFAULT_QUEUE = 'nostrajamus-prod'
 else:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -95,7 +100,10 @@ else:
         'HOST': '',
         'PORT': '',
     }
+    DEBUG = True
     AWS_STORAGE_BUCKET_NAME = 'nostrajamus-dev'
+    BROKER_URL = 'sqs://sqs.us-east-1.amazonaws.com/755639026061/nostrajamus-dev'
+    # CELERY_DEFAULT_QUEUE = 'nostrajamus-dev'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -121,7 +129,7 @@ REST_FRAMEWORK = {
 
 # Celery
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-CELERY_TIMEZONE = 'UTC'
+CELERY_TIMEZONE = 'US/Eastern'
 CELERY_IMPORTS = ('api.tasks',)
 CELERYBEAT_SCHEDULE = {
     'update-playcounts': {
