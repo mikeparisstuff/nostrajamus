@@ -85,7 +85,9 @@ class Profile(AbstractUser):
 
     location = models.CharField(
         max_length=512,
-        default=''
+        default='',
+        blank=True,
+        null=True
     )
 
     jam_points = models.DecimalField(

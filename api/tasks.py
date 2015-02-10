@@ -144,9 +144,10 @@ def update_all_time_rankings():
 
 @shared_task
 def update_user_jam_points():
-    entry_points = ContestEntry.objects.values('user__username').annotate(total_jam_points=Sum('jam_points'))
+    entry_points = ContestEntry.objects.values('user__id').annotate(total_jam_points=Sum('jam_points'))
+    # entry_points = ContestEntry.objects.values('user__username').annotate(total_jam_points=Sum('jam_points'))
     for i, point in enumerate(entry_points):
-        user = Profile.objects.get(username=point['user__username'])
+        user = Profile.objects.get(pk=point['user__id'])
         user.jam_points = point['total_jam_points']
         print "{}: Updating points for user: {} with points: {}".format(i, user.username, point['total_jam_points'])
         user.save()
