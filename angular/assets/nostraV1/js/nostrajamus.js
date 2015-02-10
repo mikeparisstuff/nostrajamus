@@ -241,6 +241,7 @@ $(function() {
                 },
                 error: function(error) {
                     console.log(error);
+                    window.location.href = "/forgot/";
 //                    alert("Sorry there was an issue. It may have been an issue on our side or it may help to clear your cookies and try again.")
                 }
             });
