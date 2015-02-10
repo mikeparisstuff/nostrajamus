@@ -186,6 +186,7 @@ $(function() {
                 success: function(data) {
                     console.log('SUCCESS: ' + data);
                     window.location.href = "/#/dashboard";
+                    window.location.reload();
                 },
                 error: function(error) {
                     console.log(error);
