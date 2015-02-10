@@ -244,6 +244,11 @@ class ContestViewSet(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def list(self, request, *args, **kwargs):
+        contests = Contest.objects.all()
+        serialzer = ContestSerializer(contests, many=True, context={'request': request})
+        return Response(serialzer.data, status=status.HTTP_200_OK)
+
     @detail_route()
     def entries(self, request, pk=None):
         contest = self.get_object()
