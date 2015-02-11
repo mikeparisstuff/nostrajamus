@@ -265,6 +265,22 @@ class ContestViewSet(viewsets.ModelViewSet):
         serializer = PaginatedContestEntrySerializer(entries, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @detail_route()
+    def rank(self, request, pk=None):
+        try:
+            contest = self.get_object()
+            entries = contest.entries
+            user = request.user
+            rank = -1
+            for i, entry in enumerate(entries):
+                if entry.user == user:
+                    rank = i + 1
+                    break
+            return Response({"rank": rank}, status=status.HTTP_200_OK)
+        except Exception, e:
+            return Response({"detail": "Either you were not logged in or this is an invalid contest"}, status=status.HTTP_400_BAD_REQUEST)
+
+
     @detail_route(methods=("POST",), permission_classes=(permissions.IsAuthenticated,))
     def enter(self, request, pk=None):
         try:
