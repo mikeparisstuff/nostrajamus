@@ -1552,10 +1552,14 @@ Page content
 
 @media (min-width: 992px) {
   /* 992px */
+  .container {
+    width: 80%;
+  }
+
   /* Page content */
   .page-content-wrapper {
-    width: 90%;
-    margin: 0 auto;
+    float: left;
+    width: 100%;
   }
   .page-content-wrapper .page-content {
     margin-left: 195px;
@@ -1609,6 +1613,10 @@ Page content
     margin: 0px !important;
     padding: 20px !important;
     min-height: 280px;
+  }
+
+  .container {
+    width: 100%;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
