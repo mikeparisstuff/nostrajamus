@@ -222,7 +222,7 @@ class Contest(BaseModel):
 
     # True if the contest is live else False
     is_live = models.BooleanField(
-        default = True
+        default = False
     )
 
     start_time = models.DateTimeField(
@@ -242,6 +242,9 @@ class Contest(BaseModel):
 
     class Meta:
         ordering = ('-start_time',)
+
+    def __str__(self):
+        return "{}: {}".format(self.id, self.title)
 
 
 class ContestMembership(BaseModel):
