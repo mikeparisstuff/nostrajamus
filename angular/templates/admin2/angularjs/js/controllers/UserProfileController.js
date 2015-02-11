@@ -58,7 +58,7 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
 
 		var playIncrease = ((currPlayCount - initPlayCount) / (initPlayCount)) * 100;
 
-		return playIncrease.toFixed(2);
+		return playIncrease.toFixed(1);
     };
 
     $scope.getFollowIncrease = function(track) {
@@ -68,7 +68,21 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
 		
 		var followIncrease = ((currFollowCount - initFollowCount) / (initFollowCount)) * 100;
 
-		return followIncrease.toFixed(2);
+		return followIncrease.toFixed(1);
+    };
+
+    $scope.insertCommas = function(s) {
+        s = s.toString();
+        // get stuff before the dot
+        var d = s.indexOf('.');
+        var s2 = d === -1 ? s : s.slice(0, d);
+        // insert commas every 3 digits from the right
+        for (var i = s2.length - 3; i > 0; i -= 3)
+          s2 = s2.slice(0, i) + ',' + s2.slice(i);
+        // append fractional part
+        if (d !== -1)
+          s2 += s.slice(d);
+        return s2;
     };
 
     $scope.selectedFile = [];

@@ -9,17 +9,33 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         $rootScope.settings.layout.pageSidebarClosed = false;
     });
 
-    $scope.trending = trending;
+    $scope.trending = trending.results;
+    $scope.totalCount = trending.count;
     // console.log($scope.trending);
 
     $scope.timeSelect = 'weekly';
+    // $scope.busy = false;
 
     // pagination
     $scope.currentPage = 1;
     $scope.pageSize = 7;
 
     $scope.numberOfPages=function() {
-        return Math.ceil($scope.trending.count/$scope.pageSize);                
+        return Math.ceil($scope.totalCount/$scope.pageSize);                
+    };
+
+    $scope.insertCommas = function(s) {
+        s = s.toString();
+        // get stuff before the dot
+        var d = s.indexOf('.');
+        var s2 = d === -1 ? s : s.slice(0, d);
+        // insert commas every 3 digits from the right
+        for (var i = s2.length - 3; i > 0; i -= 3)
+          s2 = s2.slice(0, i) + ',' + s2.slice(i);
+        // append fractional part
+        if (d !== -1)
+          s2 += s.slice(d);
+        return s2;
     };
 
     $scope.getWeekly = function() {
@@ -27,6 +43,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         return;
       }
       else {
+        // $scope.trending = [];
         $scope.timeSelect = 'weekly';
 
         $http({
@@ -36,7 +53,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
             // console.log(data);
-            $scope.trending = data;
+            $scope.trending = data.results;
             // console.log($scope.trending);
             // console.log("SUCCESS");
         }).error(function (data, status, headers, config) {
@@ -54,6 +71,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         return;
       }
       else {
+        // $scope.trending = [];
         $scope.timeSelect = 'monthly';
 
         $http({
@@ -63,7 +81,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
             // console.log(data);
-            $scope.trending = data;
+            $scope.trending = data.results;
             // console.log($scope.trending);
             // console.log("SUCCESS");
         }).error(function (data, status, headers, config) {
@@ -81,6 +99,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         return;
       }
       else {
+        // $scope.trending = [];
         $scope.timeSelect = 'alltime';
 
         $http({
@@ -90,7 +109,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
             // console.log(data);
-            $scope.trending = data;
+            $scope.trending = data.results;
             // console.log($scope.trending);
             // console.log("SUCCESS");
         }).error(function (data, status, headers, config) {
@@ -115,7 +134,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
             // console.log(data);
-            $scope.trending = data;
+            $scope.trending = data.results;
             console.log($scope.trending);
             // console.log("SUCCESS");
         }).error(function (data, status, headers, config) {
@@ -123,12 +142,12 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
             // console.log(data);
             // console.log("FAILURE");
         });
-    }
+    };
 
     $scope.nextPage = function() {
         $scope.currentPage = $scope.currentPage + 1;
 
-        console.log($scope.currentPage);
+        // console.log($scope.currentPage);
 
         $http({
             url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=" + $scope.currentPage,
@@ -137,7 +156,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
             // console.log(data);
-            $scope.trending = data;
+            $scope.trending = data.results;
             console.log($scope.trending);
             // console.log("SUCCESS");
         }).error(function (data, status, headers, config) {
@@ -145,7 +164,38 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
             // console.log(data);
             // console.log("FAILURE");
         });
-    }
+    };
+
+    // $scope.myPagingFunction = function() {
+    //     if (!$scope.busy) {
+    //         $scope.busy = true;
+    //         if ($scope.currentPage < $scope.totalCount/$scope.pageSize) {
+    //             $scope.currentPage = $scope.currentPage + 1;
+
+    //             console.log($scope.currentPage);
+
+    //             $http({
+    //                 url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=" + $scope.currentPage,
+    //                 method: "GET",
+    //                 // data: JSON.stringify($scope.form),
+    //                 headers: {'Content-Type': 'application/json'}
+    //             }).success(function (data, status, headers, config) {
+    //                 // console.log(data);
+    //                 for (var i in data.results) {
+    //                     $scope.trending.push(data.results[i]);
+    //                 }
+    //                 $scope.busy = false;
+    //                 // console.log($scope.trending);
+    //                 // console.log("SUCCESS");
+    //             }).error(function (data, status, headers, config) {
+    //                 // $scope.status = status;
+    //                 // console.log(data);
+    //                 // console.log("FAILURE");
+    //             });
+    //         }
+    //     }
+
+    // };
 
 //     var dayTracks = [];
 //     var weekTracks = [];
@@ -201,7 +251,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
   		var currPlayCount = track.current_playback_count;
   		var initPlayCount = track.initial_playback_count;
 
-  		var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(2);
+  		var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(1);
 
   		return playIncrease;
     };

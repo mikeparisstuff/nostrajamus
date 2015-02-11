@@ -182,40 +182,41 @@
 					</div>
 					<br>
 					<div class="col-sm-3 text-center">
-						<h5>Jam Points</h5>{{track.jam_points}}
+						<h5>Jam Points</h5>{{insertCommas(track.jam_points)}}
 					</div>
+
 					<div class="col-sm-12">
 						<div class="row list-separated text-center">
 							<div class="col-md-3 col-sm-3 col-xs-6">
 								<div class="font-grey-mint font-xs">
-									Total Plays
+									Initial Plays
 								</div>
 								<div class="uppercase font-lg font-red-flamingo">
-									{{track.current_playback_count}} <span class="font-md font-grey-mint"></span>
-								</div>
-							</div>
-							<div class="col-md-3 col-sm-3 col-xs-6">
-								<div class="font-grey-mint font-xs">
-									Total Followers
-								</div>
-								<div class="uppercase font-lg font-green-haze">
-									{{track.current_follower_count}} <span class="font-md font-grey-mint"></span>
+									{{insertCommas(track.initial_playback_count)}} <span class="font-md font-grey-mint"></span>
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-6">
 								<div class="font-grey-mint font-xs">
 									Play Increase
 								</div>
-								<div class="uppercase font-lg font-purple">
-									{{getPlayIncrease(track)}} <span class="font-md font-grey-mint">%</span>
+								<div class="uppercase font-lg font-green-haze">
+									{{insertCommas(getPlayIncrease(track))}} <span class="font-md font-grey-mint">%</span>
 								</div>
 							</div>
 							<div class="col-md-3 col-sm-3 col-xs-6">
 								<div class="font-grey-mint font-xs">
-									Follower Increase
+									Current Plays
+								</div>
+								<div class="uppercase font-lg font-purple">
+									{{insertCommas(track.current_playback_count)}} <span class="font-md font-grey-mint"></span>
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-6">
+								<div class="font-grey-mint font-xs">
+									Initial Followers
 								</div>
 								<div class="uppercase font-lg font-blue-sharp">
-									{{getFollowIncrease(track)}} <span class="font-md font-grey-mint">%</span>
+									{{insertCommas(track.initial_follower_count)}} <span class="font-md font-grey-mint"></span>
 								</div>
 							</div>
 						</div>

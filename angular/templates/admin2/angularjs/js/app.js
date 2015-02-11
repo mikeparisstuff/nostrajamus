@@ -9,8 +9,9 @@ var MetronicApp = angular.module("MetronicApp", [
     "oc.lazyLoad",
     "ngSanitize",
     "ngResource",
-    "angularFileUpload"//authentication with django
+    "angularFileUpload",//authentication with django
     // "angularFileUpload" //file upload
+    'infinite-scroll'
 ]); 
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
