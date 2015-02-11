@@ -140,7 +140,7 @@ Page content
 @media (min-width: $screen-md-min) { /* 992px */
 
     .container {
-      width: 80%;
+      width: 75%;
     }
 	/* Page content */
 	.page-content-wrapper {
@@ -216,7 +216,7 @@ Page content
 	}
 
   .container {
-    width: 100%;
+    width: 90%;
   }
 }
 
@@ -248,6 +248,10 @@ Page content
 			}
 		}
 	}
+
+    .container {
+      width: 100%;
+    }
 }
 
 @media (max-width: $screen-xs-min) { /* 480px */

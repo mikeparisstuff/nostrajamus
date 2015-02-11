@@ -1553,7 +1553,7 @@ Page content
 @media (min-width: 992px) {
   /* 992px */
   .container {
-    width: 80%;
+    width: 75%;
   }
 
   /* Page content */
@@ -1616,7 +1616,7 @@ Page content
   }
 
   .container {
-    width: 100%;
+    width: 90%;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -1641,6 +1641,10 @@ Page content
   .page-content-wrapper .page-content .page-title small {
     font-size: 13px;
     padding-top: 3px;
+  }
+
+  .container {
+    width: 100%;
   }
 }
 @media (max-width: 480px) {
