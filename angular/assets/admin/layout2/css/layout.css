@@ -941,11 +941,11 @@ Page sidebar
 }
 .page-container-bg-solid .page-sidebar .page-sidebar-menu > li.active > a > .selected, .page-container-bg-solid
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > .selected {
-  border-color: transparent #FFFFFF transparent transparent;
+  border-color: transparent #F8F8F8 transparent transparent;
 }
 .page-container-bg-solid.page-sidebar-reversed .page-sidebar .page-sidebar-menu > li.active > a > .selected, .page-container-bg-solid.page-sidebar-reversed
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > .selected {
-  border-color: transparent transparent transparent #FFFFFF;
+  border-color: transparent transparent transparent #F8F8F8;
 }
 .page-sidebar .page-sidebar-menu li > a > .arrow:before,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a > .arrow:before {
@@ -1544,7 +1544,7 @@ Page content
   background-color: #fff;
 }
 .page-container-bg-solid .page-content {
-  background: #FFFFFF;
+  background: #F8F8F8;
 }
 .page-full-width .page-content {
   margin-left: 0px !important;
@@ -1554,8 +1554,8 @@ Page content
   /* 992px */
   /* Page content */
   .page-content-wrapper {
-    float: left;
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
   }
   .page-content-wrapper .page-content {
     margin-left: 195px;

@@ -22,6 +22,7 @@ def calculate_jam_points(initial_playcount, initial_followers, final_playcount, 
     if jam_points < 0:
         print "Found Negative Jam Points"
         print "{}, {}, {}, {}: {}".format(initial_playcount, initial_followers, final_playcount, final_followers, jam_points)
+        return 0
     return (jam_points**0.5)
 
 
