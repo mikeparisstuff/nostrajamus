@@ -1,14 +1,13 @@
 /*Custom CSS NostraJAMUS*/
 .nostra {
-  font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
-  color: #ff5252;
-  float: left;
-  padding-top: 10px;
-  /*padding-left: 10px;*/
-  padding-right: 10px;
-  font-size: 30px;
+    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+    color: #ff5252;
+    float: left;
+    padding-top: 10px;
+    /*padding-left: 10px;*/
+    padding-right: 10px;
+    font-size: 30px;
 }
-
 /*.logo-nostra {
   max-width: 200px;
   margin-top: 20px;
@@ -18,13 +17,11 @@
   border-radius: 5px;
   border: 2px solid #ff5252;
 }
-
 #registerButton:hover {
   /*background-color: #ccc;*/
   border-radius: 5px;
   border: 2px solid #ff5252;
 }
-
 .page-top {
   border-bottom: 1px solid #ff5252;
 }
@@ -32,38 +29,33 @@
 .dropdown-user > .dropdown-menu {
   margin-top: 0;
 }
-
-.page-top > .navbar-default {
+.page-top>.navbar-default {
   padding: 0;
   /*margin: 0;*/
 }
 
 @media (max-width: 768px) {
-  .page-top > nav {
-    height: 67px;
-  }
 
-  .navbar-header {
-    background-color: #333;
-  }
-
-  .navbar-default {
-    background-color: #333;
-  }
-
-  .navbar-header > .navbar-toggle {
-    margin-top: 16px;
-  }
-
-  .navbar-collapse {
-    background-color: #222222;
-  }
-
-  #nostra-nav-collapse {
-    background-color: #333;
-    margin-top: 7px;
-    overflow: visible;
-  }
+    .page-top > nav {
+        height: 67px;
+    }
+    .navbar-header {
+      background-color: #333;
+    }
+    .navbar-default {
+      background-color: #333;
+    }
+    .navbar-header > .navbar-toggle {
+        margin-top: 16px;
+    }
+    .navbar-collapse {
+        background-color: #222222;
+    }
+    #nostra-nav-collapse {
+      background-color: #333;
+      margin-top: 7px;
+      overflow: visible;
+    }
 }
 /*
 section#services {
@@ -73,7 +65,6 @@ section#services {
   max-height: 20%;
   max-width: 20%;
 }
-
 .nostra-header-nav {
   max-height: 75px;
   max-width: 75px;
@@ -81,81 +72,64 @@ section#services {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 .task-config {
   float: right;
 }
-
 .font-nostra {
   font-size: 20px;
   color: #ff5252;
 }
-
 .font-nostra-sm {
   color: #ff5252;
 }
-
 .font-nostra-dark {
-  color: #43525c;
+    color: #43525c;
 }
-
 .white-nostra {
-  color: #ddd;
+    color: #ddd;
 }
-
 .sublogin {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
-
 .red {
-  color: #ff5252;
-  text-align: center;
+    color: #ff5252;
+    text-align: center;
 }
-
 .green {
-  color: green;
-  text-align: center;
+    color: green;
+    text-align: center;
 }
-
 .scoring-img {
-  width: 100%;
+    width: 100%;
 }
-
 .btn-center {
-  position: relative;
-  top: 50%;
+  position:relative;
+  top:50%;
 }
-
 .white {
   color: #fff;
 }
-
 .subheading {
   font-style: italic;
   font-size: 12px;
 }
-
 .faq-answer {
   font-size: 12px;
 }
-
 .under-construction {
   float: auto;
   align: center;
   max-height: 250px;
   max-width: 250px;
 }
-
 .user-pic {
   margin-right: 10px;
 }
-
-.table {
-  border: 1px solid black;
-  table-layout: fixed;
-  width: 200px;
+.table{
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 200px;
 }
-
 /*th, td {
   border: 1px solid black;
   overflow: hidden;
@@ -164,12 +138,10 @@ section#services {
 .title-bg {
   background-color: #43525c;
 }
-
 .img-tutorial {
   /*max-width: 600px;*/
-  width: 100%;
+    width: 100%;
 }
-
 @media (max-width: 800px) {
   .img-tutorial {
     max-width: 425px;
@@ -185,21 +157,17 @@ section#services {
   font-weight: 700;
   font-size: 14px;
 }
-
 .img-profile {
   border: 2px solid;
   border-radius: 25px;
   border-color: #333;
 }
-
 .title {
   color: #ddd;
 }
-
 .subheading-leaders {
   font-size: 12px;
 }
-
 .profpic-default {
   max-width: 100px;
   max-height: 100px;
@@ -213,8 +181,8 @@ section#services {
   display: inline-block;
   border: 0;
 }
-
 /*/Portlet Formatting*/
+
 /***
 Red-nostra
 ***/
@@ -226,7 +194,6 @@ Red-nostra
   opacity: 1;
   filter: alpha(opacity=100);
 }
-
 .red-nostra-modal.btn {
   color: #FFFFFF;
   background-color: #ff5252;
@@ -234,7 +201,6 @@ Red-nostra
   opacity: 1;
   filter: alpha(opacity=100);
 }
-
 .dark-nostra-modal.btn {
   color: #FFFFFF;
   background-color: #555;
@@ -242,36 +208,29 @@ Red-nostra
   opacity: 1;
   filter: alpha(opacity=100);
 }
-
 .red-nostra.btn:hover, .red-nostra.btn:focus, .red-nostra.btn:active, .red-nostra.btn.active {
   color: #FFFFFF;
   background-color: #ff5252;
   opacity: 0.7;
   filter: alpha(opacity=70);
 }
-
 .open .red-nostra.btn.dropdown-toggle {
   color: #FFFFFF;
   background-color: #ff5252;
 }
-
 .red-nostra.btn:active, .red-nostra.btn.active {
   background-image: none;
   background-color: #ff5252;
 }
-
 .red-nostra.btn:active:hover, .red-nostra.btn.active:hover {
   background-color: #ff5252;
 }
-
 .open .red-nostra.btn.dropdown-toggle {
   background-image: none;
 }
-
 .red-nostra.btn.disabled, .red-nostra.btn.disabled:hover, .red-nostra.btn.disabled:focus, .red-nostra.btn.disabled:active, .red-nostra.btn.disabled.active, .red-nostra.btn[disabled], .red-nostra.btn[disabled]:hover, .red-nostra.btn[disabled]:focus, .red-nostra.btn[disabled]:active, .red-nostra.btn[disabled].active, fieldset[disabled] .red-nostra.btn, fieldset[disabled] .red-nostra.btn:hover, fieldset[disabled] .red-nostra.btn:focus, fieldset[disabled] .red-nostra.btn:active, fieldset[disabled] .red-nostra.btn.active {
   background-color: #ff5252;
 }
-
 .red-nostra.btn .badge {
   color: #ff5252;
   background-color: #FFFFFF;
@@ -287,7 +246,6 @@ Red-nostra
 .portlet.red-nostra {
   background-color: #ff5252;
 }
-
 .portlet > .portlet-body.dark-bg-nostra,
 .portlet.red-nostra {
   background-color: #f7f7f7;
@@ -298,31 +256,24 @@ Red-nostra
   border: 0;
   color: #FFFFFF;
 }
-
 .portlet.solid.red-nostra > .portlet-title > .caption > i {
   color: #FFFFFF;
 }
-
 .portlet.solid.red-nostra > .portlet-title > .tools > a.remove {
   background-image: url(../img/portlet-remove-icon-white.png);
 }
-
 .portlet.solid.red-nostra > .portlet-title > .tools > a.config {
   background-image: url(../img/portlet-config-icon-white.png);
 }
-
 .portlet.solid.red-nostra > .portlet-title > .tools > a.reload {
   background-image: url(../img/portlet-reload-icon-white.png);
 }
-
 .portlet.solid.red-nostra > .portlet-title > .tools > a.expand {
   background-image: url(../img/portlet-expand-icon-white.png);
 }
-
 .portlet.solid.red-nostra > .portlet-title > .tools > a.collapse {
   background-image: url(../img/portlet-collapse-icon-white.png);
 }
-
 .portlet.solid.red-nostra > .portlet-title > .tools > a.fullscreen {
   color: #fdfdfd;
 }
@@ -332,30 +283,24 @@ Red-nostra
   background-color: #bebebe;
   border-top: 0;
 }
-
 .portlet.box.red-nostra > .portlet-title {
   background-color: #ff5252;
 }
-
 .portlet.box.red-nostra > .portlet-title > .caption {
   color: #FFFFFF;
 }
-
 .portlet.box.red-nostra > .portlet-title > .caption > i {
   color: #FFFFFF;
 }
-
 .portlet.box.red-nostra > .portlet-title > .actions .btn-default {
   background: transparent !important;
   background-color: transparent !important;
   border: 1px solid #a8c4dd;
   color: #bad1e4;
 }
-
 .portlet.box.red-nostra > .portlet-title > .actions .btn-default > i {
   color: #c5d8e9;
 }
-
 .portlet.box.red-nostra > .portlet-title > .actions .btn-default:hover, .portlet.box.red-nostra > .portlet-title > .actions .btn-default:focus, .portlet.box.red-nostra > .portlet-title > .actions .btn-default:active, .portlet.box.red-nostra > .portlet-title > .actions .btn-default.active {
   border: 1px solid #cdddec;
   color: #dfeaf3;
@@ -365,27 +310,22 @@ Red-nostra
 .dashboard-stat.red-nostra {
   background-color: #ff5252;
 }
-
 .dashboard-stat.red-nostra.dashboard-stat-light:hover {
   background-color: #4884b8;
 }
-
 .dashboard-stat.red-nostra .visual > i {
   color: #FFFFFF;
   opacity: 0.1;
   filter: alpha(opacity=10);
 }
-
 .dashboard-stat.red-nostra .details .number {
   color: #FFFFFF;
 }
-
 .dashboard-stat.red-nostra .details .desc {
   color: #FFFFFF;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-
 .dashboard-stat.red-nostra .more {
   color: #FFFFFF;
   background-color: #4884b8;
@@ -408,41 +348,34 @@ Red-nostra
   background: #ff5252 !important;
   color: #FFFFFF !important;
 }
-
 /*End red-nostra formatting*/
+
 /* social-media-icons */
 .fa-twitter {
-  color: #4099ff;
+    color: #4099ff;
 }
-
 .fa-facebook {
-  color: #3b5998;
+    color: #3b5998;
 }
-
 .fa-soundcloud {
-  color: #ff7700;
+    color: #ff7700;
 }
-
 .fa-spotify {
-  color: #6ae368;
+    color: #6ae368;
 }
-
 .fa-tumblr {
-  color: #36465d;
+    color: #36465d;
 }
-
 .social-media-icons {
   display: inline-block;
   opacity: 0.7;
   filter: alpha(opacity=70);
 }
-
 .social-media-icons:hover {
   cursor: pointer;
   opacity: 1;
   filter: alpha(opacity=100);
 }
-
 @media (min-width: 992px) {
   /* 992px */
   .social-media-icons {
@@ -454,23 +387,21 @@ Red-nostra
   .social-media-icons {
     right: 10px;
   }
-
   .social-media-icons > i {
     font-size: 28px;
   }
 }
 .socialmedia {
-  vertical-align: right;
-  float: right;
-  text-indent: 10px;
+    vertical-align: right;
+    float: right;
+    text-indent: 10px;
 }
-
 /*End social-media-icons*/
+
 @media (min-width: 768px) {
   section.thin-section {
     padding: 25px 0;
   }
-
   section.thick-section {
     padding: 40px 0;
   }

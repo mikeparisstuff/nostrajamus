@@ -158,14 +158,15 @@
 
                 /* User */
                 > li.dropdown-user {
-                    > .dropdown-toggle {                    
+
+                    > .dropdown-toggle {
 
                         > .username {
                             color: $header-top-menu-user-font-color;
                         }
 
                         > i {
-                            color: $header-top-menu-user-font-color;
+                            color: $header-top-menu-icon-font-color;
                         }
                     }
 
@@ -669,7 +670,11 @@
     ****/     
 
     body {
-        background-color: $sidebar-bg-color; 
+//        background-color: $sidebar-bg-color;
+        background-image: $bg-image;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
     }
  
     body.page-boxed {

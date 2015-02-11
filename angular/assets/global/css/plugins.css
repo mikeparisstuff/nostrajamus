@@ -434,7 +434,7 @@ Color variants
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default {
   color: #444;
-  background: #ececec;
+  background: #ff9f9f;
 }
 
 /* Bootstrap switch on portlet headers */
@@ -1843,7 +1843,7 @@ Color variants
 
 .noUi-default.noUi-connect,
 .noUi-default .noUi-connect {
-  background: #c6c6c6;
+  background: #ff5252;
 }
 
 /***

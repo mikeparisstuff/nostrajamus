@@ -40,7 +40,7 @@ New Profile Page
 
 .profile-usertitle-job {
   text-transform: uppercase;
-  color: #ff5252;
+  color: #5b9bd1;
   font-size: 13px;
   font-weight: 800;
   margin-bottom: 7px;
@@ -91,13 +91,13 @@ New Profile Page
 
 .profile-usermenu ul li a:hover {
   background-color: #fafcfd;
-  color: #ff5252;
+  color: #5b9bd1;
 }
 
 .profile-usermenu ul li.active a {
-  color: #ff5252;
+  color: #5b9bd1;
   background-color: #f6f9fb;
-  border-left: 2px solid #ff5252;
+  border-left: 2px solid #5b9bd1;
   margin-left: -2px;
 }
 
@@ -113,7 +113,7 @@ New Profile Page
 }
 
 .profile-stat-text {
-  color: #ff5252;
+  color: #5b9bd1;
   font-size: 11px;
   font-weight: 800;
   text-align: center;
@@ -140,7 +140,7 @@ New Profile Page
 .profile-desc-link a {
   font-size: 14px;
   font-weight: 600;
-  color: #ff5252;
+  color: #5b9bd1;
 }
 
 /* END PROFILE SIDEBAR */
