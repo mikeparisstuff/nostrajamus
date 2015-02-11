@@ -416,6 +416,24 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         // console.log(response.data);
                         return response.data;
                     });
+                }],
+                myEntry: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/users/me').then(function(response) {
+                        // console.log(response.data);
+                        var myTrackInfo;
+                        for (var i in response.data.my_entries) {
+                            if (response.data.my_entries[i].contest == $stateParams.contestID) {
+                                myTrackInfo = response.data.my_entries[i];
+                            }
+                        }
+                        return myTrackInfo;
+                    });
+                }],
+                myRank: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/contests/' + $stateParams.contestID + '/rank/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
                 }]
             }
         })
@@ -453,6 +471,24 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 }],
                 contestEntries: ['$http', '$stateParams', function($http, $stateParams) {
                     return $http.get('/api/contests/' + $stateParams.contestID + '/entries/').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                myEntry: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/users/me').then(function(response) {
+                        // console.log(response.data);
+                        var myTrackInfo;
+                        for (var i in response.data.my_entries) {
+                            if (response.data.my_entries[i].contest == $stateParams.contestID) {
+                                myTrackInfo = response.data.my_entries[i];
+                            }
+                        }
+                        return myTrackInfo;
+                    });
+                }],
+                myRank: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/contests/' + $stateParams.contestID + '/rank/').then(function(response) {
                         // console.log(response.data);
                         return response.data;
                     });

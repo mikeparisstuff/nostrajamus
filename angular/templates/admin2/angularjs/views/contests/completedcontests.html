@@ -4,6 +4,15 @@
 </h3>
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h2 class="section-heading">{{contestInfo.title}}</h2>
+        <div class="section-subheading">{{contestInfo.description}}</div>
+        <!-- <div class="section-subheading text-muted">Submission Deadline In <span id="countdown-open"></span></div> -->
+        <br>
+    </div>
+</div>
+
 <div class="row" ng-controller="AdvancedDatatablesDemoCtrl">
 	<div class="col-md-12">
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -45,13 +54,28 @@
 	</div>
 </div>
 
-<div class="row">
-    <div class="col-lg-12 text-center">
-        <h2 class="section-heading">{{contestInfo.title}}</h2>
-        <div class="section-subheading">{{contestInfo.description}}</div>
-        <!-- <div class="section-subheading text-muted">Submission Deadline In <span id="countdown-open"></span></div> -->
+<div class="row" ng-hide="myRank==-1">
+    <h3 align="center">Your Pick</h3>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="text-center rank-holder">
+                <br><br>
+                <h1 class="counter">{{myRank}}</h1>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(myEntry)}}"></iframe>
+        </div>
+        <div class="col-md-2 text-center rank-holder">
+            <br><br><br>
+            <!-- <div><a href="#/profile/{{myEntry.user.id}}/dashboard">{{myEntry.user.username}}</a></div> -->
+            <div>{{myEntry.jam_points}} Jam Points</div>
+            <button type="button" class="btn btn-default dark-nostra-modal" data-toggle="modal" ng-click="updateModal(myEntry)" data-target="#graphModal">Details</button>
+        </div>
     </div>
 </div>
+
+<hr>
 
 <h3 align="center">Full Standings</h3>
 <div class="row" ng-repeat="entry in contestEntries.results | limitTo:pageSize">

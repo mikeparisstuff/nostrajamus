@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('InProgressContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http) {
+MetronicApp.controller('InProgressContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -11,6 +11,10 @@ MetronicApp.controller('InProgressContestsController', ['$rootScope', '$scope', 
 
     $scope.contestInfo = contestInfo;
     $scope.contestEntries = contestEntries;
+    $scope.myEntry = myEntry;
+    $scope.myRank = myRank.rank;
+
+    // console.log(myEntry);
 
     $scope.timeOffset = function(date, offset) {
         var d = new Date(date);
