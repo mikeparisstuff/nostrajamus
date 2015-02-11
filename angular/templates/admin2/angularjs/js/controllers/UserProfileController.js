@@ -44,7 +44,7 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
     };
 
     $scope.getSrc = function(track) {
-    	var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.track.sc_id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+    	var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.track.sc_id + '&amp;color=ff5252&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
 
     	var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
 
