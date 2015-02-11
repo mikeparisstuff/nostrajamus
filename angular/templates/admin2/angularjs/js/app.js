@@ -38,29 +38,6 @@ MetronicApp.factory('settings', ['$rootScope', function($rootScope) {
     return settings;
 }]);
 
-// HTTP Request Service for My Contests
-// MetronicApp.factory('contestData', ['$resource', '$q', function ($resource, $q) {
-
-//     var factory = {
-//         query: function (value) {
-
-//             // here you can play with 'value'
-
-//             var data = $resource('/api/contests/' + value, {}, {
-//                 query: {
-//                     method: 'GET',
-//                     isArray: false
-//                 }
-//             });
-//             var deferred = $q.defer();
-//             deferred.resolve(data);
-//             return deferred.promise;
-//         }
-
-//     }
-//     return factory;
-// }]);
-
 // Setup authentication with django
 MetronicApp.config(['$httpProvider', function($httpProvider) {
     // django and angular both support csrf tokens. This tells
@@ -295,7 +272,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('dashboard', {
             url: "/dashboard",
             templateUrl: "/assets/views/dashboard.html",            
-            data: {pageTitle: 'Home'},
+            data: {
+                pageTitle: 'Home',
+                requireLogin: false
+            },
             controller: "DashboardController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
