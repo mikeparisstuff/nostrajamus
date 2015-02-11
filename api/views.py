@@ -300,7 +300,9 @@ class ContestViewSet(viewsets.ModelViewSet):
                     contest = contest,
                     track = track,
                     initial_playback_count = track_data["playback_count"],
-                    initial_follower_count = sc_user.followers_count
+                    initial_follower_count = sc_user.followers_count,
+                    current_playback_count = track_data["playback_count"],
+                    current_follower_count = sc_user.followers_count
                 )
                 # entry_serializer = ContestEntrySerializer(contest_entry, context={'request': request})
                 # return Response(entry_serializer.data, status=status.HTTP_200_OK)

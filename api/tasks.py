@@ -166,16 +166,30 @@ def update_user_jam_points():
 
 @shared_task
 def start_contest(contest_id):
+    '''
+    from datetime import datetime
+    from pytz import timezone
+    eastern = timezone=('US/Eastern')
+    date = datetime(year=, month=, ..., tzinfo=eastern)
+    start_contest.apply_async(eta=date, args=(x,))
+    For some reason this is running 4 minutes back on my vagrant
+    '''
     contest = Contest.objects.get(id=contest_id)
     entries = contest.entries
     for entry in entries:
-        new_track = client.get('/tracks/{}'.format(entry.track.sc_id))
-        new_user = client.get('/users/{}'.format(entry.track.user.sc_id))
-        entry.initial_playback_count = new_track.playback_count
-        entry.initial_follower_count = new_user.followers_count
-        entry.is_active = True
-        entry.jam_points = 0.0
-        entry.save()
+        try:
+            new_track = client.get('/tracks/{}'.format(entry.track.sc_id))
+            new_user = client.get('/users/{}'.format(entry.track.user.sc_id))
+            entry.initial_playback_count = new_track.playback_count
+            entry.initial_follower_count = new_user.followers_count
+            entry.is_active = True
+            entry.jam_points = 0.0
+            entry.save()
+        except HTTPError as e:
+            print "Could not find track with id: {}".format(entry.track.sc_id)
+            print "Error: {}".format(e)
+    contest.is_live = True
+    contest.save()
 
 @shared_task
 def end_contest(contest_id):
