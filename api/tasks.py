@@ -173,6 +173,7 @@ def start_contest(contest_id):
         new_user = client.get('/users/{}'.format(entry.track.user.sc_id))
         entry.initial_playback_count = new_track.playback_count
         entry.initial_follower_count = new_user.followers_count
+        entry.is_active = True
         entry.jam_points = 0.0
         entry.save()
 
