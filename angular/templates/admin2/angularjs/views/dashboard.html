@@ -172,10 +172,10 @@
 					<p><h5>End Time (ET)</h5>{{end_time}}</p>
 	            </div>
 	            <div class="modal-footer title-bg">
-	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open' && isEnabled">Enter</button>
-	               	<button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress' && isEnabled">View</button>
-	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed' && isEnabled">View</button>
-	                <span class="btn btn-default" ng-hide="isEnabled" ng-disabled="true">Coming Soon</span>
+	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open' && enabled">Enter</button>
+	               	<button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'">View</button>
+	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'">View</button>
+	                <span class="btn btn-default" ng-hide="enabled" ng-disabled="true">Coming Soon</span>
 	            </div>
 	        </div>
 	    </div>
@@ -197,10 +197,10 @@
 					<!-- <p ng-repeat="value in prizeValues">{{value}}</p> -->
 	            </div>
 	            <div class="modal-footer title-bg">
-	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open' && isEnabled">Enter</button>
-	               	<button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress' && isEnabled">View</button>
-	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed' && isEnabled">View</button>
-	                <span class="btn btn-default" ng-hide="isEnabled" ng-disabled="true">Coming Soon</span>
+	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open' && enabled">Enter</button>
+	               	<button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'">View</button>
+	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'">View</button>
+	                <span class="btn btn-default" ng-hide="enabled" ng-disabled="true">Coming Soon</span>
 	            </div>
 	        </div>
 	    </div>
@@ -322,13 +322,13 @@
 										</td> -->
 										<td>
 											<!-- <img class="user-pic" src="{{getProfilePicture(inProgressContest.contest_picture)}}"> -->
-											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'inProgress', inProgressContest.id, isEnabled(openContest.start_time))">{{inProgressContest.title}}</a>
+											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'inProgress', inProgressContest.id, isEnabled(inProgressContest.start_time))">{{inProgressContest.title}}</a>
 										</td>
 										<td>
 											${{inProgressContest.entry_fee}}
 										</td>
 										<td>
-											<a href="#" type="button" data-toggle="modal" data-target="#prizeDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'open', inProgressContest.id, isEnabled(openContest.start_time))">{{inProgressContest.prize}}</a>
+											<a href="#" type="button" data-toggle="modal" data-target="#prizeDetailsModal" ng-click="passModal(inProgressContest.title, inProgressContest.entry_fee, inProgressContest.prize, inProgressContest.description, inProgressContest.start_time, inProgressContest.end_time, 'inProgress', inProgressContest.id, isEnabled(inProgressContest.start_time))">{{inProgressContest.prize}}</a>
 										</td>
 										<td>
 											{{inProgressContest.end_time}}
@@ -365,14 +365,14 @@
 									<tr ng-repeat="completedContest in completedContests">
 										<td>
 											<!-- <img class="user-pic" src="{{getProfilePicture(completedContest.contest_picture)}}"> -->
-											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, compeletedContest.end_time, 'completed', completedContest.id, isEnabled(openContest.start_time))">
+											<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, compeletedContest.end_time, 'completed', completedContest.id, isEnabled(completedContest.start_time))">
 											{{completedContest.title}}</a>
 										</td>
 										<td>
 											${{completedContest.entry_fee}}
 										</td>
 										<td>
-											<a href="#" type="button" data-toggle="modal" data-target="#prizeDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, completedContest.end_time, 'open', completedContest.id, isEnabled(openContest.start_time))">{{completedContest.prize}}</a>
+											<a href="#" type="button" data-toggle="modal" data-target="#prizeDetailsModal" ng-click="passModal(completedContest.title, completedContest.entry_fee, completedContest.prize, completedContest.description, completedContest.start_time, completedContest.end_time, 'completed', completedContest.id, isEnabled(completedContest.start_time))">{{completedContest.prize}}</a>
 										</td>
 										<td>
 											{{completedContest.end_time}}

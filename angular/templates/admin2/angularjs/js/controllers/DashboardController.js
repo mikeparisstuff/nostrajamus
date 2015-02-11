@@ -119,9 +119,11 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		var oneWeek = new Date().addHours(24*7);
 		var startTime = new Date(start).addHours(0);
 		if (startTime < oneWeek) {
+			// console.log(true);
 			return true;
 		}
 		else {
+			// console.log(false);
 			return false;
 		}
 	}
@@ -164,7 +166,7 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 	$scope.passModal = function(title, entry_fee, prize, description, start_time, end_time, status, contest_id, isEnabled) {
 		$scope.title = title;
 		$scope.entry_fee = entry_fee;
-		$scope.isEnabled = isEnabled;
+		$scope.enabled = isEnabled;
 
 		$scope.prize = prize;
 		var prizes = prize.split(",");
@@ -175,7 +177,9 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		for (var i in prizes) {
 			var eachPrize = prizes[i].split(":");
 			prizeCategories.push(eachPrize[0].trim());
-			prizeValues.push(eachPrize[1].trim());
+			if (eachPrize[1]) {
+				prizeValues.push(eachPrize[1].trim());
+			}
 		}
 
 		$scope.prizeCategories = prizeCategories;
