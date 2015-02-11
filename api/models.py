@@ -605,7 +605,7 @@ class ContestEntry(BaseModel):
     '''
 
     is_active = models.BooleanField(
-        default = True
+        default = False
     )
 
     # User who entered the song
