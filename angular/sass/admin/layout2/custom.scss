@@ -1,12 +1,30 @@
 /*Custom CSS NostraJAMUS*/
 .nostra {
-    font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
-    color: #ff5252;
-    float: left;
-    padding-top: 10px;
-    /*padding-left: 10px;*/
-    padding-right: 10px;
-    font-size: 30px;
+  font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+  color: #ff5252;
+  float: left;
+  padding-top: 10px;
+  /*padding-left: 10px;*/
+  padding-right: 10px;
+  font-size: 30px;
+}
+.nostra-style-red {
+  font-family: Sica-ExtraBoldItalic;
+  color: #ff5252;
+  float: left;
+  padding-top: 10px;
+  /*padding-left: 10px;*/
+  // padding-right: 10px;
+  font-size: 30px;
+}
+.nostra-style-white {
+  font-family: Sica-ExtraBoldItalic;
+  color: #ffffff;
+  float: left;
+  padding-top: 10px;
+  /*padding-left: 10px;*/
+  // padding-right: 10px;
+  font-size: 30px;
 }
 /*.logo-nostra {
   max-width: 200px;
@@ -406,3 +424,106 @@ Red-nostra
     padding: 40px 0;
   }
 }
+
+// FONTS
+
+/* @import must be at top of file, otherwise CSS will not work */
+
+@import url("//hello.myfonts.net/count/2d4dba");
+
+  
+@font-face {font-family: 'Sica-SemiBoldItalic';src: url('webfonts/2D4DBA_0_0.eot');src: url('webfonts/2D4DBA_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_0_0.woff2') format('woff2'),url('webfonts/2D4DBA_0_0.woff') format('woff'),url('webfonts/2D4DBA_0_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-SemiBold';src: url('webfonts/2D4DBA_1_0.eot');src: url('webfonts/2D4DBA_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_1_0.woff2') format('woff2'),url('webfonts/2D4DBA_1_0.woff') format('woff'),url('webfonts/2D4DBA_1_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-Light';src: url('webfonts/2D4DBA_2_0.eot');src: url('webfonts/2D4DBA_2_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_2_0.woff2') format('woff2'),url('webfonts/2D4DBA_2_0.woff') format('woff'),url('webfonts/2D4DBA_2_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-Regular';src: url('webfonts/2D4DBA_3_0.eot');src: url('webfonts/2D4DBA_3_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_3_0.woff2') format('woff2'),url('webfonts/2D4DBA_3_0.woff') format('woff'),url('webfonts/2D4DBA_3_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-LightItalic';src: url('webfonts/2D4DBA_4_0.eot');src: url('webfonts/2D4DBA_4_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_4_0.woff2') format('woff2'),url('webfonts/2D4DBA_4_0.woff') format('woff'),url('webfonts/2D4DBA_4_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-RegularItalic';src: url('webfonts/2D4DBA_5_0.eot');src: url('webfonts/2D4DBA_5_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_5_0.woff2') format('woff2'),url('webfonts/2D4DBA_5_0.woff') format('woff'),url('webfonts/2D4DBA_5_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-ExtraLightItalic';src: url('webfonts/2D4DBA_6_0.eot');src: url('webfonts/2D4DBA_6_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_6_0.woff2') format('woff2'),url('webfonts/2D4DBA_6_0.woff') format('woff'),url('webfonts/2D4DBA_6_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-ExtraLight';src: url('webfonts/2D4DBA_7_0.eot');src: url('webfonts/2D4DBA_7_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_7_0.woff2') format('woff2'),url('webfonts/2D4DBA_7_0.woff') format('woff'),url('webfonts/2D4DBA_7_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-ExtraBoldItalic';src: url('webfonts/2D4DBA_8_0.eot');src: url('webfonts/2D4DBA_8_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_8_0.woff2') format('woff2'),url('webfonts/2D4DBA_8_0.woff') format('woff'),url('webfonts/2D4DBA_8_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-ExtraBold';src: url('webfonts/2D4DBA_9_0.eot');src: url('webfonts/2D4DBA_9_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_9_0.woff2') format('woff2'),url('webfonts/2D4DBA_9_0.woff') format('woff'),url('webfonts/2D4DBA_9_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-BoldItalic';src: url('webfonts/2D4DBA_A_0.eot');src: url('webfonts/2D4DBA_A_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_A_0.woff2') format('woff2'),url('webfonts/2D4DBA_A_0.woff') format('woff'),url('webfonts/2D4DBA_A_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'Sica-Bold';src: url('webfonts/2D4DBA_B_0.eot');src: url('webfonts/2D4DBA_B_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2D4DBA_B_0.woff2') format('woff2'),url('webfonts/2D4DBA_B_0.woff') format('woff'),url('webfonts/2D4DBA_B_0.ttf') format('truetype');}
+
+.Sica-SemiBoldItalic { 
+  font-family: Sica-SemiBoldItalic;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-SemiBold { 
+  font-family: Sica-SemiBold;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-Light { 
+  font-family: Sica-Light;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-Regular { 
+  font-family: Sica-Regular;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-LightItalic { 
+  font-family: Sica-LightItalic;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-RegularItalic { 
+  font-family: Sica-RegularItalic;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-ExtraLightItalic { 
+  font-family: Sica-ExtraLightItalic;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-ExtraLight { 
+  font-family: Sica-ExtraLight;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-ExtraBoldItalic { 
+  font-family: Sica-ExtraBoldItalic;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-ExtraBold { 
+  font-family: Sica-ExtraBold;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-BoldItalic { 
+  font-family: Sica-BoldItalic;
+  font-weight: normal;
+  font-style: normal;
+}
+.Sica-Bold { 
+  font-family: Sica-Bold;
+  font-weight: normal;
+  font-style: normal;
+} 
