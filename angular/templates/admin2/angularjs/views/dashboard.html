@@ -428,14 +428,13 @@
 								<tr ng-repeat="myContest in myContestInfo">
 									<td>
 										<!-- <img class="user-pic" src="{{getProfilePicture(myContest.contest_picture)}}"> -->
-										<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(myContest.title, myContest.entry_fee, myContest.prize, myContest.description, myContest.start_time, compeletedContest.end_time, 'completed', myContest.id, isEnabled(openContest.start_time))">
-										{{myContest.title}}</a>
+										<a href="#" type="button" class="primary-link" data-toggle="modal" data-target="#contestDetailsModal" ng-click="passModal(myContest.title, myContest.entry_fee, myContest.prize, myContest.description, myContest.start_time, myContest.end_time, 'inProgress', myContest.id, isEnabled(myContest.start_time))">{{myContest.title}}</a>
 									</td>
 									<td>
 										${{myContest.entry_fee}}
 									</td>
 									<td>
-										<a href="#" type="button" data-toggle="modal" data-target="#prizeDetailsModal" ng-click="passModal(myContest.title, myContest.entry_fee, myContest.prize, myContest.description, myContest.start_time, myContest.end_time, 'open', myContest.id, isEnabled(openContest.start_time))">{{myContest.prize}}</a>
+										<a href="#" type="button" data-toggle="modal" data-target="#prizeDetailsModal" ng-click="passModal(myContest.title, myContest.entry_fee, myContest.prize, myContest.description, myContest.start_time, myContest.end_time, 'inProgress', myContest.id, isEnabled(myContest.start_time))">{{myContest.prize}}</a>
 									</td>
 									<td>
 										{{myContest.start_time}} - {{myContest.end_time}}
