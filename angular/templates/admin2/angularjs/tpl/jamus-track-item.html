@@ -1,0 +1,49 @@
+<div class="row jamus-track-item">
+    <div class="col-sm-3 text-center">
+        <div class="track-img-wrapper">
+            <img class="track-img" src="{{ track.track.artwork_url }}" alt="" />
+            <div class="play-btn-container">
+                <span class="play-btn fa fa-5x fa-play-circle-o" ng-click="playNewTrack(track)" ></span>
+            </div>
+        </div>
+    </div>
+    <div class="track-data col-sm-8">
+        <div class="track-data-top">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>{{ track.track.title }}</h3>
+                    <p>{{ track.track.user.username }}</p>
+                </div>
+            </div>
+        </div>
+        <hr class="track-divider"/>
+        <div class="track-data-bottom text-center">
+            <div class="row">
+                <div class="col-sm-2"><b>Initial</b><br />{{ insertCommas(track.initial_playback_count) }}
+                </div>
+                <div class="col-sm-2"><b>Increase</b><br />
+                    {{ insertCommas(getPlayIncrease(track)) }}
+                </div>
+                <div class="col-sm-2"><b>Current</b><br />{{insertCommas(track.current_playback_count) }}</div>
+                <div class="col-sm-2"><b>Followers</b><br />{{ insertCommas(track.initial_follower_count) }}</div>
+                <div class="col-sm-3"><b>Jam Points</b><br />{{ insertCommas(track.jam_points) }}</div>
+                <div class="col-sm-1"></div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-sm-1">
+        <div class="track-right-icons text-center">
+            <div class="like-icon track-right-icon">
+                <span class="fa fa-3x fa-heart-o"></span>
+            </div>
+            <div class="share-icon track-right-icon">
+                <span class="fa fa-3x fa-share-square-o"></span>
+            </div>
+            <div class="soundcloud-icon track-right-icon">
+                <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>
+            </div>
+        </div>
+    </div>
+</div>

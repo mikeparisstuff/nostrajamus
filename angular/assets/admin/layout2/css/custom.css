@@ -626,3 +626,116 @@ Red-nostra
   font-weight: normal;
   font-style: normal;
 }
+
+/* RIGHT PANEL */
+.right-panel {
+  height: 100%;
+}
+
+.music-player {
+  background: #ffffff;
+  height: 50px;
+  margin: 0;
+  line-height: 50px;
+  vertical-align: middle;
+}
+
+.player-controls, .player-queue {
+  padding-top: 3px;
+}
+
+.button-icon {
+  background: none;
+  border: none;
+}
+.button-icon:focus {
+  outline: 0;
+}
+
+/* BEGIN TRACK ITEM */
+.jamus-track-item {
+  height: 200px;
+  border: 1px solid #aaaaaa;
+  /* max-width: 900px; */
+  background-color: #ffffff;
+}
+
+.track-img-wrapper {
+  height: 200px;
+  width: 200px;
+  padding: 0;
+}
+
+.track-img-wrapper img {
+  width: 100%;
+}
+
+.track-right-icons {
+  background-color: #eeeeee;
+  height: 200px;
+  margin-top: -1px;
+  padding-top: 15px;
+  margin-right: -17px;
+  border: 1px solid #aaaaaa;
+}
+
+.play-btn {
+  position: absolute;
+  left: 75px;
+  top: 90px;
+}
+
+.track-data-bottom > div {
+  height: 100%;
+}
+
+.play-btn {
+  opacity: 0.8;
+  color: #ff5252;
+}
+
+.track-divider {
+  margin-right: 15px;
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+.track-right-icon {
+  color: #888888;
+}
+
+.track-right-icon:hover {
+  transform: scale(1.1);
+}
+
+.like-icon {
+  margin-top: 20px;
+}
+
+.share-icon {
+  margin-top: 35px;
+  margin-left: 4px;
+}
+
+.soundcloud-icon {
+  margin-top: 35px;
+}
+.soundcloud-icon > a {
+  color: #888888;
+}
+.soundcloud-icon > a:hover {
+  text-decoration: none;
+  color: #888888;
+}
+
+.green {
+  color: #00bb00;
+}
+
+.track-data-bottom {
+  margin-top: 20px;
+}
+
+/* END TRACK ITEM */

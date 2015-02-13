@@ -100,6 +100,10 @@ License: You must have a valid license purchased only from themeforest(the above
 			</div>
 			<!-- END SIDEBAR -->
 			<div class="page-content-wrapper">
+
+                <!--<div ui-view="global-player"></div>-->
+                <div data-ng-include="'/assets/views/musicplayer.html'" data-ng-controller="GlobalPlayerController"></div>
+
 				<div class="page-content">
 					<!-- BEGIN STYLE CUSTOMIZER(optional) -->
 <!-- 					<div data-ng-include="'/assets/tpl/theme-panel.html'" data-ng-controller="ThemePanelController" class="theme-panel hidden-xs hidden-sm">
@@ -167,6 +171,9 @@ License: You must have a valid license purchased only from themeforest(the above
 
 	<script src="http://connect.soundcloud.com/sdk.js"></script> <!-- SoundCloud SDK -->
 	<script src="/assets/global/plugins/moment.js"></script> <!-- Time Formatting JS Plugin -->
+    <script type="text/javascript" src="/assets/js/controllers/GlobalPlayerController.js"></script>
+    <!--<script src="/assets/global/plugins/angular.audio.js"></script>-->
+    <!--<script src="http://d2v52k3cl9vedd.cloudfront.net/plangular/2.0-beta-1/ng-plangular.min.js"></script>-->
 
 	<script type="text/javascript">
 		/* Init Metronic's core jquery plugins and layout scripts */

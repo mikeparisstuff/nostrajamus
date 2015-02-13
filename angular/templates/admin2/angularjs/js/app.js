@@ -12,7 +12,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "angularFileUpload",//authentication with django
     // "angularFileUpload" //file upload
     'infinite-scroll'
-]); 
+]);
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
 MetronicApp.config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
@@ -81,6 +81,48 @@ MetronicApp.factory('api', ['$resource', function($resource) {
         // })
     };
 }]);
+
+MetronicApp.factory('globalPlayerService', function() {
+    var player =  {
+        data: {
+            currentTrack: {},
+            currentTrackData: {},
+            trackQueue: [],
+            isPlaying: false
+        }
+    }
+    player.playPause = function() {
+//        console.log("WOOO");
+        if (this.data.isPlaying) {
+            this.data.currentTrack.pause();
+            this.data.isPlaying = false;
+        } else {
+            this.data.currentTrack.play();
+            this.data.isPlaying = true;
+        }
+    };
+    player.resetTrack = function(track) {
+        if (this.data.isPlaying) {
+            this.data.currentTrack.pause();
+            this.data.isPlaying = false;
+        } else if (this.data.currentTrackData.sc_id == track.sc_id) {
+            this.playPause();
+        }
+        this.loadTrack(track, this.playPause);
+    };
+    player.loadTrack = function(track, callback) {
+        this.data.currentTrackData = track;
+        var trackId = track.sc_id;
+        var that = this;
+        SC.stream("/tracks/" + trackId, function(sound){
+            that.data.currentTrack = sound;
+            callback.bind(that)();
+//            that.data.isPlaying = true;
+//            sound.play();
+        });
+    };
+    return player;
+});
 
 MetronicApp.controller('authController', function($scope, api, authState) {
     // Angular does not detect auto-fill or auto-complete. If the browser
@@ -271,7 +313,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // Dashboard
         .state('dashboard', {
             url: "/dashboard",
-            templateUrl: "/assets/views/dashboard.html",            
+            templateUrl: "/assets/views/dashboard.html",
             data: {
                 pageTitle: 'Home',
                 requireLogin: false
@@ -295,7 +337,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
                             '/assets/admin/pages/scripts/tasks.js',
 
-                            '/assets/js/controllers/DashboardController.js'
+                            '/assets/js/controllers/DashboardController.js',
+                            '/assets/js/controllers/GlobalPlayerController.js'
                         ] 
                     });
                 }],

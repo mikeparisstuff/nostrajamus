@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll) {
+MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -245,6 +245,10 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 //     console.log($scope.monthTracks);
 //     console.log($scope.weekTracks);
 //     console.log($scope.dayTracks);
+
+    $scope.playNewTrack = function(track) {
+      globalPlayerService.resetTrack(track.track);
+    };
 
     $scope.getPlayIncrease = function(track) {
   		// get play count increase
