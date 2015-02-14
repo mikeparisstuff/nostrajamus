@@ -17,7 +17,7 @@ from datetime import timedelta
 import djcelery
 djcelery.setup_loader()
 BROKER_URL = 'django://'
-DEBUG = True
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -71,6 +71,8 @@ os.environ.setdefault("AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY_ID)
 os.environ.setdefault("AWS_SECRET_ACCESS_KEY", AWS_SECRET_ACCESS_KEY)
 BROKER_BACKEND = "SQS"
 
+DEBUG = True
+
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
@@ -88,6 +90,8 @@ if instance_id == 'PROD':
     }
     AWS_STORAGE_BUCKET_NAME = 'nostrajamus-prod'
     BROKER_URL = 'sqs://sqs.us-east-1.amazonaws.com/755639026061/nostrajamus-prod'
+    # DEBUG = False
+    # ALLOWED_HOSTS = ['nostrajamus.com']
     # CELERY_DEFAULT_QUEUE = 'nostrajamus-prod'
 else:
     DATABASES['default'] = {
