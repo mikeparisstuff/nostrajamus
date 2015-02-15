@@ -71,7 +71,6 @@ os.environ.setdefault("AWS_ACCESS_KEY_ID", AWS_ACCESS_KEY_ID)
 os.environ.setdefault("AWS_SECRET_ACCESS_KEY", AWS_SECRET_ACCESS_KEY)
 BROKER_BACKEND = "SQS"
 
-DEBUG = True
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -90,8 +89,8 @@ if instance_id == 'PROD':
     }
     AWS_STORAGE_BUCKET_NAME = 'nostrajamus-prod'
     BROKER_URL = 'sqs://sqs.us-east-1.amazonaws.com/755639026061/nostrajamus-prod'
-    # DEBUG = False
-    # ALLOWED_HOSTS = ['nostrajamus.com']
+    DEBUG = False
+    ALLOWED_HOSTS = ['nostrajamus.com']
     # CELERY_DEFAULT_QUEUE = 'nostrajamus-prod'
 else:
     DATABASES['default'] = {
@@ -105,6 +104,7 @@ else:
     }
     AWS_STORAGE_BUCKET_NAME = 'nostrajamus-dev'
     BROKER_URL = 'sqs://sqs.us-east-1.amazonaws.com/755639026061/nostrajamus-dev'
+    DEBUG = True
     # CELERY_DEFAULT_QUEUE = 'nostrajamus-dev'
 
 REST_FRAMEWORK = {
