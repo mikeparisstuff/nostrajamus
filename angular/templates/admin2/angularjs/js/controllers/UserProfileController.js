@@ -134,4 +134,4 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
             }
         };
     }
-]);
+]);;
