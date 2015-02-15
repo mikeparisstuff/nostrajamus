@@ -1,11 +1,11 @@
 
 /* Setup general page controller */
-MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService) {
-    $scope.$on('$viewContentLoaded', function() {
-        // initialize core components
-        Metronic.initAjax();
+MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll) {
+    $scope.$on('$viewContentLoaded', function() {   
+    	// initialize core components
+    	Metronic.initAjax();
 
-        // set default layout mode
+    	// set default layout mode
         $rootScope.settings.layout.pageSidebarClosed = false;
     });
 
@@ -21,7 +21,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     $scope.pageSize = 7;
 
     $scope.numberOfPages=function() {
-        return Math.ceil($scope.totalCount/$scope.pageSize);
+        return Math.ceil($scope.totalCount/$scope.pageSize);                
     };
 
     $scope.insertCommas = function(s) {
@@ -31,95 +31,95 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         var s2 = d === -1 ? s : s.slice(0, d);
         // insert commas every 3 digits from the right
         for (var i = s2.length - 3; i > 0; i -= 3)
-            s2 = s2.slice(0, i) + ',' + s2.slice(i);
+          s2 = s2.slice(0, i) + ',' + s2.slice(i);
         // append fractional part
         if (d !== -1)
-            s2 += s.slice(d);
+          s2 += s.slice(d);
         return s2;
     };
 
     $scope.getWeekly = function() {
-        if ($scope.timeSelect == 'weekly') {
-            return;
-        }
-        else {
-            // $scope.trending = [];
-            $scope.timeSelect = 'weekly';
+      if ($scope.timeSelect == 'weekly') {
+        return;
+      }
+      else {
+        // $scope.trending = [];
+        $scope.timeSelect = 'weekly';
 
-            $http({
-                url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
-                method: "GET",
-                // data: JSON.stringify($scope.form),
-                headers: {'Content-Type': 'application/json'}
-            }).success(function (data, status, headers, config) {
-                // console.log(data);
-                $scope.trending = data.results;
-                // console.log($scope.trending);
-                // console.log("SUCCESS");
-            }).error(function (data, status, headers, config) {
-                // $scope.status = status;
-                // console.log(data);
-                // console.log("FAILURE");
-            });
+        $http({
+            url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            // console.log(data);
+            $scope.trending = data.results;
+            // console.log($scope.trending);
+            // console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            // console.log(data);
+            // console.log("FAILURE");
+        });
 
-            $scope.currentPage = 1;
-        }
+        $scope.currentPage = 1;
+      }
     }
 
     $scope.getMonthly = function() {
-        if ($scope.timeSelect == 'monthly') {
-            return;
-        }
-        else {
-            // $scope.trending = [];
-            $scope.timeSelect = 'monthly';
+      if ($scope.timeSelect == 'monthly') {
+        return;
+      }
+      else {
+        // $scope.trending = [];
+        $scope.timeSelect = 'monthly';
 
-            $http({
-                url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
-                method: "GET",
-                // data: JSON.stringify($scope.form),
-                headers: {'Content-Type': 'application/json'}
-            }).success(function (data, status, headers, config) {
-                // console.log(data);
-                $scope.trending = data.results;
-                // console.log($scope.trending);
-                // console.log("SUCCESS");
-            }).error(function (data, status, headers, config) {
-                // $scope.status = status;
-                // console.log(data);
-                // console.log("FAILURE");
-            });
+        $http({
+            url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            // console.log(data);
+            $scope.trending = data.results;
+            // console.log($scope.trending);
+            // console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            // console.log(data);
+            // console.log("FAILURE");
+        });
 
-            $scope.currentPage = 1;
-        }
+        $scope.currentPage = 1;
+      }
     }
 
     $scope.getAllTime = function() {
-        if ($scope.timeSelect == 'alltime') {
-            return;
-        }
-        else {
-            // $scope.trending = [];
-            $scope.timeSelect = 'alltime';
+      if ($scope.timeSelect == 'alltime') {
+        return;
+      }
+      else {
+        // $scope.trending = [];
+        $scope.timeSelect = 'alltime';
 
-            $http({
-                url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
-                method: "GET",
-                // data: JSON.stringify($scope.form),
-                headers: {'Content-Type': 'application/json'}
-            }).success(function (data, status, headers, config) {
-                // console.log(data);
-                $scope.trending = data.results;
-                // console.log($scope.trending);
-                // console.log("SUCCESS");
-            }).error(function (data, status, headers, config) {
-                // $scope.status = status;
-                // console.log(data);
-                // console.log("FAILURE");
-            });
+        $http({
+            url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            // console.log(data);
+            $scope.trending = data.results;
+            // console.log($scope.trending);
+            // console.log("SUCCESS");
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            // console.log(data);
+            // console.log("FAILURE");
+        });
 
-            $scope.currentPage = 1;
-        }
+        $scope.currentPage = 1;
+      }
     }
 
     $scope.prevPage = function() {
@@ -246,47 +246,32 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 //     console.log($scope.weekTracks);
 //     console.log($scope.dayTracks);
 
-    $scope.player = globalPlayerService;
-
-    $scope.playNewTrack = function(track, index) {
-        globalPlayerService.resetTrack(track.track);
-        var tunes = $scope.trending.map(function(elem) {
-            return elem.track;
-        });
-        globalPlayerService.data.trackQueue = tunes;
-    };
-
-    $scope.getCroppedImageUrl = function(url) {
-        var cropped = url.replace("-large", "-t300x300");
-        return cropped;
-    }
-
     $scope.getPlayIncrease = function(track) {
-        // get play count increase
-        var currPlayCount = track.current_playback_count;
-        var initPlayCount = track.initial_playback_count;
+  		// get play count increase
+  		var currPlayCount = track.current_playback_count;
+  		var initPlayCount = track.initial_playback_count;
 
-        var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(1);
+  		var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(1);
 
-        return playIncrease;
+  		return playIncrease;
     };
 
     $scope.getFollowIncrease = function(track) {
-        // get follower count increase
-        var currFollowCount = track.current_follower_count;
-        var initFollowCount = track.initial_follower_count;
+  		// get follower count increase
+  		var currFollowCount = track.current_follower_count;
+  		var initFollowCount = track.initial_follower_count;
+  		
+  		var followIncrease = ((currFollowCount - initFollowCount) / (initFollowCount)) * 100;
 
-        var followIncrease = ((currFollowCount - initFollowCount) / (initFollowCount)) * 100;
-
-        return followIncrease;
+  		return followIncrease;
     };
 
     $scope.getSrc = function(track) {
         var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.track.sc_id + '&amp;color=ff5252&amp;theme_color=ff5252&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=true&amp;visual=true';
 
-        var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
+    	var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
 
-        return trustedUrl;
+    	return trustedUrl;
     };
 
 }]);

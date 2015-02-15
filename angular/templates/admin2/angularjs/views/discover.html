@@ -48,53 +48,51 @@
 											<span class="caption-helper hide">weekly stats...</span>
 										</div>
 									</div> -->
-									<div class="portlet-body">
+									<div class="portlet-body text-center">
 										<div ng-repeat="track in trending | limitTo:pageSize">
-                                            <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
-
-                                            <!--<div class="row" align="center">-->
-												<!--<div class="col-md-10 col-sm-10 col-xs-20">-->
-													<!--<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>-->
-												<!--</div>-->
-												<!--<br><br>-->
-												<!--<div class="col-md-1 col-sm-1 col-xs-2 text-center">-->
-													<!--<h5>Jam Points</h5><br>{{insertCommas(track.jam_points)}}-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<div class="row list-separated text-center">-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-red-flamingo">-->
-														<!--{{insertCommas(track.initial_playback_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Play Increase-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--<span class="font-lg font-grey-mint">+</span>{{insertCommas(getPlayIncrease(track))}}%-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Current Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--{{insertCommas(track.current_playback_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Followers-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-green-haze">-->
-														<!--{{insertCommas(track.initial_follower_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-											<!--</div>-->
+                                            <div class="row" align="center">
+												<div class="col-md-10 col-sm-10 col-xs-20">
+													<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
+												</div>
+												<br><br>
+												<div class="col-md-1 col-sm-1 col-xs-2 text-center">
+													<h5>Jam Points</h5><br>{{insertCommas(track.jam_points)}}
+												</div>
+											</div>
+											<div class="row list-separated text-center">
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Initial Playcount
+													</div>
+													<div class="uppercase font-hg font-red-flamingo">
+														{{insertCommas(track.initial_playback_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Play Increase
+													</div>
+													<div class="uppercase font-hg font-purple">
+														<span class="font-lg font-grey-mint">+</span>{{insertCommas(getPlayIncrease(track))}}%
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Current Playcount
+													</div>
+													<div class="uppercase font-hg font-purple">
+														{{insertCommas(track.current_playback_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Initial Followers
+													</div>
+													<div class="uppercase font-hg font-green-haze">
+														{{insertCommas(track.initial_follower_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+											</div>
 											<hr>
 										</div>
 
@@ -126,52 +124,49 @@
 									</div> -->
 									<div class="portlet-body text-center">
 										<div ng-repeat="track in trending | limitTo:pageSize">
-
-                                            <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
-
-                                            <!--<div class="row" align="center">-->
-												<!--<div class="col-md-10 col-sm-10 col-xs-20">-->
-													<!--<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>-->
-												<!--</div>-->
-												<!--<br><br>-->
-												<!--<div class="col-md-1 col-sm-1 col-xs-2 text-center">-->
-													<!--<h5>Jam Points</h5><br>{{insertCommas(track.jam_points)}}-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<div class="row list-separated text-center">-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-red-flamingo">-->
-														<!--{{insertCommas(track.initial_playback_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Play Increase-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--<span class="font-lg font-grey-mint">+</span>{{insertCommas(getPlayIncrease(track))}}%-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Current Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--{{insertCommas(track.current_playback_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Followers-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-green-haze">-->
-														<!--{{insertCommas(track.initial_follower_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-											<!--</div>-->
+                                            <div class="row" align="center">
+												<div class="col-md-10 col-sm-10 col-xs-20">
+													<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
+												</div>
+												<br><br>
+												<div class="col-md-1 col-sm-1 col-xs-2 text-center">
+													<h5>Jam Points</h5><br>{{insertCommas(track.jam_points)}}
+												</div>
+											</div>
+											<div class="row list-separated text-center">
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Initial Playcount
+													</div>
+													<div class="uppercase font-hg font-red-flamingo">
+														{{insertCommas(track.initial_playback_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Play Increase
+													</div>
+													<div class="uppercase font-hg font-purple">
+														<span class="font-lg font-grey-mint">+</span>{{insertCommas(getPlayIncrease(track))}}%
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Current Playcount
+													</div>
+													<div class="uppercase font-hg font-purple">
+														{{insertCommas(track.current_playback_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Initial Followers
+													</div>
+													<div class="uppercase font-hg font-green-haze">
+														{{insertCommas(track.initial_follower_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+											</div>
 											<hr>
 										</div>
 
@@ -203,52 +198,49 @@
 									</div> -->
 									<div class="portlet-body text-center">
 										<div ng-repeat="track in trending | limitTo:pageSize">
-
-                                            <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
-
-                                            <!--<div class="row" align="center">-->
-												<!--<div class="col-md-10 col-sm-10 col-xs-20">-->
-													<!--<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>-->
-												<!--</div>-->
-												<!--<br><br>-->
-												<!--<div class="col-md-1 col-sm-1 col-xs-2 text-center">-->
-													<!--<h5>Jam Points</h5><br>{{insertCommas(track.jam_points)}}-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<div class="row list-separated text-center">-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-red-flamingo">-->
-														<!--{{insertCommas(track.initial_playback_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Play Increase-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--<span class="font-lg font-grey-mint">+</span>{{insertCommas(getPlayIncrease(track))}}%-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Current Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--{{insertCommas(track.current_playback_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Followers-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-green-haze">-->
-														<!--{{insertCommas(track.initial_follower_count)}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-											<!--</div>-->
+                                            <div class="row" align="center">
+												<div class="col-md-10 col-sm-10 col-xs-20">
+													<iframe width="90%" height="155" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>
+												</div>
+												<br><br>
+												<div class="col-md-1 col-sm-1 col-xs-2 text-center">
+													<h5>Jam Points</h5><br>{{insertCommas(track.jam_points)}}
+												</div>
+											</div>
+											<div class="row list-separated text-center">
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Initial Playcount
+													</div>
+													<div class="uppercase font-hg font-red-flamingo">
+														{{insertCommas(track.initial_playback_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Play Increase
+													</div>
+													<div class="uppercase font-hg font-purple">
+														<span class="font-lg font-grey-mint">+</span>{{insertCommas(getPlayIncrease(track))}}%
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Current Playcount
+													</div>
+													<div class="uppercase font-hg font-purple">
+														{{insertCommas(track.current_playback_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+												<div class="col-md-3 col-sm-3 col-xs-6">
+													<div class="font-grey-mint font-sm">
+														Initial Followers
+													</div>
+													<div class="uppercase font-hg font-green-haze">
+														{{insertCommas(track.initial_follower_count)}} <span class="font-lg font-grey-mint"></span>
+													</div>
+												</div>
+											</div>
 											<hr>
 										</div>
 
