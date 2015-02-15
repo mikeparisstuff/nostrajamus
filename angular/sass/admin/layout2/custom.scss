@@ -1,3 +1,23 @@
+$screen-xs-min:              		480px !default;
+
+// Small screen / tablet
+$screen-sm-min:              		768px !default;
+
+// Medium screen / desktop(change 992 to 900 in order show default sidebar menu in ipad width devices,
+// also change this variable in metronic.js under getResponsiveBreakpoint function)
+$screen-md-min:              		992px !default;
+
+// Large screen / wide desktop
+$screen-lg-min:             	 	1200px !default;
+
+// Large scree / wider desktop
+$screen-lg-med:                     1260px !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              		($screen-sm-min - 1) !default;
+$screen-sm-max:              		($screen-md-min - 1) !default;
+$screen-md-max:              		($screen-lg-min - 1) !default;
+
 /*Custom CSS NostraJAMUS*/
 .nostra {
   font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
@@ -568,37 +588,36 @@ Red-nostra
 
 /* BEGIN TRACK ITEM */
 
+
 .jamus-track-item {
+  margin-top: 20px;
   height: 200px;
   border: 1px solid #aaaaaa;
-  /* max-width: 900px; */
   background-color: #ffffff;
+
 }
 
 .track-img-wrapper {
-  height: 200px;
-  width: 200px;
-  padding: 0;
+  height: 100%;
+//  background-size: 100%;
+  background-size: cover;
+  background-position: center center;
 }
 
 .track-img-wrapper img {
-  width: 100%;
+  display: table-cell;
+  max-width: 100%;
 }
 
-.track-right-icons {
-  background-color: #eeeeee;
-  height: 200px;
-  margin-top: -1px;
-  padding-top: 15px;
-//  margin-left: -29px;
-  margin-right: -17px;
-  border: 1px solid #aaaaaa;
-}
 
-.play-btn {
+.play-btn-container {
   position: absolute;
+  top: 60px;
   left: 75px;
-  top: 90px;
+}
+
+.track-data-top {
+  padding-top: 10px;
 }
 
 .track-data-bottom > div {
@@ -608,10 +627,17 @@ Red-nostra
 .play-btn {
   opacity: 0.8;
   color: #ff5252;
+  margin-top: 90px;
 }
 
-.track-divider {
-  margin-right: 15px;
+.track-progress {
+  position: absolute;
+//  top: 0;
+//  left: 0;
+  height: 198px;
+  width: 100%;
+  background-color: rgba(255, 82, 82, .8);
+  border-radius: 0;
 }
 
 .play-btn:hover {
@@ -626,17 +652,13 @@ Red-nostra
   transform: scale(1.1);
 }
 
-.like-icon {
-  margin-top: 20px;
-}
-
 .share-icon {
-  margin-top: 35px;
+  margin-top: 20px;
   margin-left: 4px;
 }
 
 .soundcloud-icon {
-  margin-top: 35px;
+  margin-top: 1    0px;
   > a {
     color: #888888;
   }
@@ -650,8 +672,23 @@ Red-nostra
   color: #00bb00;
 }
 
-.track-data-bottom {
-  margin-top: 20px;
+@media (max-width: $screen-xs-min) {
+  .track-title {
+    font-size: 14px;
+  }
+  .track-data-bottom {
+    > .row {
+      div {
+        font-size: 9px;
+      }
+    }
+  }
+  .track-data-top {
+    padding-top: 10px;
+  }
+  .track-divider {
+    margin-bottom: 0;
+  }
 }
 
 /* END TRACK ITEM */

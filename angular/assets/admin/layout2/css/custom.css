@@ -654,35 +654,31 @@ Red-nostra
 
 /* BEGIN TRACK ITEM */
 .jamus-track-item {
+  margin-top: 20px;
   height: 200px;
   border: 1px solid #aaaaaa;
-  /* max-width: 900px; */
   background-color: #ffffff;
 }
 
 .track-img-wrapper {
-  height: 200px;
-  width: 200px;
-  padding: 0;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
 }
 
 .track-img-wrapper img {
-  width: 100%;
+  display: table-cell;
+  max-width: 100%;
 }
 
-.track-right-icons {
-  background-color: #eeeeee;
-  height: 200px;
-  margin-top: -1px;
-  padding-top: 15px;
-  margin-right: -17px;
-  border: 1px solid #aaaaaa;
-}
-
-.play-btn {
+.play-btn-container {
   position: absolute;
+  top: 60px;
   left: 75px;
-  top: 90px;
+}
+
+.track-data-top {
+  padding-top: 10px;
 }
 
 .track-data-bottom > div {
@@ -692,10 +688,15 @@ Red-nostra
 .play-btn {
   opacity: 0.8;
   color: #ff5252;
+  margin-top: 90px;
 }
 
-.track-divider {
-  margin-right: 15px;
+.track-progress {
+  position: absolute;
+  height: 198px;
+  width: 100%;
+  background-color: rgba(255, 82, 82, 0.8);
+  border-radius: 0;
 }
 
 .play-btn:hover {
@@ -710,17 +711,13 @@ Red-nostra
   transform: scale(1.1);
 }
 
-.like-icon {
-  margin-top: 20px;
-}
-
 .share-icon {
-  margin-top: 35px;
+  margin-top: 20px;
   margin-left: 4px;
 }
 
 .soundcloud-icon {
-  margin-top: 35px;
+  margin-top: 1    0px;
 }
 .soundcloud-icon > a {
   color: #888888;
@@ -734,8 +731,21 @@ Red-nostra
   color: #00bb00;
 }
 
-.track-data-bottom {
-  margin-top: 20px;
-}
+@media (max-width: 480px) {
+  .track-title {
+    font-size: 14px;
+  }
 
+  .track-data-bottom > .row div {
+    font-size: 9px;
+  }
+
+  .track-data-top {
+    padding-top: 10px;
+  }
+
+  .track-divider {
+    margin-bottom: 0;
+  }
+}
 /* END TRACK ITEM */

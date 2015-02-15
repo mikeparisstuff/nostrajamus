@@ -88,9 +88,11 @@ MetronicApp.factory('globalPlayerService', function() {
             currentTrack: {},
             currentTrackData: {},
             trackQueue: [],
-            isPlaying: false
+            isPlaying: false,
+            currentIndex: 0,
+            trackProgress: 0
         }
-    }
+    };
     player.playPause = function() {
 //        console.log("WOOO");
         if (this.data.isPlaying) {
@@ -107,19 +109,51 @@ MetronicApp.factory('globalPlayerService', function() {
             this.data.isPlaying = false;
         } else if (this.data.currentTrackData.sc_id == track.sc_id) {
             this.playPause();
+            return;
         }
         this.loadTrack(track, this.playPause);
+    };
+    player._updatePosition = function() {
+        var progress = this.data.currentTrack.position / this.data.currentTrack.durationEstimate;
+        if (progress >= 0) {
+            this.data.trackProgress = this.data.currentTrack.position / this.data.currentTrack.durationEstimate;
+        } else {
+            this.data.trackProgress = 0;
+        }
+        console.log('sound '+this.data.currentTrack.id+' playing: ' + this.data.trackProgress);
     };
     player.loadTrack = function(track, callback) {
         this.data.currentTrackData = track;
         var trackId = track.sc_id;
         var that = this;
         SC.stream("/tracks/" + trackId, function(sound){
+            sound.options.onfinish = that.playNextTrack.bind(that);
+            sound.options.whileplaying = that._updatePosition.bind(that);
             that.data.currentTrack = sound;
             callback.bind(that)();
 //            that.data.isPlaying = true;
 //            sound.play();
         });
+    };
+    player.playNextTrack = function() {
+        if (this.data.trackQueue.length > this.data.currentIndex+1) {
+            this.data.currentIndex = this.data.currentIndex + 1;
+            var next = this.data.trackQueue[this.data.currentIndex];
+            this.resetTrack(next);
+        }
+    };
+    player.playPreviousTrack = function() {
+        if (this.data.trackQueue.length > this.data.currentIndex-1) {
+            this.data.currentIndex = this.data.currentIndex - 1;
+            if (this.data.currentIndex < 0) {
+                this.data.currentIndex = 0;
+            }
+            var next = this.data.trackQueue[this.data.currentIndex];
+            this.resetTrack(next);
+        }
+    };
+    player.getTrackProgress = function() {
+        return this.data.trackProgress;
     };
     return player;
 });

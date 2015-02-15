@@ -13,6 +13,7 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
     });
 
     $scope.player = globalPlayerService;
+
 //    $scope.trackQueue = globalPlayerData.trackQueue;
 
 //    $scope.player.playPause = globalPlayerService.playPause;
