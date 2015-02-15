@@ -638,6 +638,19 @@ Red-nostra
   margin: 0;
   line-height: 50px;
   vertical-align: middle;
+  position: relative;
+}
+
+.music-player-progress-bar {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  border-radius: 0;
+  background: white;
+}
+.music-player-progress-bar > div.progress-bar {
+  height: 50px;
+  background: rgba(255, 82, 82, 0.7);
 }
 
 .player-controls, .player-queue {

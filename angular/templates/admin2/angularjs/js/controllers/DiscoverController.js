@@ -246,20 +246,20 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 //     console.log($scope.weekTracks);
 //     console.log($scope.dayTracks);
 
-    $scope.player = globalPlayerService;
+    $scope.player = globalPlayerService.player;
 
     $scope.playNewTrack = function(track, index) {
-        globalPlayerService.resetTrack(track.track);
+        globalPlayerService.player.resetTrack(track.track);
         var tunes = $scope.trending.map(function(elem) {
             return elem.track;
         });
-        globalPlayerService.data.trackQueue = tunes;
+        globalPlayerService.player.data.trackQueue = tunes;
     };
 
     $scope.getCroppedImageUrl = function(url) {
         var cropped = url.replace("-large", "-t300x300");
         return cropped;
-    }
+    };
 
     $scope.getPlayIncrease = function(track) {
         // get play count increase

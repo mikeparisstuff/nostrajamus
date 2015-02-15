@@ -60,8 +60,9 @@
                 <h1 class="counter">{{myRank}}</h1>
             </div>
         </div>
-        <div class="col-md-8">
-            <iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(myEntry)}}"></iframe>
+        <div class="col-md-8" ng-init="track = myEntry">
+            <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
+            <!--<iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(myEntry)}}"></iframe>-->
         </div>
         <div class="col-md-2 text-center rank-holder">
             <br><br><br>
@@ -77,7 +78,7 @@
 <div class="row">
 	<h3 align="center">Current Standings</h3>
 <!--     <div class="row" ng-repeat="entry in contestEntries.results | startFrom:currentPage*pageSize | limitTo:pageSize"> -->
-    <div class="row" ng-repeat="entry in contestEntries.results | limitTo:pageSize">
+    <div class="row" ng-repeat="track in contestEntries.results | limitTo:pageSize">
         <div class="col-md-2">
             <div class="text-center rank-holder">
                 <br><br>
@@ -85,13 +86,13 @@
             </div>
         </div>
         <div class="col-md-8">
-            <iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(entry)}}"></iframe>
+            <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
         </div>
         <div class="col-md-2 text-center rank-holder">
             <br><br><br>
-            <div><a href="#/profile/{{entry.user.id}}/dashboard">{{entry.user.username}}</a></div>
-            <div>{{entry.jam_points}} Jam Points</div>
-            <button type="button" class="btn btn-default dark-nostra-modal" data-toggle="modal" ng-click="updateModal(entry)" data-target="#graphModal">Details</button>
+            <div><a href="#/profile/{{track.user.id}}/dashboard">{{track.user.username}}</a></div>
+            <div>{{track.jam_points}} Jam Points</div>
+            <button type="button" class="btn btn-default dark-nostra-modal" data-toggle="modal" ng-click="updateModal(track)" data-target="#graphModal">Details</button>
             <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-title="{{ entry.track.title }}" data-id="{{ entry.id }}" data-sc-id="{{ entry.sc_id }}" data-target="#graphModal" data-ip="{{ entry.initial_playback_count }}" data-cp="{{ entry.current_playback_count }}" data-fc="{{ entry.current_follower_count }}" data-album-art="{{ entry.track.artwork_url }}">Details</button> -->
         </div>
     </div>

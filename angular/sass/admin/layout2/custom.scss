@@ -559,6 +559,19 @@ Red-nostra
   margin: 0;
   line-height: 50px;
   vertical-align: middle;
+  position: relative;
+}
+
+.music-player-progress-bar {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 1);
+  > div.progress-bar {
+    height: 50px;
+    background: rgba(255, 82, 82, .7);
+  }
 }
 
 
@@ -690,5 +703,6 @@ Red-nostra
     margin-bottom: 0;
   }
 }
+
 
 /* END TRACK ITEM */

@@ -3,6 +3,10 @@
         <!--<div plangular="http://soundcloud.com/mrsjxn/bbb">-->
             <div class="row">
                 <!--<div class="progress-bar"></div>-->
+                <div class="progress music-player-progress-bar">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ player.data.trackProgress }}" aria-valuemin="0" aria-valuemax="1" style="width: {{ player.data.trackProgress * 100 }}%;">
+                    </div>
+                </div>
                 <div class="col-xs-3 player-controls">
                     <div class="row text-center">
                         <div class="col-xs-4">
@@ -26,9 +30,9 @@
                 </div>
                 <div class="col-xs-6 text-center player-details">
                     <div>{{ player.data.currentTrackData.title }} - {{ player.data.currentTrackData.user.username }}</div>
-                    <!--<progress value="{{ currentTime / duration || 0 }}"-->
+                    <!--<progress value="{{ player.data.trackProgress }}" max="1"-->
                               <!--ng-click="seek($event)">-->
-                        <!--{{ currentTime / duration }}-->
+                        <!--<!--{{ currentTime / duration }}-->
                     <!--</progress>-->
                 </div>
                 <div class="col-xs-3 text-center player-queue">

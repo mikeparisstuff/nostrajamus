@@ -82,7 +82,7 @@ MetronicApp.factory('api', ['$resource', function($resource) {
     };
 }]);
 
-MetronicApp.factory('globalPlayerService', function() {
+MetronicApp.factory('globalPlayerService', function($rootScope) {
     var player =  {
         data: {
             currentTrack: {},
@@ -93,6 +93,16 @@ MetronicApp.factory('globalPlayerService', function() {
             trackProgress: 0
         }
     };
+
+    var broadcast = function (progress) {
+      $rootScope.$broadcast('player.trackProgress.update', progress);
+    };
+
+    player.updateProgress = function (newState) {
+      this.data.trackProgress = newState;
+      broadcast(this.data.trackProgress);
+    };
+
     player.playPause = function() {
 //        console.log("WOOO");
         if (this.data.isPlaying) {
@@ -104,23 +114,23 @@ MetronicApp.factory('globalPlayerService', function() {
         }
     };
     player.resetTrack = function(track) {
-        if (this.data.isPlaying) {
-            this.data.currentTrack.pause();
-            this.data.isPlaying = false;
-        } else if (this.data.currentTrackData.sc_id == track.sc_id) {
+        if (this.data.currentTrackData.sc_id == track.sc_id) {
             this.playPause();
             return;
+        } else if (this.data.isPlaying) {
+            this.data.currentTrack.pause();
+            this.data.isPlaying = false;
         }
         this.loadTrack(track, this.playPause);
     };
     player._updatePosition = function() {
         var progress = this.data.currentTrack.position / this.data.currentTrack.durationEstimate;
         if (progress >= 0) {
-            this.data.trackProgress = this.data.currentTrack.position / this.data.currentTrack.durationEstimate;
+            this.updateProgress.bind(this)(this.data.currentTrack.position / this.data.currentTrack.durationEstimate);
         } else {
-            this.data.trackProgress = 0;
+            this.updateProgress.bind(this)(0);
         }
-        console.log('sound '+this.data.currentTrack.id+' playing: ' + this.data.trackProgress);
+//        console.log('sound '+this.data.currentTrack.id+' playing: ' + this.data.trackProgress);
     };
     player.loadTrack = function(track, callback) {
         this.data.currentTrackData = track;
@@ -155,7 +165,7 @@ MetronicApp.factory('globalPlayerService', function() {
     player.getTrackProgress = function() {
         return this.data.trackProgress;
     };
-    return player;
+    return { player: player };
 });
 
 MetronicApp.controller('authController', function($scope, api, authState) {
@@ -442,7 +452,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/inprogresscontests/:contestID",
             templateUrl: "/assets/views/contests/inprogresscontests.html",
             data: {pageTitle: 'In Progress Contests'},
-            controller: "InProgressContestsController",
+            controller: "CompletedContestsController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -458,7 +468,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '/assets/global/plugins/datatables/all.min.js',
                             '/assets/js/scripts/table-advanced.js',
 
-                            '/assets/js/controllers/InProgressContestsController.js'
+                            '/assets/js/controllers/CompletedContestsController.js'
                         ]
                     });
                 }],

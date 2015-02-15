@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank) {
+MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', 'globalPlayerService', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank, globalPlayerService) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -9,12 +9,12 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
         $rootScope.settings.layout.pageSidebarClosed = false;
     });
 
+    /* BEGIN SHARED LOGIC */
+
     $scope.contestInfo = contestInfo;
     $scope.contestEntries = contestEntries;
     $scope.myEntry = myEntry;
     $scope.myRank = myRank.rank;
-
-    // console.log(myEntry);
 
     $scope.timeOffset = function(date, offset) {
         var d = new Date(date);
@@ -27,31 +27,30 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
         return formattedTime;
     };
 
-    var insertCommas = function(s) {
-        // get stuff before the dot
-        var d = s.indexOf('.');
-        var s2 = d === -1 ? s : s.slice(0, d);
-        // insert commas every 3 digits from the right
-        for (var i = s2.length - 3; i > 0; i -= 3)
-          s2 = s2.slice(0, i) + ',' + s2.slice(i);
-        // append fractional part
-        if (d !== -1)
-          s2 += s.slice(d);
-        return s2;
-    }
-
     $scope.insertCommas = function(s) {
+        s = s.toString();
         // get stuff before the dot
         var d = s.indexOf('.');
         var s2 = d === -1 ? s : s.slice(0, d);
         // insert commas every 3 digits from the right
         for (var i = s2.length - 3; i > 0; i -= 3)
-          s2 = s2.slice(0, i) + ',' + s2.slice(i);
+            s2 = s2.slice(0, i) + ',' + s2.slice(i);
         // append fractional part
         if (d !== -1)
-          s2 += s.slice(d);
+            s2 += s.slice(d);
         return s2;
-    }
+    };
+
+    $scope.getPlayIncrease = function(track) {
+        // get play count increase
+        var currPlayCount = track.current_playback_count;
+        var initPlayCount = track.initial_playback_count;
+
+        var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(1);
+
+        return playIncrease;
+    };
+
 
     $scope.modalEntry = {};
     $scope.updateModal = function(entry) {
@@ -133,6 +132,65 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
 
     $scope.getRanks = function() {
         return ($scope.currentPage-1) * $scope.pageSize;
-    }
+    };
+
+    /* END SHARED LOGIC */
+
+    /* BEGIN IN PROGRESS CONTESTS */
+
+        // Start Countdown Timer
+    // set the date we're counting down to
+    var target_date = new Date($scope.contestInfo.start_time).getTime();
+    var time_now = Date.now();
+
+    // variables for time units
+    var days, hours, minutes, seconds;
+    // get tag element
+    // var countdown = document.getElementById('countdown');
+
+    // update the tag with id "countdown" every 1 second
+    setInterval(function () {
+        // find the amount of "seconds" between now and target
+        var current_date = new Date().getTime();
+
+        var seconds_left = (target_date - current_date) / 1000;
+
+        // do some time calculations
+        days = parseInt(seconds_left / 86400);
+        seconds_left = seconds_left % 86400;
+
+        hours = parseInt(seconds_left / 3600);
+        seconds_left = seconds_left % 3600;
+
+        minutes = parseInt(seconds_left / 60);
+        seconds = parseInt(seconds_left % 60);
+
+        // format countdown string + set tag value
+        document.getElementById('countdown-inprogress').innerHTML = '<span class="days">' + days + ' <b>Days</b></span> <span class="hours">' + hours + ' <b>Hours</b></span> <span class="minutes">' + minutes + ' <b>Minutes</b></span> <span class="seconds">' + seconds + ' <b>Seconds</b></span>';
+
+    }, 1000);
+    // End Countdown Timer
+
+
+    /* END IN PROGRESS CONTESTS */
+
+    /* BEGIN PLAYER LOGIC */
+
+    $scope.player = globalPlayerService.player;
+
+    $scope.playNewTrack = function(track, index) {
+        globalPlayerService.player.resetTrack(track.track);
+        var tunes = $scope.trending.map(function(elem) {
+            return elem.track;
+        });
+        globalPlayerService.player.data.trackQueue = tunes;
+    };
+
+    $scope.getCroppedImageUrl = function(url) {
+        var cropped = url.replace("-large", "-t300x300");
+        return cropped;
+    };
+
+    /* END PLAYER LOGIC */
 
 }]);
