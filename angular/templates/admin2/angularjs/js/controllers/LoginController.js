@@ -12,5 +12,5 @@ MetronicApp.controller('LoginController', function($rootScope, $scope, $http, $t
     $scope.contests = contests;
 
     // set sidebar closed and body solid layout mode
-    $rootScope.settings.layout.pageSidebarClosed = false;
+    $rootScope.settings.layout.pageSidebarClosed = true;
 });

@@ -5,7 +5,7 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     	// initialize core components
     	Metronic.initAjax();
     	// set default layout mode
-      $rootScope.settings.layout.pageSidebarClosed = false;
+      $rootScope.settings.layout.pageSidebarClosed = true;
     });
 
     $scope.leaders = leaders;

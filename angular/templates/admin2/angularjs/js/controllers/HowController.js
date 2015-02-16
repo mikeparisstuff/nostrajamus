@@ -6,7 +6,7 @@ MetronicApp.controller('HowController', ['$rootScope', '$scope', 'settings', fun
     	Metronic.initAjax();
 
     	// set default layout mode
-        $rootScope.settings.layout.pageSidebarClosed = false;
+        $rootScope.settings.layout.pageSidebarClosed = true;
     });
 
 	$scope.max = 3;

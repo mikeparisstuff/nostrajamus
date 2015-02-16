@@ -21,5 +21,5 @@ MetronicApp.controller('TestController', function($rootScope, $scope, $http, $ti
     };
 
     // set sidebar closed and body solid layout mode
-    $rootScope.settings.layout.pageSidebarClosed = false;
+    $rootScope.settings.layout.pageSidebarClosed = true;
 });

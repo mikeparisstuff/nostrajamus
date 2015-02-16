@@ -6,7 +6,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     	Metronic.initAjax();
 
     	// set default layout mode
-        $rootScope.settings.layout.pageSidebarClosed = false;
+        $rootScope.settings.layout.pageSidebarClosed = true;
     });
 
     $scope.contestInfo = contestInfo;

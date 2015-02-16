@@ -238,5 +238,5 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 	// End My Contest Info
 
     // set sidebar closed and body solid layout mode
-    $rootScope.settings.layout.pageSidebarClosed = false;
+    $rootScope.settings.layout.pageSidebarClosed = true;
 });

@@ -6,6 +6,6 @@ MetronicApp.controller('JamsController', ['$rootScope', '$scope', 'settings', fu
     	Metronic.initAjax();
 
     	// set default layout mode
-        $rootScope.settings.layout.pageSidebarClosed = false;
+        $rootScope.settings.layout.pageSidebarClosed = true;
     });
 }]);
