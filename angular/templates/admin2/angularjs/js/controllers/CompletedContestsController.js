@@ -6,7 +6,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
     	Metronic.initAjax();
 
     	// set default layout mode
-        $rootScope.settings.layout.pageSidebarClosed = false;
+        $rootScope.settings.layout.pageSidebarClosed = true;
     });
 
     /* BEGIN SHARED LOGIC */
