@@ -10,6 +10,8 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
     $scope.myData = myData;
     $scope.closed = false;
 
+    $scope.contestType = 'open';
+
     $scope.getProfilePicture = function(pic) {
       var src = '';
         
