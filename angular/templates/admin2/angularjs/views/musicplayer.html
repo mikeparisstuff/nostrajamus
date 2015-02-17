@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="col-xs-6 text-center player-details">
-                    <div>{{ player.data.currentTrackData.title }} - {{ player.data.currentTrackData.user.username }}</div>
+                    <div ng-show="player.data.currentTrackData.title">{{ player.data.currentTrackData.title }} - {{ player.data.currentTrackData.user.username }}</div>
                     <!--<progress value="{{ player.data.trackProgress }}" max="1"-->
                               <!--ng-click="seek($event)">-->
                         <!--<!--{{ currentTime / duration }}-->
