@@ -56,7 +56,7 @@
     <div class="row">
         <div class="col-md-2">
             <div class="text-center rank-holder">
-                <br><br>
+                <br><br><br><br>
                 <h1 class="counter">{{myRank}}</h1>
             </div>
         </div>
@@ -65,10 +65,16 @@
             <!--<iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(myEntry)}}"></iframe>-->
         </div>
         <div class="col-md-2 text-center rank-holder">
-            <br><br><br>
+            <br><br><br><br>
             <!-- <div><a href="#/profile/{{myEntry.user.id}}/dashboard">{{myEntry.user.username}}</a></div> -->
             <div>{{myEntry.jam_points}} Jam Points</div>
             <button type="button" class="btn btn-default dark-nostra-modal" data-toggle="modal" ng-click="updateModal(myEntry)" data-target="#graphModal">Details</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 text-center">
+            <h4>SHARE Your Link and WIN:</h4>
+            <input type="text" class="form-control text-center" value="{{myEntry.track.permalink_url}}" style="width:100%"></input>
         </div>
     </div>
 </div>
@@ -81,7 +87,7 @@
     <div class="row" ng-repeat="track in contestEntries.results | limitTo:pageSize">
         <div class="col-md-2">
             <div class="text-center rank-holder">
-                <br><br>
+                <br><br><br><br>
                 <h1 class="counter">{{$index+getRanks()+1}}</h1>
             </div>
         </div>
@@ -89,7 +95,7 @@
             <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
         </div>
         <div class="col-md-2 text-center rank-holder">
-            <br><br><br>
+            <br><br><br><br>
             <div><a href="#/profile/{{track.user.id}}/dashboard">{{track.user.username}}</a></div>
             <div>{{track.jam_points}} Jam Points</div>
             <button type="button" class="btn btn-default dark-nostra-modal" data-toggle="modal" ng-click="updateModal(track)" data-target="#graphModal">Details</button>
@@ -97,6 +103,7 @@
         </div>
     </div>
 </div>
+<br>
 <div class="row" align="center">
     <button class="btn btn-primary red-nostra" ng-disabled="currentPage == 1" ng-click="prevPage()">
         Prev

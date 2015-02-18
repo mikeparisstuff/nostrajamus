@@ -164,7 +164,6 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     	// document.getElementById("sc-embed").innerHTML = trackFrame;
   	};
 
-
   	$scope.postTrack = function(track) {
         // console.log(track);
   		$http({
@@ -187,6 +186,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
                             if ($scope.myData.my_entries[i].contest == $scope.contestInfo.id) {
                                 $scope.mySubmittedTrack = $scope.myData.my_entries[i].track;
                                 $scope.hasSubmitted = true;
+                                $('#shareModal').modal('show');
                             }
                         }
                     }

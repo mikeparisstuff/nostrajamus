@@ -51,7 +51,6 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
         return playIncrease;
     };
 
-
     $scope.modalEntry = {};
     $scope.updateModal = function(entry) {
         entry.percentage_increase = (((entry.current_playback_count - entry.initial_playback_count)/entry.initial_playback_count)*100).toFixed(2).toString();
