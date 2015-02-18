@@ -35,12 +35,12 @@ from django.views.generic.base import TemplateView
 class OnePageAppView(TemplateView):
     template_name = 'index.html'
 
-class HomePageView(APIView):
-    def get(self, request, format=None):
-        if request.user.is_authenticated():
-            return render_to_response("index.html", RequestContext(request))
-        else:
-            return render_to_response("landing.html")
+# class HomePageView(APIView):
+#     def get(self, request, format=None):
+#         if request.user.is_authenticated():
+#             return render_to_response("index.html", RequestContext(request))
+#         else:
+#             return render_to_response("landing.html")
 
 class ForgetView(APIView):
     def get(self, request, format=None):

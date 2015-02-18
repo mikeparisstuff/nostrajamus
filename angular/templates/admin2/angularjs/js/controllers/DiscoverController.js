@@ -6,7 +6,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         Metronic.initAjax();
 
         // set default layout mode
-        $rootScope.settings.layout.pageSidebarClosed = false;
+        $rootScope.settings.layout.pageSidebarClosed = true;
     });
 
     $scope.trending = trending.results;

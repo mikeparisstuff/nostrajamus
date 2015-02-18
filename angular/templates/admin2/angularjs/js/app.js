@@ -8,10 +8,9 @@ var MetronicApp = angular.module("MetronicApp", [
     "ui.bootstrap", 
     "oc.lazyLoad",
     "ngSanitize",
-    "ngResource",
-    "angularFileUpload",//authentication with django
-    // "angularFileUpload" //file upload
-    'infinite-scroll'
+    "ngResource", //authentication with django
+    "angularFileUpload", //file upload
+    'infinite-scroll',
 ]);
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -47,7 +46,7 @@ MetronicApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.contentType = 'application/json';
 }]);
 
-MetronicApp.service('authState', function () {
+MetronicApp.service('authState', function () {    
     return {
         user: undefined
     };
@@ -81,6 +80,65 @@ MetronicApp.factory('api', ['$resource', function($resource) {
         // })
     };
 }]);
+
+MetronicApp.controller('authController', function($scope, api, authState) {
+    // Angular does not detect auto-fill or auto-complete. If the browser
+    // autofills "username", Angular will be unaware of this and think
+    // the $scope.username is blank. To workaround this we use the 
+    // autofill-event polyfill [4][5]
+    $('#id_auth_form input').checkAndTriggerAutoFillEvent();
+
+    $scope.authState = authState;
+
+    $scope.getCredentials = function(){
+        return {
+                username: $scope.username,
+                first_name: "",
+                last_name: "",
+                email: $scope.email,
+                password: $scope.password
+            };
+    };
+
+    $scope.login = function(){
+        api.auth.login($scope.getCredentials()).
+            $promise.
+                then(function(data){
+                    // on good username and password
+                    authState.user = data.username;
+                    window.location.href = "/";
+                }).
+                catch(function(data){
+                    // on incorrect username and password
+                    alert(data.data.detail);
+                });
+    };
+
+    $scope.logout = function(){
+        api.auth.logout(function(){
+            authState.user = undefined;
+            window.location.href = "/";
+        });
+    };
+
+    $scope.register = function($event){
+        // prevent login form from firing
+        $event.preventDefault();
+        // create user and immediatly login on success
+        api.users.create($scope.getCredentials()).
+            $promise.
+                then($scope.login).
+                catch(function(data){
+                    alert(data.data.username);
+                });
+    };
+
+    // [1] https://tools.ietf.org/html/rfc2617
+    // [2] https://developer.mozilla.org/en-US/docs/Web/API/Window.btoa
+    // [3] https://docs.djangoproject.com/en/dev/ref/settings/#append-slash
+    // [4] https://github.com/tbosch/autofill-event
+    // [5] http://remysharp.com/2010/10/08/what-is-a-polyfill/
+});
 
 MetronicApp.factory('globalPlayerService', function($rootScope) {
     var player =  {
@@ -168,68 +226,6 @@ MetronicApp.factory('globalPlayerService', function($rootScope) {
     return { player: player };
 });
 
-MetronicApp.controller('authController', function($scope, api, authState) {
-    // Angular does not detect auto-fill or auto-complete. If the browser
-    // autofills "username", Angular will be unaware of this and think
-    // the $scope.username is blank. To workaround this we use the 
-    // autofill-event polyfill [4][5]
-    $('#id_auth_form input').checkAndTriggerAutoFillEvent();
-
-    $scope.authState = authState;
-
-    $scope.getCredentials = function(){
-        return {
-                username: $scope.username,
-                first_name: "",
-                last_name: "",
-                email: $scope.email,
-                password: $scope.password
-            };
-    };
-
-    $scope.login = function(){
-        api.auth.login($scope.getCredentials()).
-            $promise.
-                then(function(data){
-                    // on good username and password
-                    authState.user = data.username;
-                }).
-                catch(function(data){
-                    // on incorrect username and password
-                    alert(data.data.detail);
-                });
-    };
-
-    $scope.logout = function(){
-        api.auth.logout(function(){
-            // console.log(authState.user);
-            authState.user = undefined;
-        });
-        if (!authState.user) {
-            window.location.href = "/";
-        }
-
-    };
-
-    $scope.register = function($event){
-        // prevent login form from firing
-        $event.preventDefault();
-        // create user and immediatly login on success
-        api.users.create($scope.getCredentials()).
-            $promise.
-                then($scope.login).
-                catch(function(data){
-                    alert(data.data.username);
-                });
-    };
-
-    // [1] https://tools.ietf.org/html/rfc2617
-    // [2] https://developer.mozilla.org/en-US/docs/Web/API/Window.btoa
-    // [3] https://docs.djangoproject.com/en/dev/ref/settings/#append-slash
-    // [4] https://github.com/tbosch/autofill-event
-    // [5] http://remysharp.com/2010/10/08/what-is-a-polyfill/
-});
-
 // /Setup authentication with django
 
 //We already have a limitTo filter built-in to angular,
@@ -315,7 +311,7 @@ MetronicApp.controller('FooterController', ['$scope', function($scope) {
 MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
     // Redirect any unmatched url
-    $urlRouterProvider.otherwise("/dashboard");
+    $urlRouterProvider.otherwise("/");
 
     $stateProvider
 
@@ -323,7 +319,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('login', {
         //     url: "/login",
         //     templateUrl: "/assets/views/login.html",
-        //     data: {pageTitle: 'Log In'},
+        //     data: {
+        //         pageTitle: 'Log In',
+        //         authenticate: false
+        //     },
         //     controller: "LoginController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -344,23 +343,17 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         //                     '/assets/js/controllers/LoginController.js'
         //                 ] 
         //             });
-        //         }],
-        //         contests: ['$http', function($http) {
-        //             return $http.get('/api/contests/').then(function(response) {
-        //                 // console.log(response.data);
-        //                 return response.data;
-        //             });
         //         }]
         //     }
         // })
 
         // Dashboard
         .state('dashboard', {
-            url: "/dashboard",
+            url: "/",
             templateUrl: "/assets/views/dashboard.html",
             data: {
                 pageTitle: 'Home',
-                requireLogin: false
+                authenticate: true
             },
             controller: "DashboardController",
             resolve: {
@@ -405,7 +398,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('opencontests/:contestID', {
             url: "/opencontests/:contestID",
             templateUrl: "/assets/views/contests/opencontests.html",
-            data: {pageTitle: 'Open Contests'},
+            data: {
+                pageTitle: 'Open Contests',
+                authenticate: true
+            },
             controller: "OpenContestsController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -451,7 +447,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('inprogresscontests/:contestID', {
             url: "/inprogresscontests/:contestID",
             templateUrl: "/assets/views/contests/inprogresscontests.html",
-            data: {pageTitle: 'In Progress Contests'},
+            data: {
+                pageTitle: 'In Progress Contests',
+                authenticate: true
+            },
             controller: "CompletedContestsController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -509,7 +508,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('completedcontests/:contestID', {
             url: "/completedcontests/:contestID",
             templateUrl: "/assets/views/contests/completedcontests.html",
-            data: {pageTitle: 'Completed Contests'},
+            data: {
+                pageTitle: 'Completed Contests',
+                authenticate: true
+            },
             controller: "CompletedContestsController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -852,7 +854,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state("profile", {
             url: "/profile/:userID",
             templateUrl: "/assets/views/profile/main.html",
-            data: {pageTitle: 'User Profile'},
+            data: {
+                pageTitle: 'User Profile',
+                authenticate: true
+            },
             controller: "UserProfileController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1052,7 +1057,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('leaderboard', {
             url: "/leaderboard",
             templateUrl: "/assets/views/leaderboard.html",
-            data: {pageTitle: 'Leaderboard'},
+            data: {
+                pageTitle: 'Leaderboard',
+                authenticate: false
+            },
             controller: "LeaderboardController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1085,7 +1093,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('discover', {
             url: "/discover",
             templateUrl: "/assets/views/discover.html",
-            data: {pageTitle: 'Discover'},
+            data: {
+                pageTitle: 'Discover',
+                authenticate: false
+            },
             controller: "DiscoverController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1119,7 +1130,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('leagues', {
             url: "/leagues",
             templateUrl: "/assets/views/leagues.html",
-            data: {pageTitle: 'Leagues'},
+            data: {
+                pageTitle: 'Leagues',
+                authenticate: true
+            },
             controller: "LeaguesController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1165,7 +1179,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('how', {
             url: "/how",
             templateUrl: "/assets/views/how.html",
-            data: {pageTitle: 'How It Works'},
+            data: {
+                pageTitle: 'How It Works',
+                authenticate: true
+            },
             controller: "HowController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1183,7 +1200,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('message', {
             url: "/message",
             templateUrl: "/assets/views/message.html",
-            data: {pageTitle: 'Message Us'},
+            data: {
+                pageTitle: 'Message Us',
+                authenticate: true
+            },
             controller: "MessageController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1211,7 +1231,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state("admincontrols", {
             url: "/admincontrols",
             templateUrl: "/assets/views/admincontrols.html",
-            data: {pageTitle: 'Admin Controls'},
+            data: {
+                pageTitle: 'Admin Controls',
+                authenticate: true
+            },
             controller: "AdminController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1250,7 +1273,19 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 }]);
 
 /* Init global settings and run the app */
-MetronicApp.run(["$rootScope", "settings", "$state", "$anchorScroll", function($rootScope, settings, $state, $anchorScroll) {
+MetronicApp.run(["$rootScope", "settings", "$state", "$anchorScroll", "authState", function($rootScope, settings, $state, $anchorScroll, authState) {
     $rootScope.$state = $state; // state to be accessed from view
-    $anchorScroll.yOffset = 50;
+    // $anchorScroll.yOffset = 50;
+
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+        // console.log(toState);
+        // console.log(fromState);
+        // console.log(authState.user);
+        if (toState.data.authenticate && !authState.user){
+            // User isn’t authenticated
+            $state.transitionTo("discover");
+            window.location.href = window.location.href;
+            event.preventDefault();
+        }
+    });
 }]);
