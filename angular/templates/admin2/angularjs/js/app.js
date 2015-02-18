@@ -89,15 +89,41 @@ MetronicApp.controller('authController', function($scope, api, authState) {
     $('#id_auth_form input').checkAndTriggerAutoFillEvent();
 
     $scope.authState = authState;
+    // console.log(authState);
+
+    $scope.makeCredentials = function(){
+        if ($scope.password1 != null && $scope.password2 != null && $scope.password1 === $scope.password2) {
+            // console.log(
+            //     JSON.stringify({
+            //         "username": $scope.user_name,
+            //         "first_name": $scope.first_name,
+            //         "last_name": $scope.last_name,
+            //         "email": $scope.email,
+            //         "password": $scope.password1,
+            //         "profile_picture": null,
+            //         "location": ""
+            //     })
+            // );
+            return JSON.stringify({
+                "username": $scope.user_name,
+                "first_name": $scope.first_name,
+                "last_name": $scope.last_name,
+                "email": $scope.email,
+                "password": $scope.password1,
+                "profile_picture": null,
+                "location": ""
+            });
+        }
+        else {
+            alert("Error");
+        }
+    };
 
     $scope.getCredentials = function(){
-        return {
-                username: $scope.username,
-                first_name: "",
-                last_name: "",
-                email: $scope.email,
-                password: $scope.password
-            };
+        console.log(
+            {username: $scope.user_name, password: $scope.password1}
+        );
+        return {username: $scope.user_name, password: $scope.password1};
     };
 
     $scope.login = function(){
@@ -125,7 +151,7 @@ MetronicApp.controller('authController', function($scope, api, authState) {
         // prevent login form from firing
         $event.preventDefault();
         // create user and immediatly login on success
-        api.users.create($scope.getCredentials()).
+        api.users.create($scope.makeCredentials()).
             $promise.
                 then($scope.login).
                 catch(function(data){
