@@ -832,6 +832,10 @@ Red-nostra
   color: #00bb00;
 }
 
+.player-details {
+  overflow: hidden;
+}
+
 @media (max-width: 480px) {
   .track-title {
     font-size: 14px;
