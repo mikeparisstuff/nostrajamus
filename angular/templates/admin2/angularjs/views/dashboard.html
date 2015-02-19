@@ -29,6 +29,12 @@
                                     <button type="submit" class="btn btn-xl" ng-click="login()">Log In</button>
                                     <div id="errors"></div>
                                 </div>
+
+                                <div class="col-lg-12 text-center">
+                                	<br>
+                                	<b>Not a member yet? <a href="#" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Register Now!</span></a></b>
+                                </div>
+
                             </div>
                         </form>
                     </div>
@@ -112,8 +118,8 @@
 						<a href="#/opencontests/28" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/1a_-_hip_hop.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/1b_-_hip_hop.png" class="img-responsive bottom"></a>
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/1a_-_hip_hop.png" class="img-responsive top"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/1b_-_hip_hop.png" class="img-responsive bottom"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/1a_-_hip_hop.png" class="img-responsive top"></a>
 					</div>
 
 					<div ng-if="authState.user">
@@ -121,8 +127,8 @@
 						<a href="#/inprogresscontests/20" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/4a_-_tropical_house.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/4b_-_tropical_house.png" data-toggle="modal" data-target="#loginModal" class="img-responsive bottom"></a>
-						<a href="#" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/4a_-_tropical_house.png" data-toggle="modal" data-target="#loginModal" class="img-responsive top"></a>
+						<a href="#" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/4b_-_tropical_house.png" data-toggle="modal" data-target="#registerModal" class="img-responsive bottom"></a>
+						<a href="#" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/4a_-_tropical_house.png" data-toggle="modal" data-target="#registerModal" class="img-responsive top"></a>
 					</div>
 
 					<div ng-if="authState.user">
@@ -130,8 +136,8 @@
 						<a href="#/completedcontests/3" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/7a_-_1000_followers.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/7b_-_1000_followers.png" class="img-responsive bottom"></a>
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/7a_-_1000_followers.png" class="img-responsive top"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/7b_-_1000_followers.png" class="img-responsive bottom"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/7a_-_1000_followers.png" class="img-responsive top"></a>
 					</div>
 				</div>
 				<!-- <div class="visual">
@@ -158,8 +164,8 @@
 						<a href="#/opencontests/29" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/2a_-_anything_goes.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/2b_-_anything_goes.png" class="img-responsive bottom"></a>
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/2a_-_anything_goes.png" class="img-responsive top"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/2b_-_anything_goes.png" class="img-responsive bottom"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/2a_-_anything_goes.png" class="img-responsive top"></a>
 					</div>
 
 					<div ng-if="authState.user">
@@ -167,8 +173,8 @@
 						<a href="#/inprogresscontests/25" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/5a_-_anything_goes.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/5b_-_anything_goes.png" class="img-responsive bottom"></a>
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/5a_-_anything_goes.png" class="img-responsive top"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/5b_-_anything_goes.png" class="img-responsive bottom"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/5a_-_anything_goes.png" class="img-responsive top"></a>
 					</div>
 					
 					<div ng-if="authState.user">
@@ -176,8 +182,8 @@
 						<a href="#/completedcontests/23" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/8a_-_anything_goes.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/8b_-_anything_goes.png" class="img-responsive bottom"></a>
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/8a_-_anything_goes.png" class="img-responsive top"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/8b_-_anything_goes.png" class="img-responsive bottom"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/8a_-_anything_goes.png" class="img-responsive top"></a>
 					</div>
 				</div>
 				<!-- <div class="visual">
@@ -204,8 +210,8 @@
 						<a href="#/opencontests/31" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/3a_-_5000_followers.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/3b_-_5000_followers.png" class="img-responsive bottom"></a>
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/3a_-_5000_followers.png" class="img-responsive top"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/3b_-_5000_followers.png" class="img-responsive bottom"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='open'"><img src="assets/nostraV1/img/contest/open/3a_-_5000_followers.png" class="img-responsive top"></a>
 					</div>
 
 					<div ng-if="authState.user">
@@ -213,8 +219,8 @@
 						<a href="#/inprogresscontests/24" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/6a_-_electronic_dance.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/6b_-_electronic_dance.png" class="img-responsive bottom"></a>
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/6a_-_electronic_dance.png" class="img-responsive top"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/6b_-_electronic_dance.png" class="img-responsive bottom"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='inprogress'"><img src="assets/nostraV1/img/contest/inprogress/6a_-_electronic_dance.png" class="img-responsive top"></a>
 					</div>
 
 					<div ng-if="authState.user">
@@ -222,8 +228,8 @@
 						<a href="#/completedcontests/2" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/9a_-_rowdy_remixes.png" class="img-responsive top"></a>
 					</div>
 					<div ng-if="!authState.user">
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/9b_-_rowdy_remixes.png" class="img-responsive bottom"></a>
-						<a href="#" data-toggle="modal" data-target="#loginModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/9a_-_rowdy_remixes.png" class="img-responsive top"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/9b_-_rowdy_remixes.png" class="img-responsive bottom"></a>
+						<a href="#" data-toggle="modal" data-target="#registerModal" ng-if="contestType=='completed'"><img src="assets/nostraV1/img/contest/completed/9a_-_rowdy_remixes.png" class="img-responsive top"></a>
 					</div>
 
 				</div>
@@ -302,9 +308,9 @@
 	               	<button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'" ng-if="authState.user">View</button>
 	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'" ng-if="authState.user">View</button>
 	                <span class="btn btn-default" ng-hide="enabled" ng-disabled="true">Coming Soon</span>
-	                <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open' && enabled" ng-if="!authState.user">Enter</button>
-	                <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'" ng-if="!authState.user">View</button>
-	                <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'" ng-if="!authState.user">View</button>
+	                <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open' && enabled" ng-if="!authState.user">Enter</button>
+	                <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'" ng-if="!authState.user">View</button>
+	                <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'" ng-if="!authState.user">View</button>
 	            </div>
 	        </div>
 	    </div>
@@ -330,9 +336,9 @@
 	               	<button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'" ng-if="authState.user">View</button>
 	                <button type="button" ng-click="goToContest(status, contest_id)" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'" ng-if="authState.user">View</button>
 	                <span class="btn btn-default" ng-hide="enabled" ng-disabled="true">Coming Soon</span>
-	                <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open' && enabled" ng-if="!authState.user">Enter</button>
-	                <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'" ng-if="!authState.user">View</button>
-	                <button type="button" data-toggle="modal" data-target="#loginModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'" ng-if="!authState.user">View</button>
+	                <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='open' && enabled" ng-if="!authState.user">Enter</button>
+	                <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='inProgress'" ng-if="!authState.user">View</button>
+	                <button type="button" data-toggle="modal" data-target="#registerModal" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="status=='completed'" ng-if="!authState.user">View</button>
 	            </div>
 	        </div>
 	    </div>
@@ -421,7 +427,7 @@
 												<span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}} && isEnabled(openContest.start_time)" ng-if="authState.user">Enter</span>
 												<span class="btn btn-default" ng-hide="isEnabled(openContest.start_time)" ng-disabled="true">Coming Soon</span>
 											</a>
-											<span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}} && isEnabled(openContest.start_time)" data-toggle="modal" data-target="#loginModal" ng-if="!authState.user">Enter</span>
+											<span class="btn btn-default red-nostra" ng-show="{{openContest.is_live}} && isEnabled(openContest.start_time)" data-toggle="modal" data-target="#registerModal" ng-if="!authState.user">Enter</span>
 										</td>
 									</tr>
 								</table>
@@ -470,7 +476,7 @@
 											<a href="#/inprogresscontests/{{inProgressContest.id}}">
 												<span class="btn btn-default red-nostra" ng-show="{{inProgressContest.is_live}}"ng-if="authState.user">View</span>
 											</a>
-											<span class="btn btn-default red-nostra" data-toggle="modal" data-target="#loginModal" ng-show="{{inProgressContest.is_live}}" ng-if="!authState.user">View</span>
+											<span class="btn btn-default red-nostra" data-toggle="modal" data-target="#registerModal" ng-show="{{inProgressContest.is_live}}" ng-if="!authState.user">View</span>
 										</td>
 									</tr>
 								</table>
@@ -517,7 +523,7 @@
 											<a href="#/completedcontests/{{completedContest.id}}">
 												<span class="btn btn-default red-nostra" ng-if="authState.user">View</span>
 											</a>
-											<span class="btn btn-default red-nostra" data-toggle="modal" data-target="#loginModal" ng-if="!authState.user">View</span>
+											<span class="btn btn-default red-nostra" data-toggle="modal" data-target="#registerModal" ng-if="!authState.user">View</span>
 										</td>
 									</tr>
 								</table>

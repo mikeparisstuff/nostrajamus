@@ -312,7 +312,10 @@ MetronicApp.controller('HeaderController', ['$scope', '$http', 'authState', func
         Layout.initHeader(); // init header
     });
 
-    if (authState.user != null) {
+    // $scope.authState = authState;
+    // console.log($scope.authState);
+
+    if (!authState.user) { //weird
         $http.get('/api/users/me').then(function(response) {
             $scope.myData = response.data;
             // console.log($scope.myData);
@@ -443,7 +446,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     });
                 }],
                 myData: ['$http', 'authState', function($http, authState) {
-                    console.log(authState);
+                    // console.log(authState);
                     if (authState.user.length > 0) {
                         return $http.get('/api/users/me').then(function(response) {
                             console.log(response.data);
