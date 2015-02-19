@@ -191,6 +191,9 @@ def start_contest(contest_id):
         except HTTPError as e:
             print "Could not find track with id: {}".format(entry.track.sc_id)
             print "Error: {}".format(e)
+            entry.is_active = True
+            entry.jam_points = 0.0
+            entry.save()
     contest.is_live = True
     contest.save()
 
@@ -215,5 +218,7 @@ def end_contest(contest_id):
         except HTTPError as e:
             print 'Error getting track with id: {}'.format(entry.track.sc_id)
             print 'ERROR: {}'.format(e)
+            entry.is_active = False
+            entry.save()
     contest.is_live = False
     contest.save()
