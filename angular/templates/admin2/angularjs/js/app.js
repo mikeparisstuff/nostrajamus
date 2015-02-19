@@ -1337,14 +1337,13 @@ MetronicApp.run(["$rootScope", "settings", "$state", "$anchorScroll", "authState
     // $anchorScroll.yOffset = 50;
 
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-        console.log(authState.user);
         // console.log(toState);
         // console.log(fromState);
         // console.log(authState.user);
         if (toState.data.authenticate && !authState.user){
             // User isn’t authenticated
             $state.transitionTo("discover");
-            $window.location.href = $window.location.href;
+            window.location.href = window.location.href;
             event.preventDefault();
         }
     });
