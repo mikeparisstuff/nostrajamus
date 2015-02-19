@@ -643,6 +643,9 @@ Red-nostra
 
 .queue-item {
   overflow: hidden;
+  border-bottom: 1px solid #eeeeee;
+  padding-left: 10px;
+  height: 50px;
 }
 
 .queue-wrapper {
@@ -748,6 +751,8 @@ Red-nostra
   margin-top: 90px;
 }
 
+
+
 .track-progress {
   position: absolute;
 //  top: 0;
@@ -765,6 +770,12 @@ Red-nostra
 .track-right-icons {
   background-color: #eeeeee;
   height: 200px;
+}
+
+.track-queue-btn {
+  position: absolute;
+  top: -36px;
+  right: 9px;
 }
 
 .track-right-icon {

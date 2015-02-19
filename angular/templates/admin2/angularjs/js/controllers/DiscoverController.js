@@ -255,7 +255,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 
         var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(1);
 
-        return playIncrease;
+        return playIncrease + " %";
     };
 
     $scope.getFollowIncrease = function(track) {
@@ -282,10 +282,10 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 
     $scope.playNewTrack = function(track, index) {
         globalPlayerService.player.resetTrack(track.track);
-        var tunes = $scope.trending.slice(index).map(function(elem) {
+        var tunes = $scope.trending.slice(index+1).map(function(elem) {
             return elem.track;
         });
-        globalPlayerService.player.data.trackQueue = tunes;
+        globalPlayerService.player.data.trackQueue = tunes.slice();
         // Set the next url and such
         var nextUrl = '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=" + ($scope.currentPage + 1);
         globalPlayerService.player.data.nextPageUrl = nextUrl;
@@ -300,9 +300,13 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 //        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
         $scope.$apply(function() {
             $scope.player.data = globalPlayerService.player.data;
+            $scope.player.data.trackQueue = globalPlayerService.player.data.trackQueue;
         });
     });
 
+      function watchSource(){
+        return DataFactory.items;
+      }
     /* END PLAYER */
 
 }]);

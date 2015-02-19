@@ -18,10 +18,19 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
 //        console.log(globalPlayerService.player.data.trackProgress);
 //        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
         $scope.$apply(function() {
-            $scope.player.data = globalPlayerService.player.data;
+            $scope.player.data.trackProgress = globalPlayerService.player.data.trackProgress;
         });
     });
 
+    $scope.$watch(function() { return globalPlayerService.data.trackQueue}, function(current, previous){
+        $scope.player.data.trackQueue = current;
+    });
+
+    $scope.forceApply = function() {
+        $scope.$apply(function() {
+            $scope.player.data.trackQueue = globalPlayerService.player.data.trackQueue;
+        });
+    }
 //    $scope.trackQueue = globalPlayerData.trackQueue;
 
 //    $scope.player.playPause = globalPlayerService.playPause;

@@ -172,6 +172,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             currentTrack: {},
             currentTrackData: {},
             trackQueue: [],
+            backStack: [],
             isPlaying: false,
             currentIndex: 0,
             trackProgress: 0,
@@ -232,31 +233,44 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
         });
     };
     player.playNextTrack = function() {
-        if (this.data.trackQueue.length > this.data.currentIndex+1) {
-            // If within last 3 songs pull the next page
-            this.data.currentIndex = this.data.currentIndex + 1;
-            if (this.data.trackQueue.length - this.data.currentIndex < 4) {
-                this.getNextPageForQueue()
-            }
-            var next = this.data.trackQueue[this.data.currentIndex];
+        if (this.data.trackQueue.length <= 5) {
+            this.getNextPageForQueue()
+        } else if (this.data.trackQueue.length) {
+            var next = this.data.trackQueue.shift();
+            this.data.backStack.push(this.data.currentTrackData);
             this.resetTrack(next);
         }
+//        if (this.data.trackQueue.length > this.data.currentIndex+1) {
+//            // If within last 3 songs pull the next page
+//            this.data.currentIndex = this.data.currentIndex + 1;
+//            if (this.data.trackQueue.length - this.data.currentIndex < 4) {
+//                this.getNextPageForQueue()
+//            }
+//            var next = this.data.trackQueue[this.data.currentIndex];
+//
+//            this.resetTrack(next);
+//        }
     };
     player.playPreviousTrack = function() {
-        if (this.data.trackQueue.length > this.data.currentIndex-1) {
-            this.data.currentIndex = this.data.currentIndex - 1;
-            if (this.data.currentIndex < 0) {
-                this.data.currentIndex = 0;
-            }
-            var next = this.data.trackQueue[this.data.currentIndex];
-            this.resetTrack(next);
+        if (this.data.backStack.length) {
+            var prev = this.data.backStack.pop();
+            this.data.trackQueue.unshift(this.data.currentTrackData);
+            this.resetTrack(prev);
         }
+//        if (this.data.trackQueue.length > this.data.currentIndex-1) {
+//            this.data.currentIndex = this.data.currentIndex - 1;
+//            if (this.data.currentIndex < 0) {
+//                this.data.currentIndex = 0;
+//            }
+//            var next = this.data.trackQueue[this.data.currentIndex];
+//            this.resetTrack(next);
+//        }
     };
     player.getTrackProgress = function() {
         return this.data.trackProgress;
     };
     player.addTrackToQueue = function(track) {
-        this.data.trackQueue.splice(this.data.currentIndex+1, 0, track);
+        this.data.trackQueue.unshift(track);
     };
     player.getNextPageForQueue = function() {
         var that = this;

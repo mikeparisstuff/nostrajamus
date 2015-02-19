@@ -179,7 +179,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
 
     $scope.playNewTrack = function(track, index) {
         globalPlayerService.player.resetTrack(track.track);
-        var tunes = $scope.contestEntries.results.slice(index).map(function(elem) {
+        var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
             return elem.track;
         });
         globalPlayerService.player.data.trackQueue = tunes;

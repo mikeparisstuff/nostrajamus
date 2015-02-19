@@ -8,17 +8,17 @@
                     </div>
                 </div>
                 <div class="dropdown queue-wrapper">
-                  <button class="btn button-icon dropdown-toggle" type="button" id="trackQueueMenu" data-toggle="dropdown" aria-expanded="true">
+                  <button class="btn button-icon dropdown-toggle" ng-click="forceApply()" type="button" id="trackQueueMenu" data-toggle="dropdown" aria-expanded="true">
                     <span class="fa fa-2x fa-bars"></span>
                   </button>
 
                   <ul class="dropdown-menu dropdown-menu-right track-queue-dropdown" role="menu" aria-labelledby="trackQueueMenu">
                       <li ng-if="player.data.trackQueue.length == 0" role="presentation"><a role="menuitem" tabindex="-1" href="#">No songs in queue...</a></li>
-                      <li ng-repeat="track in player.data.trackQueue.slice(player.data.currentIndex+1)" role="presentation" class="queue-item">
-                          <a role="menuitem" tabindex="-1" href="#">
+                      <li ng-repeat="track in player.data.trackQueue" role="presentation" class="queue-item">
+                          <div role="menuitem" tabindex="-1" href="#">
                               <img src="{{ track.artwork_url }}" class="img_responsive track-queue-art" alt=""/>
                             {{ track.title }}
-                          </a>
+                          </div>
                       </li>
                   </ul>
                 </div>
@@ -43,14 +43,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-6 col-lg-4 text-center player-details">
+                <div class="col-xs-6 col-lg-5 text-center player-details">
                     <div ng-show="player.data.currentTrackData.title">{{ player.data.currentTrackData.title }} - {{ player.data.currentTrackData.user.username }}</div>
                     <!--<progress value="{{ player.data.trackProgress }}" max="1"-->
                               <!--ng-click="seek($event)">-->
                         <!--<!--{{ currentTime / duration }}-->
                     <!--</progress>-->
                 </div>
-                <div class="col-xs-3 col-lg-3 text-center">
+                <div class="col-xs-3 col-lg-4 text-center">
 
                     <!--<div class="dropdown player-queue">-->
                       <!--<button class="btn button-icon dropdown-toggle" type="button" id="trackQueueMenu" data-toggle="dropdown" aria-expanded="true">-->
