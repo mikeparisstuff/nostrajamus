@@ -224,10 +224,6 @@ section#services {
   max-height: 100px;
 }
 
-li.register-btn {
-  padding-top: 5px;
-}
-
 /*Portlet Formatting*/
 .portlet > .portlet-title > .nav-tabs.center-tabs {
   background: none;
@@ -238,6 +234,29 @@ li.register-btn {
 }
 
 /*/Portlet Formatting*/
+.nostra-register {
+  background-color: #ff5252;
+  color: #fff;
+  border: 0;
+}
+
+.nostra-register:hover {
+  opacity: 0.75;
+  background-color: #ff5252;
+  color: #fff;
+  border: 0;
+}
+
+.nostra-register:active, .nostra-register:focus {
+  background-color: #ff5252 !important;
+  color: #fff;
+  border: 0;
+}
+
+.nostra-login {
+  color: #ddd;
+}
+
 /***
 Red-nostra
 ***/
@@ -877,5 +896,10 @@ Red-nostra
 @media (max-width: 767px) {
   .contest-banners {
     height: 75px;
+  }
+}
+@media (min-width: 1200px) {
+  .contest-banners {
+    height: 150px;
   }
 }

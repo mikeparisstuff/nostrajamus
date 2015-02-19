@@ -211,10 +211,6 @@ section#services {
   max-height: 100px;
 }
 
-li.register-btn {
-  padding-top: 5px;
-}
-
 /*Portlet Formatting*/
 .portlet > .portlet-title > .nav-tabs.center-tabs {
   background: none;
@@ -224,6 +220,28 @@ li.register-btn {
   border: 0;
 }
 /*/Portlet Formatting*/
+
+.nostra-register {
+  background-color: #ff5252;
+  color: #fff;
+  border: 0;
+}
+.nostra-register:hover {
+  opacity: 0.75;
+  // border: 1px solid #ff5252;
+  background-color: #ff5252;
+  color: #fff;
+  border: 0;
+}
+.nostra-register:active, .nostra-register:focus {
+  background-color: #ff5252 !important;
+  color: #fff;
+  border: 0;
+}
+.nostra-login {
+  color: #ddd;
+  // margin-top: 13px;
+}
 
 /***
 Red-nostra
@@ -848,6 +866,12 @@ Red-nostra
 @media(max-width: $screen-xs-max) {
   .contest-banners {
     height: 75px;
+  }
+}
+
+@media(min-width: $screen-lg-min) {
+  .contest-banners {
+    height: 150px;
   }
 }
 // END TRANSITION
