@@ -25,14 +25,14 @@
         <hr class="track-divider"/>
         <div class="track-data-bottom text-center">
             <div class="row">
-                <div class="col-md-2 col-sm-2 col-xs-4"><b>Initial</b><br />{{ insertCommas(track.initial_playback_count) }}
+                <div class="col-md-3 col-sm-3 col-xs-4"><b>Initial</b><br />{{ insertCommas(track.initial_playback_count) }}
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-4"><b>Increase</b><br />
+                <div class="col-md-2 col-sm-2 col-xs-4"><b>Increase</b><br />
                     {{ insertCommas(getPlayIncrease(track)) }}
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-4"><b>Current</b><br />{{insertCommas(track.current_playback_count) }}</div>
+                <div class="col-md-2 col-sm-2 col-xs-4"><b>Current</b><br />{{insertCommas(track.current_playback_count) }}</div>
                 <div class="col-md-2 col-sm-2 col-xs-4"><b>Followers</b><br />{{ insertCommas(track.initial_follower_count) }}</div>
-                <div class="col-md-2 col-sm-2 col-xs-4"><b>Jam Points</b><br />{{ insertCommas(track.jam_points) }}</div>
+                <div class="col-md-3 col-sm-3 col-xs-4"><b>Jam Points</b><br />{{ insertCommas(track.jam_points) }}</div>
             </div>
 
         </div>
