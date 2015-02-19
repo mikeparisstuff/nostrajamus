@@ -1,6 +1,6 @@
 
 <div class="row jamus-track-item">
-    <div class="track-img-wrapper col-md-3 col-sm-3 col-xs-4 text-center" style="background-image: url({{ getCroppedImageUrl(track.track.artwork_url) }});">
+    <div class="track-img-wrapper col-md-3 col-sm-3 col-xs-3 text-center" style="background-image: url({{ getCroppedImageUrl(track.track.artwork_url) }});">
         <!---->
          <!--<img class="track-img img-responsive center-block" src="https://i1.sndcdn.com/artworks-000093556135-fu2rsq-large.jpg" alt="" />-->
         <span ng-if="track.track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn fa fa-5x fa-play-circle-o" ng-click="playNewTrack(track, $index)"></span>
@@ -9,7 +9,11 @@
 
         </div> -->
     </div>
-    <div class="track-data col-md-9 col-sm-9 col-xs-8">
+    <div class="track-data col-md-8 col-sm-7 col-xs-7">
+        <div ng-if="player.data.currentTrackData.sc_id == track.track.sc_id" class="progress jamus-list-item-progress-bar">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{ player.data.trackProgress }}" aria-valuemin="0" aria-valuemax="1" style="width: {{ player.data.trackProgress * 100 }}%;">
+            </div>
+        </div>
         <div class="track-data-top text-center">
             <div class="row">
                 <div class="col-xs-12">
@@ -23,29 +27,32 @@
             <div class="row">
                 <div class="col-md-2 col-sm-2 col-xs-4"><b>Initial</b><br />{{ insertCommas(track.initial_playback_count) }}
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-4"><b>Increase</b><br />
+                <div class="col-md-3 col-sm-3 col-xs-4"><b>Increase</b><br />
                     {{ insertCommas(getPlayIncrease(track)) }}
                 </div>
-                <div class="col-md-2 col-sm-2 col-xs-4"><b>Current</b><br />{{insertCommas(track.current_playback_count) }}</div>
+                <div class="col-md-3 col-sm-3 col-xs-4"><b>Current</b><br />{{insertCommas(track.current_playback_count) }}</div>
                 <div class="col-md-2 col-sm-2 col-xs-4"><b>Followers</b><br />{{ insertCommas(track.initial_follower_count) }}</div>
                 <div class="col-md-2 col-sm-2 col-xs-4"><b>Jam Points</b><br />{{ insertCommas(track.jam_points) }}</div>
-                <div class="soundcloud-icon col-md-2 col-sm-2 col-xs-4">
-                    <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>
-                </div>
             </div>
 
         </div>
 
     </div>
-    <!--<div class="col-md-1 col-sm-2 col-xs-12 track-right-icons">-->
-        <!--<div class=" text-center">-->
-            <!--<!--<div class="like-icon track-right-icon">-->
-                <!--<!--<span class="fa fa-3x fa-heartbeat"></span>-->
-            <!--<!--</div>-->
-            <!--<!--<div class="share-icon track-right-icon">-->
-                <!--<!--<span class="fa fa-3x fa-share-square-o"></span>-->
-            <!--<!--</div>-->
+    <div class="col-md-1 col-sm-2 col-xs-2 track-right-icons">
+        <div class="text-center">
+            <div class="queue-icon track-right-icon">
+                <span ng-click="player.addTrackToQueue(track.track)" class="fa fa-3x fa-plus-square-o"></span>
+            </div>
+            <div class="soundcloud-icon track-right-icon">
+                <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>
+            </div>
+            <!--<div class="like-icon track-right-icon">
+                <!--<span class="fa fa-3x fa-heartbeat"></span>
+            <!--</div>
+            <!--<div class="share-icon track-right-icon">
+                <!--<span class="fa fa-3x fa-share-square-o"></span>
+            <!--</div>-->
 
-        <!--</div>-->
-    <!--</div>-->
+        </div>
+    </div>
 </div>

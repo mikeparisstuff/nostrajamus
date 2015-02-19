@@ -642,7 +642,14 @@ Red-nostra
   margin: 0;
   line-height: 50px;
   vertical-align: middle;
-  position: relative;
+  width: 100%;
+  top: 68px;
+  left: 0;
+  position: fixed;
+  z-index: 110;
+  -webkit-box-shadow: 0px 0px 7px #000000;
+  -moz-box-shadow: 0px 0px 7px #000000;
+  box-shadow: 0px 0px 7px #000000;
 }
 
 .music-player-progress-bar {
@@ -655,6 +662,54 @@ Red-nostra
 .music-player-progress-bar > div.progress-bar {
   height: 50px;
   background: rgba(255, 82, 82, 0.7);
+}
+
+.jamus-list-item-progress-bar {
+  position: absolute;
+  margin-left: -15px;
+  height: 199px;
+  width: 100%;
+  border-radius: 0;
+  background: white;
+  padding-left: -15px;
+}
+.jamus-list-item-progress-bar > div.progress-bar {
+  height: 199px;
+  background: rgba(255, 82, 82, 0.7);
+}
+
+.track-queue-dropdown {
+  position: absolute;
+  margin-top: 0 !important;
+  left: -700%;
+  border-radius: 0;
+  -webkit-box-shadow: 2px 2px 3px #aaa;
+  -moz-box-shadow: 2px 2px 3px #aaa;
+  box-shadow: 2px 2px 3px #aaa;
+}
+.track-queue-dropdown:before {
+  position: absolute;
+  top: 0px;
+  display: inline-block;
+  border: 0 !important;
+  content: '';
+}
+.track-queue-dropdown:after {
+  border: 0 !important;
+}
+
+.queue-item {
+  overflow: hidden;
+}
+
+.queue-wrapper {
+  position: absolute;
+  top: 5px;
+  right: 14%;
+}
+
+.track-queue-art {
+  width: 30px;
 }
 
 .player-controls, .player-queue {
@@ -673,7 +728,7 @@ Red-nostra
 .jamus-track-item {
   margin-top: 20px;
   height: 200px;
-  border: 1px solid #aaaaaa;
+  border: 1px solid #eeeeee;
   background-color: #ffffff;
 }
 
@@ -720,7 +775,13 @@ Red-nostra
   transform: scale(1.1);
 }
 
+.track-right-icons {
+  background-color: #eeeeee;
+  height: 200px;
+}
+
 .track-right-icon {
+  margin-top: 51px;
   color: #888888;
 }
 

@@ -82,7 +82,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
 
     // pagination
     $scope.currentPage = 1;
-    $scope.pageSize = 5;
+    $scope.pageSize = 10;
 
     $scope.numberOfPages=function() {
         return Math.ceil($scope.contestEntries.count/$scope.pageSize);                
@@ -179,16 +179,27 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
 
     $scope.playNewTrack = function(track, index) {
         globalPlayerService.player.resetTrack(track.track);
-        var tunes = $scope.trending.map(function(elem) {
+        var tunes = $scope.contestEntries.results.slice(index).map(function(elem) {
             return elem.track;
         });
         globalPlayerService.player.data.trackQueue = tunes;
+        // Set the next url and such
+        var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
+        globalPlayerService.player.data.nextPageUrl = nextUrl;
     };
 
     $scope.getCroppedImageUrl = function(url) {
         var cropped = url.replace("-large", "-t300x300");
         return cropped;
     };
+
+    $scope.$on('player.trackProgress.update', function (newState) {
+        console.log(globalPlayerService.player.data.trackProgress);
+//        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
+        $scope.$apply(function() {
+            $scope.player.data = globalPlayerService.player.data;
+        });
+    });
 
     /* END PLAYER LOGIC */
 

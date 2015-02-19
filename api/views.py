@@ -253,7 +253,7 @@ class ContestViewSet(viewsets.ModelViewSet):
     def entries(self, request, pk=None):
         contest = self.get_object()
         queryset = contest.entries
-        paginator = Paginator(queryset, 5)
+        paginator = Paginator(queryset, 10)
         page = request.QUERY_PARAMS.get('page')
         try:
             entries = paginator.page(page)
@@ -396,7 +396,7 @@ class TrackViewSet(viewsets.ModelViewSet):
         else:
             queryset = PeriodicRanking.objects.filter(type='WEEKLY')
 
-        paginator = Paginator(queryset, 7)
+        paginator = Paginator(queryset, 10)
         page = request.QUERY_PARAMS.get('page')
         try:
             entries = paginator.page(page)

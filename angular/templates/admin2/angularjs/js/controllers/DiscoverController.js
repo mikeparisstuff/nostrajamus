@@ -18,7 +18,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 
     // pagination
     $scope.currentPage = 1;
-    $scope.pageSize = 7;
+    $scope.pageSize = 10;
 
     $scope.numberOfPages=function() {
         return Math.ceil($scope.totalCount/$scope.pageSize);
@@ -246,20 +246,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 //     console.log($scope.weekTracks);
 //     console.log($scope.dayTracks);
 
-    $scope.player = globalPlayerService.player;
 
-    $scope.playNewTrack = function(track, index) {
-        globalPlayerService.player.resetTrack(track.track);
-        var tunes = $scope.trending.map(function(elem) {
-            return elem.track;
-        });
-        globalPlayerService.player.data.trackQueue = tunes;
-    };
-
-    $scope.getCroppedImageUrl = function(url) {
-        var cropped = url.replace("-large", "-t300x300");
-        return cropped;
-    };
 
     $scope.getPlayIncrease = function(track) {
         // get play count increase
@@ -288,5 +275,35 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
 
         return trustedUrl;
     };
+
+    /* BEGINNING PLAYER */
+
+    $scope.player = globalPlayerService.player;
+
+    $scope.playNewTrack = function(track, index) {
+        globalPlayerService.player.resetTrack(track.track);
+        var tunes = $scope.trending.slice(index).map(function(elem) {
+            return elem.track;
+        });
+        globalPlayerService.player.data.trackQueue = tunes;
+        // Set the next url and such
+        var nextUrl = '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=" + ($scope.currentPage + 1);
+        globalPlayerService.player.data.nextPageUrl = nextUrl;
+    };
+
+    $scope.getCroppedImageUrl = function(url) {
+        var cropped = url.replace("-large", "-t300x300");
+        return cropped;
+    };
+
+    $scope.$on('player.trackProgress.update', function (newState) {
+        console.log(globalPlayerService.player.data.trackProgress);
+//        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
+        $scope.$apply(function() {
+            $scope.player.data = globalPlayerService.player.data;
+        });
+    });
+
+    /* END PLAYER */
 
 }]);

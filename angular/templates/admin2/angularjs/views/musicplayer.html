@@ -7,14 +7,29 @@
                     <div class="progress-bar" role="progressbar" aria-valuenow="{{ player.data.trackProgress }}" aria-valuemin="0" aria-valuemax="1" style="width: {{ player.data.trackProgress * 100 }}%;">
                     </div>
                 </div>
-                <div class="col-xs-3 player-controls">
+                <div class="dropdown queue-wrapper">
+                  <button class="btn button-icon dropdown-toggle" type="button" id="trackQueueMenu" data-toggle="dropdown" aria-expanded="true">
+                    <span class="fa fa-2x fa-bars"></span>
+                  </button>
+
+                  <ul class="dropdown-menu dropdown-menu-right track-queue-dropdown" role="menu" aria-labelledby="trackQueueMenu">
+                      <li ng-if="player.data.trackQueue.length == 0" role="presentation"><a role="menuitem" tabindex="-1" href="#">No songs in queue...</a></li>
+                      <li ng-repeat="track in player.data.trackQueue.slice(player.data.currentIndex+1)" role="presentation" class="queue-item">
+                          <a role="menuitem" tabindex="-1" href="#">
+                              <img src="{{ track.artwork_url }}" class="img_responsive track-queue-art" alt=""/>
+                            {{ track.title }}
+                          </a>
+                      </li>
+                  </ul>
+                </div>
+                <div class="col-xs-3 col-lg-3 col-lg-offset-1 player-controls">
                     <div class="row text-center">
-                        <div class="col-xs-4">
+                        <div class="col-xs-4 col-xs-offset-1">
                             <button class="button-icon" ng-click="player.playPreviousTrack()">
                                 <span class="fa fa-2x fa-step-backward"></span>
                             </button>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-3">
                             <button class="button-icon" ng-click="player.playPause()">
                                 <!--player.playPause(player.i, player.playlistIndex)-->
                                 <span ng-if="!player.data.isPlaying" class="fa fa-2x fa-play"></span>
@@ -28,17 +43,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-6 text-center player-details">
+                <div class="col-xs-6 col-lg-4 text-center player-details">
                     <div ng-show="player.data.currentTrackData.title">{{ player.data.currentTrackData.title }} - {{ player.data.currentTrackData.user.username }}</div>
                     <!--<progress value="{{ player.data.trackProgress }}" max="1"-->
                               <!--ng-click="seek($event)">-->
                         <!--<!--{{ currentTime / duration }}-->
                     <!--</progress>-->
                 </div>
-                <div class="col-xs-3 text-center player-queue">
-                    <button class="button-icon" ng-click="next()">
-                        <span class="fa fa-2x fa-list-ul"></span>
-                    </button>
+                <div class="col-xs-3 col-lg-3 text-center">
+
+                    <!--<div class="dropdown player-queue">-->
+                      <!--<button class="btn button-icon dropdown-toggle" type="button" id="trackQueueMenu" data-toggle="dropdown" aria-expanded="true">-->
+                        <!--<span class="fa fa-2x fa-list-ul"></span>-->
+                      <!--</button>-->
+                      <!--<ul class="dropdown-menu" role="menu" aria-labelledby="trackQueueMenu" ng-repeat="track in player.data.trackQueue">-->
+                           <!--<li role="presentation"><a role="menuitem" tabindex="-1" href="#">track.title</a></li>-->
+                      <!--</ul>-->
+                    <!--</div>-->
+
+
+                    <!--<button class="button-icon" ng-click="next()">-->
+                        <!--<span class="fa fa-2x fa-list-ul"></span>-->
+                    <!--</button>-->
                 </div>
             </div>
         <!--</div>-->

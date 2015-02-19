@@ -166,7 +166,7 @@ MetronicApp.controller('authController', function($scope, api, authState) {
     // [5] http://remysharp.com/2010/10/08/what-is-a-polyfill/
 });
 
-MetronicApp.factory('globalPlayerService', function($rootScope) {
+MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
     var player =  {
         data: {
             currentTrack: {},
@@ -174,7 +174,9 @@ MetronicApp.factory('globalPlayerService', function($rootScope) {
             trackQueue: [],
             isPlaying: false,
             currentIndex: 0,
-            trackProgress: 0
+            trackProgress: 0,
+            userTrackQueue: [],
+            nextPageUrl: ""
         }
     };
 
@@ -231,7 +233,11 @@ MetronicApp.factory('globalPlayerService', function($rootScope) {
     };
     player.playNextTrack = function() {
         if (this.data.trackQueue.length > this.data.currentIndex+1) {
+            // If within last 3 songs pull the next page
             this.data.currentIndex = this.data.currentIndex + 1;
+            if (this.data.trackQueue.length - this.data.currentIndex < 4) {
+                this.getNextPageForQueue()
+            }
             var next = this.data.trackQueue[this.data.currentIndex];
             this.resetTrack(next);
         }
@@ -249,6 +255,31 @@ MetronicApp.factory('globalPlayerService', function($rootScope) {
     player.getTrackProgress = function() {
         return this.data.trackProgress;
     };
+    player.addTrackToQueue = function(track) {
+        var newQueue = this.data.trackQueue;
+        newQueue.splice(this.data.currentIndex, 0, track);
+        this.data.trackQueue = newQueue;
+    };
+    player.getNextPageForQueue = function() {
+        var that = this;
+        $http({
+            url: that.data.nextPageUrl,
+            method: "GET",
+            // data: JSON.stringify($scope.form),
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            var newTracks = data.results.map(function(elem) {
+                return elem.track;
+            });
+            that.data.trackQueue = that.data.trackQueue.concat(newTracks);
+            that.data.nextPageUrl = data.next;
+        }).error(function (data, status, headers, config) {
+            console.log("Error getting next page for queue");
+            console.log(data);
+        });
+
+    };
+
     return { player: player };
 });
 
