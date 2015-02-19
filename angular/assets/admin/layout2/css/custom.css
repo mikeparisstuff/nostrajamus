@@ -698,6 +698,10 @@ Red-nostra
   border: 0 !important;
 }
 
+.page-content-wrapper {
+  padding-top: 50px;
+}
+
 .queue-item {
   overflow: hidden;
 }
