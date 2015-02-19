@@ -256,9 +256,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
         return this.data.trackProgress;
     };
     player.addTrackToQueue = function(track) {
-        var newQueue = this.data.trackQueue;
-        newQueue.splice(this.data.currentIndex+1, 0, track);
-        this.data.trackQueue = newQueue;
+        this.data.trackQueue.splice(this.data.currentIndex+1, 0, track);
     };
     player.getNextPageForQueue = function() {
         var that = this;
