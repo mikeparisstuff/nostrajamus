@@ -831,3 +831,51 @@ Red-nostra
   }
 }
 /* END TRACK ITEM */
+#cf1 img {
+  position: absolute;
+  left: 0;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#cf1 img.top:hover {
+  opacity: 0;
+}
+
+#cf2 img {
+  position: absolute;
+  left: 0;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#cf2 img.top:hover {
+  opacity: 0;
+}
+
+#cf3 img {
+  position: absolute;
+  left: 0;
+  -webkit-transition: opacity 0.5s ease-in-out;
+  -moz-transition: opacity 0.5s ease-in-out;
+  -o-transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#cf3 img.top:hover {
+  opacity: 0;
+}
+
+.contest-banners {
+  height: 110px;
+}
+
+@media (max-width: 767px) {
+  .contest-banners {
+    height: 75px;
+  }
+}

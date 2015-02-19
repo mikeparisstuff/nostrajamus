@@ -1,13 +1,21 @@
 'use strict';
 
-MetronicApp.controller('DashboardController', function($rootScope, $scope, $http, $timeout, contests, myData, $window) {
+MetronicApp.controller('DashboardController', function($rootScope, $scope, $http, $timeout, contests, myData, $window, authState) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         Metronic.initAjax();
     });
 
     $scope.contests = contests;
-    $scope.myData = myData;
+    $scope.authState = authState;
+
+    if ($scope.authState.user.length > 0) {
+    	$scope.myData = myData;
+    	console.log($scope.myData);
+    }
+    else {
+    	$scope.myData = null;
+    }
     $scope.closed = false;
 
     $scope.contestType = 'open';
@@ -210,34 +218,36 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		}
 	}
 
-	// My Contest Info
-	$scope.myContestInfo = [];
+	if (authState.user) {
+		// My Contest Info
+		$scope.myContestInfo = [];
 
-   	var getContestInfo = function(i, contestNum){
-    	$http({
-            url: '/api/contests/' + contestNum,
-            method: "GET",
-            // data: JSON.stringify($scope.form),
-            headers: {'Content-Type': 'application/json'}
-        }).success(function (data, status, headers, config) {
-    	  	// console.log(data);
-    	  	$scope.myContestInfo.push(data);
-    	  	$scope.convertDateTime(i, $scope.myContestInfo);
-    	  	// console.log("SUCCESS");
-        }).error(function (data, status, headers, config) {
-            // $scope.status = status;
-    	  	// console.log(data);
-    	  	// console.log("FAILURE");
-        });
-	};
+	   	var getContestInfo = function(i, contestNum){
+	    	$http({
+	            url: '/api/contests/' + contestNum,
+	            method: "GET",
+	            // data: JSON.stringify($scope.form),
+	            headers: {'Content-Type': 'application/json'}
+	        }).success(function (data, status, headers, config) {
+	    	  	// console.log(data);
+	    	  	$scope.myContestInfo.push(data);
+	    	  	$scope.convertDateTime(i, $scope.myContestInfo);
+	    	  	// console.log("SUCCESS");
+	        }).error(function (data, status, headers, config) {
+	            // $scope.status = status;
+	    	  	// console.log(data);
+	    	  	// console.log("FAILURE");
+	        });
+		};
 
-	if (myData.my_entries) {
-		for (var i=0; i < myData.my_entries.length; i++) {
-			var contestNum = myData.my_entries[i].contest;
-			getContestInfo(i, contestNum);
+		if (myData.my_entries) {
+			for (var i=0; i < myData.my_entries.length; i++) {
+				var contestNum = myData.my_entries[i].contest;
+				getContestInfo(i, contestNum);
+			}
 		}
+		// End My Contest Info
 	}
-	// End My Contest Info
 
     // set sidebar closed and body solid layout mode
     $rootScope.settings.layout.pageSidebarClosed = true;

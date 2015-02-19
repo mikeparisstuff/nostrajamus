@@ -412,7 +412,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "/assets/views/dashboard.html",
             data: {
                 pageTitle: 'Home',
-                authenticate: true
+                authenticate: false
             },
             controller: "DashboardController",
             resolve: {
@@ -444,11 +444,14 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         return response.data;
                     });
                 }],
-                myData: ['$http', function($http) {
-                    return $http.get('/api/users/me').then(function(response) {
-                        // console.log(response.data);
-                        return response.data;
-                    });
+                myData: ['$http', 'authState', function($http, authState) {
+                    console.log(authState);
+                    if (authState.user.length > 0) {
+                        return $http.get('/api/users/me').then(function(response) {
+                            console.log(response.data);
+                            return response.data;
+                        });
+                    }
                 }]
             }
         })
