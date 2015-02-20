@@ -75,7 +75,7 @@ MetronicApp.controller('HowController', ['$rootScope', '$scope', 'settings', fun
 	if (value < 3) {
 		value++;
 		document.getElementById('how-to-play').innerHTML = '<img class="img-tutorial" src="/assets/global/img/tutorial/how_to_play_' + value + '.png">';
-		if (value == 2) {
+		if (value == 3) {
 	    	document.getElementById('jam-modal-tutorial').innerHTML = '<button type="button" class="btn btn-primary red-nostra" data-toggle="modal" data-target="#rulesModal">What are Jam Points?</button>';
 	    }
 	   	else {
