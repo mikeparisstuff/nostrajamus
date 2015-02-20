@@ -140,7 +140,7 @@ Page content
 @media (min-width: $screen-md-min) { /* 992px */
 
     .container {
-      width: 75%;
+      width: 90%;
     }
 	/* Page content */
 	.page-content-wrapper {
@@ -197,6 +197,12 @@ Page content
 }
 
 @media (max-width: $screen-sm-max) { /* 991px */
+
+  .container {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
 
 	/* Boxed page container  */
 	.page-boxed > .container { 
