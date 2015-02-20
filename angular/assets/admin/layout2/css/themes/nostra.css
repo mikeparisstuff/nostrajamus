@@ -402,7 +402,7 @@ Page Footer
 @media (max-width: 480px) {
   /* 480px */
   .page-header.navbar {
-    background: #ff5252;
+    /* background: $header-logo-bg-color; */
     /* Top menu */
   }
   .page-header-fixed-mobile .page-header.navbar .top-menu {

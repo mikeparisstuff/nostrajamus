@@ -808,7 +808,15 @@ Red-nostra
 }
 
 .player-details {
+  height: 50px;
   overflow: hidden;
+}
+
+.btn-previous {
+  float: right;
+}
+.btn-next {
+  float: left;
 }
 
 @media (max-width: $screen-xs-min) {

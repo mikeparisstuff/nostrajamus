@@ -24,20 +24,20 @@
                 </div>
                 <div class="col-xs-3 col-lg-3 col-lg-offset-1 player-controls">
                     <div class="row text-center">
-                        <div class="col-xs-4 col-xs-offset-1">
-                            <button class="button-icon" ng-click="player.playPreviousTrack()">
+                        <div class="col-xs-3 col-xs-offset-1">
+                            <button class="button-icon btn-previous" ng-click="player.playPreviousTrack()">
                                 <span class="fa fa-2x fa-step-backward"></span>
                             </button>
                         </div>
-                        <div class="col-xs-3">
-                            <button class="button-icon" ng-click="player.playPause()">
+                        <div class="col-xs-4">
+                            <button class="button-icon btn-play" ng-click="player.playPause()">
                                 <!--player.playPause(player.i, player.playlistIndex)-->
                                 <span ng-if="!player.data.isPlaying" class="fa fa-2x fa-play"></span>
                                 <span ng-if="player.data.isPlaying" class="fa fa-2x fa-pause"></span>
                             </button>
                         </div>
-                        <div class="col-xs-4">
-                            <button class="button-icon" ng-click="player.playNextTrack()">
+                        <div class="col-xs-3">
+                            <button class="button-icon btn-next" ng-click="player.playNextTrack()">
                                 <span class="fa fa-2x fa-step-forward"></span>
                             </button>
                         </div>
