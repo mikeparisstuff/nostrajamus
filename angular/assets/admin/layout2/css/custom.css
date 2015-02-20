@@ -686,14 +686,14 @@ Red-nostra
 .jamus-list-item-progress-bar {
   position: absolute;
   margin-left: -15px;
-  height: 199px;
+  height: 198px;
   width: 100%;
   border-radius: 0;
   background: white;
   padding-left: -15px;
 }
 .jamus-list-item-progress-bar > div.progress-bar {
-  height: 199px;
+  height: 198px;
   background: rgba(255, 82, 82, 0.7);
 }
 
