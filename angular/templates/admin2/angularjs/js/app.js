@@ -436,7 +436,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
         // Dashboard
         .state('dashboard', {
-            url: "/",
+            url: "/dashboard",
             templateUrl: "/assets/views/dashboard.html",
             data: {
                 pageTitle: 'Home',
@@ -1181,7 +1181,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         })
 
         .state('discover', {
-            url: "/discover",
+            url: "/",
             templateUrl: "/assets/views/discover.html",
             data: {
                 pageTitle: 'Discover',
@@ -1271,7 +1271,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "/assets/views/how.html",
             data: {
                 pageTitle: 'How It Works',
-                authenticate: true
+                authenticate: false
             },
             controller: "HowController",
             resolve: {
