@@ -14,11 +14,21 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
 
     $scope.player = globalPlayerService.player;
 
+    if (globalPlayerService.player.data.trackQueue.length == 0 ) {
+        globalPlayerService.player.getDefaultQueue();
+    }
+
     $scope.$on('player.trackProgress.update', function (newState) {
 //        console.log(globalPlayerService.player.data.trackProgress);
 //        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
         $scope.$apply(function() {
             $scope.player.data.trackProgress = globalPlayerService.player.data.trackProgress;
+        });
+    });
+
+    $scope.$on('player.trackQueue.update', function() {
+       $scope.$apply(function() {
+            $scope.player.data.trackQueue = globalPlayerService.player.data.trackQueue;
         });
     });
 

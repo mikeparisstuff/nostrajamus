@@ -169,8 +169,8 @@ MetronicApp.controller('authController', function($scope, api, authState) {
 MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
     var player =  {
         data: {
-            currentTrack: {},
-            currentTrackData: {},
+            currentTrack: null,
+            currentTrackData: null,
             trackQueue: [],
             backStack: [],
             isPlaying: false,
@@ -190,8 +190,21 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
       broadcast(this.data.trackProgress);
     };
 
+
+    player.getDefaultQueue = function () {
+        var that = this;
+        $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
+            that.loadTrack(response.data.results[0].track);
+            that.data.trackQueue = response.data.results.slice(1).map(function(elem) { return elem.track });
+            $rootScope.$broadcast('player.trackQueue.update', that.data.trackQueue);
+        });
+    };
     player.playPause = function() {
 //        console.log("WOOO");
+//        if (this.data.currentTrack == null && this.data.currentTrackData) {
+//            this.loadTrack(this.data.currentTrackData, this.playPause);
+//            return;
+//        }
         if (this.data.isPlaying) {
             this.data.currentTrack.pause();
             this.data.isPlaying = false;

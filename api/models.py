@@ -724,3 +724,101 @@ class PeriodicRanking(BaseModel):
 
     class Meta:
         ordering = ('type', '-jam_points',)
+
+
+# def get_private_contest_picture_upload_path(self, filename):
+#     return 'contests/contest_{}_pic.jpg'.format(self.id)
+#
+# class PrivateContest(BaseModel):
+#
+#     title = models.CharField(
+#         max_length=100,
+#         blank=True,
+#         default = ''
+#     )
+#
+#     @property
+#     def num_entries(self):
+#         return self.contestentry_set.count()
+#
+#     @property
+#     def entries(self):
+#         return self.contestentry_set.all().order_by('-jam_points')
+#
+#     @property
+#     def winning_entry(self):
+#         try:
+#             return self.contestentry_set.latest('jam_points')
+#         except:
+#             return None
+#
+#     contest_picture = models.FileField(
+#         upload_to = get_private_contest_picture_upload_path,
+#         null = True,
+#         blank = True
+#     )
+#
+#     description = models.CharField(
+#         max_length=256,
+#         blank = True,
+#         default = ''
+#     )
+#
+#     prize = models.CharField(
+#         max_length=32,
+#         blank=True,
+#         default=''
+#     )
+#
+#     max_entries = models.IntegerField(
+#         default = -1
+#     )
+#
+#     creator = models.ForeignKey(
+#         Profile,
+#         blank=True,
+#         null=True,
+#         default=None,
+#         related_name='owned_private_contest_set'
+#     )
+#
+#     entry_fee = models.IntegerField(
+#         choices=ENTRY_FEE_OPTIONS,
+#         default=0
+#     )
+#
+#     allowed_users = models.ManyToManyField(
+#         Profile
+#     )
+#
+#     prize_payout = models.CharField(
+#         max_length=16,
+#         choices=PRIZE_PAYOUT_OPTIONS,
+#         default=WINNER_TAKES_ALL
+#     )
+#
+#     songs_per_entrant = models.IntegerField(
+#         choices=NUM_SONGS_OPTION,
+#         default=1
+#     )
+#
+#     # True if the contest is live else False
+#     is_live = models.BooleanField(
+#         default = False
+#     )
+#
+#     start_time = models.DateTimeField(
+#         blank = True,
+#         null = True
+#     )
+#
+#     end_time = models.DateTimeField(
+#         blank = True,
+#         null = True
+#     )
+#
+#     class Meta:
+#         ordering = ('-start_time',)
+#
+#     def __str__(self):
+#         return "{}: {}".format(self.id, self.title)
