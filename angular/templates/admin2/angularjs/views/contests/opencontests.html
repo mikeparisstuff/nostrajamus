@@ -45,7 +45,7 @@
 </div>
 
 <!-- not hasSubmitted already: show this -->
-<div class="row" ng-hide="hasSubmitted">
+<div class="row" ng-if="!hasSubmitted">
 	<!-- <h3 align="center">Enter Now</h3> -->
     <div class="col-md-12">
         <div class="row">
@@ -72,10 +72,14 @@
                             <div class="form-group">
                                 <input type="text" name="" class="form-control" id="search" type="text" placeholder="Start typing to search Soundcloud OR enter a Soundcloud url . . . Results will appear below" ng-model="asyncSelected" typeahead="track.title for track in getTracks($viewValue)" typeahead-on-select='onSelect($item, $model, $label)'>
                                 <br>
-                                <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{ track_url }}" ng-show="track_url"></iframe>
-                                <h4 class="text-center" ng-show="track">Play Count: {{ track.playback_count }}</h4>
+                                <div class="col-md-12">
+                                    <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
+                                    <br><br>
+                                </div>
+                                <!-- <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{ track_url }}" ng-show="track_url"></iframe> -->
+                                <!-- <h4 class="text-center" ng-show="track">Play Count: {{ track.playback_count }}</h4> -->
                                 <!-- <div id="sc-embed"></div> -->
-                                <div class="text-center text-muted"><span id="playcount_embed"></span><span id="follower_count_embed"></span></div>
+                                <!-- <div class="text-center text-muted"><span id="playcount_embed"></span><span id="follower_count_embed"></span></div> -->
                                 </input>
                             </div>
                         </div>
@@ -83,7 +87,7 @@
                         <div class="clearfix"></div>
                         <div class="col-md-12 text-center">
                             <div id="success"></div>
-                            <button type="submit" class="btn btn-xl" ng-click="postTrack(track)">Join Contest</button>
+                            <button type="submit" class="btn btn-xl" ng-click="postTrack(origTrack)">Join Contest</button>
                             <div id="errors"></div>
                         </div>
                     </div>
@@ -94,7 +98,7 @@
 </div>
 
 <!-- hasSubmitted already: show this -->
-<div class="row" ng-show="hasSubmitted">
+<div class="row" ng-if="hasSubmitted">
     <!-- <h3 align="center">Enter Now</h3> -->
     <div class="col-md-12">
         <div class="row">
@@ -115,8 +119,11 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(mySubmittedTrack)}}"></iframe>
+                <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
             </div>
+            <!-- <div class="col-md-12"> -->
+                <!-- <iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(mySubmittedTrack)}}"></iframe> -->
+            <!-- </div> -->
         </div>
         <br>
         <div class="row">

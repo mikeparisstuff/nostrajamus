@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', 'myData', '$http', '$sce', function($rootScope, $scope, settings, contestInfo, contestEntries, myData, $http, $sce) {
+MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', 'myData', '$http', '$sce', 'globalPlayerService', function($rootScope, $scope, settings, contestInfo, contestEntries, myData, $http, $sce, globalPlayerService) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -15,6 +15,8 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     $scope.mySubmittedTrackID = null;
     $scope.hasSubmitted = false;
 
+    $scope.fromOpenContests = true;
+
     // console.log(myData.my_entries);
     // console.log(contestInfo);
 
@@ -23,9 +25,38 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             if (myData.my_entries[i].contest == contestInfo.id) {
                 $scope.mySubmittedTrack = myData.my_entries[i].track;
                 $scope.hasSubmitted = true;
+
+                var url = "https://api.soundcloud.com/users/" + $scope.mySubmittedTrack.sc_user_id;
+                $http.get(url, {
+                  params: {
+                    client_id: "f0b7083f9e4c053ca072c48a26e8567a",
+                  }
+                }).then(function(response){
+                    console.log(response.data);
+                    $scope.initial_followers_count = response.data.followers_count;
+
+                    console.log($scope.initial_followers_count);
+
+                    $scope.track = $scope.mySubmittedTrack;
+                    $scope.track.sc_id = $scope.mySubmittedTrack.sc_id;
+
+                    $scope.track = {
+                        track: $scope.mySubmittedTrack,
+                        initial_playback_count: $scope.mySubmittedTrack.playback_count,
+                        current_playback_count: $scope.mySubmittedTrack.playback_count,
+                        initial_follower_count: $scope.initial_followers_count,
+                        jam_points: 0
+                    };
+
+                    console.log($scope.track);
+
+                    // return response.data;
+                });
+
             }
         }
-    }
+    };
+
 
     $scope.getSrc = function(track) {
     	var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.sc_id + '&amp;color=ff5252&amp;theme_color=ff5252&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
@@ -44,7 +75,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 
     	var formattedTime = moment(nd).format("MM/DD/YYYY, h:mm A");
     	return formattedTime;
-    }
+    };
 
     // $scope.contestInfo.start_time = new Date($scope.contestInfo.start_time).toLocaleString('en-US');
     // $scope.contestInfo.end_time = new Date($scope.contestInfo.end_time).toLocaleString('en-US');
@@ -138,31 +169,78 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         }
   	};
 
-    $scope.getSCUrl = function(item) {
-        // console.log(item);
-        $scope.track = item;
+    // $scope.getSCUrl = function(item) {
+    //     // console.log(item);
+    //     $scope.track = item;
 
-        var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + item.id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+    //     var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + item.id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
 
-        var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
+    //     var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
 
-        $scope.track_url = trustedUrl;
-    };
+    //     $scope.track_url = trustedUrl;
+    // };
 
   	$scope.onSelect = function(item, model, label) {
-  		console.log(item);
-  		$scope.track = item;
+  		// console.log(item);
+        $scope.origTrack = item;
 
-  		var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + item.id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+        var url = "https://api.soundcloud.com/users/" + item.user.id;
+        $http.get(url, {
+          params: {
+            client_id: "f0b7083f9e4c053ca072c48a26e8567a",
+          }
+        }).then(function(response){
+            console.log(response.data);
+            $scope.initial_followers_count = response.data.followers_count;
 
-    	var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
+            console.log($scope.initial_followers_count);
 
-    	$scope.track_url = trustedUrl;
+            $scope.track = item;
+            $scope.track.sc_id = item.id;
 
-    	// var trackFrame = '<iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="' + SCUrl + '"></iframe>';
+            $scope.track = {
+                track: item,
+                initial_playback_count: item.playback_count,
+                current_playback_count: item.playback_count,
+                initial_follower_count: $scope.initial_followers_count,
+                jam_points: 0
+            };
 
-    	// document.getElementById("sc-embed").innerHTML = trackFrame;
+            console.log($scope.track);
+
+            // return response.data;
+        });
+
+  		// var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + item.id + '&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
+
+    	// var trustedUrl = $sce.trustAsResourceUrl(SCUrl);
+
+    	// $scope.track_url = trustedUrl;
   	};
+
+    $scope.getPlayIncrease = function(track) {
+        // get play count increase
+        var currPlayCount = track.current_playback_count;
+        var initPlayCount = track.initial_playback_count;
+
+        var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(1);
+
+        return playIncrease;
+    };
+
+    $scope.insertCommas = function(s) {
+        s = s.toString();
+        // get stuff before the dot
+        var d = s.indexOf('.');
+        var s2 = d === -1 ? s : s.slice(0, d);
+        // insert commas every 3 digits from the right
+        for (var i = s2.length - 3; i > 0; i -= 3)
+            s2 = s2.slice(0, i) + ',' + s2.slice(i);
+        // append fractional part
+        if (d !== -1)
+            s2 += s.slice(d);
+        return s2;
+    };
 
   	$scope.postTrack = function(track) {
         // console.log(track);
@@ -176,7 +254,6 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
         	  	// console.log(data);
-
 
                 $http.get('/api/users/me').then(function (response) {
                     // console.log(response.data);
@@ -224,5 +301,34 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     //     }
     //     return titles;
     // });
+
+        /* BEGIN PLAYER LOGIC */
+
+    $scope.player = globalPlayerService.player;
+
+    $scope.playNewTrack = function(track, index) {
+        globalPlayerService.player.resetTrack(track.track);
+        var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
+            return elem.track;
+        });
+        globalPlayerService.player.data.trackQueue = tunes;
+        // Set the next url and such
+        var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
+        globalPlayerService.player.data.nextPageUrl = nextUrl;
+    };
+
+    $scope.getCroppedImageUrl = function(url) {
+        var cropped = url.replace("-large", "-t300x300");
+        return cropped;
+    };
+
+    $scope.$on('player.trackProgress.update', function (newState) {
+//        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
+        $scope.$apply(function() {
+            $scope.player.data = globalPlayerService.player.data;
+        });
+    });
+
+    /* END PLAYER LOGIC */
 
 }]);
