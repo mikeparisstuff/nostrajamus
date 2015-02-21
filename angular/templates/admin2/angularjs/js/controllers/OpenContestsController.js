@@ -140,8 +140,10 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
               }
             }).then(function(response){
                 console.log(response.data);
-                $scope.getSCUrl(response.data);
-                $scope.track = response.data;
+
+                $scope.getUrlAPI(response.data);
+                // $scope.getSCUrl(response.data);
+                // $scope.track = response.data;
                 return (response.data);
               // return response.data.map(function(item){
               //   return {
@@ -219,6 +221,37 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     	// $scope.track_url = trustedUrl;
   	};
 
+    $scope.getUrlAPI = function(item) {
+        $scope.origTrack = item;
+
+        var url = "https://api.soundcloud.com/users/" + item.user.id;
+        $http.get(url, {
+          params: {
+            client_id: "f0b7083f9e4c053ca072c48a26e8567a",
+          }
+        }).then(function(response){
+            console.log(response.data);
+            $scope.initial_followers_count = response.data.followers_count;
+
+            console.log($scope.initial_followers_count);
+
+            $scope.track = item;
+            $scope.track.sc_id = item.id;
+
+            $scope.track = {
+                track: item,
+                initial_playback_count: item.playback_count,
+                current_playback_count: item.playback_count,
+                initial_follower_count: $scope.initial_followers_count,
+                jam_points: 0
+            };
+
+            console.log($scope.track);
+
+            // return response.data;
+        });
+    }
+
     $scope.getPlayIncrease = function(track) {
         // get play count increase
         var currPlayCount = track.current_playback_count;
@@ -244,7 +277,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     };
 
   	$scope.postTrack = function(track) {
-        // console.log(track);
+        console.log(track);
   		$http({
             url: '/api/contests/' + $scope.contestInfo.id + '/enter/' ,
             method: "POST",
