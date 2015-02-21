@@ -431,6 +431,23 @@
 										</td>
 									</tr>
 								</table>
+
+								<hr>
+
+								<table class="table table-hover table-light" align="center">
+									<!-- <tr> -->
+										<div class="col-md-offset-3 col-md-6">
+	                                        <input type="text" class="form-control" id="suggestion" placeholder="Can't find a contest that you like? Here's a chance to submit your own." ng-model="suggestion">
+	                                    </div>
+	                                    <div class="clearfix"></div>
+	                                    <br>
+	                                    <div class="text-center" width="100%">
+		                                	<button type="submit" class="btn btn-md red-nostra" ng-click="enterSuggestion(suggestion)">Submit</button>
+		                                	<div ng-model="suggestThanks" class="font-nostra" value=""><b>{{suggestThanks}}</b></div>
+		                                </div>
+									<!-- </tr> -->
+								</table>
+
 							</div>
 						</div>
 						<!-- End Tab 1 -->

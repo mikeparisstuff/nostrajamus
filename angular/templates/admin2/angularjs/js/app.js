@@ -476,7 +476,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     // console.log(authState);
                     if (authState.user.length > 0) {
                         return $http.get('/api/users/me').then(function(response) {
-                            console.log(response.data);
+                            // console.log(response.data);
                             return response.data;
                         });
                     }
@@ -583,6 +583,12 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             }
                         }
                         return myTrackInfo;
+                    });
+                }],
+                myInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/users/me').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
                     });
                 }],
                 myRank: ['$http', '$stateParams', function($http, $stateParams) {
@@ -1180,6 +1186,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
+        //Discover Base
         .state('discover', {
             url: "/",
             templateUrl: "/assets/views/discover.html",
@@ -1210,6 +1217,69 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 trending: ['$http', function($http) {
                     return $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
                         // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                referralTrack: ['$http', '$stateParams', function($http, $stateParams) {
+                    return null;
+                }],
+                myInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    // console.log($stateParams);
+                    return null;
+                }]
+            }
+        })
+
+        //Discover Referral
+        .state('discover/:userID/[:trackID]', {
+            url: "/:userID/:trackID",
+            templateUrl: "/assets/views/discover.html",
+            data: {
+                pageTitle: 'Discover',
+                authenticate: false
+            },
+            controller: "DiscoverController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            '/assets/global/plugins/select2/select2.css',
+                            '/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+                            '/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css',
+                            '/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css',
+
+                            '/assets/global/plugins/select2/select2.min.js',
+                            '/assets/global/plugins/datatables/all.min.js',
+                            '/assets/js/scripts/table-advanced.js',
+
+                            '/assets/js/controllers/DiscoverController.js'
+                        ]
+                    });
+                }],
+                trending: ['$http', function($http) {
+                    return $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                referralTrack: ['$http', '$stateParams', function($http, $stateParams) {
+                    // console.log($stateParams);
+                    if ($stateParams.userID && $stateParams.trackID) {
+                        return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
+                            for (var i = 0; i < response.data.my_entries.length; i++) {
+                                if (response.data.my_entries[i].track.sc_id == $stateParams.trackID) {
+                                    console.log(response.data.my_entries[i]);
+                                    return response.data.my_entries[i]; 
+                                }
+                            }
+                        });
+                    }
+                }],
+                myInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    // console.log($stateParams);
+                    return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
                         return response.data;
                     });
                 }]

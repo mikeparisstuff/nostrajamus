@@ -11,7 +11,7 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 
     if ($scope.authState.user.length > 0) {
     	$scope.myData = myData;
-    	console.log($scope.myData);
+    	// console.log($scope.myData);
     }
     else {
     	$scope.myData = null;
@@ -216,6 +216,30 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 		else if (status == 'completed') {
 			$window.location.href = '#/completedcontests/' + contest_id;
 		}
+	}
+
+	$scope.enterSuggestion = function(suggestion) {
+
+		$http({
+            url: '/api/feedback/' ,
+            method: "POST",
+            data:
+            {
+			    "text": suggestion, 
+			    "name": "", 
+			    "email": ""
+			},
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+        	  	// console.log(data);
+                $scope.suggestion = "";
+                $scope.suggestThanks = "Thanks!";
+            }).error(function (data, status, headers, config) {
+                // $scope.status = status;
+        	  	// console.log(data);
+                alert("Try again.");
+            });
+
 	}
 
 	if (authState.user) {

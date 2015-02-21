@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService) {
+MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', 'referralTrack', 'myInfo', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService, referralTrack, myInfo) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         Metronic.initAjax();
@@ -12,6 +12,8 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     $scope.trending = trending.results;
     $scope.totalCount = trending.count;
     // console.log($scope.trending);
+    $scope.referralTrack = referralTrack;
+    $scope.myInfo = myInfo;
 
     $scope.timeSelect = 'weekly';
     // $scope.busy = false;
@@ -166,6 +168,14 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         });
     };
 
+    $scope.updateModal = function(entry) {
+        entry.percentage_increase = (((entry.current_playback_count - entry.initial_playback_count)/entry.initial_playback_count)*100).toFixed(2).toString();
+        entry.initial_playback_count = entry.initial_playback_count.toString();
+        entry.current_playback_count = entry.current_playback_count.toString();
+        entry.current_follower_count = entry.current_follower_count.toString();
+        $scope.modalEntry = entry;
+    };
+
     // $scope.myPagingFunction = function() {
     //     if (!$scope.busy) {
     //         $scope.busy = true;
@@ -304,9 +314,9 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         });
     });
 
-      function watchSource(){
-        return DataFactory.items;
-      }
+    function watchSource(){
+       return DataFactory.items;
+    }
     /* END PLAYER */
 
 }]);

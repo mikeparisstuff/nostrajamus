@@ -17,12 +17,13 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 
     $scope.fromOpenContests = true;
 
-    // console.log(myData.my_entries);
+    // console.log(myData);
     // console.log(contestInfo);
 
     if (myData.my_entries != null) {
         for (var i=0; i < myData.my_entries.length; i++) {
             if (myData.my_entries[i].contest == contestInfo.id) {
+                $scope.myTrack = myData.my_entries[i];
                 $scope.mySubmittedTrack = myData.my_entries[i].track;
                 $scope.hasSubmitted = true;
 
@@ -261,6 +262,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
                     if ($scope.myData.my_entries != null) {
                         for (var i=0; i < $scope.myData.my_entries.length; i++) {
                             if ($scope.myData.my_entries[i].contest == $scope.contestInfo.id) {
+                                $scope.myTrack = $scope.myData.my_entries[i];
                                 $scope.mySubmittedTrack = $scope.myData.my_entries[i].track;
                                 $scope.hasSubmitted = true;
                                 $('#shareModal').modal('show');
@@ -277,6 +279,21 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
                 alert("Try again.");
             });
   	};
+
+    $scope.removeSubmission = function() {
+        console.log($scope.myTrack);
+
+        $http.delete('/api/contest_entries/' + $scope.myTrack.id).then(function (response) {
+            // console.log(response);
+            $scope.hasSubmitted = false;  
+            $scope.removedSong = "You just removed your submission of this song below. Please enter another if you dare.";          
+        });
+    };
+
+    $scope.getReferralLink = function(userId, trackId) {
+        var link = "http://nostrajamus.com/#/" + userId + "/" + trackId;
+        return link;
+    };
 
  //    $scope.getTracks = function(val) {
 	// 	return SC.get('/tracks', {q: val}, function(tracks) {

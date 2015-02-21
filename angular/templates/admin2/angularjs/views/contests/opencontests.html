@@ -72,6 +72,7 @@
                             <div class="form-group">
                                 <input type="text" name="" class="form-control" id="search" type="text" placeholder="Start typing to search Soundcloud OR enter a Soundcloud url . . . Results will appear below" ng-model="asyncSelected" typeahead="track.title for track in getTracks($viewValue)" typeahead-on-select='onSelect($item, $model, $label)'>
                                 <br>
+                                <div class="text-center" id="removedSong" ng-model="removedSong"><b>{{removedSong}}</b></div>
                                 <div class="col-md-12">
                                     <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
                                     <br><br>
@@ -113,7 +114,7 @@
         <div class="row">
             <br>
             <div class="col-lg-12 text-center">
-                <p class="subheading-button">Thanks for entering! Here's the song you submitted:</p>
+                <p class="subheading-button"><b>Thanks for entering! Here's the song you submitted:</b></p>
             </div>
             <br>
         </div>
@@ -129,7 +130,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h4>SHARE Your Link and WIN:</h4>
-                <input type="text" class="form-control text-center" value="{{mySubmittedTrack.permalink_url}}" style="width:100%"></input>
+                <input type="text" class="form-control text-center" value="{{getReferralLink(myData.id, mySubmittedTrack.sc_id)}}" style="width:100%"></input>
             </div>
         </div>
         <br><br><br>
@@ -189,7 +190,7 @@
                 <br>
                 <h5>Share this link:</h5>
                 <!-- <br> -->
-                <input type="text" class="form-control text-center" value="{{mySubmittedTrack.permalink_url}}" style="width:100%"></input>
+                <input type="text" class="form-control text-center" value="{{getReferralLink(myData.id, mySubmittedTrack.sc_id)}}" style="width:100%"></input>
                 <br><br>
                 Follow us:
                 <br><br>

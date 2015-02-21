@@ -9,6 +9,7 @@
 
         </div> -->
     </div>
+
     <div class="track-data col-md-9 col-sm-9 col-xs-9" ng-show="track">
         <div ng-if="player.data.currentTrackData.sc_id == track.track.sc_id" class="progress jamus-list-item-progress-bar">
             <div class="progress-bar" role="progressbar" aria-valuenow="{{ player.data.trackProgress }}" aria-valuemin="0" aria-valuemax="1" style="width: {{ player.data.trackProgress * 100 }}%;">
@@ -16,7 +17,8 @@
         </div>
         <div class="track-data-top text-center">
             <div class="row">
-                <div class="col-xs-12">
+                <i class="btn fa fa-times" ng-click="removeSubmission()" style="float:right" ng-if="fromOpenContests && hasSubmitted"></i>
+                <div class="col-xs-offset-1 col-xs-10">
                     <h4 class="track-title">{{ track.track.title }}</h4>
                     <p class="track-artist">{{ track.track.user.username }}</p>
                 </div>

@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', 'globalPlayerService', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank, globalPlayerService) {
+MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', 'myInfo', 'globalPlayerService', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank, myInfo, globalPlayerService) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -14,6 +14,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
     $scope.contestInfo = contestInfo;
     $scope.contestEntries = contestEntries;
     $scope.myEntry = myEntry;
+    $scope.myInfo = myInfo;
     $scope.myRank = myRank.rank;
 
     $scope.timeOffset = function(date, offset) {
@@ -169,6 +170,11 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
 
     }, 1000);
     // End Countdown Timer
+
+    $scope.getReferralLink = function(userId, trackId) {
+        var link = "http://nostrajamus.com/#/" + userId + "/" + trackId;
+        return link;
+    };
 
 
     /* END IN PROGRESS CONTESTS */
