@@ -652,6 +652,12 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         return myTrackInfo;
                     });
                 }],
+                myInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    return $http.get('/api/users/me').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
                 myRank: ['$http', '$stateParams', function($http, $stateParams) {
                     return $http.get('/api/contests/' + $stateParams.contestID + '/rank/').then(function(response) {
                         // console.log(response.data);

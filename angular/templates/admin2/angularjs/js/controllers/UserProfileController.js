@@ -1,6 +1,6 @@
 'use strict';
 
-MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", "myInfo", "me", function($rootScope, $scope, $http, $timeout, $upload, $sce, myInfo, me) {
+MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", "myInfo", "me", "globalPlayerService", function($rootScope, $scope, $http, $timeout, $upload, $sce, myInfo, me, globalPlayerService) {
     $scope.$on('$viewContentLoaded', function() {   
         Metronic.initAjax(); // initialize core components
         Layout.setSidebarMenuActiveLink('set', $('#sidebar_menu_link_profile')); // set profile link active in sidebar menu 
@@ -117,6 +117,35 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
         $scope.uploadProgress = 0;
         $scope.selectedFile = $files;
     };
+
+    /* BEGIN PLAYER LOGIC */
+
+    $scope.player = globalPlayerService.player;
+
+    $scope.playNewTrack = function(track, index) {
+        globalPlayerService.player.resetTrack(track.track);
+        var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
+            return elem.track;
+        });
+        globalPlayerService.player.data.trackQueue = tunes;
+        // Set the next url and such
+        var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
+        globalPlayerService.player.data.nextPageUrl = nextUrl;
+    };
+
+    $scope.getCroppedImageUrl = function(url) {
+        var cropped = url.replace("-large", "-t300x300");
+        return cropped;
+    };
+
+    $scope.$on('player.trackProgress.update', function (newState) {
+//        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
+        $scope.$apply(function() {
+            $scope.player.data = globalPlayerService.player.data;
+        });
+    });
+
+    /* END PLAYER LOGIC */
 
     // $scope.saveChanges = function() {
     //     $http.put().success(successCallback);

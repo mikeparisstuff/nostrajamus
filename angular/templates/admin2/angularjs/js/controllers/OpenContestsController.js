@@ -352,7 +352,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     //     return titles;
     // });
 
-        /* BEGIN PLAYER LOGIC */
+    /* BEGIN PLAYER LOGIC */
 
     $scope.player = globalPlayerService.player;
 
