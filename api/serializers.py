@@ -126,7 +126,8 @@ class ContestEntrySerializer(serializers.ModelSerializer):
 
 class ShallowContestEntrySerializer(serializers.ModelSerializer):
 
-    user = ShallowProfileSerializer(read_only=True)
+    # user = ShallowProfileSerializer(read_only=True)
+    track = SCTrackSerializer(read_only=True)
 
     class Meta:
         model = ContestEntry
