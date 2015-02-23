@@ -124,6 +124,13 @@ class ContestEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = ContestEntry
 
+class ShallowContestEntrySerializer(serializers.ModelSerializer):
+
+    user = ShallowProfileSerializer(read_only=True)
+
+    class Meta:
+        model = ContestEntry
+
 class PaginatedContestEntrySerializer(PaginationSerializer):
     class Meta:
         object_serializer_class = ContestEntrySerializer
@@ -166,12 +173,22 @@ class ResetPasswordTokenSerializer(serializers.ModelSerializer):
         model = ResetPasswordToken
 
 class RankingSerializer(serializers.ModelSerializer):
+    def get_entries(self, obj):
+        entries = ContestEntry.objects.filter(track__pk=obj.track.pk)
+        if entries:
+            serializer = ShallowContestEntrySerializer(entries, many=True)
+            return serializer.data
+        else:
+            return None
 
+    entries = serializers.SerializerMethodField()
     track = SCTrackSerializer(read_only=True)
 
     class Meta:
         model = PeriodicRanking
+        field = ('track', 'jam_points', 'type', 'initial_playback_count', 'initial_follower_count', 'current_playback_count', 'current_follower_count', 'entries', 'created_at', 'modified_at')
 
 class PaginatedRankingSerializer(PaginationSerializer):
+
     class Meta:
         object_serializer_class = RankingSerializer
