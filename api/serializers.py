@@ -77,7 +77,7 @@ class ShallowProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ( 'id', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points')
+        fields = ( 'id', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points', 'description')
 
 class ShallowContestEntrySerializer(serializers.ModelSerializer):
 
@@ -113,12 +113,18 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('id', 'url', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points', 'my_rewards', 'my_entries')
+        fields = ('id', 'url', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points', 'my_rewards', 'my_entries', 'description')
         read_only_fields = ('id', 'total_jam_points', 'my_rewards', 'my_entries')
 
 class ContestEntrySerializer(serializers.ModelSerializer):
 
     track = SCTrackSerializer(read_only=True)
+    user = ShallowProfileSerializer(read_only=True)
+
+    class Meta:
+        model = ContestEntry
+
+class NoTrackContestEntrySerializer(serializers.ModelSerializer):
     user = ShallowProfileSerializer(read_only=True)
 
     class Meta:
@@ -177,7 +183,7 @@ class RankingSerializer(serializers.ModelSerializer):
     def get_entries(self, obj):
         entries = ContestEntry.objects.filter(track__pk=obj.track.pk)
         if entries:
-            serializer = ShallowContestEntrySerializer(entries, many=True)
+            serializer = NoTrackContestEntrySerializer(entries, many=True)
             return serializer.data
         else:
             return None

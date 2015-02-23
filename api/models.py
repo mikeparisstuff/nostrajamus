@@ -83,6 +83,13 @@ class Profile(AbstractUser):
         blank = True
     )
 
+    description = models.CharField(
+        max_length=2048,
+        default='',
+        blank=True,
+        null=True
+    )
+
     location = models.CharField(
         max_length=512,
         default='',
