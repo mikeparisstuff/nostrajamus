@@ -190,7 +190,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
         });
         globalPlayerService.player.data.trackQueue = tunes;
         // Set the next url and such
-        var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
+        var nextUrl = '/api/contests/' + $scope.contestInfo.id + '/entries/?page=' + ($scope.currentPage + 1);
         globalPlayerService.player.data.nextPageUrl = nextUrl;
     };
 

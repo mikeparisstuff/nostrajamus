@@ -196,6 +196,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
         $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
             that.loadTrack(response.data.results[0].track);
             that.data.trackQueue = response.data.results.slice(1).map(function(elem) { return elem.track });
+            that.data.nextPageUrl = '/api/tracks/trending/?filter=weekly&page=2';
             $rootScope.$broadcast('player.trackQueue.update', that.data.trackQueue);
         });
     };
@@ -246,7 +247,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
         });
     };
     player.playNextTrack = function() {
-        if (this.data.trackQueue.length <= 5) {
+        if (this.data.trackQueue.length <= 4) {
             this.getNextPageForQueue()
         } else if (this.data.trackQueue.length) {
             var next = this.data.trackQueue.shift();
