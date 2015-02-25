@@ -15,7 +15,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     $scope.referralTrack = referralTrack;
     $scope.myInfo = myInfo;
 
-    $scope.timeSelect = 'weekly';
+    $scope.timeSelect = 'daily';
     // $scope.busy = false;
 
     // pagination
