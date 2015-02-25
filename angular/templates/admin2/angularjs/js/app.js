@@ -222,7 +222,22 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             this.data.currentTrack.pause();
             this.data.isPlaying = false;
         }
+        // This is the load spot for playing a new track. Make the increment playcount call here
+        this._incrementPlaycount(track.id);
         this.loadTrack(track, this.playPause);
+    };
+    player._incrementPlaycount = function (track_id) {
+        var url = "/api/tracks/" + track_id + "/played/";
+        $http({
+            url: url,
+            method: "POST",
+        }).success(function (data, status, headers, config) {
+            console.log(data);
+            console.log("Finished updating playback count for track: " + track_id)
+        }).error(function (data, status, headers, config) {
+            console.log("Error updating playback count for track: " + track_id);
+            console.log(data);
+        });
     };
     player._updatePosition = function() {
         var progress = this.data.currentTrack.position / this.data.currentTrack.durationEstimate;
@@ -254,16 +269,6 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             this.data.backStack.push(this.data.currentTrackData);
             this.resetTrack(next);
         }
-//        if (this.data.trackQueue.length > this.data.currentIndex+1) {
-//            // If within last 3 songs pull the next page
-//            this.data.currentIndex = this.data.currentIndex + 1;
-//            if (this.data.trackQueue.length - this.data.currentIndex < 4) {
-//                this.getNextPageForQueue()
-//            }
-//            var next = this.data.trackQueue[this.data.currentIndex];
-//
-//            this.resetTrack(next);
-//        }
     };
     player.playPreviousTrack = function() {
         if (this.data.backStack.length) {
@@ -271,14 +276,6 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             this.data.trackQueue.unshift(this.data.currentTrackData);
             this.resetTrack(prev);
         }
-//        if (this.data.trackQueue.length > this.data.currentIndex-1) {
-//            this.data.currentIndex = this.data.currentIndex - 1;
-//            if (this.data.currentIndex < 0) {
-//                this.data.currentIndex = 0;
-//            }
-//            var next = this.data.trackQueue[this.data.currentIndex];
-//            this.resetTrack(next);
-//        }
     };
     player.getTrackProgress = function() {
         return this.data.trackProgress;

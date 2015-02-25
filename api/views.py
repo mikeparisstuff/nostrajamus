@@ -384,6 +384,12 @@ class TrackViewSet(viewsets.ModelViewSet):
         serializer = SCPeriodicPlayCountSerializer(play_counts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @detail_route(methods=("POST",), permission_classes=(permissions.IsAuthenticated,))
+    def played(self, request, pk=None):
+        track = self.get_object()
+        track.increment_playback_count()
+        return Response({'detail': 'Successfully incremented playcount for track {}'.format(pk)}, status=status.HTTP_200_OK)
+
     @list_route()
     def trending(self, request):
         filter = request.QUERY_PARAMS.get('filter')

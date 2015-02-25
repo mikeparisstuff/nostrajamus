@@ -10,7 +10,7 @@ class ContestAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'num_entries')
 
 class SCTrackAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'stream_url', 'created_at')
+    list_display = ('id', 'title', 'stream_url', 'jamus_playback_count', 'created_at')
 
 class SCPeriodicPlayCountAdmin(admin.ModelAdmin):
     list_display = ('id', 'track', 'playback_count', 'follower_count')

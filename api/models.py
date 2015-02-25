@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -564,6 +565,14 @@ class SCTrack(BaseModel):
         blank=True,
         null=True
     )
+
+    jamus_playback_count = models.IntegerField(
+        default=0
+    )
+
+    def increment_playback_count(self):
+        self.jamus_playback_count = F('jamus_playback_count') + 1
+        self.save()
 
     def __repr__(self):
         return self.title
