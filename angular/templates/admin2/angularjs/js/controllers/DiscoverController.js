@@ -40,6 +40,34 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         return s2;
     };
 
+    $scope.getDaily = function() {
+        if ($scope.timeSelect == 'daily') {
+            return;
+        }
+        else {
+            // $scope.trending = [];
+            $scope.timeSelect = 'daily';
+
+            $http({
+                url: '/api/tracks/trending/?filter=' + $scope.timeSelect + "&page=1",
+                method: "GET",
+                // data: JSON.stringify($scope.form),
+                headers: {'Content-Type': 'application/json'}
+            }).success(function (data, status, headers, config) {
+                // console.log(data);
+                $scope.trending = data.results;
+                // console.log($scope.trending);
+                // console.log("SUCCESS");
+            }).error(function (data, status, headers, config) {
+                // $scope.status = status;
+                // console.log(data);
+                // console.log("FAILURE");
+            });
+
+            $scope.currentPage = 1;
+        }
+    };
+
     $scope.getWeekly = function() {
         if ($scope.timeSelect == 'weekly') {
             return;

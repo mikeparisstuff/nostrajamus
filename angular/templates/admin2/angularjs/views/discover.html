@@ -62,6 +62,8 @@
 				</div>
 				<div class="actions pull-right">
                     <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <label class="btn btn-transparent grey-salsa btn-circle btn-sm" ng-click="getDaily()">
+                        <input type="radio" name="options" class="toggle">Day</label>
                         <label class="btn btn-transparent grey-salsa btn-circle btn-sm active" ng-click="getWeekly()">
                         <input type="radio" name="options" class="toggle">Week</label>
                         <label class="btn btn-transparent grey-salsa btn-circle btn-sm" ng-click="getMonthly()">
@@ -75,6 +77,30 @@
 
 				<div class="tab-content">
 					<div class="tab-pane active" id="tab_1_1">
+                        <div class="row" ng-show="timeSelect=='daily'">
+							<div class="col-md-12 col-sm-12">
+								<!-- BEGIN PORTLET-->
+								<div class="portlet light">
+									<div class="portlet-body text-center">
+										<div ng-repeat="track in trending | limitTo:pageSize">
+                                            <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
+
+											<hr>
+										</div>
+
+										<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 1" ng-click="prevPage()">
+									        Prev
+									    </button>
+									    {{currentPage}}/{{numberOfPages()}}
+									    <button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.count/pageSize" ng-click="nextPage()">
+									        Next
+									    </button>
+									</div>
+								</div>
+								<!-- END PORTLET-->
+							</div>
+						</div>
+					</div>
 
 						<div class="row" ng-show="timeSelect=='weekly'">
 							<div class="col-md-12 col-sm-12">

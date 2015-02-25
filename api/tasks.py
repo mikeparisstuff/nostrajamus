@@ -53,6 +53,38 @@ def update_playcount():
             print 'ERROR: {}'.format(e)
 
 @shared_task
+def update_daily_rankings():
+    tracks = SCTrack.objects.all()
+    for track in tracks:
+        # Update Weekly
+        last_day = timezone.now() - timedelta(days=1)
+        most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        daily = SCPeriodicPlayCount.objects.filter(created_at__lte=last_day, track=track).order_by('-created_at')[:1]
+        if len(daily) > 0:
+            daily = daily[0]
+        else:
+            daily = SCPeriodicPlayCount.objects.filter(track=track).earliest('created_at')
+        jam_points = calculate_jam_points(daily.playback_count, daily.follower_count, most_recent.playback_count, most_recent.follower_count )
+        try:
+            week_entry = PeriodicRanking.objects.get(track = track, type='DAILY')
+            week_entry.jam_points = jam_points
+            week_entry.initial_playback_count = daily.playback_count
+            week_entry.initial_follower_count = daily.follower_count
+            week_entry.current_playback_count = most_recent.playback_count
+            week_entry.current_follower_count = most_recent.follower_count
+            week_entry.save()
+        except PeriodicRanking.DoesNotExist:
+            PeriodicRanking.objects.create(
+                track = track,
+                type = 'DAILY',
+                jam_points = jam_points,
+                initial_playback_count = daily.playback_count,
+                initial_follower_count = daily.follower_count,
+                current_playback_count = most_recent.playback_count,
+                current_follower_count = most_recent.follower_count
+            )
+
+@shared_task
 def update_weekly_rankings():
     tracks = SCTrack.objects.all()
     for track in tracks:

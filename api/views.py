@@ -393,6 +393,8 @@ class TrackViewSet(viewsets.ModelViewSet):
     @list_route()
     def trending(self, request):
         filter = request.QUERY_PARAMS.get('filter')
+        if filter == 'daily':
+            queryset = PeriodicRanking.objects.filter(type='DAILY')
         if filter == 'weekly':
             queryset = PeriodicRanking.objects.filter(type='WEEKLY')
         elif filter == 'monthly':

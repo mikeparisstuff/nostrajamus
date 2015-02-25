@@ -140,6 +140,10 @@ CELERYBEAT_SCHEDULE = {
         'task': 'api.tasks.update_user_jam_points',
         'schedule': timedelta(minutes=30)
     },
+    'update-daily-rankings': {
+        'task': 'api.tasks.update_daily_rankings',
+        'schedule': timedelta(minutes=60)
+    },
     'update-weekly-rankings': {
         'task': 'api.tasks.update_weekly_rankings',
         'schedule': timedelta(minutes=60)

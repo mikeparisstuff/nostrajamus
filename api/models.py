@@ -705,10 +705,12 @@ class ResetPasswordToken(BaseModel):
         default=True
     )
 
+DAILY = "DAILY"
 WEEKLY = "WEEKLY"
 MONTHLY = "MONTHLY"
 ALLTIME = "ALLTIME"
 RANKING_OPTIONS = (
+    (DAILY, "Daily"),
     (WEEKLY, "Weekly"),
     (MONTHLY, "Monthly"),
     (ALLTIME, "AllTime")
