@@ -1226,7 +1226,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     });
                 }],
                 trending: ['$http', function($http) {
-                    return $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
+                    return $http.get('/api/tracks/trending/?filter=daily&page=1').then(function(response) {
                         // console.log(response.data);
                         return response.data;
                     });
