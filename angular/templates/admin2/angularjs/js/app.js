@@ -10,7 +10,7 @@ var MetronicApp = angular.module("MetronicApp", [
     "ngSanitize",
     "ngResource", //authentication with django
     "angularFileUpload", //file upload
-    'infinite-scroll',
+    'infinite-scroll'
 ]);
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -177,7 +177,8 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             currentIndex: 0,
             trackProgress: 0,
             userTrackQueue: [],
-            nextPageUrl: ""
+            nextPageUrl: "",
+            shouldUpdatePlaybackCount: false
         }
     };
 
@@ -210,6 +211,9 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             this.data.currentTrack.pause();
             this.data.isPlaying = false;
         } else {
+            if (this.data.shouldUpdatePlaybackCount) {
+                this._incrementPlaycount(this.data.currentTrackData.id);
+            }
             this.data.currentTrack.play();
             this.data.isPlaying = true;
         }
@@ -223,18 +227,20 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             this.data.isPlaying = false;
         }
         // This is the load spot for playing a new track. Make the increment playcount call here
-        this._incrementPlaycount(track.id);
         this.loadTrack(track, this.playPause);
     };
     player._incrementPlaycount = function (track_id) {
         var url = "/api/tracks/" + track_id + "/played/";
+        var that = this;
         $http({
             url: url,
-            method: "POST",
+            method: "POST"
         }).success(function (data, status, headers, config) {
+            that.data.shouldUpdatePlaybackCount = false;
             console.log(data);
             console.log("Finished updating playback count for track: " + track_id)
         }).error(function (data, status, headers, config) {
+            that.data.shouldUpdatePlaybackCount = false;
             console.log("Error updating playback count for track: " + track_id);
             console.log(data);
         });
@@ -256,6 +262,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             sound.options.onfinish = that.playNextTrack.bind(that);
             sound.options.whileplaying = that._updatePosition.bind(that);
             that.data.currentTrack = sound;
+            that.data.shouldUpdatePlaybackCount = true;
             callback.bind(that)();
 //            that.data.isPlaying = true;
 //            sound.play();
