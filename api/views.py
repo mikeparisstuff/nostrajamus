@@ -395,7 +395,7 @@ class TrackViewSet(viewsets.ModelViewSet):
         filter = request.QUERY_PARAMS.get('filter')
         if filter == 'daily':
             queryset = PeriodicRanking.objects.filter(type='DAILY')
-        if filter == 'weekly':
+        elif filter == 'weekly':
             queryset = PeriodicRanking.objects.filter(type='WEEKLY')
         elif filter == 'monthly':
             queryset = PeriodicRanking.objects.filter(type='MONTHLY')
