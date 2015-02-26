@@ -194,10 +194,10 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
 
     player.getDefaultQueue = function () {
         var that = this;
-        $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
+        $http.get('/api/tracks/trending/?filter=daily&page=1').then(function(response) {
             that.loadTrack(response.data.results[0].track);
             that.data.trackQueue = response.data.results.slice(1).map(function(elem) { return elem.track });
-            that.data.nextPageUrl = '/api/tracks/trending/?filter=weekly&page=2';
+            that.data.nextPageUrl = '/api/tracks/trending/?filter=daily&page=2';
             $rootScope.$broadcast('player.trackQueue.update', that.data.trackQueue);
         });
     };
