@@ -1,0 +1,110 @@
+<!--BEGIN PAGE HEADER-->
+<!-- <div align="right" ng-controller="authController" ng-if="!authState.user" style="float:right">Already registered? <a href="#" class="red" data-toggle="modal" data-target="#loginModal">LOG IN</a></div> -->
+<!-- <h3 class="page-title">
+</h3> -->
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+
+<!-- Trending Tastemakers -->
+<div ng-if="panelId==0">
+
+	<br><br>
+	<div style="height:10px"></div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<!-- BEGIN PORTLET-->
+			<div class="portlet light">
+				<div class="portlet-title">
+					<div class="caption caption-md">
+						<i class="icon-bar-chart font-green-haze hide"></i>
+						<span class="caption-subject font-nostra bold uppercase">Trending Tastemakers</span>
+					</div>
+				</div>
+				<br>
+				<div class="portlet-body" ng-repeat="track in trendingTracks | limitTo:5">
+
+					<div class="row" id="switchPanel">
+					    <div class="col-xs-4 text-center">
+					        <img src="{{track.entries[0].user.profile_picture}}" class="img-responsive img-circle img-profile-panel" alt=""ng-show="track.entries[0].user.profile_picture">
+					        <i class="fa fa-user fa-3x" style="color:#ff5252;" ng-hide="track.entries[0].user.profile_picture"></i>
+					        <br>
+					        <h5>{{track.entries[0].user.username}}</h5>
+					    </div>
+					    <div class="col-xs-8 text-center">
+					    	<b>Jam Points</b>
+					    	<div>{{track.entries[0].user.total_jam_points}}</div>
+					    </div>
+					</div>
+					
+					<!-- first song -->
+					<div data-ng-include="'/assets/tpl/jamus-contest-item-panel.html'"></div>
+					<!-- more songs -->
+					<div class="" ng-repeat="tracks in track.moreTracks" ng-if="tracks">
+						<div data-ng-include="'/assets/tpl/jamus-contest-item-panel-more.html'"></div>
+					</div>
+
+					<hr>
+
+				</div>
+			</div>
+			<!-- END PORTLET-->
+		</div>
+	</div>
+
+</div>
+<!-- End Trending Tastemakers -->
+
+<!-- Start Contest Leaders -->
+<div ng-if="panelId!=0">
+
+	<br><br>
+	<div style="height:10px"></div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<!-- BEGIN PORTLET-->
+			<div class="portlet light">
+				<div class="portlet-title">
+					<div class="caption caption-md">
+						<i class="icon-bar-chart font-green-haze hide"></i>
+						<span class="caption-subject font-nostra bold uppercase">Contest {{panelId}}</span>
+						<div class="btn btn-default red-nostra" ng-click="setPanelBack()" style="opacity:0.5">Weekly Tastemakers</div>
+					</div>
+				</div>
+				<br>
+				<div class="portlet-body" ng-repeat="track in contestInstance.results | limitTo:5" id="switchPanel">
+
+					<div class="row">
+					    <div class="col-xs-4 text-center">
+					        <img src="{{track.user.profile_picture}}" class="img-responsive img-circle img-profile-panel" alt=""ng-show="track.user.profile_picture">
+					        <i class="fa fa-user fa-3x" style="color:#ff5252;" ng-hide="track.user.profile_picture"></i>
+					        <br>
+					        <h5>{{track.user.username}}</h5>
+					    </div>
+					    <div class="col-xs-8 text-center">
+					    	<b>Jam Points</b>
+					    	<div>{{track.jam_points}}</div>
+					    </div>
+					</div>
+					
+					<div data-ng-include="'/assets/tpl/jamus-contest-x-item-panel.html'"></div>
+
+					<hr>
+
+				</div>
+			</div>
+			<!-- END PORTLET-->
+		</div>
+	</div>
+
+</div>
+<!-- End Contest Leaders -->
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS & CSS -->
+<script>
+	// Index.init();    
+	// Tasks.initDashboardWidget();
+</script>
+<!-- BEGIN MAIN JS & CSS

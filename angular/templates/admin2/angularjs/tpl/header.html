@@ -115,6 +115,12 @@
             	<ul class="nav navbar-nav navbar-right" ng-if="!authState.user">
             		<li class="dropdown" id="">
 						<a href="#/" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+						<span class="title">Home</span>
+						</a>
+						<br>
+					</li>
+            		<li class="dropdown" id="">
+						<a href="#/discover" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
 						<span class="title">Discover</span>
 						</a>
 						<br>
@@ -126,8 +132,8 @@
 						</a>
 						<br>
 					</li>
-					<li class="dropdown" id="">
-						<a href="#/how" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+					<li class="dropdown" id="" ng-if="!authState.user">
+						<a href="#" class="dropdown-toggle" ng-click="setFirst()" data-toggle="modal" data-target="#tutorialModal" data-close-others="true">
 						<!--<i class="icon-share"></i>-->
 						<span class="title">How To Play</span>
 						</a>
@@ -161,6 +167,12 @@
                 <ul class="nav navbar-nav navbar-right" ng-if="authState.user">
                 	<li class="dropdown" id="">
 						<a href="#/" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+						<span class="title">Home</span>
+						</a>
+						<br>
+					</li>
+                	<li class="dropdown" id="">
+						<a href="#/discover" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
 						<!--<i class="icon-share"></i>-->
 						<span class="title">Discover</span>
 						</a>
@@ -177,13 +189,6 @@
 						<a href="#/leaderboard" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
 						<!--<i class="icon-trophy"></i>-->
 						<span class="title">Leaders</span>
-						</a>
-						<br>
-					</li>
-					<li class="dropdown" id="">
-						<a href="#/how" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
-						<!--<i class="icon-share"></i>-->
-						<span class="title">How To Play</span>
 						</a>
 						<br>
 					</li>
@@ -205,10 +210,10 @@
 							</li>
 							<!--<li class="divider">-->
 							<!--</li>-->
-							<!-- <li>
+							<li>
 						        <a href="#/how">
                                 <i class="icon-question"></i> Learn </a>
-					        </li> -->
+					        </li>
                             <li>
 								<a href="#/message">
 								<i class="icon-paper-plane"></i> Contact Us </a>
@@ -368,6 +373,55 @@
 	            <!-- <div class="modal-footer title-bg">
 	                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal">Sweet.</button>
 	            </div> -->
+	        </div>
+	    </div>
+	</div>
+
+	<div class="modal fade" id="tutorialModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="authController">
+	    <div class="modal-dialog modal-tutorial">
+	        <div class="modal-content">
+	            <div class="modal-header title-bg">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title white" id="tutorialModalLabel" ng-hide="firstTime">How To Play</h4>
+	                <h4 class="modal-title white" id="tutorialModalLabel" ng-show="firstTime">First Time Here?</h4>
+	            </div>
+	            <div class="modal-body" style="height:350px;">
+	                <div class="row">
+	                    <div class="col-lg-12">
+	                        
+							<div id="myCarousel" class="carousel slide">
+								<ol class="carousel-indicators">
+									<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+									<li data-target="#myCarousel" data-slide-to="1"></li>
+									<li data-target="#myCarousel" data-slide-to="2"></li>
+								</ol>
+								<!-- Carousel items -->
+								<div class="carousel-inner">
+									<div class="active item">
+										<img class="img-tutorial-carousel" src="/assets/global/img/tutorial/how_to_play_1.png">
+									</div>
+									<div class="item">
+										<img class="img-tutorial-carousel" src="/assets/global/img/tutorial/how_to_play_2.png">
+									</div>
+									<div class="item">
+										<img class="img-tutorial-carousel" src="/assets/global/img/tutorial/how_to_play_3.png">
+									</div>
+								</div>
+								<!-- Carousel nav -->
+								<div class="btn" ng-disabled="slide==1">
+									<a class="carousel-control left" id="leftButton" href="#myCarousel" data-slide="prev" ng-click="getPrev()">&lsaquo;</a>
+								</div>
+								<div class="btn" ng-disabled="slide==3">
+									<a class="carousel-control right" id="rightButton" href="#myCarousel" data-slide="next" ng-click="getNext()">&rsaquo;</a>
+								</div>
+							</div>
+
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="modal-footer" id="footer-tutorial">
+	                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="slide==3">Got it!</button>
+	            </div>
 	        </div>
 	    </div>
 	</div>

@@ -838,8 +838,160 @@ Red-nostra
   }
 }
 
-
 /* END TRACK ITEM */
+
+// Start Contest Item
+
+.jamus-contest-item {
+  padding: 0 !important;
+  margin-top: 20px;
+  height: 100px;
+  border: 1px solid #eeeeee;
+  background-color: #ffffff;
+}
+
+.track-title-contest {
+  font-size: 11px;
+}
+
+.track-artist-contest {
+  font-size: 10px;
+}
+
+.track-img-wrapper-contest {
+  height: 100%;
+//  background-size: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.track-img-wrapper-contest img {
+  display: table-cell;
+  max-width: 100%;
+}
+
+
+.play-btn-container-contest {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+}
+
+.track-data-top-contest {
+  padding-top: 5px;
+}
+
+.track-data-bottom-contest > div {
+  height: 100%;
+}
+
+.track-divider-contest {
+  margin-top: 0px;
+  margin-bottom: 1px;
+}
+
+.play-btn-contest {
+  opacity: 0.8;
+  color: #ff5252;
+  margin-top: 45px;
+}
+
+.jamus-list-item-progress-bar-contest {
+  position: absolute;
+  margin-left: -15px;
+  height: 98px;
+  width: 100%;
+  margin-bottom: 0px !important;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 1);
+  padding-left: -15px;
+  > div.progress-bar-contest {
+    height: 98px;
+    background: rgba(255, 82, 82, .7);
+  }
+}
+
+.contest-stats {
+  font-size: 10px;
+}
+
+.play-btn-contest:hover {
+  transform: scale(1.1);
+}
+
+.track-right-icons-contest {
+  background-color: #eeeeee;
+  height: 100px;
+}
+
+.track-queue-btn-contest {
+  position: absolute;
+  top: -18px;
+  right: 4px;
+}
+
+.track-right-icon-contest {
+  margin-top: 25px;
+  color: #888888;
+}
+
+.track-right-icon-contest:hover {
+  transform: scale(1.1);
+}
+
+.share-icon-contest {
+  margin-top: 10px;
+  margin-left: 2px;
+}
+
+.soundcloud-icon-contest {
+  margin-top: 5px;
+  > a {
+    color: #888888;
+  }
+  > a:hover {
+    text-decoration: none;
+    color: #888888;
+  }
+}
+
+.player-details-contest {
+  height: 25px;
+  overflow: hidden;
+}
+
+.btn-previous-contest {
+  float: right;
+}
+.btn-next-contest {
+  float: left;
+}
+
+@media (max-width: $screen-xs-min) {
+  .track-title-contest {
+    font-size: 7px;
+  }
+  .track-data-bottom-contest {
+    > .row {
+      div {
+        font-size: 5px;
+      }
+    }
+  }
+  .track-data-top-contest {
+    padding-top: 5px;
+  }
+  .track-divider-contest {
+    margin-bottom: 0;
+  }
+}
+
+.img-profile-panel {
+  width:100% !important;
+  height:100% !important;
+}
+
+// End Contest Item
 
 // TRANSITION
 
@@ -898,3 +1050,116 @@ Red-nostra
   }
 }
 // END TRANSITION
+
+.carousel-indicators {
+  position: absolute;
+  top: -50px;
+  right: 0px;
+  z-index: 5;
+}
+
+.carousel-control {
+  // position: absolute;
+  top: 200px;
+  left: 15px;
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+  font-size: 60px;
+  font-weight: 100;
+  line-height: 25px;
+  color: #ffffff;
+  text-align: center;
+  background: #222222;
+  border: 3px solid #ffffff;
+  -webkit-border-radius: 23px;
+  -moz-border-radius: 23px;
+  border-radius: 23px;
+  opacity: 0.5;
+}
+
+.carousel-control.right {
+  right: -10px;
+  left: auto;
+}
+
+.carousel-control.left {
+  left: -10px;
+  right: auto;
+}
+
+.img-tutorial-carousel {
+  padding: 30px;
+}
+
+// Front Page Start
+
+.contest-item {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  border: 1epx solid;
+  border-radius: 100px;
+}
+
+body .modal-tutorial {
+    /* new custom width */
+    width: 750px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    // margin-left: -375px;
+}
+
+#footer-tutorial {
+  padding: 15px;
+  text-align: right;
+  border-top: 0px solid #e5e5e5 !important;
+}
+
+// Front Page End
+
+//panel css
+
+#switchPanel {
+    // margin-top: 25px;
+    // font-size: 21px;
+    // text-align: center;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s; /* Firefox */
+    -webkit-animation: fadein 2s; /* Safari and Chrome */
+    -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+//end panel css

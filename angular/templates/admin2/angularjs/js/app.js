@@ -339,10 +339,35 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$scope', '$http', 'authState', function($scope, $http, authState) {
+MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'authState', function($rootScope, $scope, $http, authState) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
+
+    $rootScope.firstTime = true;
+    $scope.firstTime = $rootScope.firstTime;
+
+    $scope.slide = 1;
+    $('myCarousel').carousel({
+        interval: false
+    })
+
+    $scope.setFirst = function() {
+        $rootScope.firstTime = false;
+        $scope.firstTime = $rootScope.firstTime;
+    }
+
+    $scope.getPrev = function() {
+        if ($scope.slide > 1) {
+            $scope.slide--;
+        }
+    }
+
+    $scope.getNext = function() {
+        if ($scope.slide < 3) {
+            $scope.slide++;
+        }
+    }
 
     // $scope.authState = authState;
     // console.log($scope.authState);
@@ -404,6 +429,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
     // Redirect any unmatched url
     $urlRouterProvider.otherwise("/");
+    // $locationProvider.html5Mode(true);
 
     $stateProvider
 
@@ -438,6 +464,112 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         //         }]
         //     }
         // })
+
+        // Home
+        .state('home', {
+            url: "/",
+            data: {
+                pageTitle: 'Home',
+                authenticate: false
+            },
+            views: {
+                "main": {
+                    templateUrl: "/assets/views/home.html",
+                    controller: "HomeController",
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'MetronicApp',
+                                insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                                files: [
+                                    '/assets/global/plugins/morris/morris.css',
+                                    '/assets/admin/pages/css/tasks.css',
+                                    
+                                    '/assets/global/plugins/morris/morris.min.js',
+                                    '/assets/global/plugins/morris/raphael-min.js',
+                                    '/assets/global/plugins/jquery.sparkline.min.js',
+
+                                    '/assets/admin/pages/scripts/index3.js',
+                                    '/assets/admin/pages/scripts/tasks.js',
+
+                                    '/assets/admin/pages/scripts/tasks.js',
+
+                                    '/assets/js/controllers/HomeController.js',
+                                    '/assets/js/controllers/GlobalPlayerController.js'
+                                ] 
+                            });
+                        }],
+                        contests: ['$http', function($http) {
+                            var contestData = [];
+                            return $http.get('/api/contests/').then(function(response) {
+                                // console.log(response.data);
+
+                                return response.data;
+                            });
+                        }],
+                        weeklyLeaders: ['$http', function($http) {
+                            return $http.get('/api/tracks/trending/').then(function(response) {
+                                // console.log(response.data);
+                                return response.data;
+                            });
+                        }]
+                    }
+                },
+                "panel": {
+                    templateUrl: "/assets/views/homepanel.html",
+                    // data: {
+                    //     pageTitle: 'Home',
+                    //     authenticate: false
+                    // },
+                    controller: "HomeController",
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load({
+                                name: 'MetronicApp',
+                                insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                                files: [
+                                    '/assets/global/plugins/morris/morris.css',
+                                    '/assets/admin/pages/css/tasks.css',
+                                    
+                                    '/assets/global/plugins/morris/morris.min.js',
+                                    '/assets/global/plugins/morris/raphael-min.js',
+                                    '/assets/global/plugins/jquery.sparkline.min.js',
+
+                                    '/assets/admin/pages/scripts/index3.js',
+                                    '/assets/admin/pages/scripts/tasks.js',
+
+                                    '/assets/admin/pages/scripts/tasks.js',
+
+                                    '/assets/js/controllers/HomeController.js',
+                                    '/assets/js/controllers/GlobalPlayerController.js'
+                                ] 
+                            });
+                        }],
+                        contests: ['$http', function($http) {
+                            return $http.get('/api/contests/').then(function(response) {
+                                // console.log(response.data);
+                                return response.data;
+                            });
+                        }],
+                        myData: ['$http', 'authState', function($http, authState) {
+                            // console.log(authState);
+                            if (authState.user.length > 0) {
+                                return $http.get('/api/users/me').then(function(response) {
+                                    // console.log(response.data);
+                                    return response.data;
+                                });
+                            }
+                        }],
+                        weeklyLeaders: ['$http', function($http) {
+                            return $http.get('/api/tracks/trending/').then(function(response) {
+                                // console.log(response.data);
+                                return response.data;
+                            });
+                        }]
+                    }
+                }
+            }
+        })
 
         // Dashboard
         .state('dashboard', {
@@ -1199,7 +1331,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
         //Discover Base
         .state('discover', {
-            url: "/",
+            url: "/discover",
             templateUrl: "/assets/views/discover.html",
             data: {
                 pageTitle: 'Discover',
@@ -1243,7 +1375,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
         //Discover Referral
         .state('discover/:userID/[:trackID]', {
-            url: "/:userID/:trackID",
+            url: "/discover/:userID/:trackID",
             templateUrl: "/assets/views/discover.html",
             data: {
                 pageTitle: 'Discover',

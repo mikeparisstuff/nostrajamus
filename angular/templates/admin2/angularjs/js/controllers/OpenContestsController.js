@@ -324,7 +324,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
     };
 
     $scope.getReferralLink = function(userId, trackId) {
-        var link = "http://nostrajamus.com/#/" + userId + "/" + trackId;
+        var link = "http://nostrajamus.com/#/discover/" + userId + "/" + trackId;
         return link;
     };
 

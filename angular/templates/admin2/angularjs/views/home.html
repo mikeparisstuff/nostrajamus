@@ -1,0 +1,154 @@
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="authController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header title-bg">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title white" id="myModalLabel">Log In</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form name="registationForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Username *" ng-model="user_name" required data-validation-required-message="Please enter your name.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-offset-2 col-md-8">
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Password *" ng-model="password1" required data-validation-required-message="Please enter your name.">
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="col-lg-12 text-center">
+                                    <div id="success"></div>
+                                    <button type="submit" class="btn btn-xl" ng-click="login()">Log In</button>
+                                    <div id="errors"></div>
+                                </div>
+
+                                <div class="col-lg-12 text-center">
+                                	<br>
+                                	<b>Not a member yet? <a href="#" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Register Now!</span></a></b>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer title-bg">
+                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal">Sweet.</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!--BEGIN PAGE HEADER-->
+<!-- <div align="right" ng-controller="authController" ng-if="!authState.user" style="float:right">Already registered? <a href="#" class="red" data-toggle="modal" data-target="#loginModal">LOG IN</a></div> -->
+<h3 class="page-title">
+	Home
+</h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div ng-init="filterContests(contests)">
+	<!-- <div class="note note-default note-bordered" ng-if="authState.user"> -->
+		<!-- <h3>Welcome, {{myData.username}}! <span class="close" data-close="note"></span></h3> -->
+		<!-- <h5> -->
+			<!-- First time here? Check out the <a href="/#how" class="red-nostra">Learn</a> page. Otherwise, check out our upcoming contests below. -->
+		<!-- </h5> -->
+		<!-- <span class="label label-success">Start</span> --> 
+	<!-- </div> -->
+	<!-- BEGIN DASHBOARD STATS -->
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<!-- BEGIN PORTLET-->
+			<div class="portlet light">
+				<div class="portlet-title">
+					<div class="caption caption-md">
+						<i class="icon-bar-chart font-green-haze hide"></i>
+						<span class="caption-subject font-nostra bold uppercase">Open Contests</span>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<div class="table-scrollable table-scrollable-borderless">
+						<div class="col-md-12 contest-banners" id="cf1">
+							<div class="col-md-4">
+								<div ng-if="authState.user">
+									<a href="#/opencontests/31"><img src="assets/nostraV1/img/contest/open/3b_-_5000_followers.png" class="img-responsive bottom"></a>
+									<a href="#/opencontests/31"><img src="assets/nostraV1/img/contest/open/3a_-_5000_followers.png" class="img-responsive top"></a>
+								</div>
+								<div ng-if="!authState.user">
+									<a href="#" data-toggle="modal" data-target="#registerModal"><img src="assets/nostraV1/img/contest/open/3b_-_5000_followers.png" class="img-responsive bottom"></a>
+									<a href="#" data-toggle="modal" data-target="#registerModal"><img src="assets/nostraV1/img/contest/open/3a_-_5000_followers.png" class="img-responsive top"></a>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div ng-if="authState.user">
+									<a href="#/opencontests/29"><img src="assets/nostraV1/img/contest/open/2b_-_anything_goes.png" class="img-responsive bottom"></a>
+									<a href="#/opencontests/29"><img src="assets/nostraV1/img/contest/open/2a_-_anything_goes.png" class="img-responsive top"></a>
+								</div>
+								<div ng-if="!authState.user">
+									<a href="#" data-toggle="modal" data-target="#registerModal"><img src="assets/nostraV1/img/contest/open/2b_-_anything_goes.png" class="img-responsive bottom"></a>
+									<a href="#" data-toggle="modal" data-target="#registerModal"><img src="assets/nostraV1/img/contest/open/2a_-_anything_goes.png" class="img-responsive top"></a>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div ng-if="authState.user">
+									<a href="#/opencontests/32"><img src="assets/nostraV1/img/contest/open/3b-rowdy-remixes.png" class="img-responsive bottom"></a>
+									<a href="#/opencontests/32"><img src="assets/nostraV1/img/contest/open/3a-rowdy-remixes.png" class="img-responsive top"></a>
+								</div>
+								<div ng-if="!authState.user">
+									<a href="#" data-toggle="modal" data-target="#registerModal"><img src="assets/nostraV1/img/contest/open/3b-rowdy-remixes.png" class="img-responsive bottom"></a>
+									<a href="#" data-toggle="modal" data-target="#registerModal"><img src="assets/nostraV1/img/contest/open/3a-rowdy-remixes.png" class="img-responsive top"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END PORTLET-->
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<!-- BEGIN PORTLET-->
+			<div class="portlet light">
+				<div class="portlet-title">
+					<div class="caption caption-md">
+						<i class="icon-bar-chart font-green-haze hide"></i>
+						<span class="caption-subject font-nostra bold uppercase">Contest Playlists</span>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<div class="table-scrollable table-scrollable-borderless">
+						<div class="col-md-12">
+							<div class="col-md-4" ng-repeat="contest in inProgressContests">
+								<div data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="col-md-4" ng-repeat="contest in completedContests">
+								<div data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END PORTLET-->
+		</div>
+	</div>
+
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS & CSS -->
+<script>
+	// Index.init();    
+	// Tasks.initDashboardWidget();
+</script>
+<!-- BEGIN MAIN JS & CSS
