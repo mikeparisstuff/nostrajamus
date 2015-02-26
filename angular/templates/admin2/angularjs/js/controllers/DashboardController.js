@@ -129,7 +129,7 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 	$scope.isEnabled = function(start) {
 		var oneWeek = new Date().addHours(24*7);
 		var startTime = new Date(start).addHours(0);
-		if (startTime < oneWeek) {
+		if (startTime > oneWeek) {
 			// console.log(true);
 			return true;
 		}
