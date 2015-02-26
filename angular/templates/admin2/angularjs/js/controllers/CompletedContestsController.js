@@ -49,7 +49,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
 
         var playIncrease = (((currPlayCount - initPlayCount) / (initPlayCount)) * 100).toFixed(1);
 
-        return playIncrease;
+        return playIncrease + "%";
     };
 
     $scope.modalEntry = {};
