@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', 'myInfo', 'globalPlayerService', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank, myInfo, globalPlayerService) {
+MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', 'myInfo', 'globalPlayerService', 'homeService', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank, myInfo, globalPlayerService, homeService) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -184,6 +184,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
     $scope.player = globalPlayerService.player;
 
     $scope.playNewTrack = function(track, index) {
+        homeService.home.data.panelId = 0;
         globalPlayerService.player.resetTrack(track.track);
         var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
             return elem.track;

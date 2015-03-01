@@ -1,6 +1,6 @@
 'use strict';
 
-MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", "myInfo", "me", "globalPlayerService", function($rootScope, $scope, $http, $timeout, $upload, $sce, myInfo, me, globalPlayerService) {
+MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", "myInfo", "me", "globalPlayerService", "homeService", function($rootScope, $scope, $http, $timeout, $upload, $sce, myInfo, me, globalPlayerService, homeService) {
     $scope.$on('$viewContentLoaded', function() {   
         Metronic.initAjax(); // initialize core components
         Layout.setSidebarMenuActiveLink('set', $('#sidebar_menu_link_profile')); // set profile link active in sidebar menu 
@@ -123,6 +123,7 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
     $scope.player = globalPlayerService.player;
 
     $scope.playNewTrack = function(track, index) {
+        homeService.home.data.panelId = 0;
         globalPlayerService.player.resetTrack(track.track);
         var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
             return elem.track;

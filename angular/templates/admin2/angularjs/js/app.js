@@ -194,15 +194,14 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
 
     player.getDefaultQueue = function () {
         var that = this;
-        $http.get('/api/tracks/trending/?filter=daily&page=1').then(function(response) {
+        $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
             that.loadTrack(response.data.results[0].track);
             that.data.trackQueue = response.data.results.slice(1).map(function(elem) { return elem.track });
-            that.data.nextPageUrl = '/api/tracks/trending/?filter=daily&page=2';
+            that.data.nextPageUrl = '/api/tracks/trending/?filter=weekly&page=2';
             $rootScope.$broadcast('player.trackQueue.update', that.data.trackQueue);
         });
     };
     player.playPause = function() {
-//        console.log("WOOO");
 //        if (this.data.currentTrack == null && this.data.currentTrackData) {
 //            this.loadTrack(this.data.currentTrackData, this.playPause);
 //            return;
@@ -219,7 +218,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
         }
     };
     player.resetTrack = function(track) {
-        if (this.data.currentTrackData.sc_id == track.sc_id) {
+        if (this.data.currentTrackData.sc_id != null && this.data.currentTrackData.sc_id == track.sc_id) {
             this.playPause();
             return;
         } else if (this.data.isPlaying) {
@@ -255,6 +254,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
 //        console.log('sound '+this.data.currentTrack.id+' playing: ' + this.data.trackProgress);
     };
     player.loadTrack = function(track, callback) {
+        console.log(track);
         this.data.currentTrackData = track;
         var trackId = track.sc_id;
         var that = this;
@@ -270,7 +270,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
     };
     player.playNextTrack = function() {
         if (this.data.trackQueue.length <= 4) {
-            this.getNextPageForQueue()
+            this.getNextPageForQueue();
         } else if (this.data.trackQueue.length) {
             var next = this.data.trackQueue.shift();
             this.data.backStack.push(this.data.currentTrackData);
@@ -313,7 +313,15 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
     return { player: player };
 });
 
-// /Setup authentication with django
+MetronicApp.factory('homeService', ['$rootScope', function ($rootScope) {
+    var home =  {
+        data: {
+            panelId: 0,
+            panelContestName: null
+        }
+    };
+    return { home: home };
+}]);
 
 //We already have a limitTo filter built-in to angular,
 //let's make a startFrom filter
@@ -364,7 +372,7 @@ MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'au
     }
 
     $scope.getNext = function() {
-        if ($scope.slide < 3) {
+        if ($scope.slide < 4) {
             $scope.slide++;
         }
     }
@@ -506,12 +514,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
                                 return response.data;
                             });
-                        }],
-                        weeklyLeaders: ['$http', function($http) {
-                            return $http.get('/api/tracks/trending/').then(function(response) {
-                                // console.log(response.data);
-                                return response.data;
-                            });
                         }]
                     }
                 },
@@ -521,7 +523,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     //     pageTitle: 'Home',
                     //     authenticate: false
                     // },
-                    controller: "HomeController",
+                    controller: "HomePanelController",
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load({
@@ -540,13 +542,19 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
                                     '/assets/admin/pages/scripts/tasks.js',
 
-                                    '/assets/js/controllers/HomeController.js',
+                                    '/assets/js/controllers/HomePanelController.js',
                                     '/assets/js/controllers/GlobalPlayerController.js'
                                 ] 
                             });
                         }],
                         contests: ['$http', function($http) {
                             return $http.get('/api/contests/').then(function(response) {
+                                // console.log(response.data);
+                                return response.data;
+                            });
+                        }],
+                        weeklyLeaders: ['$http', function($http) {
+                            return $http.get('/api/tracks/trending/?filter=weekly').then(function(response) {
                                 // console.log(response.data);
                                 return response.data;
                             });
@@ -559,12 +567,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                                     return response.data;
                                 });
                             }
-                        }],
-                        weeklyLeaders: ['$http', function($http) {
-                            return $http.get('/api/tracks/trending/').then(function(response) {
-                                // console.log(response.data);
-                                return response.data;
-                            });
                         }]
                     }
                 }
@@ -1095,7 +1097,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             templateUrl: "/assets/views/profile/main.html",
             data: {
                 pageTitle: 'User Profile',
-                authenticate: true
+                authenticate: false
             },
             controller: "UserProfileController",
             resolve: {

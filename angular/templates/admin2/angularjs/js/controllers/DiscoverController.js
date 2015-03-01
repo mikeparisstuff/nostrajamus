@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', 'referralTrack', 'myInfo', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService, referralTrack, myInfo) {
+MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', 'referralTrack', 'myInfo', 'homeService', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService, referralTrack, myInfo, homeService) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         Metronic.initAjax();
@@ -319,6 +319,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     $scope.player = globalPlayerService.player;
 
     $scope.playNewTrack = function(track, index) {
+        homeService.home.data.panelId = 0;
         globalPlayerService.player.resetTrack(track.track);
         var tunes = $scope.trending.slice(index+1).map(function(elem) {
             return elem.track;

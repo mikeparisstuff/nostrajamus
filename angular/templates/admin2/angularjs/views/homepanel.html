@@ -5,11 +5,65 @@
 <!-- END PAGE HEADER-->
 <!-- BEGIN MAIN CONTENT -->
 
-<!-- Trending Tastemakers -->
-<div ng-if="panelId==0">
+<br><br>
+<div style="height:10px"></div>
 
-	<br><br>
-	<div style="height:10px"></div>
+<!-- My Live Contests -->
+<div class="row" ng-if="authState.user">
+	<div class="col-md-12 col-sm-12">
+		<!-- BEGIN PORTLET-->
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption caption-md">
+					<i class="icon-bar-chart font-green-haze hide"></i>
+					<span class="caption-subject font-nostra bold uppercase">My Live Contests</span>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="tab-content">
+					<div class="table-scrollable table-scrollable-borderless">
+						<table class="table table-hover table-light">
+							<thead>
+								<tr class="uppercase">
+									<th width="50%">
+										Contests
+									</th>
+									<th width="50%" class="text-center">
+										Rank
+									</th>
+								</tr>
+							</thead>
+							<tr ng-repeat="myContest in myContestInfo">
+								<td>
+									<!-- <img class="user-pic" src="{{getProfilePicture(myContest.contest_picture)}}"> -->
+									<a href="#/inprogresscontests/{{myContest.id}}" type="button" class="primary-link">{{myContest.title}}</a>
+								</td>
+								<td class="text-center">
+									{{myContest.rank}}
+								</td>
+								<!-- <td>
+									<a href="#" type="button" data-toggle="modal" data-target="#prizeDetailsModal" ng-click="passModal(myContest.title, myContest.entry_fee, myContest.prize, myContest.description, myContest.start_time, myContest.end_time, 'inProgress', myContest.id, isEnabled(myContest.start_time))">{{myContest.prize}}</a>
+								</td>
+								<td>
+									{{myContest.start_time}} - {{myContest.end_time}}
+								</td>
+								<td align="right">
+									<a href="#/completedcontests/{{myContest.id}}"><span class="btn btn-default red-nostra" ng-show="{{myContest.is_live}}">View</span></a>
+									<a href="#/completedcontests/{{myContest.id}}"><span class="btn btn-default red-nostra" ng-hide="{{myContest.is_live}}">View</span></a>
+								</td> -->
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END PORTLET-->
+	</div>
+</div>
+<!-- End My Live Contests -->
+
+<!-- Trending Tastemakers -->
+<div ng-if="homeService.home.data.panelId==0">
 
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
@@ -29,7 +83,7 @@
 					        <img src="{{track.entries[0].user.profile_picture}}" class="img-responsive img-circle img-profile-panel" alt=""ng-show="track.entries[0].user.profile_picture">
 					        <i class="fa fa-user fa-3x" style="color:#ff5252;" ng-hide="track.entries[0].user.profile_picture"></i>
 					        <br>
-					        <h5>{{track.entries[0].user.username}}</h5>
+					        <a href="#/profile/{{track.entries[0].user.id}}"><h5>{{track.entries[0].user.username}}</h5></a>
 					    </div>
 					    <div class="col-xs-8 text-center">
 					    	<b>Jam Points</b>
@@ -56,10 +110,7 @@
 <!-- End Trending Tastemakers -->
 
 <!-- Start Contest Leaders -->
-<div ng-if="panelId!=0">
-
-	<br><br>
-	<div style="height:10px"></div>
+<div ng-if="homeService.home.data.panelId!=0">
 
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
@@ -67,9 +118,7 @@
 			<div class="portlet light">
 				<div class="portlet-title">
 					<div class="caption caption-md">
-						<i class="icon-bar-chart font-green-haze hide"></i>
-						<span class="caption-subject font-nostra bold uppercase">Contest {{panelId}}</span>
-						<div class="btn btn-default red-nostra" ng-click="setPanelBack()" style="opacity:0.5">Weekly Tastemakers</div>
+						<span class="caption-subject font-nostra bold uppercase">{{homeService.home.data.panelContestName}}</span>
 					</div>
 				</div>
 				<br>
@@ -80,7 +129,7 @@
 					        <img src="{{track.user.profile_picture}}" class="img-responsive img-circle img-profile-panel" alt=""ng-show="track.user.profile_picture">
 					        <i class="fa fa-user fa-3x" style="color:#ff5252;" ng-hide="track.user.profile_picture"></i>
 					        <br>
-					        <h5>{{track.user.username}}</h5>
+					        <a href="#/profile/{{track.user.id}}/dashboard"><h5>{{track.user.username}}</h5></a>
 					    </div>
 					    <div class="col-xs-8 text-center">
 					    	<b>Jam Points</b>

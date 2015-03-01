@@ -394,6 +394,7 @@
 									<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 									<li data-target="#myCarousel" data-slide-to="1"></li>
 									<li data-target="#myCarousel" data-slide-to="2"></li>
+									<li data-target="#myCarousel" data-slide-to="3"></li>
 								</ol>
 								<!-- Carousel items -->
 								<div class="carousel-inner">
@@ -406,12 +407,36 @@
 									<div class="item">
 										<img class="img-tutorial-carousel" src="/assets/global/img/tutorial/how_to_play_3.png">
 									</div>
+									<div class="item">
+										<h4 class="green">Good Examples</h4>
+						                <h4 class="text-center">(uploaded by record label or artist)</h4>
+						                <div class="row">
+						                    <div class="col-md-6">
+						                        <img src="/assets/global/img/scoring/good1.png" class="scoring-img" alt=""/>
+						                    </div>
+						                    <div class="col-md-6">
+						                        <img src="/assets/global/img/scoring/good2.png" class="scoring-img" alt=""/>
+						                    </div>
+						                </div>
+
+						                <hr/>
+						                <h4 class="red">Bad Examples</h4>
+						                <h4 class="text-center">(uploaded by random internet stranger)</h4>
+						                <div class="row">
+						                    <div class="col-md-6">
+						                        <img src="/assets/global/img/scoring/bad1.png" class="scoring-img" alt=""/>
+						                    </div>
+						                    <div class="col-md-6">
+						                        <img src="/assets/global/img/scoring/bad2.png" class="scoring-img" alt=""/>
+						                    </div>
+						                </div>
+									</div>
 								</div>
 								<!-- Carousel nav -->
 								<div class="btn" ng-disabled="slide==1">
 									<a class="carousel-control left" id="leftButton" href="#myCarousel" data-slide="prev" ng-click="getPrev()">&lsaquo;</a>
 								</div>
-								<div class="btn" ng-disabled="slide==3">
+								<div class="btn" ng-disabled="slide==4">
 									<a class="carousel-control right" id="rightButton" href="#myCarousel" data-slide="next" ng-click="getNext()">&rsaquo;</a>
 								</div>
 							</div>
@@ -420,7 +445,7 @@
 	                </div>
 	            </div>
 	            <div class="modal-footer" id="footer-tutorial">
-	                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="slide==3">Got it!</button>
+	                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="slide==4">Got it!</button>
 	            </div>
 	        </div>
 	    </div>

@@ -2,13 +2,10 @@
 
 <div class="row jamus-track-item">
     <div class="track-img-wrapper col-md-12 col-sm-12 col-xs-12 text-center" style="background-image: url({{ getCroppedImageUrl(contest.contest_picture) }});">
-        <!---->
-         <!--<img class="track-img img-responsive center-block" src="https://i1.sndcdn.com/artworks-000093556135-fu2rsq-large.jpg" alt="" />-->
-        <span ng-if="contest.results[0].track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn fa fa-5x fa-play-circle-o" ng-click="setPanel(contest.id);playNewTrack(contest.results[0].track, contest.id, contest.results)"></span>
-        <span ng-if="contest.results[0].track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn fa fa-4x fa-pause" ng-click="playNewTrack(contest.results[0].track, contest.id, contest.results)"></span>
-        <!-- <div class="play-btn-container">
 
-        </div> -->
+        <span ng-if="contest.id != homeService.home.data.panelId || !player.data.isPlaying" class="play-btn fa fa-5x fa-play-circle-o" ng-click="setPanelPlay(contest)"></span>
+        <span ng-if="contest.id == homeService.home.data.panelId && player.data.isPlaying" class="play-btn fa fa-4x fa-pause" ng-click="panelPause()"></span>
+
     </div>
 
     <div class="col-md-4 col-sm-4 col-xs-4" ng-hide="contest" align="center">
@@ -17,22 +14,5 @@
         <!-- <a class="fa fa-soundcloud fa-lg"></a> -->
         <img src="assets/nostraV1/img/contest/powered_soundcloud.png" height="100"></img>
     </div>
-
-    <!--<div class="col-md-2 col-sm-2 col-xs-2 track-right-icons">-->
-        <!--<div class="text-center">-->
-            <!--<div class="queue-icon track-right-icon">-->
-                <!--<span ng-click="player.addTrackToQueue(track.track)" class="fa fa-3x fa-plus-square-o"></span>-->
-            <!--</div>-->
-            <!--<div class="soundcloud-icon track-right-icon">-->
-                <!--<a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<div class="like-icon track-right-icon">-->
-                <!--&lt;!&ndash;<span class="fa fa-3x fa-heartbeat"></span>-->
-            <!--&lt;!&ndash;</div>-->
-            <!--&lt;!&ndash;<div class="share-icon track-right-icon">-->
-                <!--&lt;!&ndash;<span class="fa fa-3x fa-share-square-o"></span>-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-        <!--</div>-->
-    <!--</div>-->
+    
 </div>

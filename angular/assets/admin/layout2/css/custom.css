@@ -1132,6 +1132,72 @@ body .modal-tutorial {
   border-top: 0px solid #e5e5e5 !important;
 }
 
+.jamus-open-item {
+  height: 151px;
+  border: 1px solid #eeeeee;
+  background-color: #ffffff;
+}
+
+ul.img-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+ul.img-list li {
+  display: inline-block;
+  height: 150px;
+  margin: 0;
+  position: relative;
+  width: 150px;
+}
+
+span.text-content {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+  height: 150px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  opacity: 0;
+}
+
+span.text-content span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+ul.img-list li:hover span.text-content {
+  opacity: 1;
+}
+
+span.text-content {
+  background: rgba(255, 52, 52, 0.5);
+  color: white;
+  cursor: pointer;
+  display: table;
+  height: 150px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 150px;
+  opacity: 0;
+  -webkit-transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  transition: opacity 500ms;
+}
+
+.nostra-description {
+  font-family: Sica-Light;
+  color: #ffffff;
+}
+
 #switchPanel {
   animation: fadein 2s;
   -moz-animation: fadein 2s;
