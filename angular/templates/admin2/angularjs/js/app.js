@@ -384,6 +384,22 @@ MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope
     $scope.$on('$viewContentLoaded', function() {
         Metronic.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
+        
+        var items = [
+            "Nostradamus's famous Prophecies were the precursor awards to the Grammys.",
+            "Nostradamus was born in Provence, France but he soon moved to Woodstock, New York.",
+            "Nostradamus predicted Kanye's T. Swift and Beck interruptions.",
+            "Our whole team has cardboard cutouts of Nostradamus.",
+            "Nostradamus is the great-great-great-great grandfather of both Daft Punk members.",
+            "Nostradamus crowdsurfed at the first Coachella."
+            ];
+
+        var text = items[Math.floor(Math.random()*items.length)];
+
+        // document.getElementById('loadingText').innerHTML = '<div class="page-loading-text text-center">' + text + '</div>';
+
+        document.getElementById('loadingText').innerHTML = text;
+
     });
 }]);
 

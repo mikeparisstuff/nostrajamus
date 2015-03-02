@@ -1,5 +1,20 @@
 /*Custom CSS NostraJAMUS*/
 @import url("//hello.myfonts.net/count/2d4dba");
+.page-loading-text {
+  font-family: Sica-Bold;
+  font-size: 20px;
+  top: 50%;
+  margin-top: 200px;
+}
+.page-loading-text > div {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  background: #eee;
+  border-radius: 100% !important;
+  display: inline-block;
+}
+
 .nostra {
   font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
   color: #ff5252;

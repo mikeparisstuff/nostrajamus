@@ -343,7 +343,7 @@ Page Footer
     border-bottom: 0;
   }
   .page-sidebar-fixed:not(.page-footer-fixed) .page-footer {
-    background-color: #F8F8F8;
+    background-color: #FFFFFF;
   }
   .page-sidebar-fixed:not(.page-footer-fixed) .page-footer .page-footer-inner {
     color: #333;
@@ -384,7 +384,7 @@ Page Footer
 @media (max-width: 991px) {
   /* 991px */
   .page-container {
-    background: #F8F8F8;
+    background: #FFFFFF;
   }
 
   .page-header.navbar {

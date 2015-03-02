@@ -19,6 +19,27 @@ $screen-sm-max:              		($screen-md-min - 1) !default;
 $screen-md-max:              		($screen-lg-min - 1) !default;
 
 /*Custom CSS NostraJAMUS*/
+.page-loading-text {
+  font-family: Sica-Bold;
+  // position: fixed;
+  font-size: 20px;
+  top: 50%;
+  margin-top: 200px;
+  // left: 50%;
+  // margin-left: -55px;
+
+  > div {
+    // text-align: center;
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    background: #eee;
+
+    border-radius: 100% !important;
+    display: inline-block;
+  }
+}
+
 .nostra {
   font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
   color: #ff5252;
