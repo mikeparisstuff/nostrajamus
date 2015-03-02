@@ -363,6 +363,8 @@
 	                                <div class="col-lg-12 text-center">
 	                                	<br>
 	                                	<b>Not a member yet? <a href="#" data-toggle="modal" data-target="#registerModal" data-dismiss="modal"><span>Register Now!</span></a></b>
+	                                	<br>
+	                                	<b>Forgot Password? <a href="#" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal">Click Here</span></a></b>
 	                                </div>
 
 	                            </div>
@@ -376,6 +378,52 @@
 	        </div>
 	    </div>
 	</div>
+
+	<div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="authController">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header title-bg">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title white" id="forgotModalLabel">Forgot Password</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form name="registationForm" novalidate>
+                                <div class="row">
+                                    
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control text-center" placeholder="Email *" ng-model="emailForgot" required data-validation-required-message="Please enter an email">
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-12 text-center">
+                                        <div id="success"></div>
+                                        <button type="submit" class="btn btn-xl" ng-click="getPassword(emailForgot)">Get Password</button>
+                                        <div id="errors"></div>
+                                    </div>
+
+                                    <div class="col-lg-12 text-center">
+	                                	<br>
+	                                	<b>Have an account? <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Log In</span></a></b>
+	                                </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- <div class="modal-footer title-bg">
+                    <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal">Sweet.</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
 
 	<div class="modal fade" id="tutorialModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="authController">
 	    <div class="modal-dialog modal-tutorial">

@@ -1,12 +1,24 @@
 <!-- square -->
 
-<div class="row jamus-track-item">
-    <div class="track-img-wrapper col-md-12 col-sm-12 col-xs-12 text-center" style="background-image: url({{ getCroppedImageUrl(contest.contest_picture) }});">
+<div class="row jamus-open-item">
+    <div class="track-img-wrapper col-md-12 col-sm-12 col-xs-12 text-center" style="background-image: url({{ getCroppedImageUrl(contest.contest_picture) }});" ng-show="contest">
 
-        <span ng-if="contest.id != homeService.home.data.panelId || !player.data.isPlaying" class="play-btn fa fa-5x fa-play-circle-o" ng-click="setPanelPlay(contest)"></span>
-        <span ng-if="contest.id == homeService.home.data.panelId && player.data.isPlaying" class="play-btn fa fa-4x fa-pause" ng-click="panelPause()"></span>
+        <span ng-if="contest.id != homeService.home.data.panelId || !player.data.isPlaying" class="play-btn-playlist fa fa-5x fa-play-circle-o" ng-click="setPanelPlay(contest)"></span>
+        <span ng-if="contest.id == homeService.home.data.panelId && player.data.isPlaying" class="play-btn-playlist fa fa-4x fa-pause" ng-click="panelPause()"></span>
 
     </div>
+
+    <span class="text-content-playlist">
+        <span ng-if="contest.is_live && authState.user">
+            <a href="#/inprogresscontest/{{contest.id}}" class="nostra-description">{{contest.title}}</a>
+        </span>
+        <span ng-if="!contest.is_live && authState.user">
+            <a href="#/completedcontest/{{contest.id}}" class="nostra-description">{{contest.title}}</a>
+        </span>
+        <span ng-if="!authState.user">
+            <a href="#" class="nostra-description" data-toggle="modal" data-target="#registerModal">{{contest.title}}</a>
+        </span>
+    </span>
 
     <div class="col-md-4 col-sm-4 col-xs-4" ng-hide="contest" align="center">
         <br>
@@ -14,5 +26,5 @@
         <!-- <a class="fa fa-soundcloud fa-lg"></a> -->
         <img src="assets/nostraV1/img/contest/powered_soundcloud.png" height="100"></img>
     </div>
-    
+
 </div>

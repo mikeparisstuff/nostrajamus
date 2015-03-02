@@ -1,13 +1,13 @@
 'use strict';
 
-MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http, $timeout, contests, globalPlayerService, weeklyLeaders, homeService, myData, authState) {
+MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http, $timeout, contests, globalPlayerService, dailyLeaders, homeService, myData, authState) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         Metronic.initAjax();
     });
 
     $scope.contests = contests;
-    $scope.weeklyLeaders = weeklyLeaders;
+    $scope.dailyLeaders = dailyLeaders;
     $scope.myData = myData;
 
     if ($scope.authState.user.length > 0) {
@@ -63,10 +63,10 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 
 		if (myData.my_entries) {
 			for (var i=0; i < myData.my_entries.length; i++) {
-				// if (myData.my_entries[i].is_active) {
+				if (myData.my_entries[i].is_active) {
 					var contestNum = myData.my_entries[i].contest;
 					getContestInfo(i, contestNum);
-				// }
+				}
 			}
 		}
 		// End My Contest Info
@@ -82,7 +82,7 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
         $scope.getContestEntries(i, $scope.contests[i]);
     }
 
-    $scope.trendingTracks = weeklyLeaders.results;
+    $scope.trendingTracks = dailyLeaders.results;
 
 	$scope.insertCommas = function(s) {
         s = s.toString();
@@ -186,8 +186,10 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
         });
         globalPlayerService.player.data.trackQueue = tunes;
         // // Set the next url and such
-        // var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
-        // globalPlayerService.player.data.nextPageUrl = nextUrl;
+        // if (homeService.home.data.panelId != 0) {
+        // 	var nextUrl = '/api/contests/' + homeService.home.data.panelId + 'entries/?page=' + ($scope.currentPage + 1);
+        // 	globalPlayerService.player.data.nextPageUrl = nextUrl;
+        // }
     };
 
     $scope.getCroppedImageUrl = function(url) {

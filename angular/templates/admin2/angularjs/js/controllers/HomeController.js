@@ -12,7 +12,6 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
     }
 
     $rootScope.homeService = homeService;
-    // $rootScope.panelId = 0;
     $scope.contests = contests;
     $scope.authState = authState;
 
@@ -162,7 +161,7 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
         });
         globalPlayerService.player.data.trackQueue = tunes;
         // // Set the next url and such
-        // var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
+        // var nextUrl = '/api/contests/' + $scope.contestInfo.id + '/entries/?page=' + ($scope.currentPage + 1);
         // globalPlayerService.player.data.nextPageUrl = nextUrl;
     };
 

@@ -81,7 +81,7 @@ MetronicApp.factory('api', ['$resource', function($resource) {
     };
 }]);
 
-MetronicApp.controller('authController', function($scope, api, authState) {
+MetronicApp.controller('authController', function($scope, api, authState, $http) {
     // Angular does not detect auto-fill or auto-complete. If the browser
     // autofills "username", Angular will be unaware of this and think
     // the $scope.username is blank. To workaround this we use the 
@@ -159,6 +159,53 @@ MetronicApp.controller('authController', function($scope, api, authState) {
                 });
     };
 
+    $scope.getPassword = function(email) {
+        $http({
+            url: '/api/users/initiate_password_reset/',
+            method: "POST",
+            data:
+            {
+                "email": email
+            },
+            headers: {'Content-Type': 'application/json'}
+        }).success(function (data, status, headers, config) {
+            console.log(data);
+            alert("Thanks! Check your email for your token to retrieve password.");
+            $('#forgotModal').modal('hide');
+            window.location.href = "#/forgot";
+        }).error(function (data, status, headers, config) {
+            // $scope.status = status;
+            console.log(data);
+            alert("Try again.");
+        });
+    }
+
+    $scope.resetPassword = function(token, new_password, confirm_password) {
+        if (new_password == confirm_password) {
+            $http({
+                url: '/api/users/reset_password/',
+                method: "POST",
+                data:
+                {
+                    "token": token,
+                    "new_password": new_password
+                },
+                headers: {'Content-Type': 'application/json'}
+            }).success(function (data, status, headers, config) {
+                console.log(data);
+                alert("Password Changed!");
+                window.location.href = "#/home";
+            }).error(function (data, status, headers, config) {
+                // $scope.status = status;
+                console.log(data);
+                alert("Try again.");
+            });
+        }
+        else {
+            alert("Passwords don't match!");
+        }
+    }
+
     // [1] https://tools.ietf.org/html/rfc2617
     // [2] https://developer.mozilla.org/en-US/docs/Web/API/Window.btoa
     // [3] https://docs.djangoproject.com/en/dev/ref/settings/#append-slash
@@ -194,10 +241,10 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
 
     player.getDefaultQueue = function () {
         var that = this;
-        $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
+        $http.get('/api/tracks/trending/?filter=daily&page=1').then(function(response) {
             that.loadTrack(response.data.results[0].track);
             that.data.trackQueue = response.data.results.slice(1).map(function(elem) { return elem.track });
-            that.data.nextPageUrl = '/api/tracks/trending/?filter=weekly&page=2';
+            that.data.nextPageUrl = '/api/tracks/trending/?filter=daily&page=2';
             $rootScope.$broadcast('player.trackQueue.update', that.data.trackQueue);
         });
     };
@@ -553,8 +600,8 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                                 return response.data;
                             });
                         }],
-                        weeklyLeaders: ['$http', function($http) {
-                            return $http.get('/api/tracks/trending/?filter=weekly').then(function(response) {
+                        dailyLeaders: ['$http', function($http) {
+                            return $http.get('/api/tracks/trending/?filter=daily').then(function(response) {
                                 // console.log(response.data);
                                 return response.data;
                             });
@@ -570,6 +617,41 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         }]
                     }
                 }
+            }
+        })
+
+        //Forgot Password
+        .state('forgot', {
+            url: "/forgot",
+            templateUrl: "/assets/views/forgot.html",
+            data: {
+                pageTitle: 'Forgot Password',
+                authenticate: false
+            },
+            controller: "ForgotController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '/assets/global/plugins/morris/morris.css',
+                            '/assets/admin/pages/css/tasks.css',
+                            
+                            '/assets/global/plugins/morris/morris.min.js',
+                            '/assets/global/plugins/morris/raphael-min.js',
+                            '/assets/global/plugins/jquery.sparkline.min.js',
+
+                            '/assets/admin/pages/scripts/index3.js',
+                            '/assets/admin/pages/scripts/tasks.js',
+
+                            '/assets/admin/pages/scripts/tasks.js',
+
+                            '/assets/js/controllers/ForgotController.js',
+                            '/assets/js/controllers/GlobalPlayerController.js'
+                        ] 
+                    });
+                }]
             }
         })
 
@@ -1404,7 +1486,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     });
                 }],
                 trending: ['$http', function($http) {
-                    return $http.get('/api/tracks/trending/?filter=weekly&page=1').then(function(response) {
+                    return $http.get('/api/tracks/trending/?filter=daily&page=1').then(function(response) {
                         // console.log(response.data);
                         return response.data;
                     });

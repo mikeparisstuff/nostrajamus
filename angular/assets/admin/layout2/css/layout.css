@@ -941,11 +941,11 @@ Page sidebar
 }
 .page-container-bg-solid .page-sidebar .page-sidebar-menu > li.active > a > .selected, .page-container-bg-solid
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > .selected {
-  border-color: transparent #F8F8F8 transparent transparent;
+  border-color: transparent #FFFFFF transparent transparent;
 }
 .page-container-bg-solid.page-sidebar-reversed .page-sidebar .page-sidebar-menu > li.active > a > .selected, .page-container-bg-solid.page-sidebar-reversed
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a > .selected {
-  border-color: transparent transparent transparent #F8F8F8;
+  border-color: transparent transparent transparent #FFFFFF;
 }
 .page-sidebar .page-sidebar-menu li > a > .arrow:before,
 .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li > a > .arrow:before {
@@ -1544,7 +1544,7 @@ Page content
   background-color: #fff;
 }
 .page-container-bg-solid .page-content {
-  background: #F8F8F8;
+  background: #FFFFFF;
 }
 .page-full-width .page-content {
   margin-left: 0px !important;

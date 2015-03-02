@@ -62,7 +62,7 @@
 				<div class="portlet-title">
 					<div class="caption caption-md">
 						<i class="icon-bar-chart font-green-haze hide"></i>
-						<span class="caption-subject font-nostra bold uppercase">Open Contests</span>
+						<span class="caption-subject font-nostra bold uppercase">Join a Contest</span>
 					</div>
 				</div>
 				<!-- <div class="portlet-body"> -->
@@ -107,16 +107,12 @@
 				</div>
 				<!-- <div class="portlet-body"> -->
 					<div class="table-scrollable table-scrollable-borderless">
-						<div class="col-md-12">
-							<div class="col-md-4" ng-repeat="contest in inProgressContests">
-								<div data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></div>
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="col-md-4" ng-repeat="contest in completedContests">
-								<div data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></div>
-							</div>
-						</div>
+						<ul class="col-md-4 img-list" ng-repeat="contest in inProgressContests">
+							<li data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></li>
+						</ul>
+						<ul class="col-md-4 img-list" ng-repeat="contest in completedContests">
+							<li data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></li>
+						</ul>
 					</div>
 				<!-- </div> -->
 			</div>

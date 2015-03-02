@@ -1154,29 +1154,6 @@ ul.img-list li {
 }
 
 span.text-content {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  cursor: pointer;
-  display: table;
-  height: 150px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 150px;
-  opacity: 0;
-}
-
-span.text-content span {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-}
-
-ul.img-list li:hover span.text-content {
-  opacity: 1;
-}
-
-span.text-content {
   background: rgba(255, 52, 52, 0.5);
   color: white;
   cursor: pointer;
@@ -1193,9 +1170,56 @@ span.text-content {
   transition: opacity 500ms;
 }
 
+span.text-content span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+ul.img-list li:hover span.text-content {
+  opacity: 1;
+}
+
 .nostra-description {
-  font-family: Sica-Light;
+  font-family: Sica-Regular;
   color: #ffffff;
+}
+
+span.text-content-playlist {
+  background: rgba(255, 52, 52, 0.5);
+  color: white;
+  display: table;
+  height: 0px;
+  left: 0;
+  position: absolute;
+  top: 125px;
+  width: 150px;
+  padding: 0;
+  opacity: 0;
+  -webkit-transition: opacity 500ms;
+  -moz-transition: opacity 500ms;
+  -o-transition: opacity 500ms;
+  transition: opacity 500ms;
+}
+
+span.text-content-playlist span {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+ul.img-list li:hover span.text-content-playlist {
+  opacity: 1;
+}
+
+.play-btn-playlist {
+  opacity: 0.8;
+  color: #ff5252;
+  margin-top: 65px;
+}
+
+.play-btn-playlist:hover {
+  transform: scale(1.1);
 }
 
 #switchPanel {
