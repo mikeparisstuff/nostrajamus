@@ -15,6 +15,12 @@
   display: inline-block;
 }
 
+.page-spinner-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
 .nostra {
   font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
   color: #ff5252;

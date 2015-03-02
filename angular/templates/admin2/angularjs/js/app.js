@@ -81,7 +81,7 @@ MetronicApp.factory('api', ['$resource', function($resource) {
     };
 }]);
 
-MetronicApp.controller('authController', function($scope, api, authState, $http) {
+MetronicApp.controller('authController', function($scope, api, authState, $http, spinnerService) {
     // Angular does not detect auto-fill or auto-complete. If the browser
     // autofills "username", Angular will be unaware of this and think
     // the $scope.username is blank. To workaround this we use the 
@@ -370,6 +370,15 @@ MetronicApp.factory('homeService', ['$rootScope', function ($rootScope) {
     return { home: home };
 }]);
 
+MetronicApp.factory('spinnerService', ['$rootScope', function ($rootScope) {
+    var spinner = {
+        data: {
+            refresh: true
+        }
+    };
+    return {spinner: spinner};
+}]);
+
 //We already have a limitTo filter built-in to angular,
 //let's make a startFrom filter
 // MetronicApp.filter('startFrom', function() {
@@ -380,26 +389,23 @@ MetronicApp.factory('homeService', ['$rootScope', function ($rootScope) {
 // });
 
 /* Setup App Main Controller */
-MetronicApp.controller('AppController', ['$scope', '$rootScope', function($scope, $rootScope) {
+MetronicApp.controller('AppController', ['$scope', '$rootScope', 'spinnerService', function($scope, $rootScope, spinnerService) {
     $scope.$on('$viewContentLoaded', function() {
         Metronic.initComponents(); // init core components
         //Layout.init(); //  Init entire layout(header, footer, sidebar, etc) on page load if the partials included in server side instead of loading with ng-include directive 
-        
+
         var items = [
-            "Nostradamus's famous Prophecies were the precursor awards to the Grammys.",
-            "Nostradamus was born in Provence, France but he soon moved to Woodstock, New York.",
-            "Nostradamus predicted Kanye's T. Swift and Beck interruptions.",
-            "Our whole team has cardboard cutouts of Nostradamus.",
-            "Nostradamus is the great-great-great-great grandfather of both Daft Punk members.",
-            "Nostradamus crowdsurfed at the first Coachella."
-            ];
+        "Nostradamus's famous Prophecies were the precursor awards to the Grammys.",
+        "Nostradamus was born in Provence, France but he soon moved to Woodstock, New York.",
+        "Nostradamus predicted Kanye's T. Swift and Beck interruptions.",
+        "Our whole team has cardboard cutouts of Nostradamus.",
+        "Nostradamus is the great-great-great-great grandfather of both Daft Punk members.",
+        "Nostradamus crowdsurfed at the first Coachella."
+        ];
 
         var text = items[Math.floor(Math.random()*items.length)];
 
-        // document.getElementById('loadingText').innerHTML = '<div class="page-loading-text text-center">' + text + '</div>';
-
-        document.getElementById('loadingText').innerHTML = text;
-
+        $scope.loadingText = text;
     });
 }]);
 
@@ -410,13 +416,14 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'authState', function($rootScope, $scope, $http, authState) {
+MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'authState', 'spinnerService', function($rootScope, $scope, $http, authState, spinnerService) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
 
     $rootScope.firstTime = true;
     $scope.firstTime = $rootScope.firstTime;
+    // spinnerService.spinner.data.refresh = false;
 
     $scope.slide = 1;
     $('myCarousel').carousel({
@@ -471,6 +478,8 @@ MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'au
         return pic;
       // }
     };
+
+    spinnerService.spinner.data.refresh = false;
 
 }]);
 
@@ -1676,11 +1685,12 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 }]);
 
 /* Init global settings and run the app */
-MetronicApp.run(["$rootScope", "settings", "$state", "$anchorScroll", "authState", function($rootScope, settings, $state, $anchorScroll, authState) {
+MetronicApp.run(["$rootScope", "settings", "$state", "$anchorScroll", "authState", "spinnerService", function($rootScope, settings, $state, $anchorScroll, authState, spinnerService) {
     $rootScope.$state = $state; // state to be accessed from view
     // $anchorScroll.yOffset = 50;
 
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+        // spinnerService.spinner.data.refresh = false;
         // console.log(toState);
         // console.log(fromState);
         // console.log(authState.user);

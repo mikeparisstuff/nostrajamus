@@ -25,6 +25,7 @@ $screen-md-max:              		($screen-lg-min - 1) !default;
   font-size: 20px;
   top: 50%;
   margin-top: 200px;
+  // z-index: 10050 + 1;
   // left: 50%;
   // margin-left: -55px;
 
@@ -38,6 +39,11 @@ $screen-md-max:              		($screen-lg-min - 1) !default;
     border-radius: 100% !important;
     display: inline-block;
   }
+}
+.page-spinner-text {
+  position:absolute;
+  width:100%;
+  text-align:center;
 }
 
 .nostra {
