@@ -81,7 +81,7 @@ MetronicApp.factory('api', ['$resource', function($resource) {
     };
 }]);
 
-MetronicApp.controller('authController', function($scope, api, authState) {
+MetronicApp.controller('authController', function($scope, api, authState, $http) {
     // Angular does not detect auto-fill or auto-complete. If the browser
     // autofills "username", Angular will be unaware of this and think
     // the $scope.username is blank. To workaround this we use the 
