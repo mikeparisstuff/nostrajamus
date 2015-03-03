@@ -1,0 +1,66 @@
+<!--BEGIN PAGE HEADER-->
+<!-- <div align="right" ng-controller="authController" ng-if="!authState.user" style="float:right">Already registered? <a href="#" class="red" data-toggle="modal" data-target="#loginModal">LOG IN</a></div> -->
+<h3 class="page-title">
+	Recover Password
+</h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div>
+	
+<div class="row" ng-controller="authController">
+    <div class="col-lg-12">
+        <form name="reset" novalidate>
+        	<div class="row text-center">
+            	<div class="col-md-offset-3 col-md-6">
+            		<small>Don't have a token? Get one <a href="#" data-toggle="modal" data-target="#forgotModal" data-dismiss="modal">here</a>.</small>
+            	</div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control text-center" placeholder="Your Token (check email) *" ng-model="token" required data-validation-required-message="Please enter your email address.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>              
+            </div>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="form-group">
+                        <input type="password" class="form-control text-center" placeholder="New Password *" ng-model="new_password" required data-validation-required-message="Please enter your new password.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6">
+                    <div class="form-group">
+                        <input type="password" class="form-control text-center" placeholder="New Password *" ng-model="confirm_password" required data-validation-required-message="Please enter your new password.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+            </div>
+
+        	<div class="clearfix"></div>
+            <div class="col-lg-12 text-center">
+                <div id="success"></div>
+                <button type="submit" ng-click="resetPassword(token, new_password, confirm_password)" class="btn btn-xl">Submit</button>
+                <div id="errors"></div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h3 class="section-subheading text-muted">Back to <a href="#/home/">Home</a></h3>
+    </div>
+</div>
+
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS & CSS -->
+<script>
+	// Index.init();    
+	// Tasks.initDashboardWidget();
+</script>
+<!-- BEGIN MAIN JS & CSS
