@@ -1,0 +1,78 @@
+<!-- panel x -->
+
+<div class="row">
+
+    <div class="col-md-12 jamus-contest-item">
+        <div class="track-img-wrapper-contest col-md-3 col-sm-3 col-xs-3 text-center" style="background-image: url({{ getCroppedImageUrl(track.track.artwork_url) }});">
+            <!---->
+             <!--<img class="track-img img-responsive center-block" src="https://i1.sndcdn.com/artworks-000093556135-fu2rsq-large.jpg" alt="" />-->
+            <span ng-if="track.track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn-contest fa fa-3x fa-play-circle-o" ng-click="playNewTrack(track.track, $index, trendingTracks)"></span>
+            <span ng-if="track.track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn-contest fa fa-2x fa-pause" ng-click="playNewTrack(track.track, $index, trendingTracks)"></span>
+            <!-- <div class="play-btn-container">
+
+            </div> -->
+        </div>
+
+        <div class="track-data col-md-9 col-sm-9 col-xs-9">
+            <div ng-if="player.data.currentTrackData.sc_id == track.track.sc_id" class="progress jamus-list-item-progress-bar-contest">
+                <div class="progress-bar-contest" role="progressbar" aria-valuenow="{{ player.data.trackProgress }}" aria-valuemin="0" aria-valuemax="1" style="width: {{ player.data.trackProgress * 100 }}%;">
+                </div>
+            </div>
+            <div class="track-data-top-contest text-center">
+                <div class="row">
+                    <!-- <i class="btn fa fa-times" ng-click="removeSubmission()" style="float:right" ng-if="fromOpenContests && hasSubmitted"></i> -->
+                    <div class="col-xs-offset-1 col-xs-10">
+                        <div class="track-title-contest"><b>{{ track.track.title }}</b></div>
+                        <p class="track-artist-contest">{{ track.track.user.username }}</p>
+                    </div>
+                </div>
+                <!--<div class="track-queue-btn track-right-icon">-->
+                    <!--<span class="fa fa-2x fa-plus-square-o" ng-click="player.addTrackToQueue(track.track)"></span>-->
+                <!--</div>-->
+            </div>
+
+            <hr class="track-divider-contest"/>
+            <div class="track-data-bottom-contest text-center">
+                <div class="row">
+                    <!-- <div class="col-md-2 col-sm-2 col-xs-4"><b>Initial Plays</b><br />{{ insertCommas(track.initial_playback_count) }} -->
+                    <!-- </div> -->
+                    <div class="contest-stats col-md-4 col-sm-4 col-xs-8"><b>+ Plays</b>
+                        {{ insertCommas(getPlayIncrease(track)) }}%
+                    </div>
+                    <!-- <div class="col-md-2 col-sm-2 col-xs-4"><b>Current Plays</b><br />{{insertCommas(track.current_playback_count) }}</div> -->
+                    <div class="contest-stats col-md-4 col-sm-4 col-xs-8"><b>Followers</b><br />{{ insertCommas(track.initial_follower_count) }}</div>
+                    <!-- <div class="col-md-2 col-sm-2 col-xs-4"><b>Jam Points</b><br />{{ insertCommas(track.jam_points) }}</div> -->
+                    <div class="soundcloud-icon-contest col-md-4 col-sm-4 col-xs-8">
+                        <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-1x fa-soundcloud"></a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- <div class="col-md-12 col-sm-12 col-xs-12" ng-hide="contest" align="center">
+            <br>
+            <h4>Powered by</h4>
+            <img src="assets/nostraV1/img/contest/powered_soundcloud.png" height="100"></img>
+        </div> -->
+    </div>
+
+    <!--<div class="col-md-2 col-sm-2 col-xs-2 track-right-icons">-->
+        <!--<div class="text-center">-->
+            <!--<div class="queue-icon track-right-icon">-->
+                <!--<span ng-click="player.addTrackToQueue(track.track)" class="fa fa-3x fa-plus-square-o"></span>-->
+            <!--</div>-->
+            <!--<div class="soundcloud-icon track-right-icon">-->
+                <!--<a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div class="like-icon track-right-icon">-->
+                <!--&lt;!&ndash;<span class="fa fa-3x fa-heartbeat"></span>-->
+            <!--&lt;!&ndash;</div>-->
+            <!--&lt;!&ndash;<div class="share-icon track-right-icon">-->
+                <!--&lt;!&ndash;<span class="fa fa-3x fa-share-square-o"></span>-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+        <!--</div>-->
+    <!--</div>-->
+</div>
