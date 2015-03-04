@@ -925,3 +925,8 @@ Red-nostra
     height: 150px;
   }
 }
+@media (max-width: 992px) {
+  .page-header-fixed.page-header-fixed-mobile .navbar-fixed-top {
+    height: inherit;
+  }
+}

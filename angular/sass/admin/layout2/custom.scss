@@ -897,4 +897,11 @@ Red-nostra
     height: 150px;
   }
 }
+
+@media(max-width: $screen-md-min) {
+  .page-header-fixed.page-header-fixed-mobile .navbar-fixed-top {
+    height: inherit;
+  }
+}
+
 // END TRANSITION
