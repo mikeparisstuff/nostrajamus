@@ -158,11 +158,19 @@
                                 {{$index+1}}
                             </th>
                             <td class="bold text-center" width="33%">
+                            	<!-- <div class="row">
+									<div class="col-md-2 col-md-offset-2">
+										<div class="profile-pic-sm">
+											<img src="{{getProfilePicture(leader.profile_picture)}}" ng-show="getProfilePicture(leader.profile_picture)" class="profile-circle-img" height="100%" width="100%">
+										</div>
+									</div>
+								</div> -->
                                 <div class="row">
                                     <div class="col-md-2 col-md-offset-2">
-                                        <!-- class="user-pic" -->
-                                        <img class="img-responsive img-circle" src="{{getProfilePicture(leader.profile_picture)}}" ng-show="getProfilePicture(leader.profile_picture)"> <!-- /assets/admin/layout/img/avatar4.jpg -->
-                                        <i class="fa fa-user fa-lg" ng-hide="getProfilePicture(leader.profile_picture)"></i>
+                                    	<div class="profile-pic-sm" height="100%" width="100%">
+	                                        <img class="img-responsive img-circle" src="{{getProfilePicture(leader.profile_picture)}}" ng-show="getProfilePicture(leader.profile_picture)">
+	                                        <i class="fa fa-user fa-lg" ng-hide="getProfilePicture(leader.profile_picture)"></i>
+	                                    </div>
                                     </div>
                                     <a href="#/profile/{{leader.id}}/dashboard"><div class="col-md-6">{{leader.username}}</div></a>
                                 </div>

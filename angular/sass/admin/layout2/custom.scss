@@ -269,6 +269,14 @@ section#services {
   color: #ddd;
   // margin-top: 13px;
 }
+.profile-pic-sm {
+  width: 25px;
+  height: 25px;
+  margin-right: 0;
+}
+.profile-circle-img {
+  border-radius: 50% !important;
+}
 
 /***
 Red-nostra
@@ -1281,31 +1289,31 @@ ul.img-list li:hover span.text-content-playlist {
 
 /* HOME */
 
-.contest-square-info {
-  background-color: #fff;
-  height: 70px;
-  position: absolute;
-  bottom:1px;
-  left: 1px;
-  right: 1px;
+// .contest-square-info {
+//   background-color: #fff;
+//   height: 70px;
+//   position: absolute;
+//   bottom:1px;
+//   left: 1px;
+//   right: 1px;
 
-}
+// }
 
-.jamus-contest-item-square {
-  margin-top: 20px;
-  height: 300px;
-  border: 1px solid #eeeeee;
-  background-color: #333;
-}
+// .jamus-contest-item-square {
+//   margin-top: 20px;
+//   height: 300px;
+//   border: 1px solid #eeeeee;
+//   background-color: #333;
+// }
 
 /* END HOME */
 
 
 /* OVERRIDE TEMPLATE */
 
-.page-content-wrapper .page-content {
-  padding: 0;
-  background-color: #fff;
-}
+// .page-content-wrapper .page-content {
+//   padding: 0;
+//   background-color: #fff;
+// }
 
 /* END OVERRIDE TEMPLATE */
