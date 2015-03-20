@@ -364,7 +364,8 @@ MetronicApp.factory('homeService', ['$rootScope', function ($rootScope) {
     var home =  {
         data: {
             panelId: 0,
-            panelContestName: null
+            panelContestName: null,
+            is_Live: false
         }
     };
     return { home: home };

@@ -58,7 +58,7 @@
 </div>
 <!-- End My Live Contests -->
 
-<!-- Trending Tastemakers -->
+<!-- Hottest Tracks -->
 <div ng-if="homeService.home.data.panelId==0">
 
 	<div class="row">
@@ -68,13 +68,15 @@
 				<div class="portlet-title">
 					<div class="caption caption-md">
 						<i class="icon-bar-chart font-green-haze hide"></i>
-						<span class="caption-subject font-nostra bold uppercase">Trending Tastemakers</span>
+						<span class="caption-subject font-nostra bold uppercase">Hottest Tracks</span>
+						<br>
+						<div class="font-discovered">Discover more <a href="#/discover">here</a>.</div>
 					</div>
 				</div>
-				<br>
+				<!-- <br> -->
 				<div class="portlet-body" ng-repeat="track in trendingTracks | limitTo:5">
 
-					<div class="row" id="switchPanel">
+					<!-- <div class="row" id="switchPanel">
 					    <div class="col-xs-6 text-center">
 					    	<a href="#/profile/{{track.entries[0].user.id}}/dashboard">
 						        <img src="{{track.entries[0].user.profile_picture}}" class="img-responsive img-circle img-profile-panel" alt=""ng-show="track.entries[0].user.profile_picture">
@@ -87,25 +89,34 @@
 					    	<b>Jam Points</b>
 					    	<div>{{track.entries[0].user.total_jam_points}}</div>
 					    </div>
+					</div> -->
+
+					<div class="font-discovered">
+						Discovered by: 
+						<a href="#/profile/{{track.entries[0].user.id}}/dashboard">
+							{{track.entries[0].user.username}}
+						</a>
 					</div>
 					
 					<!-- first song -->
 					<div data-ng-include="'/assets/tpl/jamus-contest-item-panel.html'"></div>
 					<!-- more songs -->
-					<div class="" ng-repeat="tracks in track.moreTracks" ng-if="tracks">
+					<!-- <div class="" ng-repeat="tracks in track.moreTracks" ng-if="tracks">
 						<div data-ng-include="'/assets/tpl/jamus-contest-item-panel-more.html'"></div>
-					</div>
+					</div> -->
 
 					<hr>
 
 				</div>
+
+				<div class="font-discovered" style="float:right"><a href="#/discover">See More...</a></div>
 			</div>
 			<!-- END PORTLET-->
 		</div>
 	</div>
 
 </div>
-<!-- End Trending Tastemakers -->
+<!-- End Hottest Tracks -->
 
 <!-- Start Contest Leaders -->
 <div ng-if="homeService.home.data.panelId!=0">
@@ -116,13 +127,19 @@
 			<div class="portlet light">
 				<div class="portlet-title">
 					<div class="caption caption-md">
-						<span class="caption-subject font-nostra bold uppercase">{{homeService.home.data.panelContestName}}</span>
+						<span class="caption-subject font-nostra bold uppercase">
+							<a ng-if="!homeService.home.data.is_Live && authState.user" href="#/completedcontests/{{homeService.home.data.panelId}}">{{homeService.home.data.panelContestName}}</a>
+							<a ng-if="homeService.home.data.is_Live && authState.user" href="#/inprogresscontests/{{homeService.home.data.panelId}}">{{homeService.home.data.panelContestName}}</a>
+							<span ng-if="!authState.user">
+					            <a href="#" class="" data-toggle="modal" data-target="#registerModal">{{homeService.home.data.panelContestName}}</a>
+					        </span>
+						</span>
 					</div>
 				</div>
-				<br>
+				<!-- <br> -->
 				<div class="portlet-body" ng-repeat="track in contestInstance.results | limitTo:5" id="switchPanel">
 
-					<div class="row">
+					<!-- <div class="row">
 					    <div class="col-xs-6 text-center">
 					    	<a href="#/profile/{{track.user.id}}/dashboard">
 						        <img src="{{track.user.profile_picture}}" class="img-responsive img-circle img-profile-panel" alt=""ng-show="track.user.profile_picture">
@@ -135,12 +152,27 @@
 					    	<b>Jam Points</b>
 					    	<div>{{track.jam_points}}</div>
 					    </div>
+					</div> -->
+
+					<div class="font-discovered">
+						Discovered by: 
+						<a href="#/profile/{{track.user.id}}/dashboard">
+							{{track.user.username}}
+						</a>
 					</div>
 					
 					<div data-ng-include="'/assets/tpl/jamus-contest-x-item-panel.html'"></div>
 
 					<hr>
 
+				</div>
+
+				<div class="font-discovered" style="float:right">
+					<a ng-if="!homeService.home.data.is_Live && authState.user" href="#/completedcontests/{{homeService.home.data.panelId}}">See Full Standings...</a>
+					<a ng-if="homeService.home.data.is_Live && authState.user" href="#/inprogresscontests/{{homeService.home.data.panelId}}">See Full Standings...</a>
+					<span ng-if="!authState.user">
+			            <a href="#" class="" data-toggle="modal" data-target="#registerModal">See Full Standings...</a>
+			        </span>
 				</div>
 			</div>
 			<!-- END PORTLET-->

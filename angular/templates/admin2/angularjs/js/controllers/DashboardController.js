@@ -84,7 +84,7 @@ MetronicApp.controller('DashboardController', function($rootScope, $scope, $http
 
 		$scope.openContests = openContests;
 		$scope.inProgressContests = inProgressContests;
-		$scope.completedContests = completedContests;
+		$scope.completedContests = completedContests.reverse();
 
 		// Start Countdown Timer
 		// set the date we're counting down to

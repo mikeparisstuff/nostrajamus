@@ -277,6 +277,14 @@ section#services {
 .profile-circle-img {
   border-radius: 50% !important;
 }
+.font-discovered {
+  font-family: Sica-Light;
+  float: left;
+  padding-top: 10px;
+  /*padding-left: 10px;*/
+  // padding-right: 10px;
+  font-size: 15px;
+}
 
 /***
 Red-nostra
@@ -876,7 +884,7 @@ Red-nostra
 
 .jamus-contest-item {
   padding: 0 !important;
-  margin-top: 20px;
+  // margin-top: 20px;
   height: 100px;
   border: 1px solid #eeeeee;
   background-color: #ffffff;
