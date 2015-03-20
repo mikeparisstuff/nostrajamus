@@ -44,8 +44,8 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
 		}
 
 		$scope.openContests = openContests;
-		$scope.inProgressContests = inProgressContests;
-		$scope.completedContests = completedContests;
+		$scope.inProgressContests = inProgressContests.reverse();
+		$scope.completedContests = completedContests.reverse();
 	};
 
 	$scope.insertCommas = function(s) {
