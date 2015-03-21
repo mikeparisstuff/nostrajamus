@@ -10,10 +10,10 @@
 
     <span class="text-content-playlist">
         <span ng-if="contest.is_live && authState.user">
-            <a href="#/inprogresscontest/{{contest.id}}" class="nostra-description">{{contest.title}}</a>
+            <a href="#/inprogresscontests/{{contest.id}}" class="nostra-description">{{contest.title}}</a>
         </span>
         <span ng-if="!contest.is_live && authState.user">
-            <a href="#/completedcontest/{{contest.id}}" class="nostra-description">{{contest.title}}</a>
+            <a href="#/completedcontests/{{contest.id}}" class="nostra-description">{{contest.title}}</a>
         </span>
         <span ng-if="!authState.user">
             <a href="#" class="nostra-description" data-toggle="modal" data-target="#registerModal">{{contest.title}}</a>
