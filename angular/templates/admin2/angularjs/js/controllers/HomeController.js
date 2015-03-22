@@ -124,11 +124,12 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
 
 	$scope.setPanelPlay = function(contest) {
 		if ($rootScope.homeService.home.data.panelId != contest.id) {
-			$rootScope.homeService.home.data.is_Live = contest.is_Live;
+			$rootScope.homeService.home.data.is_Live = contest.is_live;
 			$rootScope.homeService.home.data.panelId = contest.id;
 			$rootScope.homeService.home.data.panelContestName = contest.title;
 			homeService.home.data.panelId = contest.id;
 			homeService.home.data.panelContestName = contest.title;
+			homeService.home.data.is_Live = contest.is_live;
 			// $rootScope.panelContestPic = contest.contest_picture;
 
 			$http.get('/api/contests/' + homeService.home.data.panelId + "/entries").then(function(response) {
