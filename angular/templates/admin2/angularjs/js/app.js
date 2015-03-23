@@ -682,54 +682,54 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         })
 
         // Dashboard
-        .state('dashboard', {
-            url: "/dashboard",
-            templateUrl: "/assets/views/dashboard.html",
-            data: {
-                pageTitle: 'Home',
-                authenticate: false
-            },
-            controller: "DashboardController",
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            '/assets/global/plugins/morris/morris.css',
-                            '/assets/admin/pages/css/tasks.css',
+        // .state('dashboard', {
+        //     url: "/dashboard",
+        //     templateUrl: "/assets/views/dashboard.html",
+        //     data: {
+        //         pageTitle: 'Home',
+        //         authenticate: false
+        //     },
+        //     controller: "DashboardController",
+        //     resolve: {
+        //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+        //             return $ocLazyLoad.load({
+        //                 name: 'MetronicApp',
+        //                 insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+        //                 files: [
+        //                     '/assets/global/plugins/morris/morris.css',
+        //                     '/assets/admin/pages/css/tasks.css',
                             
-                            '/assets/global/plugins/morris/morris.min.js',
-                            '/assets/global/plugins/morris/raphael-min.js',
-                            '/assets/global/plugins/jquery.sparkline.min.js',
+        //                     '/assets/global/plugins/morris/morris.min.js',
+        //                     '/assets/global/plugins/morris/raphael-min.js',
+        //                     '/assets/global/plugins/jquery.sparkline.min.js',
 
-                            '/assets/admin/pages/scripts/index3.js',
-                            '/assets/admin/pages/scripts/tasks.js',
+        //                     '/assets/admin/pages/scripts/index3.js',
+        //                     '/assets/admin/pages/scripts/tasks.js',
 
-                            '/assets/admin/pages/scripts/tasks.js',
+        //                     '/assets/admin/pages/scripts/tasks.js',
 
-                            '/assets/js/controllers/DashboardController.js',
-                            '/assets/js/controllers/GlobalPlayerController.js'
-                        ] 
-                    });
-                }],
-                contests: ['$http', function($http) {
-                    return $http.get('/api/contests/').then(function(response) {
-                        // console.log(response.data);
-                        return response.data;
-                    });
-                }],
-                myData: ['$http', 'authState', function($http, authState) {
-                    // console.log(authState);
-                    if (authState.user.length > 0) {
-                        return $http.get('/api/users/me').then(function(response) {
-                            // console.log(response.data);
-                            return response.data;
-                        });
-                    }
-                }]
-            }
-        })
+        //                     '/assets/js/controllers/DashboardController.js',
+        //                     '/assets/js/controllers/GlobalPlayerController.js'
+        //                 ] 
+        //             });
+        //         }],
+        //         contests: ['$http', function($http) {
+        //             return $http.get('/api/contests/').then(function(response) {
+        //                 // console.log(response.data);
+        //                 return response.data;
+        //             });
+        //         }],
+        //         myData: ['$http', 'authState', function($http, authState) {
+        //             // console.log(authState);
+        //             if (authState.user.length > 0) {
+        //                 return $http.get('/api/users/me').then(function(response) {
+        //                     // console.log(response.data);
+        //                     return response.data;
+        //                 });
+        //             }
+        //         }]
+        //     }
+        // })
 
         // Open Contests
         .state('opencontests/:contestID', {
