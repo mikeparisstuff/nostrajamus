@@ -93,6 +93,12 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
 	// 	}
 	// };
 
+	$scope.getFullDate = function(date) {
+		var d = new Date(date);
+		var formattedTime = moment(d).format("MMM Do, h:mm A");
+		return formattedTime;
+	}
+
 	$scope.passModal = function(title, entry_fee, prize, description, start_time, end_time, status, contest_id, isEnabled) {
 		$scope.title = title;
 		$scope.entry_fee = entry_fee;
