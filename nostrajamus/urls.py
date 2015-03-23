@@ -3,6 +3,7 @@ from django.contrib import admin
 from rest_framework import routers
 from api import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+import haystack
 
 
 
@@ -26,6 +27,7 @@ urlpatterns = patterns('',
     # url(r'^signup/', views.SignUpView.as_view(), name="signup"),
     url(r'^api/auth/$', views.AuthView.as_view(), name="authenticate"),
     url(r'^api/', include(router.urls)),
+    url(r'^api/search/', views.TrackSearchView.as_view(), name='search_view'),
     url(r'^forgot/', views.ForgetView.as_view(), name="forgot_view"),
     url(r'^contests/', views.Contest1View.as_view(), name='contest_1'),
     url(r'^api-auth/', include('rest_framework.urls',namespace='rest_framework')),

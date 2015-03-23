@@ -50,6 +50,35 @@
 	</div>
 </div>
 
+<div class="row" ng-if="viewTrack">
+    <div class="col-md-12 col-sm-12">
+		<!-- BEGIN PORTLET-->
+		<div class="portlet light ">
+            <div class="portlet-title">
+				<div class="caption caption-md">
+					<span class="caption-subject font-nostra bold uppercase">All Time Stats for {{track.track.title}} by {{track.track.user.username}}</span>
+				</div>
+			</div>
+			<div class="portlet-body" ng-init="track = viewTrack">
+				<div class="row">
+					<div class="col-md-12 col-sm-12">
+						<!-- BEGIN PORTLET-->
+						<div class="portlet light">
+							<div class="portlet-body text-center">
+
+								<div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
+
+							</div>
+						</div>
+						<!-- END PORTLET-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END PORTLET-->
+	</div>
+</div>
+
 <div class="row">
 	<div class="col-md-12 col-sm-12">
 		<!-- BEGIN PORTLET-->

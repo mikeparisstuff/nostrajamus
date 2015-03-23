@@ -1,16 +1,21 @@
 from django.shortcuts import render, render_to_response, RequestContext, redirect
-from rest_framework import viewsets, status, permissions
+from rest_framework import viewsets, status, permissions, views
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
 from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken, PeriodicRanking
-from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer, PaginatedRankingSerializer
+from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer, PaginatedRankingSerializer, RankingSerializer
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Sum
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from rest_framework.views import APIView
+from api.search_indexes import SCTrackIndex
 import mailchimp
 from . import authentication
 import os, string, random
+from haystack.query import SearchQuerySet
+from haystack.inputs import AutoQuery, Clean
+from .search_indexes import SCTrackIndex, ProfileIndex
 from datetime import datetime, date, timedelta
 from .tasks import start_contest, end_contest
 
@@ -390,6 +395,18 @@ class TrackViewSet(viewsets.ModelViewSet):
         track.increment_playback_count()
         return Response({'detail': 'Successfully incremented playcount for track {}'.format(pk)}, status=status.HTTP_200_OK)
 
+    @detail_route(methods=("GET",))
+    def stats(self, request, pk=None):
+        track = self.get_object()
+        all_time_stats = PeriodicRanking.objects.get(track = track, type='ALLTIME')
+        serializer = RankingSerializer(all_time_stats, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @list_route()
+    def total_streams(self, request):
+        total_streams = SCTrack.objects.aggregate(total_streams=Sum('jamus_playback_count'))
+        return Response(total_streams, status=status.HTTP_200_OK)
+
     @list_route()
     def trending(self, request):
         filter = request.QUERY_PARAMS.get('filter')
@@ -440,3 +457,26 @@ class FeedbackViewSet(viewsets.ModelViewSet):
             email = data['email']
         )
         return Response({"detail": "Success"}, status=status.HTTP_200_OK)
+
+class TrackSearchView(views.APIView):
+    """My custom search view."""
+
+    def get(self, request):
+        # query_set = SearchQuerySet(using=SCTrackIndex().index_queryset())
+        query = request.GET['q']
+        results = SearchQuerySet().filter(content__contains=AutoQuery(query))
+        items = [q.object for q in results]
+        print items
+        res = []
+        for item in items:
+            if isinstance(item, SCTrack):
+                res.append({'type': 'track', 'title': item.title, 'artist': item.user.username, 'id': item.id, 'sc_id': item.sc_id, 'artwork_url': item.artwork_url})
+            elif isinstance(item, Profile):
+                try:
+                    prof_pic_url = item.profile_picture.url
+                except ValueError as e:
+                    prof_pic_url = None
+                res.append({'type': "profile", 'username': item.username, 'profile_picture': prof_pic_url, 'id': item.id})
+        # res['tracks'] = SCTrackSerializer(res['tracks'], many=True).data
+        # res['users'] = ProfileSerializer(res['users'], many=True).data
+        return Response(res, status=status.HTTP_200_OK)

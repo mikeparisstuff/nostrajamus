@@ -417,7 +417,7 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'authState', 'spinnerService', function($rootScope, $scope, $http, authState, spinnerService) {
+MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'authState', 'spinnerService', '$state', function($rootScope, $scope, $http, authState, spinnerService, $state) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
@@ -434,19 +434,44 @@ MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'au
     $scope.setFirst = function() {
         $rootScope.firstTime = false;
         $scope.firstTime = $rootScope.firstTime;
-    }
+    };
 
     $scope.getPrev = function() {
         if ($scope.slide > 1) {
             $scope.slide--;
         }
-    }
+    };
 
     $scope.getNext = function() {
         if ($scope.slide < 4) {
             $scope.slide++;
         }
-    }
+    };
+
+    $scope.searchQuery = "";
+
+    $scope.search = function(query) {
+        var url = "/api/search/";
+        return $http.get(url, {
+          params: {
+            q: query,
+          }
+        }).then(function(response){
+            console.log(response.data);
+            return response.data;
+        });
+    };
+
+    $scope.onSearchSelect = function(item, model, label) {
+        console.log(item);
+        if (item.type == 'profile') {
+            $state.go('profile.dashboard', {userID: item.id});
+//            window.location.href = "/#/profile/" + item.id + "/dashboard/";
+        } else if (item.type == 'track') {
+            $state.go('tracks', {trackID: item.id});
+//            window.location.href = "/#/discover/" + item.id + "/" + item.sc_id + "/";
+        }
+    };
 
     // $scope.authState = authState;
     // console.log($scope.authState);
@@ -1473,6 +1498,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         return response.data;
                     });
                 }],
+                viewTrack: ['$http', '$stateParams', function($http, $stateParams) {
+                    return null;
+                }],
                 referralTrack: ['$http', '$stateParams', function($http, $stateParams) {
                     return null;
                 }],
@@ -1517,6 +1545,9 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                         return response.data;
                     });
                 }],
+                viewTrack: ['$http', '$stateParams', function($http, $stateParams) {
+                    return null;
+                }],
                 referralTrack: ['$http', '$stateParams', function($http, $stateParams) {
                     // console.log($stateParams);
                     if ($stateParams.userID && $stateParams.trackID) {
@@ -1535,6 +1566,58 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                     return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
                         return response.data;
                     });
+                }]
+            }
+        })
+
+    //Discover Referral
+        .state('tracks', {
+            url: "/tracks/:trackID/",
+            templateUrl: "/assets/views/discover.html",
+            data: {
+                pageTitle: 'Discover',
+                authenticate: false
+            },
+            controller: "DiscoverController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before '#ng_load_plugins_before'
+                        files: [
+                            '/assets/global/plugins/select2/select2.css',
+                            '/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css',
+                            '/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css',
+                            '/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css',
+
+                            '/assets/global/plugins/select2/select2.min.js',
+                            '/assets/global/plugins/datatables/all.min.js',
+                            '/assets/js/scripts/table-advanced.js',
+
+                            '/assets/js/controllers/DiscoverController.js'
+                        ]
+                    });
+                }],
+                trending: ['$http', function($http) {
+                    return $http.get('/api/tracks/trending/?filter=daily&page=1').then(function(response) {
+                        // console.log(response.data);
+                        return response.data;
+                    });
+                }],
+                viewTrack: ['$http', '$stateParams', function($http, $stateParams) {
+                    // console.log($stateParams);
+                    if ($stateParams.trackID) {
+                        return $http.get('/api/tracks/' + $stateParams.trackID + '/stats/').then(function(response) {
+                            return response.data;
+                        });
+                    }
+                }],
+                referralTrack: ['$http', '$stateParams', function($http, $stateParams) {
+                    return null;
+                }],
+                myInfo: ['$http', '$stateParams', function($http, $stateParams) {
+                    // console.log($stateParams);
+                    return null;
                 }]
             }
         })

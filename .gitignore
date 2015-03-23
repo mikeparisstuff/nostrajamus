@@ -3,3 +3,4 @@
 celerybeat-schedule
 static/
 .DS_STORE
+whoosh_index

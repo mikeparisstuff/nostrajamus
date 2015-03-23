@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', 'referralTrack', 'myInfo', 'homeService', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService, referralTrack, myInfo, homeService) {
+MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', 'referralTrack', 'myInfo', 'homeService', 'viewTrack', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService, referralTrack, myInfo, homeService, viewTrack) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         Metronic.initAjax();
@@ -13,6 +13,7 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     $scope.totalCount = trending.count;
     // console.log($scope.trending);
     $scope.referralTrack = referralTrack;
+    $scope.viewTrack = viewTrack;
     $scope.myInfo = myInfo;
 
     $scope.timeSelect = 'daily';

@@ -1,4 +1,22 @@
 <html>
+<script type="text/ng-template" id="searchTemplate.html">
+  <a ng-if="match.label.type == 'track'">
+      <div class="search-item">
+          <img ng-src="{{match.label.artwork_url}}" width="16">
+          <span bind-html-unsafe="match.label.title | typeaheadHighlight:query"></span>
+          <span> - </span>
+          <span bind-html-unsafe="match.label.artist | typeaheadHighlight:query"></span>
+          <span class="mute pull-right">Track</span>
+      </div>
+  </a>
+  <a ng-if="match.label.type == 'profile'">
+      <div class="search-item">
+        <img ng-src="{{match.label.profile_picture}}" width="16">
+        <span bind-html-unsafe="match.label.username | typeaheadHighlight:query"></span>
+        <span class="mute pull-right">User</span>
+      </div>
+  </a>
+</script>
 <!-- BEGIN HEADER INNER -->
 <!-- !DOC: add 'container' in class after 'page-header-inner' -->
 <div class="page-header-inner">
@@ -85,6 +103,8 @@
 	<!-- </div> -->
 	<!-- END PAGE ACTIONS -->
 	<!-- BEGIN PAGE TOP -->
+
+
     <div class="page-top">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -162,6 +182,17 @@
 					</li>
                 </ul>
 				<!-- End Pre-Login Header -->
+
+                <div class="col-sm-3 col-md-3">
+                    <form class="navbar-form navbar-search" role="search" ng-submit="search(searchQuery)">
+                        <div class="input-group jamus-search">
+                            <input type="text" name="" class="form-control" id="search" type="text" placeholder="Search" ng-model="searchQuery" typeahead="track for track in search($viewValue)" typeahead-on-select='onSearchSelect($item, $model, $label)' typeahead-template-url="searchTemplate.html">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
 				<!-- Start Post-Login Header -->
                 <ul class="nav navbar-nav navbar-right" ng-if="authState.user">
@@ -499,13 +530,13 @@
 	    </div>
 	</div>
 
-    <!--<div class="page-top"> &lt;!&ndash; Change this maybe to make navbar clear &ndash;&gt;-->
+    <!--<div class="page-top"> <!-- Change this maybe to make navbar clear -->
 		<!--<div class="container">-->
-			<!--&lt;!&ndash; <img class="logo-nostra" src="/assets/global/img/jamus_invert.png"> &ndash;&gt;-->
+			<!--<!-- <img class="logo-nostra" src="/assets/global/img/jamus_invert.png"> -->
 			<!--<a href="#/dashboard"><div class="nostra">NostraJAMus</div></a>-->
 
-			<!--&lt;!&ndash; minimize &ndash;&gt;-->
-<!--&lt;!&ndash; 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">-->
+			<!--<!-- minimize -->
+<!--<!-- 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">-->
 	            <!--<span class="sr-only">Toggle navigation</span>-->
 	            <!--<span class="icon-bar"></span>-->
 	            <!--<span class="icon-bar"></span>-->
@@ -532,24 +563,24 @@
 	          <!--<ul class="nav navbar-nav navbar-right">-->
 	            <!--<li><a href="#">Default</a></li>-->
 	          <!--</ul>-->
-	        <!--</div> &ndash;&gt;-->
-			<!--&lt;!&ndash; minimize &ndash;&gt;-->
+	        <!--</div> -->
+			<!--<!-- minimize -->
 
-			<!--&lt;!&ndash; BEGIN HEADER SEARCH BOX &ndash;&gt;-->
-			<!--&lt;!&ndash; DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box &ndash;&gt;-->
-	<!--&lt;!&ndash; 		<form class="search-form search-form-expanded" action="#" method="GET">-->
+			<!--<!-- BEGIN HEADER SEARCH BOX -->
+			<!--<!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
+	<!--<!-- 		<form class="search-form search-form-expanded" action="#" method="GET">-->
 				<!--<div class="input-group">-->
 					<!--<input type="text" class="form-control" placeholder="Search..." name="query">-->
 					<!--<span class="input-group-btn">-->
 					<!--<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>-->
 					<!--</span>-->
 				<!--</div>-->
-			<!--</form> &ndash;&gt;-->
-			<!--&lt;!&ndash; END HEADER SEARCH BOX &ndash;&gt;-->
-			<!--&lt;!&ndash; BEGIN TOP NAVIGATION MENU &ndash;&gt;-->
+			<!--</form> -->
+			<!--<!-- END HEADER SEARCH BOX -->
+			<!--<!-- BEGIN TOP NAVIGATION MENU -->
 			<!--<div class="top-menu">-->
 				<!--<ul class="nav navbar-nav pull-right">-->
-					<!--&lt;!&ndash; BEGIN TODO DROPDOWN &ndash;&gt;-->
+					<!--<!-- BEGIN TODO DROPDOWN -->
 					<!--<li class="dropdown" id="">-->
 						<!--<a href="#/dashboard" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">-->
 						<!--<i class="icon-home"></i>-->
@@ -578,12 +609,12 @@
 						<!--</a>-->
 						<!--<br>-->
 					<!--</li>-->
-					<!--&lt;!&ndash; END TODO DROPDOWN &ndash;&gt;-->
-					<!--&lt;!&ndash; BEGIN USER LOGIN DROPDOWN &ndash;&gt;-->
-					<!--&lt;!&ndash; DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown style &ndash;&gt;-->
+					<!--<!-- END TODO DROPDOWN -->
+					<!--<!-- BEGIN USER LOGIN DROPDOWN -->
+					<!--<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown style -->
 					<!--<li class="dropdown dropdown-user dropdown-dark">-->
 						<!--<a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">-->
-						<!--<img alt="" class="img-circle" src="{{myData.profile_picture}}"/> &lt;!&ndash; /assets/admin/layout2/img/avatar3_small.jpg &ndash;&gt;-->
+						<!--<img alt="" class="img-circle" src="{{myData.profile_picture}}"/> <!-- /assets/admin/layout2/img/avatar3_small.jpg -->
 						<!--<span class="username username-hide-on-mobile">-->
 						<!--{{authState.user}} </span>-->
 						<!--<i class="fa fa-angle-down"></i>-->
@@ -599,7 +630,7 @@
 								<!--<a href="#/message">-->
 								<!--<i class="icon-paper-plane"></i> Contact Us </a>-->
 							<!--</li>-->
-<!--&lt;!&ndash; 							<li>-->
+<!--<!-- 							<li>-->
 								<!--<a href="#/jams">-->
 								<!--<i class="icon-playlist"></i> My Jams </a>-->
 							<!--</li>-->
@@ -610,7 +641,7 @@
 							<!--<li>-->
 								<!--<a href="#/history">-->
 								<!--<i class="icon-check"></i> History </a>-->
-							<!--</li> &ndash;&gt;-->
+							<!--</li> -->
 							<!--<li class="divider">-->
 							<!--</li>-->
 							<!--<li ng-controller="authController" ng-click="logout()">-->
@@ -620,11 +651,11 @@
 							<!--</li>-->
 						<!--</ul>-->
 					<!--</li>-->
-					<!--&lt;!&ndash; END USER LOGIN DROPDOWN &ndash;&gt;-->
+					<!--<!-- END USER LOGIN DROPDOWN -->
 				<!--</ul>-->
 			<!--</div>-->
 		<!--</div>-->
-		<!--&lt;!&ndash; END TOP NAVIGATION MENU &ndash;&gt;-->
+		<!--<!-- END TOP NAVIGATION MENU -->
 	<!--</div>-->
 
 
