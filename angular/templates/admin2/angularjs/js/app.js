@@ -265,7 +265,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
         }
     };
     player.resetTrack = function(track) {
-        if (this.data.currentTrackData.sc_id != null && this.data.currentTrackData.sc_id == track.sc_id) {
+        if (this.data.currentTrackData != null && this.data.currentTrackData.sc_id == track.sc_id) {
             this.playPause();
             return;
         } else if (this.data.isPlaying) {
@@ -1570,7 +1570,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
-    //Discover Referral
+        //Discover Track
         .state('tracks', {
             url: "/tracks/:trackID/",
             templateUrl: "/assets/views/discover.html",
