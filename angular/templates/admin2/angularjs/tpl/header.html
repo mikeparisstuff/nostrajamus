@@ -464,7 +464,7 @@
 	                <h4 class="modal-title white" id="tutorialModalLabel" ng-hide="firstTime">How To Play</h4>
 	                <h4 class="modal-title white" id="tutorialModalLabel" ng-show="firstTime">First Time Here?</h4>
 	            </div>
-	            <div class="modal-body" style="height:350px;">
+	            <div class="modal-body" style="margin-bottom:0;padding-bottom:0;">
 	                <div class="row">
 	                    <div class="col-lg-12">
 	                        
@@ -523,8 +523,11 @@
 	                    </div>
 	                </div>
 	            </div>
-	            <div class="modal-footer" id="footer-tutorial">
-	                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal" ng-show="slide==4">Got it!</button>
+	            <div class="modal-footer" id="footer-tutorial" style="margin-top:0;padding-top:0;">
+	            	<!-- ng-show="slide==4" -->
+	            	<div class="text-center">
+			            <button type="button" class="btn btn-default red-nostra-modal btn-lg" data-dismiss="modal" data-toggle="modal" data-target="#registerModal">Play Now!</button>
+			        </div>
 	            </div>
 	        </div>
 	    </div>
