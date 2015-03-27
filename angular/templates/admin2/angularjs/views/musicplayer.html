@@ -45,7 +45,9 @@
                     </div>
                 </div>
                 <div class="col-xs-6 col-lg-5 text-center player-details">
+                  <a href="#/tracks/{{player.data.currentTrackData.id}}">
                     <div ng-show="player.data.currentTrackData.title">{{ player.data.currentTrackData.title }} - {{ player.data.currentTrackData.user.username }}</div>
+                  </a>
                     <!--<progress value="{{ player.data.trackProgress }}" max="1"-->
                               <!--ng-click="seek($event)">-->
                         <!--<!--{{ currentTime / duration }}-->
