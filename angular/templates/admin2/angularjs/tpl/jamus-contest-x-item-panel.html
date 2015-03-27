@@ -1,5 +1,15 @@
 <!-- panel x -->
 
+<div class="font-discovered">
+    Discovered by: 
+    <a href="#/profile/{{track.user.id}}/dashboard" ng-if="track.user.username">
+        {{track.user.username}}
+    </a>
+    <span ng-if="!track.user.username">
+        A Shy User
+    </span>
+</div>
+
 <div class="row">
 
     <div class="col-md-12 jamus-contest-item">

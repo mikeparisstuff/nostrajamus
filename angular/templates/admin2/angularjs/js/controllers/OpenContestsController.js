@@ -9,6 +9,8 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         $rootScope.settings.layout.pageSidebarClosed = true;
     });
 
+    $scope.hideDiscoverer = true;
+
     $scope.contestInfo = contestInfo;
     $scope.contestEntries = contestEntries;
     $scope.myData = myData;
