@@ -40,7 +40,46 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
         $scope.$apply(function() {
             $scope.player.data.trackQueue = globalPlayerService.player.data.trackQueue;
         });
+    };
+
+    $scope.modalTrackInfo = {};
+    $scope.updateInfo = function(entry) {
+        console.log(entry);
+        // entry.percentage_increase = (((entry.playback_count - entry.initial_playback_count)/entry.initial_playback_count)*100).toFixed(2).toString();
+        // entry.initial_playback_count = entry.initial_playback_count.toString();
+        // entry.current_playback_count = entry.current_playback_count.toString();
+        // entry.current_follower_count = entry.current_follower_count.toString();
+        $scope.modalTrackInfo = entry;
+        $('#infoModal').modal('show');
+    };
+
+    $scope.insertCommas = function(s) {
+        s = s.toString();
+        // get stuff before the dot
+        var d = s.indexOf('.');
+        var s2 = d === -1 ? s : s.slice(0, d);
+        // insert commas every 3 digits from the right
+        for (var i = s2.length - 3; i > 0; i -= 3)
+            s2 = s2.slice(0, i) + ',' + s2.slice(i);
+        // append fractional part
+        if (d !== -1)
+            s2 += s.slice(d);
+        return s2;
+    };
+
+    $scope.getCroppedImageUrl = function(url) {
+        var cropped = url.replace("-large", "-t300x300");
+        return cropped;
+    };
+
+    $scope.modalClose = function() {
+        $('#infoModal').modal('hide');
     }
+
+    $scope.updateRefer = function(trackId) {
+        $scope.referLink = "http://nostrajamus.com/#/tracks/" + trackId;
+        $('#shareGlobalModal').modal('show');
+    };
 //    $scope.trackQueue = globalPlayerData.trackQueue;
 
 //    $scope.player.playPause = globalPlayerService.playPause;

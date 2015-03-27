@@ -769,12 +769,30 @@ Red-nostra
 
 .queue-wrapper {
   position: absolute;
-  top: 5px;
+  top: 4px;
+  right: 8%;
+}
+
+.share-wrapper {
+  position: absolute;
+  top: 4px;
   right: 14%;
+}
+
+.info-wrapper {
+  position: absolute;
+  top: 4px;
+  right: 18%;
 }
 
 .track-queue-art {
   width: 30px;
+}
+
+.font-player {
+  font-family: Sica-Bold;
+  font-size: 15px;
+  color: #000;
 }
 
 .player-controls, .player-queue {
