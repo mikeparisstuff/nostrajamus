@@ -113,13 +113,13 @@
 									<div class="portlet-body text-center">
 										<div ng-repeat="track in trending | limitTo:pageSize">
 
-											<div class="font-discovered">
+											<!-- <div class="font-discovered">
 												Discovered by: 
 												<a href="#/profile/{{track.entries[0].user.id}}/dashboard">
 													{{track.entries[0].user.username}}
 												</a>
 											</div>
-											<br>
+											<br> -->
 
                                             <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
 
