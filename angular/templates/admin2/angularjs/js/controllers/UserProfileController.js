@@ -60,7 +60,7 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
 
 		var playIncrease = ((currPlayCount - initPlayCount) / (initPlayCount)) * 100;
 
-		return playIncrease.toFixed(1);
+		return playIncrease.toFixed(1) + " %";
     };
 
     $scope.getFollowIncrease = function(track) {
