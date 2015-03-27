@@ -38,8 +38,16 @@
                 <div class="col-md-2 col-sm-2 col-xs-4"><b>Current Plays</b><br />{{insertCommas(track.current_playback_count) }}</div>
                 <div class="col-md-2 col-sm-2 col-xs-4"><b>Followers</b><br />{{ insertCommas(track.initial_follower_count) }}</div>
                 <div class="col-md-2 col-sm-2 col-xs-4"><b>Jam Points</b><br />{{ insertCommas(track.jam_points) }}</div>
-                <div class="soundcloud-icon col-md-2 col-sm-2 col-xs-4">
+                <!-- <div class="soundcloud-icon col-md-2 col-sm-2 col-xs-4">
                     <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>
+                </div> -->
+                <div class="col-md-2 col-sm-2 col-xs-4">
+                    <!-- <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a> -->
+                    <div style="margin-top:15px"></div>
+                    <!-- data-toggle="modal" data-target="#shareLargeModal" -->
+                        <a href="#" ng-click="updateRefer(track.track.id)">
+                            <i class="fa fa-share fa-3x"></i>
+                        </a>
                 </div>
             </div>
 

@@ -1572,7 +1572,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
 
         //Discover Track
         .state('tracks', {
-            url: "/tracks/:trackID/",
+            url: "/tracks/:trackID",
             templateUrl: "/assets/views/discover.html",
             data: {
                 pageTitle: 'Discover',

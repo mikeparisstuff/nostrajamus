@@ -205,6 +205,11 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         $scope.modalEntry = entry;
     };
 
+    $scope.updateRefer = function(trackId) {
+        $scope.referLink = "http://nostrajamus.com/#/tracks/" + trackId;
+        $('#shareLargeModal').modal('show');
+    };
+
     // $scope.myPagingFunction = function() {
     //     if (!$scope.busy) {
     //         $scope.busy = true;

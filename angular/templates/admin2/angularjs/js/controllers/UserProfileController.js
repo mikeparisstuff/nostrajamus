@@ -118,6 +118,11 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
         $scope.selectedFile = $files;
     };
 
+    $scope.updateRefer = function(trackId) {
+        $scope.referLink = "http://nostrajamus.com/#/tracks/" + trackId;
+        $('#shareLargeModal').modal('show');
+    };
+
     /* BEGIN PLAYER LOGIC */
 
     $scope.player = globalPlayerService.player;
