@@ -6,6 +6,8 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
         Layout.setSidebarMenuActiveLink('set', $('#sidebar_menu_link_profile')); // set profile link active in sidebar menu 
     });
 
+    $scope.hideDiscoverer = true;
+
     $scope.myInfo = myInfo;
     $scope.me = me;
     // $http.get('/api/users/me').then(function(response) {

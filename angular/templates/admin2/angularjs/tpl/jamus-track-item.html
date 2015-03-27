@@ -1,11 +1,12 @@
-
-<div class="font-discovered">
-    Discovered by: 
-    <a href="#/profile/{{track.entries[0].user.id}}/dashboard">
-        {{track.entries[0].user.username}}
-    </a>
-</div>
-<br>
+<span class="discoverer" ng-if="!hideDiscoverer">
+    <div class="font-discovered">
+        Discovered by: 
+        <a href="#/profile/{{track.entries[0].user.id}}/dashboard">
+            {{track.entries[0].user.username}}
+        </a>
+    </div>
+    <br>
+</span>
 
 <div class="row jamus-track-item">
     <div class="track-img-wrapper col-md-3 col-sm-3 col-xs-3 text-center" style="background-image: url({{ getCroppedImageUrl(track.track.artwork_url) }});" ng-show="track">
