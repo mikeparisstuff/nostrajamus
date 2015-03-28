@@ -224,7 +224,7 @@ section#services {
 }
 .img-profile {
   border: 2px solid;
-  border-radius: 25px;
+  // border-radius: 25px;
   border-color: #333;
 }
 .title {
@@ -270,9 +270,46 @@ section#services {
   // margin-top: 13px;
 }
 .profile-pic-sm {
-  width: 25px;
-  height: 25px;
-  margin-right: 0;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  // border: 0.5px solid #ff5252;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  // background:red;
+  overflow:hidden;
+  text-align:center;
+}
+.profile-pic-md {
+  position: absolute;
+  width: 39px;
+  height: 39px;
+  // border: 0.5px solid #ff5252;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  // background:red;
+  overflow:hidden;
+  text-align:center;
+}
+.profile-pic-lg {
+  position: absolute;
+  width: 149px;
+  height: 149px;
+  // border: 0.5px solid #ff5252;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  // background:red;
+  overflow:hidden;
+  text-align:center;
 }
 .profile-circle-img {
   border-radius: 50% !important;

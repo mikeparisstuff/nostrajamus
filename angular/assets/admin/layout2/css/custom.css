@@ -228,7 +228,6 @@ section#services {
 
 .img-profile {
   border: 2px solid;
-  border-radius: 25px;
   border-color: #333;
 }
 
@@ -279,9 +278,42 @@ section#services {
 }
 
 .profile-pic-sm {
-  width: 25px;
-  height: 25px;
-  margin-right: 0;
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.profile-pic-md {
+  position: absolute;
+  width: 39px;
+  height: 39px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.profile-pic-lg {
+  position: absolute;
+  width: 149px;
+  height: 149px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
 }
 
 .profile-circle-img {

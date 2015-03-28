@@ -58,10 +58,12 @@
 			<!-- PORTLET MAIN -->
 			<div class="portlet light profile-sidebar-portlet">
 				<!-- SIDEBAR USERPIC -->
-				<div class="profile-userpic" align="center">
-					<!-- {{getProfilePicture(myInfo.profile_picture)}} -->
-					<img src="{{getProfilePicture(myInfo.profile_picture)}}" class="img-responsive img-circle img-profile" alt=""ng-show="getProfilePicture(myInfo.profile_picture)">
-					<i class="fa fa-user fa-5x" style="color:#ff5252;" ng-hide="getProfilePicture(myInfo.profile_picture)"></i>
+				<!-- <div class="profile-userpic" align="center"> -->
+				<div align="center">
+					<img class="profile-pic-lg img-profile" src="{{getProfilePicture(myInfo.profile_picture)}}" ng-show="getProfilePicture(myInfo.profile_picture)">
+	               	<i class="fa fa-user fa-5x" style="color:#ff5252;" ng-hide="getProfilePicture(myInfo.profile_picture)"></i>
+					<!-- <img src="{{getProfilePicture(myInfo.profile_picture)}}" class="img-responsive img-circle img-profile" alt=""ng-show="getProfilePicture(myInfo.profile_picture)"> -->
+					<!-- <i class="fa fa-user fa-5x" style="color:#ff5252;" ng-hide="getProfilePicture(myInfo.profile_picture)"></i> -->
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
