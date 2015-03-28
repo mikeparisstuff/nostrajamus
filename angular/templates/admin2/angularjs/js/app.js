@@ -662,7 +662,18 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             if (authState.user.length > 0) {
                                 return $http.get('/api/users/me').then(function(response) {
                                     // console.log(response.data);
-                                    return response.data;
+
+                                    var myContestInfo = [];
+                                    if (response.data.my_entries) {
+                                        for (var i=0; i < response.data.my_entries.length; i++) {
+                                            if (response.data.my_entries[i].is_active) {
+                                                myContestInfo.push(response.data.my_entries[i]);
+                                            }
+                                        }
+                                    }
+
+                                    // return response.data;
+                                    return myContestInfo;
                                 });
                             }
                         }]

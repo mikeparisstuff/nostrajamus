@@ -8,11 +8,11 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 
     $scope.contests = contests;
     $scope.dailyLeaders = dailyLeaders;
-    $scope.myData = myData;
+    $scope.myContestInfo = myData;
     $scope.currentPage = 1;
 
     if ($scope.authState.user.length > 0) {
-    	$scope.myData = myData;
+    	$scope.myContestInfo = myData;
     	// console.log($scope.myData);
     }
     else {
@@ -21,27 +21,26 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 
     if (authState.user) {
 		// My Contest Info
-		$scope.myContestInfo = [];
-		// $scope.myContestRank = [];
+		// $scope.myContestInfo = [];
 
-	   	var getContestInfo = function(i, contestNum){
-	    	$http({
-	            url: '/api/contests/' + contestNum,
-	            method: "GET",
-	            // data: JSON.stringify($scope.form),
-	            headers: {'Content-Type': 'application/json'}
-	        }).success(function (data, status, headers, config) {
-	    	  	// console.log(data);
-	    	  	$scope.myContestInfo.push(data);
-	    	  	$scope.convertDateTime(i, $scope.myContestInfo);
-	    	  	getContestRank(i, contestNum, $scope.myContestInfo);
-	    	  	// console.log("SUCCESS");
-	        }).error(function (data, status, headers, config) {
-	            // $scope.status = status;
-	    	  	// console.log(data);
-	    	  	// console.log("FAILURE");
-	        });
-		};
+	 //   	var getContestInfo = function(i, contestNum){
+	 //    	$http({
+	 //            url: '/api/contests/' + contestNum,
+	 //            method: "GET",
+	 //            // data: JSON.stringify($scope.form),
+	 //            headers: {'Content-Type': 'application/json'}
+	 //        }).success(function (data, status, headers, config) {
+	 //    	  	// console.log(data);
+	 //    	  	$scope.myContestInfo.push(data);
+	 //    	  	$scope.convertDateTime(i, $scope.myContestInfo);
+	 //    	  	getContestRank(i, contestNum, $scope.myContestInfo);
+	 //    	  	// console.log("SUCCESS");
+	 //        }).error(function (data, status, headers, config) {
+	 //            // $scope.status = status;
+	 //    	  	// console.log(data);
+	 //    	  	// console.log("FAILURE");
+	 //        });
+		// };
 
 		var getContestRank = function(i, contestNum, myContestInfo){
 	    	$http({
@@ -62,14 +61,26 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 	        });
 		};
 
-		if (myData.my_entries) {
-			for (var i=0; i < myData.my_entries.length; i++) {
-				if (myData.my_entries[i].is_active) {
-					var contestNum = myData.my_entries[i].contest;
-					getContestInfo(i, contestNum);
+		// if (myData.my_entries) {
+		// 	for (var i=0; i < myData.my_entries.length; i++) {
+		// 		if (myData.my_entries[i].is_active) {
+		// 			var contestNum = myData.my_entries[i].contest;
+		// 			getContestInfo(i, contestNum);
+		// 		}
+		// 	}
+		// }
+
+		if ($scope.myContestInfo) {
+			for (var i = 0; i < $scope.myContestInfo.length; i++) {
+				for (var j = 0; j < $rootScope.contests.length; j++) {
+					getContestRank(i, $scope.myContestInfo[i].contest, $scope.myContestInfo);
+					if ($rootScope.contests[j].id == $scope.myContestInfo[i].contest) {
+						$scope.myContestInfo[i].title = $rootScope.contests[j].title;
+					}
 				}
 			}
 		}
+
 		// End My Contest Info
 	}
 

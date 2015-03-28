@@ -12,7 +12,7 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
     }
 
     $rootScope.homeService = homeService;
-    $scope.contests = contests;
+    $rootScope.contests = contests;
     $scope.authState = authState;
 
     $scope.filterContests = function(contestsList) {
