@@ -9,6 +9,8 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
         $rootScope.settings.layout.pageSidebarClosed = true;
     });
 
+    $scope.hideDiscoverer = true;
+
     /* BEGIN SHARED LOGIC */
 
     $scope.contestInfo = contestInfo;
