@@ -58,7 +58,10 @@
                     <!-- <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a> -->
                     <div style="margin-top:15px"></div>
                     <!-- data-toggle="modal" data-target="#shareLargeModal" -->
-                    <a href="#" ng-click="updateRefer(myData.id, track.track.sc_id)">
+                    <a href="#" ng-click="updateRefer(myData.id, track.track.sc_id)" ng-if="submissionPage">
+                        <i class="fa fa-share fa-3x"></i>
+                    </a>
+                    <a href="#" ng-click="updateRefer(track.track.id)" ng-if="!submissionPage">
                         <i class="fa fa-share fa-3x"></i>
                     </a>
                 </div>
