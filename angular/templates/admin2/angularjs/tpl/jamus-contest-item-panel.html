@@ -16,8 +16,8 @@
         <div class="track-img-wrapper-contest col-md-3 col-sm-3 col-xs-3 text-center" style="background-image: url({{ getCroppedImageUrl(track.track.artwork_url) }});">
             <!---->
              <!--<img class="track-img img-responsive center-block" src="https://i1.sndcdn.com/artworks-000093556135-fu2rsq-large.jpg" alt="" />-->
-            <span ng-if="track.track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn-contest fa fa-3x fa-play-circle-o" ng-click="playNewTrack(track.track, $index, contestInstance.results)"></span>
-            <span ng-if="track.track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn-contest fa fa-2x fa-pause" ng-click="playNewTrack(track.track, $index, contestInstance.results)"></span>
+            <span ng-if="track.track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn-contest fa fa-3x fa-play-circle-o" ng-click="playNewTrack(track.track, $index, trendingTracks)"></span>
+            <span ng-if="track.track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn-contest fa fa-2x fa-pause" ng-click="playNewTrack(track.track, $index, trendingTracks)"></span>
             <!-- <div class="play-btn-container">
 
             </div> -->
