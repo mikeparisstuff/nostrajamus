@@ -79,6 +79,7 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 					}
 				}
 			}
+			$scope.myContestInfo.reverse();
 		}
 
 		// End My Contest Info
