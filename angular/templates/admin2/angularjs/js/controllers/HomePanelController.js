@@ -9,6 +9,7 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
     $scope.contests = contests;
     $scope.dailyLeaders = dailyLeaders;
     $scope.myData = myData;
+    $scope.currentPage = 1;
 
     if ($scope.authState.user.length > 0) {
     	$scope.myData = myData;
@@ -185,24 +186,13 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
             return elem.track;
         });
         globalPlayerService.player.data.trackQueue = tunes;
-        // // Set the next url and such
-        // if (homeService.home.data.panelId != 0) {
-        // 	var nextUrl = '/api/contests/' + homeService.home.data.panelId + 'entries/?page=' + ($scope.currentPage + 1);
-        // 	globalPlayerService.player.data.nextPageUrl = nextUrl;
-        // }
+        // Set the next url and such
+        if (homeService.home.data.panelId != 0) {
+        	var nextUrl = '/api/contests/' + homeService.home.data.panelId + 'entries/?page=' + ($scope.currentPage + 1);
+        	$scope.currentPage = $scope.currentPage + 1;
+        	globalPlayerService.player.data.nextPageUrl = nextUrl;
+        }
     };
-
-    // $scope.playNewTrack = function(track, index) {
-    //     homeService.home.data.panelId = 0;
-    //     globalPlayerService.player.resetTrack(track.track);
-    //     var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
-    //         return elem.track;
-    //     });
-    //     globalPlayerService.player.data.trackQueue = tunes;
-    //     // Set the next url and such
-    //     var nextUrl = '/api/contests/' + $scope.contestInfo.id + '/entries/?page=' + ($scope.currentPage + 1);
-    //     globalPlayerService.player.data.nextPageUrl = nextUrl;
-    // };
 
     $scope.getCroppedImageUrl = function(url) {
         var cropped = url.replace("-large", "-t300x300");
