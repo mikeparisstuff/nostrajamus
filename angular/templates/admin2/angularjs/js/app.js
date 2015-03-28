@@ -318,7 +318,8 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
     player.playNextTrack = function() {
         if (this.data.trackQueue.length <= 4) {
             this.getNextPageForQueue();
-        } else if (this.data.trackQueue.length) {
+        }
+        if (this.data.trackQueue.length) {
             var next = this.data.trackQueue.shift();
             this.data.backStack.push(this.data.currentTrackData);
             this.resetTrack(next);
