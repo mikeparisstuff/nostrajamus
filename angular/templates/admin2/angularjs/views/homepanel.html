@@ -31,7 +31,7 @@
 								</th>
 							</tr>
 						</thead>
-						<tr ng-repeat="myContest in myContestInfo">
+						<tr ng-repeat="myContest in myContestInfo" ng-if="myContestInfo==null">
 							<td>
 								<!-- <img class="user-pic" src="{{getProfilePicture(myContest.contest_picture)}}"> -->
 								<a href="#/inprogresscontests/{{myContest.id}}" type="button" class="primary-link">{{myContest.title}}</a>
@@ -51,6 +51,12 @@
 							</td> -->
 						</tr>
 					</table>
+					<div class="text-center" ng-if="myContestInfo!=null" style="padding-top:40px;">
+						<span class="Sica-Bold">
+							You're not part of any current contests.<br>
+							Join a contest on the left!
+						</span>
+					</div>
 				</div>
 		</div>
 		<!-- END PORTLET-->

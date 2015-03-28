@@ -136,6 +136,11 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
         return ($scope.currentPage-1) * $scope.pageSize;
     };
 
+    $scope.updateRefer = function(trackId) {
+        $scope.referLink = "http://nostrajamus.com/#/tracks/" + trackId;
+        $('#shareLargeModal').modal('show');
+    };
+
     /* END SHARED LOGIC */
 
     /* BEGIN IN PROGRESS CONTESTS */
@@ -177,7 +182,6 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
         var link = "http://nostrajamus.com/#/discover/" + userId + "/" + trackId;
         return link;
     };
-
 
     /* END IN PROGRESS CONTESTS */
 

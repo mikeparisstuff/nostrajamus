@@ -330,6 +330,16 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         return link;
     };
 
+    $scope.updateRefer = function(userId, trackId) {
+        if (!$scope.hasSubmitted) {
+            return;
+        }
+        else {
+            $scope.referLink = "http://nostrajamus.com/#/discover/" + userId + "/" + trackId;
+            $('#shareLargeModal').modal('show');
+        }
+    };
+
  //    $scope.getTracks = function(val) {
 	// 	return SC.get('/tracks', {q: val}, function(tracks) {
 	//         // alert(tracks);
