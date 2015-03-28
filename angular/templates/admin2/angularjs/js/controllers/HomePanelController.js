@@ -192,6 +192,18 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
         // }
     };
 
+    // $scope.playNewTrack = function(track, index) {
+    //     homeService.home.data.panelId = 0;
+    //     globalPlayerService.player.resetTrack(track.track);
+    //     var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
+    //         return elem.track;
+    //     });
+    //     globalPlayerService.player.data.trackQueue = tunes;
+    //     // Set the next url and such
+    //     var nextUrl = '/api/contests/' + $scope.contestInfo.id + '/entries/?page=' + ($scope.currentPage + 1);
+    //     globalPlayerService.player.data.nextPageUrl = nextUrl;
+    // };
+
     $scope.getCroppedImageUrl = function(url) {
         var cropped = url.replace("-large", "-t300x300");
         return cropped;
