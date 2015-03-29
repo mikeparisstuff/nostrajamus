@@ -6,17 +6,60 @@
 <!-- BEGIN MAIN CONTENT -->
 <div class="row">
     <div class="col-lg-12 text-center">
-        <h2 class="section-heading">{{contestInfo.title}}</h2>
-        <div class="section-subheading">{{contestInfo.description}}</div>
+        <h2 class="section-heading Sica-ExtraBold">{{contestInfo.title}}</h2>
+        <div class="section-subheading Sica-Bold">{{contestInfo.description}}</div>
         <!-- <div class="section-subheading text-muted">Submission Deadline In <span id="countdown-inprogress"></span></div> -->
         <br>
     </div>
 </div>
 
-<div class="row" ng-controller="AdvancedDatatablesDemoCtrl">
-	<div class="col-md-12">
+<div ng-controller="AccordionDemoCtrl">
+    <!-- <p>
+        <button class="btn btn-success" ng-click="status.open = !status.open">Toggle last panel</button>
+        <button class="btn btn-warning" ng-click="status.isFirstDisabled = ! status.isFirstDisabled">Enable / Disable first panel</button>
+    </p>
+     -->
+    <accordion close-others="oneAtATime">
+        <accordion-group is-open="status.open">
+            <accordion-heading>
+                <div ng-click="toggleOpen()">
+                    <i class="fa fa-globe">&nbsp</i>Contest Summary<i class="pull-right fa fa-angle-right" ng-class="{'fa-angle-down': status.open, 'fa-angle-right': !status.open}"></i>
+                </div>
+            </accordion-heading>
+            <!-- Begin Table -->
+                <!-- <div class="row" ng-controller="AdvancedDatatablesDemoCtrl"> -->
+                    <!-- <div class="portlet box red-nostra"> -->
+                        <div class="portlet-body dark-bg-nostra">
+                            <div class="row">
+                                <div class="col-lg-6 text-center">
+                                    <p><h5>Contest Entries</h5>{{contestEntries.count}}</p>
+                                    <p><h5>Entry Fee</h5>${{contestInfo.entry_fee}}</p>
+                                    <p><h5>Prize</h5> {{contestInfo.prize}}</p>
+                                </div>
+                                <div class="col-lg-6 text-center">
+                                    <p><h5>Start Time (ET)</h5> {{contestInfo.start_time}}</p>
+                                    <p><h5>End Time (ET)</h5> {{contestInfo.end_time}}</p>
+                                    <p><h5>Status</h5> In Progress</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row" ng-show="{{contestInfo.soundcloud_playlist_link}}">
+                                <div class="col-lg-12 text-center">
+                                <p><h5>Check out the SoundCloud playlist for this contest</h5> <a href="{{contestInfo.soundcloud_playlist_link}}" target="_blank">{{contestInfo.soundcloud_playlist_link}}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                <!-- </div> -->
+            <!-- End Table -->
+        </accordion-group>
+    </accordion>
+</div>
+
+<!-- <div class="row" ng-controller="AdvancedDatatablesDemoCtrl"> -->
+	<!-- <div class="col-md-12"> -->
 		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box red-nostra">
+		<!-- <div class="portlet box red-nostra">
 			<div class="portlet-title">
 				<div class="caption">
 					<i class="fa fa-globe"></i>Contest Summary
@@ -46,10 +89,10 @@
                     </div>
                 </div>
 			</div>
-		</div>
+		</div> -->
 		<!-- END EXAMPLE TABLE PORTLET-->
-	</div>
-</div>
+	<!-- </div> -->
+<!-- </div> -->
 
 <div class="row" ng-hide="myRank==-1">
     <h3 align="center">Your Pick</h3>
@@ -230,5 +273,13 @@
 	function AdvancedDatatablesDemoCtrl($scope) {
 		// CompletedContests.init();
 	}
+    function AccordionDemoCtrl($scope) {
+        $scope.oneAtATime = true;
+
+        $scope.status = {
+            isFirstOpen: true,
+            isFirstDisabled: false
+        };
+    };
 </script>
 <!-- END MAIN JS

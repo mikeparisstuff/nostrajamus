@@ -50,6 +50,7 @@
 }
 
 .submit-song-input {
+  font-family: Sica-Regular;
   font-size: 18px;
   width: 100%;
   height: 66px;
@@ -424,6 +425,11 @@ Red-nostra
 /* Button Strip */
 .btn.red-nostra-stripe {
   border-left: 3px solid #ff5252;
+}
+
+/* Contest Summary Panel */
+.panel-collapse {
+  background-color: #f7f7f7;
 }
 
 /* Portlet */

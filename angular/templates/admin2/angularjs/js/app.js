@@ -1037,7 +1037,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // UI Bootstrap
         // .state('uibootstrap', {
         //     url: "/ui_bootstrap.html",
-        //     templateUrl: "views/ui_bootstrap.html",
+        //     templateUrl: "/assets/views/ui_bootstrap.html",
         //     data: {pageTitle: '| AngularJS UI Bootstrap'},
         //     controller: "GeneralPageController",
         //     resolve: {
@@ -1152,7 +1152,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // Custom Dropdowns
         // .state('dropdowns', {
         //     url: "/dropdowns",
-        //     templateUrl: "views/dropdowns.html",
+        //     templateUrl: "/assets/views/dropdowns.html",
         //     data: {pageTitle: '| Custom Dropdowns'},
         //     controller: "GeneralPageController",
         //     resolve: {
@@ -1181,7 +1181,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // Advanced Datatables
         // .state('datatablesAdvanced', {
         //     url: "/datatables/advanced.html",
-        //     templateUrl: "views/datatables/advanced.html",
+        //     templateUrl: "/assets/views/datatables/advanced.html",
         //     data: {pageTitle: '| Advanced Datatables'},
         //     controller: "GeneralPageController",
         //     resolve: {
@@ -1209,7 +1209,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // Ajax Datetables
         // .state('datatablesAjax', {
         //     url: "/datatables/ajax.html",
-        //     templateUrl: "views/datatables/ajax.html",
+        //     templateUrl: "/assets/views/datatables/ajax.html",
         //     data: {pageTitle: '| Ajax Datatables'},
         //     controller: "GeneralPageController",
         //     resolve: {
