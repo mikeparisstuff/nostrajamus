@@ -12,38 +12,6 @@
     </div>
 </div>
 
-<div class="row" ng-controller="AdvancedDatatablesDemoCtrl">
-	<div class="col-md-12">
-		<!-- BEGIN EXAMPLE TABLE PORTLET-->
-		<div class="portlet box red-nostra">
-			<div class="portlet-title">
-				<div class="caption">
-					<i class="fa fa-globe"></i>Contest Summary
-				</div>
-				<div class="tools">
-					<a href="javascript:;" class="reload">
-					</a>
-				</div>
-			</div>
-			<div class="portlet-body dark-bg-nostra">
-                <div class="row">
-                    <div class="col-lg-6 text-center">
-                        <p><h5>Contest Entries</h5>{{contestEntries.count}}</p>
-                        <p><h5>Entry Fee</h5>${{contestInfo.entry_fee}}</p>
-                        <p><h5>Prize</h5> {{contestInfo.prize}}</p>
-                    </div>
-                    <div class="col-lg-6 text-center">
-                        <p><h5>Start Time (ET)</h5> {{contestInfo.start_time}}</p>
-                        <p><h5>End Time (ET)</h5> {{contestInfo.end_time}}</p>
-                        <p><h5>Status</h5> Open (Enter Below)</p>
-                    </div>
-                </div>
-			</div>
-		</div>
-		<!-- END EXAMPLE TABLE PORTLET-->
-	</div>
-</div>
-
 <!-- not hasSubmitted already: show this -->
 <div class="row" ng-if="!hasSubmitted">
 	<!-- <h3 align="center">Enter Now</h3> -->
@@ -70,12 +38,22 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <input type="text" name="" class="form-control" id="search" type="text" placeholder="Start typing to search Soundcloud OR enter a Soundcloud url . . . Results will appear below" ng-model="asyncSelected" typeahead="track.title for track in getTracks($viewValue)" typeahead-on-select='onSelect($item, $model, $label)'>
+                                <div class="col-md-9 submit-song-form">
+                                    <input type="text" name="" class="form-control input-lg" id="search" type="text" placeholder="Start typing to search Soundcloud OR enter a Soundcloud url . . . Results will appear below" ng-model="asyncSelected" typeahead="track.title for track in getTracks($viewValue)" typeahead-on-select='onSelect($item, $model, $label)'>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="clearfix"></div>
+                                    <div class="col-md-12 text-center">
+                                        <div id="success"></div>
+                                        <button type="submit" class="btn btn-xl" ng-click="postTrack(origTrack)">Join Contest</button>
+                                        <div id="errors"></div>
+                                    </div>
+                                </div>
                                 <br>
                                 <div class="text-center" id="removedSong" ng-model="removedSong"><b>{{removedSong}}</b></div>
                                 <div class="col-md-12">
                                     <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
-                                    <br><br>
+                                    <br>
                                 </div>
                                 <!-- <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{ track_url }}" ng-show="track_url"></iframe> -->
                                 <!-- <h4 class="text-center" ng-show="track">Play Count: {{ track.playback_count }}</h4> -->
@@ -84,19 +62,23 @@
                                 </input>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="clearfix"></div>
+                        <!-- <div class="clearfix"></div>
                         <div class="col-md-12 text-center">
                             <div id="success"></div>
                             <button type="submit" class="btn btn-xl" ng-click="postTrack(origTrack)">Join Contest</button>
                             <div id="errors"></div>
                         </div>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<hr>
+<br>
 
 <!-- hasSubmitted already: show this -->
 <div class="row" ng-if="hasSubmitted">
@@ -105,7 +87,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="col-lg-12 text-center">
-                    <div class="section-subheading text-muted">You start collecting Jam Points as soon as this timer hits zero:</div>
+                    <div class="section-subheading text-muted">You will start collecting Jam Points as soon as this timer hits zero:</div>
                 </div>
                 <br>
                 <div class="section-subheading text-muted"><span id="countdown-submitted"></span></div>
@@ -134,6 +116,38 @@
             </div>
         </div>
         <br><br><br>
+    </div>
+</div>
+
+<div class="row" ng-controller="AdvancedDatatablesDemoCtrl">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box red-nostra">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-globe"></i>Contest Summary
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="reload">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body dark-bg-nostra">
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <p><h5>Contest Entries</h5>{{contestEntries.count}}</p>
+                        <p><h5>Entry Fee</h5>${{contestInfo.entry_fee}}</p>
+                        <p><h5>Prize</h5> {{contestInfo.prize}}</p>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <p><h5>Start Time (ET)</h5> {{contestInfo.start_time}}</p>
+                        <p><h5>End Time (ET)</h5> {{contestInfo.end_time}}</p>
+                        <p><h5>Status</h5> Open (Enter Below)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
     </div>
 </div>
 <!-- END MAIN CONTENT -->

@@ -49,6 +49,12 @@
   font-size: 30px;
 }
 
+.submit-song-form {
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
+  border: 2px solid #ff5252;
+}
+
 /*.logo-nostra {
   max-width: 200px;
   margin-top: 20px;
