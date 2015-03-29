@@ -545,7 +545,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         //     url: "/login",
         //     templateUrl: "/assets/views/login.html",
         //     data: {
-        //         pageTitle: 'Log In',
+        //         pageTitle: '| | Log In',
         //         authenticate: false
         //     },
         //     controller: "LoginController",
@@ -576,7 +576,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state('home', {
             url: "/",
             data: {
-                pageTitle: 'Home',
+                pageTitle: '| Home',
                 authenticate: false
             },
             views: {
@@ -619,7 +619,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 "panel": {
                     templateUrl: "/assets/views/homepanel.html",
                     // data: {
-                    //     pageTitle: 'Home',
+                    //     pageTitle: '| Home',
                     //     authenticate: false
                     // },
                     controller: "HomePanelController",
@@ -688,7 +688,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/forgot",
             templateUrl: "/assets/views/forgot.html",
             data: {
-                pageTitle: 'Forgot Password',
+                pageTitle: '| Forgot Password',
                 authenticate: false
             },
             controller: "ForgotController",
@@ -723,7 +723,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         //     url: "/dashboard",
         //     templateUrl: "/assets/views/dashboard.html",
         //     data: {
-        //         pageTitle: 'Home',
+        //         pageTitle: '| Home',
         //         authenticate: false
         //     },
         //     controller: "DashboardController",
@@ -773,7 +773,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/opencontests/:contestID",
             templateUrl: "/assets/views/contests/opencontests.html",
             data: {
-                pageTitle: 'Open Contests',
+                pageTitle: '| Open Contests',
                 authenticate: true
             },
             controller: "OpenContestsController",
@@ -822,7 +822,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/inprogresscontests/:contestID",
             templateUrl: "/assets/views/contests/inprogresscontests.html",
             data: {
-                pageTitle: 'In Progress Contests',
+                pageTitle: '| In Progress Contests',
                 authenticate: true
             },
             controller: "CompletedContestsController",
@@ -889,7 +889,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/completedcontests/:contestID",
             templateUrl: "/assets/views/contests/completedcontests.html",
             data: {
-                pageTitle: 'Completed Contests',
+                pageTitle: '| Completed Contests',
                 authenticate: true
             },
             controller: "CompletedContestsController",
@@ -955,7 +955,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('test', {
         //     url: "/test.html",
         //     templateUrl: "/assets/views/test.html",            
-        //     data: {pageTitle: 'Admin Test Template'},
+        //     data: {pageTitle: '| Admin Test Template'},
         //     controller: "TestController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -990,7 +990,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('fileupload', {
         //     url: "/file_upload.html",
         //     templateUrl: "views/file_upload.html",
-        //     data: {pageTitle: 'AngularJS File Upload'},
+        //     data: {pageTitle: '| AngularJS File Upload'},
         //     controller: "GeneralPageController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1013,7 +1013,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('uiselect', {
         //     url: "/ui_select.html",
         //     templateUrl: "views/ui_select.html",
-        //     data: {pageTitle: 'AngularJS Ui Select'},
+        //     data: {pageTitle: '| AngularJS Ui Select'},
         //     controller: "UISelectController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1038,7 +1038,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('uibootstrap', {
         //     url: "/ui_bootstrap.html",
         //     templateUrl: "views/ui_bootstrap.html",
-        //     data: {pageTitle: 'AngularJS UI Bootstrap'},
+        //     data: {pageTitle: '| AngularJS UI Bootstrap'},
         //     controller: "GeneralPageController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1056,7 +1056,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('tree', {
         //     url: "/tree",
         //     templateUrl: "views/tree.html",
-        //     data: {pageTitle: 'jQuery Tree View'},
+        //     data: {pageTitle: '| jQuery Tree View'},
         //     controller: "GeneralPageController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1079,7 +1079,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('formtools', {
         //     url: "/form-tools",
         //     templateUrl: "views/form_tools.html",
-        //     data: {pageTitle: 'Form Tools'},
+        //     data: {pageTitle: '| Form Tools'},
         //     controller: "GeneralPageController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1117,7 +1117,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('pickers', {
         //     url: "/pickers",
         //     templateUrl: "views/pickers.html",
-        //     data: {pageTitle: 'Date & Time Pickers'},
+        //     data: {pageTitle: '| Date & Time Pickers'},
         //     controller: "GeneralPageController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1153,7 +1153,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('dropdowns', {
         //     url: "/dropdowns",
         //     templateUrl: "views/dropdowns.html",
-        //     data: {pageTitle: 'Custom Dropdowns'},
+        //     data: {pageTitle: '| Custom Dropdowns'},
         //     controller: "GeneralPageController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1182,7 +1182,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('datatablesAdvanced', {
         //     url: "/datatables/advanced.html",
         //     templateUrl: "views/datatables/advanced.html",
-        //     data: {pageTitle: 'Advanced Datatables'},
+        //     data: {pageTitle: '| Advanced Datatables'},
         //     controller: "GeneralPageController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1210,7 +1210,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('datatablesAjax', {
         //     url: "/datatables/ajax.html",
         //     templateUrl: "views/datatables/ajax.html",
-        //     data: {pageTitle: 'Ajax Datatables'},
+        //     data: {pageTitle: '| Ajax Datatables'},
         //     controller: "GeneralPageController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1241,7 +1241,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/profile/:userID",
             templateUrl: "/assets/views/profile/main.html",
             data: {
-                pageTitle: 'User Profile',
+                pageTitle: '| User Profile',
                 authenticate: false
             },
             controller: "UserProfileController",
@@ -1289,21 +1289,21 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         .state("profile.dashboard", {
             url: "/dashboard",
             templateUrl: "/assets/views/profile/dashboard.html",
-            data: {pageTitle: 'My Profile'}
+            data: {pageTitle: '| My Profile'}
         })
 
         // User Profile Account
         .state("profile.account", {
             url: "/account",
             templateUrl: "/assets/views/profile/account.html",
-            data: {pageTitle: 'User Account'}
+            data: {pageTitle: '| User Account'}
         })
 
         // Other User Profile
         // .state("profiles/:userID", {
         //     url: "/profiles/:userID",
         //     templateUrl: "/assets/views/profiles/main.html",
-        //     data: {pageTitle: 'User Profiles'},
+        //     data: {pageTitle: '| User Profiles'},
         //     controller: "UserProfilesController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1337,7 +1337,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state("profiles.dashboard/:userID", {
         //     url: "/dashboard/:userID",
         //     templateUrl: "/assets/views/profiles/dashboard.html",
-        //     data: {pageTitle: 'Profile'},
+        //     data: {pageTitle: '| Profile'},
         //     resolve: {
         //         myInfo: ['$http', '$stateParams', function($http, $stateParams) {
         //             return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
@@ -1352,14 +1352,14 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state("profile.help", {
         //     url: "/help",
         //     templateUrl: "/assets/views/profile/help.html",
-        //     data: {pageTitle: 'User Help'}
+        //     data: {pageTitle: '| User Help'}
         // })
 
         // My Jams
         // .state('jams', {
         //     url: "/jams",
         //     templateUrl: "/assets/views/jams.html",
-        //     data: {pageTitle: 'My Jams'},
+        //     data: {pageTitle: '| My Jams'},
         //     controller: "JamsController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1387,7 +1387,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('history', {
         //     url: "/history",
         //     templateUrl: "/assets/views/history.html",
-        //     data: {pageTitle: 'History'},
+        //     data: {pageTitle: '| History'},
         //     controller: "HistoryController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1415,7 +1415,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('todo', {
         //     url: "/todo",
         //     templateUrl: "/assets/views/todo.html",
-        //     data: {pageTitle: 'Todo'},
+        //     data: {pageTitle: '| Todo'},
         //     controller: "TodoController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1444,7 +1444,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/leaderboard",
             templateUrl: "/assets/views/leaderboard.html",
             data: {
-                pageTitle: 'Leaderboard',
+                pageTitle: '| Leaderboard',
                 authenticate: false
             },
             controller: "LeaderboardController",
@@ -1481,7 +1481,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/discover",
             templateUrl: "/assets/views/discover.html",
             data: {
-                pageTitle: 'Discover',
+                pageTitle: '| Discover',
                 authenticate: false
             },
             controller: "DiscoverController",
@@ -1528,7 +1528,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/discover/:userID/:trackID",
             templateUrl: "/assets/views/discover.html",
             data: {
-                pageTitle: 'Discover',
+                pageTitle: '| Discover',
                 authenticate: false
             },
             controller: "DiscoverController",
@@ -1587,7 +1587,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/tracks/:trackID",
             templateUrl: "/assets/views/discover.html",
             data: {
-                pageTitle: 'Discover',
+                pageTitle: '| Discover',
                 authenticate: false
             },
             controller: "DiscoverController",
@@ -1639,7 +1639,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/leagues",
             templateUrl: "/assets/views/leagues.html",
             data: {
-                pageTitle: 'Leagues',
+                pageTitle: '| Leagues',
                 authenticate: true
             },
             controller: "LeaguesController",
@@ -1669,7 +1669,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         // .state('discover', {
         //     url: "/discover",
         //     templateUrl: "/assets/views/discover.html",
-        //     data: {pageTitle: 'Discover'},
+        //     data: {pageTitle: '| Discover'},
         //     controller: "DiscoverController",
         //     resolve: {
         //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -1688,7 +1688,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/how",
             templateUrl: "/assets/views/how.html",
             data: {
-                pageTitle: 'How It Works',
+                pageTitle: '| How It Works',
                 authenticate: false
             },
             controller: "HowController",
@@ -1709,7 +1709,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/message",
             templateUrl: "/assets/views/message.html",
             data: {
-                pageTitle: 'Message Us',
+                pageTitle: '| Message Us',
                 authenticate: true
             },
             controller: "MessageController",
@@ -1740,7 +1740,7 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             url: "/admincontrols",
             templateUrl: "/assets/views/admincontrols.html",
             data: {
-                pageTitle: 'Admin Controls',
+                pageTitle: '| Admin Controls',
                 authenticate: true
             },
             controller: "AdminController",
