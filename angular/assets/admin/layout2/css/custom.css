@@ -1273,7 +1273,7 @@ ul.img-list li {
 }
 
 span.text-content {
-  background: rgba(255, 52, 52, 0.75);
+  background: rgba(255, 52, 52, 0.9);
   color: white;
   cursor: pointer;
   display: table;
@@ -1305,7 +1305,7 @@ ul.img-list li:hover span.text-content {
 }
 
 span.text-content-playlist {
-  background: rgba(255, 52, 52, 0.75);
+  background: rgba(255, 52, 52, 0.9);
   color: white;
   display: table;
   height: 0px;
