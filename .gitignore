@@ -5,3 +5,4 @@ static/
 .DS_STORE
 whoosh_index
 api.json
+api.json
