@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', 'referralTrack', 'myInfo', 'homeService', 'viewTrack', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService, referralTrack, myInfo, homeService, viewTrack) {
+MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', 'settings', 'trending', '$sce', '$location', '$anchorScroll', 'globalPlayerService', 'referralTrack', 'myInfo', 'homeService', 'viewTrack', 'api', function($rootScope, $scope, $http, settings, trending, $sce, $location, $anchorScroll, globalPlayerService, referralTrack, myInfo, homeService, viewTrack, api) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         Metronic.initAjax();
@@ -22,6 +22,9 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     // pagination
     $scope.currentPage = 1;
     $scope.pageSize = 10;
+
+    $scope.player = globalPlayerService.player;
+    $scope.api = api;
 
     $scope.numberOfPages=function() {
         return Math.ceil($scope.totalCount/$scope.pageSize);
@@ -321,8 +324,6 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
     };
 
     /* BEGINNING PLAYER */
-
-    $scope.player = globalPlayerService.player;
 
     $scope.playNewTrack = function(track, index) {
         homeService.home.data.panelId = 0;

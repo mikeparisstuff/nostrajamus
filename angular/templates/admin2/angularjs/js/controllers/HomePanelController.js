@@ -1,6 +1,6 @@
 'use strict';
 
-MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http, $timeout, contests, globalPlayerService, dailyLeaders, homeService, myData, authState) {
+MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http, $timeout, contests, globalPlayerService, dailyLeaders, homeService, myData, authState, api) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         Metronic.initAjax();
@@ -192,6 +192,7 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 	/* BEGIN PLAYER LOGIC */
 
     $scope.player = globalPlayerService.player;
+    $scope.api = api;
 
     $scope.playNewTrack = function(track, index, contestEntries) {
         globalPlayerService.player.resetTrack(track);

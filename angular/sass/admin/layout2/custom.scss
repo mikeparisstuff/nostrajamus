@@ -788,6 +788,12 @@ Red-nostra
   right: 18%;
 }
 
+.like-wrapper {
+  position: absolute;
+  top: 4px;
+  right: 10%;
+}
+
 .track-queue-art {
   width: 30px;
 }
@@ -1406,6 +1412,10 @@ ul.img-list li:hover span.text-content-playlist {
 .search-item {
   overflow: hidden;
   height: 20px;
+}
+
+.isLiked {
+  color: #ff5252;
 }
 
 //end panel css

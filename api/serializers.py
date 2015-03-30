@@ -1,6 +1,6 @@
 __author__ = 'MichaelParis'
 
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, Reward, ResetPasswordToken, PeriodicRanking
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, Reward, ResetPasswordToken, PeriodicRanking, LikedTrack
 from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import PaginationSerializer
 from rest_framework import serializers
@@ -199,3 +199,10 @@ class PaginatedRankingSerializer(PaginationSerializer):
 
     class Meta:
         object_serializer_class = RankingSerializer
+
+class LikedTrackSerializer(serializers.ModelSerializer):
+
+    track = RankingSerializer()
+
+    class Meta:
+        model = LikedTrack

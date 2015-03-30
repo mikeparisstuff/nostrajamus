@@ -131,6 +131,12 @@ class Profile(AbstractUser):
     def my_rewards(self):
         rewards = UserReward.objects.filter(user=self).order_by('-created_at')
         return rewards
+
+    @property
+    def likes(self):
+        likes = self.likedtrack_set.all().order_by('-created_at')
+        return likes
+
     # contests = models.ManyToManyField(
     #     Contest,
     #     blank=True,
@@ -573,11 +579,8 @@ class SCTrack(BaseModel):
         self.jamus_playback_count = F('jamus_playback_count') + 1
         self.save()
 
-    def __repr__(self):
+    def __unicode__(self):
         return self.title
-
-    def __str__(self):
-        return "{}".format(self.id)
 
 
 class SCPeriodicPlayCount(BaseModel):
@@ -739,8 +742,23 @@ class PeriodicRanking(BaseModel):
 
     current_follower_count = models.IntegerField(default=0)
 
+    def __unicode__(self):
+        return self.track.title
+
     class Meta:
         ordering = ('type', '-jam_points',)
+
+class LikedTrack(BaseModel):
+
+    # This could be bad but to simplify getting info on request
+    # we are linking LikedTracks to AllTime Ranking entries
+    track = models.ForeignKey(
+        PeriodicRanking
+    )
+
+    user = models.ForeignKey(
+        Profile
+    )
 
 
 # def get_private_contest_picture_upload_path(self, filename):

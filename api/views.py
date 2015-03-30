@@ -2,8 +2,8 @@ from django.shortcuts import render, render_to_response, RequestContext, redirec
 from rest_framework import viewsets, status, permissions, views
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken, PeriodicRanking
-from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer, PaginatedRankingSerializer, RankingSerializer
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken, PeriodicRanking, LikedTrack
+from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer, PaginatedRankingSerializer, RankingSerializer, LikedTrackSerializer
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Sum
 from django.core.mail import send_mail
@@ -210,6 +210,13 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = ProfileSerializer(leaders, many=True, context={'request': request})
         return Response(serializer.data, status.HTTP_200_OK)
 
+    @detail_route(permission_classes=(permissions.IsAuthenticated,))
+    def likes(self, request, pk=None):
+        user = self.get_object()
+        likes = user.likes
+        serializer = LikedTrackSerializer(likes, many=True, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     # def list(self, request):
     #     pass
     #
@@ -401,6 +408,20 @@ class TrackViewSet(viewsets.ModelViewSet):
         all_time_stats = PeriodicRanking.objects.get(track = track, type='ALLTIME')
         serializer = RankingSerializer(all_time_stats, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @detail_route(methods=("POST",), permission_classes=(permissions.IsAuthenticated,))
+    def like(self, request, pk=None):
+        track = self.get_object()
+        ranking = PeriodicRanking.objects.get(track = track, type='ALLTIME')
+        obj, created = LikedTrack.objects.get_or_create(
+            user = request.user,
+            track = ranking
+        )
+        if not created:
+            # The like already existed so we should delete it
+            obj.delete()
+            return Response({'detail': 'Successfully removed liked track with id: {}'.format(pk)}, status=status.HTTP_200_OK)
+        return Response({'detail': 'Successfully liked track with id: {}'.format(pk)}, status=status.HTTP_200_OK)
 
     @list_route()
     def total_streams(self, request):

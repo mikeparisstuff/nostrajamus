@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSong, ContestEntry, SCUser, Feedback, ResetPasswordToken, PeriodicRanking
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSong, ContestEntry, SCUser, Feedback, ResetPasswordToken, PeriodicRanking, LikedTrack
 
 # Register your models here.
 
@@ -7,7 +7,7 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'first_name', 'last_name', 'username', 'email', 'jam_points')
 
 class ContestAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'num_entries')
+    list_display = ('id', 'title', 'num_entries', 'start_time', 'end_time')
 
 class SCTrackAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'stream_url', 'jamus_playback_count', 'created_at')
@@ -33,6 +33,9 @@ class ResetTokenAdmin(admin.ModelAdmin):
 class PeriodicRankingAdmin(admin.ModelAdmin):
     list_display = ('id', 'type', 'track', 'initial_playback_count', 'current_playback_count', 'jam_points')
 
+class LikedTrackAdmin(admin.ModelAdmin):
+    list_display = ('id', 'track', 'user')
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(SCTrack, SCTrackAdmin)
 admin.site.register(Contest, ContestAdmin)
@@ -43,3 +46,4 @@ admin.site.register(SCUser, SCUserAdmin)
 admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(ResetPasswordToken, ResetTokenAdmin)
 admin.site.register(PeriodicRanking, PeriodicRankingAdmin)
+admin.site.register(LikedTrack, LikedTrackAdmin)

@@ -94,11 +94,11 @@ else:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         # 'NAME': 'nostrajamusdev',
-        'NAME': 'nostrajamusdev2',
-        'USER': 'django_login',
-        'PASSWORD': 'django_login',
-        'HOST': '',
-        'PORT': '',
+        'NAME': 'NostrajamusProd',
+        'USER': 'nostrajamus',
+        'PASSWORD': 'Nostra123',
+        'HOST': 'nostrajamusprodreadreplica.cqgo2wxdycyf.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
     AWS_STORAGE_BUCKET_NAME = 'nostrajamus-dev'
     BROKER_URL = 'sqs://sqs.us-east-1.amazonaws.com/755639026061/nostrajamus-dev'

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, globalPlayerService) {
+MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, globalPlayerService, api) {
     $scope.$on('$viewContentLoaded', function() {
         // initialize core components
         Metronic.initAjax();
@@ -13,6 +13,9 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
     });
 
     $scope.player = globalPlayerService.player;
+    $scope.api = api;
+
+    globalPlayerService.player.getLikes();
 
     if (globalPlayerService.player.data.trackQueue.length == 0 ) {
         globalPlayerService.player.getDefaultQueue();
@@ -80,6 +83,7 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
         $scope.referLink = "http://nostrajamus.com/#/tracks/" + trackId;
         $('#shareGlobalModal').modal('show');
     };
+
 //    $scope.trackQueue = globalPlayerData.trackQueue;
 
 //    $scope.player.playPause = globalPlayerService.playPause;

@@ -53,6 +53,8 @@ MetronicApp.service('authState', function () {
 })
 
 MetronicApp.factory('api', ['$resource', function($resource) {
+
+
     function add_auth_header(data, headersGetter){
         // as per HTTP authentication spec [1], credentials must be
         // encoded in base64. Lets use window.btoa [2]
@@ -65,13 +67,32 @@ MetronicApp.factory('api', ['$resource', function($resource) {
     // we tell Django not to [3]. This is a problem as the POST data cannot
     // be sent with the redirect. So we want Angular to not strip the slashes!
     return {
+        data: {
+            myUser: null,
+            myLikes: [],
+            likeIds: []
+        },
         auth: $resource('/api/auth\\/', {}, {
             login: {method: 'POST', transformRequest: add_auth_header},
             logout: {method: 'DELETE'}
         }),
         users: $resource('/api/users\\/', {}, {
             create: {method: 'POST'}
-        })
+        }),
+        trackIsLiked: function(track) {
+            if (track === null) {
+                return false;
+            }
+            var trackId = track.id;
+            var found = false;
+            this.data.likeIds.forEach(function(elem) {
+                if (elem === trackId) {
+                    found = true;
+                }
+            });
+            return found;
+        }
+
         // posts: $resource('/api/posts\\/', {}, {
         //     list:   {method: 'GET', isArray: true},
         //     create: {method: 'POST'},
@@ -87,6 +108,17 @@ MetronicApp.controller('authController', function($scope, api, authState, $http,
     // the $scope.username is blank. To workaround this we use the 
     // autofill-event polyfill [4][5]
     $('#id_auth_form input').checkAndTriggerAutoFillEvent();
+
+    $scope.getMyUser = function() {
+        $http({
+            url: '/api/users/me/',
+            method: 'GET'
+        }).success(function(data, status, headers, config) {
+            api.data.myUser = data;
+        }).error(function(data, status, headers, config) {
+            console.log("Error getting user in authController");
+        });
+    };
 
     $scope.authState = authState;
     // console.log(authState);
@@ -213,7 +245,7 @@ MetronicApp.controller('authController', function($scope, api, authState, $http,
     // [5] http://remysharp.com/2010/10/08/what-is-a-polyfill/
 });
 
-MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
+MetronicApp.factory('globalPlayerService', function($rootScope, $http, api) {
     var player =  {
         data: {
             currentTrack: null,
@@ -238,6 +270,17 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
       broadcast(this.data.trackProgress);
     };
 
+    player.getMyUser = function(callback) {
+        $http({
+            url: '/api/users/me/',
+            method: 'GET'
+        }).success(function(data, status, headers, config) {
+            api.data.myUser = data;
+            callback();
+        }).error(function(data, status, headers, config) {
+            console.log("Error getting user in authController");
+        });
+    };
 
     player.getDefaultQueue = function () {
         var that = this;
@@ -356,6 +399,41 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http) {
             console.log(data);
         });
 
+    };
+
+    player.getLikes = function() {
+        if (api.data.myUser === null) {
+            this.getMyUser(this.getLikes);
+        } else {
+            $http({
+                url: "/api/users/" + api.data.myUser.id + "/likes/",
+                method: "GET"
+            }).success(function(data, status, headers, config) {
+                api.data.myLikes = data;
+                var likeIds = [];
+                api.data.myLikes.forEach(function(elem) {
+                   likeIds.push(elem.track.track.id);
+                });
+                api.data.likeIds = likeIds;
+            }).error(function(data, status, headers, config) {
+                console.log("Error getting likes");
+                console.log(data);
+            })
+        }
+    };
+
+    player.likeTrack = function() {
+        var that = this;
+        $http({
+            url: "/api/tracks/" + that.data.currentTrackData['id'] + "/like/",
+            method: "POST"
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            that.getLikes();
+        }).error(function( data, status, headers, config) {
+            console.log("Error liking track");
+            console.log(data);
+        });
     };
 
     return { player: player };

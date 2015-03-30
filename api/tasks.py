@@ -51,6 +51,9 @@ def update_playcount():
         except HTTPError as e:
             print 'Error getting track with id: {}'.format(track.sc_id)
             print 'ERROR: {}'.format(e)
+        except AttributeError as e:
+            print 'Attribute Error on track: {}'.format(track.sc_id)
+            print 'ERROR: {}'.format(e)
 
 @shared_task
 def update_daily_rankings():
