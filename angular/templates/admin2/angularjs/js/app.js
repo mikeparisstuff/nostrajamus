@@ -52,7 +52,7 @@ MetronicApp.service('authState', function () {
     };
 })
 
-MetronicApp.factory('api', ['$resource', function($resource) {
+MetronicApp.factory('api', ['$resource', '$http', function($resource, $http) {
 
 
     function add_auth_header(data, headersGetter){
@@ -66,40 +66,99 @@ MetronicApp.factory('api', ['$resource', function($resource) {
     // not ending in slashes to url that ends in slash for SEO reasons, unless
     // we tell Django not to [3]. This is a problem as the POST data cannot
     // be sent with the redirect. So we want Angular to not strip the slashes!
-    return {
+    var api = {
         data: {
             myUser: null,
             myLikes: [],
-            likeIds: []
-        },
-        auth: $resource('/api/auth\\/', {}, {
+            likeIds: {}
+        }
+    };
+
+    api.init = function() {
+        this.getLikes();
+    };
+
+    api.getLikes = function() {
+        var that = this;
+        if (that.data.myUser === null) {
+            that.getMyUser(this.getLikes);
+        } else {
+            $http({
+                url: "/api/users/" + api.data.myUser.id + "/likes/",
+                method: "GET"
+            }).success(function(data, status, headers, config) {
+                that.data.myLikes = data;
+                var likeIds = [];
+                that.data.myLikes.forEach(function(elem) {
+                   likeIds[elem.track.track.id] = true;
+                });
+                that.data.likeIds = likeIds;
+            }).error(function(data, status, headers, config) {
+                console.log("Error getting likes");
+                console.log(data);
+            })
+        }
+    };
+
+    api.likeTrack = function(track) {
+        if (track === null) {
+            return;
+        }
+        var that = this;
+        $http({
+            url: "/api/tracks/" + track['id'] + "/like/",
+            method: "POST"
+        }).success(function(data, status, headers, config) {
+            console.log(data);
+            that.getLikes();
+        }).error(function( data, status, headers, config) {
+            console.log("Error liking track");
+            console.log(data);
+        });
+    };
+
+    api.getMyUser = function(callback) {
+        var that = this;
+        $http({
+            url: '/api/users/me/',
+            method: 'GET'
+        }).success(function(data, status, headers, config) {
+            that.data.myUser = data;
+            callback.bind(that)();
+        }).error(function(data, status, headers, config) {
+            console.log("Error getting user in authController");
+        });
+    };
+
+    api.auth = $resource('/api/auth\\/', {}, {
             login: {method: 'POST', transformRequest: add_auth_header},
             logout: {method: 'DELETE'}
-        }),
-        users: $resource('/api/users\\/', {}, {
+    });
+    api.users = $resource('/api/users\\/', {}, {
             create: {method: 'POST'}
-        }),
-        trackIsLiked: function(track) {
-            if (track === null) {
-                return false;
-            }
-            var trackId = track.id;
-            var found = false;
-            this.data.likeIds.forEach(function(elem) {
-                if (elem === trackId) {
-                    found = true;
-                }
-            });
-            return found;
-        }
+    });
 
-        // posts: $resource('/api/posts\\/', {}, {
-        //     list:   {method: 'GET', isArray: true},
-        //     create: {method: 'POST'},
-        //     detail: {method: 'GET', url: '/api/posts/:id'},
-        //     delete: {method: 'DELETE', url: '/api/posts/:id'}
-        // })
+    api.trackIsLiked = function(track) {
+        if (track === null) {
+            return false;
+        }
+        var trackId = track.id;
+        if (this.data.likeIds[trackId] === true) {
+            return true;
+        }
+        return false;
+//        var found = false;
+//        this.data.likeIds.forEach(function(elem) {
+//            if (elem === trackId) {
+//                found = true;
+//            }
+//        });
+//        return found;
     };
+
+    api.init();
+
+    return api;
 }]);
 
 MetronicApp.controller('authController', function($scope, api, authState, $http, spinnerService) {
@@ -109,16 +168,16 @@ MetronicApp.controller('authController', function($scope, api, authState, $http,
     // autofill-event polyfill [4][5]
     $('#id_auth_form input').checkAndTriggerAutoFillEvent();
 
-    $scope.getMyUser = function() {
-        $http({
-            url: '/api/users/me/',
-            method: 'GET'
-        }).success(function(data, status, headers, config) {
-            api.data.myUser = data;
-        }).error(function(data, status, headers, config) {
-            console.log("Error getting user in authController");
-        });
-    };
+//    $scope.getMyUser = function() {
+//        $http({
+//            url: '/api/users/me/',
+//            method: 'GET'
+//        }).success(function(data, status, headers, config) {
+//            api.data.myUser = data;
+//        }).error(function(data, status, headers, config) {
+//            console.log("Error getting user in authController");
+//        });
+//    };
 
     $scope.authState = authState;
     // console.log(authState);
@@ -270,18 +329,6 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http, api) {
       broadcast(this.data.trackProgress);
     };
 
-    player.getMyUser = function(callback) {
-        $http({
-            url: '/api/users/me/',
-            method: 'GET'
-        }).success(function(data, status, headers, config) {
-            api.data.myUser = data;
-            callback();
-        }).error(function(data, status, headers, config) {
-            console.log("Error getting user in authController");
-        });
-    };
-
     player.getDefaultQueue = function () {
         var that = this;
         $http.get('/api/tracks/trending/?filter=daily&page=1').then(function(response) {
@@ -399,41 +446,6 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http, api) {
             console.log(data);
         });
 
-    };
-
-    player.getLikes = function() {
-        if (api.data.myUser === null) {
-            this.getMyUser(this.getLikes);
-        } else {
-            $http({
-                url: "/api/users/" + api.data.myUser.id + "/likes/",
-                method: "GET"
-            }).success(function(data, status, headers, config) {
-                api.data.myLikes = data;
-                var likeIds = [];
-                api.data.myLikes.forEach(function(elem) {
-                   likeIds.push(elem.track.track.id);
-                });
-                api.data.likeIds = likeIds;
-            }).error(function(data, status, headers, config) {
-                console.log("Error getting likes");
-                console.log(data);
-            })
-        }
-    };
-
-    player.likeTrack = function() {
-        var that = this;
-        $http({
-            url: "/api/tracks/" + that.data.currentTrackData['id'] + "/like/",
-            method: "POST"
-        }).success(function(data, status, headers, config) {
-            console.log(data);
-            that.getLikes();
-        }).error(function( data, status, headers, config) {
-            console.log("Error liking track");
-            console.log(data);
-        });
     };
 
     return { player: player };

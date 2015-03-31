@@ -25,7 +25,7 @@
                   </button>
                 </div>
                 <div class="dropdown like-wrapper">
-                    <button class="btn button-icon" type="button" id="trackQueueMenu" aria-expanded="true" ng-click="player.likeTrack()">
+                    <button class="btn button-icon" type="button" id="trackQueueMenu" aria-expanded="true" ng-click="api.likeTrack(player.data.currentTrackData)">
                         <span ng-if="api.trackIsLiked(player.data.currentTrackData)" class="fa fa-2x fa-heart isLiked"></span>
                         <span ng-if="!api.trackIsLiked(player.data.currentTrackData)" class="fa fa-2x fa-heart-o"></span>
                     </button>

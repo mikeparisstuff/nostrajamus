@@ -55,7 +55,7 @@
                     <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>
                 </div> -->
                 <div class="col-md-2 col-sm-2 col-xs-4">
-                    <button class="btn button-icon" type="button" aria-expanded="true" ng-click="player.likeTrack()">
+                    <button class="btn button-icon" type="button" aria-expanded="true" ng-click="api.likeTrack(track.track)">
                         <span ng-if="api.trackIsLiked(track.track)" class="fa fa-2x fa-heart isLiked"></span>
                         <span ng-if="!api.trackIsLiked(track.track)" class="fa fa-2x fa-heart-o"></span>
                     </button>

@@ -15,7 +15,7 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
     $scope.player = globalPlayerService.player;
     $scope.api = api;
 
-    globalPlayerService.player.getLikes();
+    api.getLikes();
 
     if (globalPlayerService.player.data.trackQueue.length == 0 ) {
         globalPlayerService.player.getDefaultQueue();
