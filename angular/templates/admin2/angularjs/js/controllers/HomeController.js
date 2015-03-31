@@ -154,9 +154,13 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
 	};
 
 	$scope.playRandom = function() {
-		console.log($rootScope.contests);
 		var randContest = $rootScope.contests[Math.floor(Math.random() * $rootScope.contests.length)];
-		$scope.setPanelPlay(randContest);
+		if (moment(randContest.start_time) <= moment(new Date())) {
+			$scope.setPanelPlay(randContest);
+		}
+		else {
+			$scope.playRandom();
+		}
 	};
 
 	// $scope.setPanelBack = function() {
