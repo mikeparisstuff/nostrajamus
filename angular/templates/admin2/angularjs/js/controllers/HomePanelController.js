@@ -72,8 +72,8 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 
 		if ($scope.myContestInfo) {
 			for (var i = 0; i < $scope.myContestInfo.length; i++) {
+				getContestRank(i, $scope.myContestInfo[i].contest, $scope.myContestInfo);
 				for (var j = 0; j < $rootScope.contests.length; j++) {
-					getContestRank(i, $scope.myContestInfo[i].contest, $scope.myContestInfo);
 					if ($rootScope.contests[j].id == $scope.myContestInfo[i].contest) {
 						$scope.myContestInfo[i].title = $rootScope.contests[j].title;
 					}

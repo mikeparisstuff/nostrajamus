@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', 'myInfo', 'globalPlayerService', 'homeService', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank, myInfo, globalPlayerService, homeService) {
+MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', '$sce', '$http', 'myEntry', 'myRank', 'myInfo', 'globalPlayerService', 'homeService', 'api', function($rootScope, $scope, settings, contestInfo, contestEntries, $sce, $http, myEntry, myRank, myInfo, globalPlayerService, homeService, api) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -10,6 +10,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
     });
 
     $scope.hideDiscoverer = true;
+    $scope.api = api;
 
     /* BEGIN SHARED LOGIC */
 

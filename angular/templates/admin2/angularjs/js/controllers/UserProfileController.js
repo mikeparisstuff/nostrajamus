@@ -1,6 +1,6 @@
 'use strict';
 
-MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", "myInfo", "me", "globalPlayerService", "homeService", function($rootScope, $scope, $http, $timeout, $upload, $sce, myInfo, me, globalPlayerService, homeService) {
+MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http", "$timeout", "$upload", "$sce", "myInfo", "me", "globalPlayerService", "homeService", "api", function($rootScope, $scope, $http, $timeout, $upload, $sce, myInfo, me, globalPlayerService, homeService, api) {
     $scope.$on('$viewContentLoaded', function() {   
         Metronic.initAjax(); // initialize core components
         Layout.setSidebarMenuActiveLink('set', $('#sidebar_menu_link_profile')); // set profile link active in sidebar menu 
@@ -10,6 +10,8 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
 
     $scope.myInfo = myInfo;
     $scope.me = me;
+
+    $scope.api = api;
     // $http.get('/api/users/me').then(function(response) {
     //      $scope.myInfo = response.data;
     //     // console.log($scope.myInfo);

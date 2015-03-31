@@ -11,6 +11,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 
     $scope.hideDiscoverer = true;
     $scope.submissionPage = true;
+    $scope.api = api;
 
     $scope.contestInfo = contestInfo;
     $scope.contestEntries = contestEntries;
