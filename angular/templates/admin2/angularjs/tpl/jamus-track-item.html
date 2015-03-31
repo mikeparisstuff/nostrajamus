@@ -54,23 +54,30 @@
                 <!-- <div class="soundcloud-icon col-md-2 col-sm-2 col-xs-4">
                     <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>
                 </div> -->
-                <div class="col-md-2 col-sm-2 col-xs-4">
-                    <button class="btn button-icon" type="button" aria-expanded="true" ng-click="api.likeTrack(track.track)">
-                        <span ng-if="api.trackIsLiked(track.track)" class="fa fa-2x fa-heart isLiked"></span>
-                        <span ng-if="!api.trackIsLiked(track.track)" class="fa fa-2x fa-heart-o"></span>
-                    </button>
 
-
-                    <!--&lt;!&ndash; <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a> &ndash;&gt;-->
-                    <!--<div style="margin-top:15px"></div>-->
-                    <!--&lt;!&ndash; data-toggle="modal" data-target="#shareLargeModal" &ndash;&gt;-->
-                    <!--<a href="#" ng-click="updateRefer(myData.id, track.track.sc_id)" ng-if="submissionPage">-->
-                        <!--<i class="fa fa-share fa-3x"></i>-->
-                    <!--</a>-->
-                    <!--<a href="#" ng-click="updateRefer(track.track.id)" ng-if="!submissionPage">-->
-                        <!--<i class="fa fa-share fa-3x"></i>-->
-                    <!--</a>-->
+                <div class="col-md-2 col-sm-2 col-xs-4 widget-wrapper">
+                    <div class="row">
+                        <div class="track-like-wrapper">
+                            <button class="btn button-icon" type="button" aria-expanded="true" ng-click="api.likeTrack(track.track)">
+                                <span ng-if="api.trackIsLiked(track.track)" class="fa fa-2x fa-heart isLiked"></span>
+                                <span ng-if="!api.trackIsLiked(track.track)" class="fa fa-2x fa-heart-o"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- <a target="_blank" href="{{ track.track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a> -->
+                        <div class="track-share-wrapper">
+                        <!--&lt;!&ndash; data-toggle="modal" data-target="#shareLargeModal" &ndash;&gt;-->
+                            <a href="#" ng-click="updateRefer(myData.id, track.track.sc_id)" ng-if="submissionPage">
+                                <i class="fa fa-share fa-3x"></i>
+                            </a>
+                            <a href="#" ng-click="updateRefer(track.track.id)" ng-if="!submissionPage">
+                                <i class="fa fa-share fa-3x"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
         </div>

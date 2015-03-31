@@ -30,27 +30,27 @@
                         <span ng-if="!api.trackIsLiked(player.data.currentTrackData)" class="fa fa-2x fa-heart-o"></span>
                     </button>
                 </div>
-                <!--<div class="dropdown queue-wrapper">-->
-                    <!--<button class="btn button-icon" type="button" id="trackQueueMenu" aria-expanded="true" ng-click="player.likeTrack()">-->
-                        <!--<span ng-if="api.data.likeIds.includes(player.data.currentTrackData.id)" class="fa fa-2x fa-heart isLiked"></span>-->
-                        <!--<span ng-if="!api.data.likeIds.includes(player.data.currentTrackData.id)" class="fa fa-2x fa-heart-o"></span>-->
-                    <!--</button>-->
+                <div class="dropdown queue-wrapper">
+                    <!-- <button class="btn button-icon" type="button" id="trackQueueMenu" aria-expanded="true" ng-click="player.likeTrack()">
+                        <span ng-if="api.data.likeIds.includes(player.data.currentTrackData.id)" class="fa fa-2x fa-heart isLiked"></span>
+                        <span ng-if="!api.data.likeIds.includes(player.data.currentTrackData.id)" class="fa fa-2x fa-heart-o"></span>
+                    </button> -->
 
-                    <!--&lt;!&ndash; QUEUE BUTTON &ndash;&gt;-->
-                  <!--&lt;!&ndash;<button class="btn button-icon dropdown-toggle" ng-click="forceApply()" type="button" id="trackQueueMenu" data-toggle="dropdown" aria-expanded="true">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<span class="fa fa-2x fa-bars"></span>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                    <!-- &lt;!&ndash; QUEUE BUTTON &ndash;&gt; -->
+                    <button class="btn button-icon dropdown-toggle" ng-click="forceApply()" type="button" id="trackQueueMenu" data-toggle="dropdown" aria-expanded="true">
+                        <span class="fa fa-2x fa-bars"></span>
+                    </button>
 
-                  <!--<ul class="dropdown-menu dropdown-menu-right track-queue-dropdown" role="menu" aria-labelledby="trackQueueMenu">-->
-                      <!--<li ng-if="player.data.trackQueue.length == 0" role="presentation"><a role="menuitem" tabindex="-1" href="#">No songs in queue...</a></li>-->
-                      <!--<li ng-repeat="track in player.data.trackQueue" role="presentation" class="queue-item">-->
-                          <!--<div role="menuitem" tabindex="-1" href="#">-->
-                              <!--<img src="{{ track.artwork_url }}" class="img_responsive track-queue-art" alt=""/>-->
-                            <!--{{ track.title }}-->
-                          <!--</div>-->
-                      <!--</li>-->
-                  <!--</ul>-->
-                <!--</div>-->
+                  <ul class="dropdown-menu dropdown-menu-right track-queue-dropdown" role="menu" aria-labelledby="trackQueueMenu">
+                      <li ng-if="player.data.trackQueue.length == 0" role="presentation"><a role="menuitem" tabindex="-1" href="#">No songs in queue...</a></li>
+                      <li ng-repeat="track in player.data.trackQueue" role="presentation" class="queue-item">
+                          <div role="menuitem" tabindex="-1" href="#">
+                              <img src="{{ track.artwork_url }}" class="img_responsive track-queue-art" alt=""/>
+                            {{ track.title }}
+                          </div>
+                      </li>
+                  </ul>
+                </div>
                 <div class="col-xs-3 col-lg-3 col-lg-offset-1 player-controls">
                     <div class="row text-center">
                         <div class="col-xs-4">

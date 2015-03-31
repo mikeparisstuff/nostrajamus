@@ -773,25 +773,25 @@ Red-nostra
 .queue-wrapper {
   position: absolute;
   top: 4px;
-  right: 8%;
-}
-
-.share-wrapper {
-  position: absolute;
-  top: 4px;
-  right: 14%;
+  right: 10%;
 }
 
 .info-wrapper {
   position: absolute;
   top: 4px;
-  right: 18%;
+  right: 14%;
+}
+
+.share-wrapper {
+  position: absolute;
+  top: 4px;
+  right: 17%;
 }
 
 .like-wrapper {
   position: absolute;
   top: 4px;
-  right: 10%;
+  right: 20%;
 }
 
 .track-queue-art {
@@ -979,6 +979,14 @@ Red-nostra
   .track-divider {
     margin-bottom: 0;
   }
+}
+
+.track-like-wrapper {
+  margin-top: -7px;
+}
+
+.track-share-wrapper {
+  margin-top: 5px;
 }
 
 /* END TRACK ITEM */
