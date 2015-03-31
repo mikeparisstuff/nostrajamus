@@ -1443,6 +1443,10 @@ ul.img-list li:hover span.text-content-playlist {
   color: #ff5252;
 }
 
+.search-icon {
+  background-color: #fff;
+}
+
 /* HOME 2 */
 /* END HOME 2 */
 /* OVERRIDE TEMPLATE */

@@ -25,9 +25,12 @@
                   </button>
                 </div>
                 <div class="dropdown like-wrapper">
-                    <button class="btn button-icon" type="button" id="trackQueueMenu" aria-expanded="true" ng-click="api.likeTrack(player.data.currentTrackData)">
+                    <button class="btn button-icon" type="button" id="trackQueueMenu" aria-expanded="true" ng-click="api.likeTrack(player.data.currentTrackData)" ng-if="authState.user">
                         <span ng-if="api.trackIsLiked(player.data.currentTrackData)" class="fa fa-2x fa-heart isLiked"></span>
                         <span ng-if="!api.trackIsLiked(player.data.currentTrackData)" class="fa fa-2x fa-heart-o"></span>
+                    </button>
+                    <button class="btn button-icon" type="button" aria-expanded="true" ng-click="api.likeTrack(track.track)" ng-if="!authState.user">
+                        <span data-toggle="modal" data-target="#loginModal" class="fa fa-2x fa-heart-o"></span>
                     </button>
                 </div>
                 <div class="dropdown queue-wrapper">
