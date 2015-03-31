@@ -773,7 +773,7 @@ Red-nostra
 .queue-wrapper {
   position: absolute;
   top: 4px;
-  right: 10%;
+  right: 11%;
 }
 
 .info-wrapper {
@@ -841,6 +841,7 @@ Red-nostra
 
 
 .player-controls, .player-queue {
+  padding-left: 12%;
   padding-top: 3px;
 }
 
@@ -956,8 +957,9 @@ Red-nostra
 }
 
 .btn-previous {
-  float: right;
+  float: left;
 }
+
 .btn-next {
   float: left;
 }
@@ -1361,6 +1363,21 @@ ul.img-list li:hover span.text-content-playlist {
   transform: scale(1.1);
 }
 
+.shuffle-wrapper {
+  float: right;
+  padding-top: 10px;
+}
+
+.shuffle-wrapper:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.shuffle-wrapper:active {
+  transform: scale(1.0);
+  cursor: pointer;
+}
+
 // Front Page End
 
 //panel css
@@ -1428,7 +1445,7 @@ ul.img-list li:hover span.text-content-playlist {
 
 //end panel css
 
-/* HOME */
+/* HOME 2 */
 
 // .contest-square-info {
 //   background-color: #fff;
@@ -1447,7 +1464,7 @@ ul.img-list li:hover span.text-content-playlist {
 //   background-color: #333;
 // }
 
-/* END HOME */
+/* END HOME 2 */
 
 
 /* OVERRIDE TEMPLATE */

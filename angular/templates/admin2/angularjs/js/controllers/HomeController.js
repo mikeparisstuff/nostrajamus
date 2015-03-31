@@ -153,6 +153,12 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
 		globalPlayerService.player.playPause();
 	};
 
+	$scope.playRandom = function() {
+		console.log($rootScope.contests);
+		var randContest = $rootScope.contests[Math.floor(Math.random() * $rootScope.contests.length)];
+		$scope.setPanelPlay(randContest);
+	};
+
 	// $scope.setPanelBack = function() {
 	// 	$rootScope.panelId = 0;
 	// };
