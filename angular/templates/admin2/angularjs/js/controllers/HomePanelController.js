@@ -1,6 +1,6 @@
 'use strict';
 
-MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http, $timeout, contests, globalPlayerService, dailyLeaders, homeService, myData, authState, api) {
+MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http, $timeout, contests, globalPlayerService, dailyLeaders, homeService, authState, api) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         Metronic.initAjax();
@@ -8,6 +8,7 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 
     $scope.contests = contests;
     $scope.dailyLeaders = dailyLeaders;
+    var myData = api.data.myUser.my_entries.filter(function(elem) {  return elem.is_active});
     $scope.myContestInfo = myData;
     $scope.currentPage = 1;
 
@@ -93,9 +94,9 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 	    })
 	}
 
-    for (var i = 0; i < $scope.contests.length; i++) {
-        $scope.getContestEntries(i, $scope.contests[i]);
-    }
+//    for (var i = 0; i < $scope.contests.length; i++) {
+//        $scope.getContestEntries(i, $scope.contests[i]);
+//    }
 
     $scope.trendingTracks = dailyLeaders.results;
 

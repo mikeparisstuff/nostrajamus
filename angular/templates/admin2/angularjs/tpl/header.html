@@ -10,10 +10,16 @@
       </div>
   </a>
   <a ng-if="match.label.type == 'profile'">
-      <div class="search-item">
-        <img ng-src="{{match.label.profile_picture}}" width="16">
-        <span bind-html-unsafe="match.label.username | typeaheadHighlight:query"></span>
-        <span class="mute pull-right">User</span>
+      <div class="search-profile-item">
+        <div class="search-top">
+            <img ng-src="{{match.label.profile_picture}}" width="16">
+            <span>  </span>
+            <span bind-html-unsafe="match.label.username | typeaheadHighlight:query"></span>
+            <span class="mute pull-right">User</span>
+        </div>
+        <div class="search-bottom">
+            <span class="mute" bind-html-unsafe="match.label.name | typeaheadHighlight:query"></span>
+        </div>
       </div>
   </a>
 </script>
@@ -217,8 +223,8 @@
 					<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown style -->
 					<li class="dropdown dropdown-user dropdown-dark">
 						<a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
-						<img class="profile-pic-md" src="{{getProfilePicture(myData.profile_picture)}}" ng-show="getProfilePicture(myData.profile_picture)">
-	                    <i class="fa fa-user fa-lg" ng-hide="getProfilePicture(myData.profile_picture)"></i>
+						<img class="profile-pic-md" src="{{getProfilePicture(api.data.myUser.profile_picture)}}" ng-show="getProfilePicture(api.data.myUser.profile_picture)">
+	                    <i class="fa fa-user fa-lg" ng-hide="getProfilePicture(api.data.myUser.profile_picture)"></i>
 						<span class="username username-hide-on-mobile">
 						{{authState.user}} </span>
 						<i class="fa fa-angle-down"></i>
@@ -269,7 +275,7 @@
                 <!--<div class="col-sm-3 col-md-3 pull-right">-->
                     <form class="navbar-form navbar-search pull-right" role="search" ng-submit="search(searchQuery)">
                         <div class="input-group jamus-search">
-                            <input type="text" name="" class="form-control" id="search" type="text" placeholder="Search" ng-model="searchQuery" typeahead="track for track in search($viewValue)" typeahead-on-select='onSearchSelect($item, $model, $label)' typeahead-template-url="searchTemplate.html">
+                            <input type="text" name="" class="form-control" id="search" type="text" placeholder="Search" ng-model="searchQuery" typeahead="track for track in search($viewValue)" typeahead-on-select='onSearchSelect($item, $model, $label)' typeahead-template-url="searchTemplate.html" typeahead-input-formatter="formatLabel($model)">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                             </div>
@@ -617,7 +623,7 @@
 					<!--<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown style -->
 					<!--<li class="dropdown dropdown-user dropdown-dark">-->
 						<!--<a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">-->
-						<!--<img alt="" class="img-circle" src="{{myData.profile_picture}}"/> <!-- /assets/admin/layout2/img/avatar3_small.jpg -->
+						<!--<img alt="" class="img-circle" src="{{api.data.myUser.profile_picture}}"/> <!-- /assets/admin/layout2/img/avatar3_small.jpg -->
 						<!--<span class="username username-hide-on-mobile">-->
 						<!--{{authState.user}} </span>-->
 						<!--<i class="fa fa-angle-down"></i>-->

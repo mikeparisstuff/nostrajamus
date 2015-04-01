@@ -123,10 +123,14 @@ MetronicApp.factory('api', ['$resource', '$http', function($resource, $http) {
             url: '/api/users/me/',
             method: 'GET'
         }).success(function(data, status, headers, config) {
+            var cleaned = data.my_likes.map(function(elem) { return elem.track });
             that.data.myUser = data;
+            that.data.myUser.my_likes = cleaned;
+            console.log(data);
             callback.bind(that)();
         }).error(function(data, status, headers, config) {
             console.log("Error getting user in authController");
+            console.log("ERROR: " + data);
         });
     };
 
@@ -508,11 +512,12 @@ initialization can be disabled and Layout.init() should be called on page load c
 ***/
 
 /* Setup Layout Part - Header */
-MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'authState', 'spinnerService', '$state', function($rootScope, $scope, $http, authState, spinnerService, $state) {
+MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'authState', 'spinnerService', '$state', 'api', function($rootScope, $scope, $http, authState, spinnerService, $state, api) {
     $scope.$on('$includeContentLoaded', function() {
         Layout.initHeader(); // init header
     });
 
+    $scope.api = api
     $rootScope.firstTime = true;
     $scope.firstTime = $rootScope.firstTime;
     // spinnerService.spinner.data.refresh = false;
@@ -564,16 +569,24 @@ MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'au
         }
     };
 
+    $scope.formatLabel = function(model) {
+        if (model.type == "track") {
+            return model.title;
+        } else if (model.type == "profile") {
+            return model.username;
+        }
+    };
+
     // $scope.authState = authState;
     // console.log($scope.authState);
 
-    if (!authState.user) { //weird
-        $http.get('/api/users/me').then(function(response) {
-            $scope.myData = response.data;
-            // console.log($scope.myData);
-            return response.data;
-        });
-    }
+//    if (!authState.user) { //weird
+//        $http.get('/api/users/me').then(function(response) {
+//            $scope.myData = response.data;
+//            // console.log($scope.myData);
+//            return response.data;
+//        });
+//    }
 
     $scope.getProfilePicture = function(pic) {
       var src = '';
@@ -747,27 +760,27 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                                 // console.log(response.data);
                                 return response.data;
                             });
-                        }],
-                        myData: ['$http', 'authState', function($http, authState) {
-                            // console.log(authState);
-                            if (authState.user.length > 0) {
-                                return $http.get('/api/users/me').then(function(response) {
-                                    // console.log(response.data);
-
-                                    var myContestInfo = [];
-                                    if (response.data.my_entries) {
-                                        for (var i=0; i < response.data.my_entries.length; i++) {
-                                            if (response.data.my_entries[i].is_active) {
-                                                myContestInfo.push(response.data.my_entries[i]);
-                                            }
-                                        }
-                                    }
-
-                                    // return response.data;
-                                    return myContestInfo;
-                                });
-                            }
                         }]
+//                        myData: ['$http', 'authState', function($http, authState) {
+//                            // console.log(authState);
+//                            if (authState.user.length > 0) {
+//                                return $http.get('/api/users/me').then(function(response) {
+//                                    // console.log(response.data);
+//
+//                                    var myContestInfo = [];
+//                                    if (response.data.my_entries) {
+//                                        for (var i=0; i < response.data.my_entries.length; i++) {
+//                                            if (response.data.my_entries[i].is_active) {
+//                                                myContestInfo.push(response.data.my_entries[i]);
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    // return response.data;
+//                                    return myContestInfo;
+//                                });
+//                            }
+//                        }]
                     }
                 }
             }

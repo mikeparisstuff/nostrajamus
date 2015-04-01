@@ -15,6 +15,8 @@ from . import authentication
 import os, string, random
 from haystack.query import SearchQuerySet
 from haystack.inputs import AutoQuery, Clean
+from referral.models import UserReferrer
+
 from .search_indexes import SCTrackIndex, ProfileIndex
 from datetime import datetime, date, timedelta
 from .tasks import start_contest, end_contest
@@ -122,6 +124,9 @@ class UserViewSet(viewsets.ModelViewSet):
                 password=password,
                 username=username
             )
+            # If this user was referred apply it here
+            UserReferrer.objects.apply_referrer(user, request)
+
             if profile_picture:
                 user.profile_picture = profile_picture
                 user.save()
@@ -203,6 +208,7 @@ class UserViewSet(viewsets.ModelViewSet):
         user = request.user
         serializer = ProfileSerializer(user, context={'request': request})
         return Response(serializer.data, status.HTTP_200_OK)
+
 
     @list_route(permission_classes=(permissions.AllowAny,))
     def leaderboard(self, request):
@@ -497,7 +503,7 @@ class TrackSearchView(views.APIView):
                     prof_pic_url = item.profile_picture.url
                 except ValueError as e:
                     prof_pic_url = None
-                res.append({'type': "profile", 'username': item.username, 'profile_picture': prof_pic_url, 'id': item.id})
+                res.append({'type': "profile", 'username': item.username, 'profile_picture': prof_pic_url, 'name': item.get_full_name(), 'id': item.id})
         # res['tracks'] = SCTrackSerializer(res['tracks'], many=True).data
         # res['users'] = ProfileSerializer(res['users'], many=True).data
         return Response(res, status=status.HTTP_200_OK)

@@ -759,6 +759,10 @@ Red-nostra
   }
 }
 
+.page-content {
+  padding-top: 5px;
+}
+
 .page-content-wrapper {
   padding-top: 50px;
 }
@@ -984,7 +988,7 @@ Red-nostra
 }
 
 .track-like-wrapper {
-  margin-top: -7px;
+//  margin-top: -7px;
 }
 
 .track-share-wrapper {
@@ -1445,6 +1449,37 @@ ul.img-list li:hover span.text-content-playlist {
 
 .search-icon {
   background-color: #fff;
+}
+
+.portlet {
+  margin-bottom: 0px;
+}
+
+.search-bottom {
+  font-size: 12px;
+}
+
+.search-profile-item {
+  height: 30px;
+}
+
+//.jamus-track-item-md {
+//  .track-item-subtitle {
+//    font-size: 10px;
+//  }
+//
+//  .track-item-number {
+//    font-size: 10px;
+//  }
+//}
+
+.track-artist {
+  margin-bottom: 0px;
+}
+
+.track-divider {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 //end panel css
 

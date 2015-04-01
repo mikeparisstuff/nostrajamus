@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework_swagger',
     'haystack',
+    'referral',
     'api',
 )
 
@@ -54,6 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'referral.middleware.ReferrerMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )

@@ -825,6 +825,10 @@ Red-nostra
   border: 0 !important;
 }
 
+.page-content {
+  padding-top: 5px;
+}
+
 .page-content-wrapper {
   padding-top: 50px;
 }
@@ -1004,10 +1008,6 @@ Red-nostra
     margin-bottom: 0;
   }
 }
-.track-like-wrapper {
-  margin-top: -7px;
-}
-
 .track-share-wrapper {
   margin-top: 3px;
 }
@@ -1445,6 +1445,27 @@ ul.img-list li:hover span.text-content-playlist {
 
 .search-icon {
   background-color: #fff;
+}
+
+.portlet {
+  margin-bottom: 0px;
+}
+
+.search-bottom {
+  font-size: 12px;
+}
+
+.search-profile-item {
+  height: 30px;
+}
+
+.track-artist {
+  margin-bottom: 0px;
+}
+
+.track-divider {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 /* HOME 2 */

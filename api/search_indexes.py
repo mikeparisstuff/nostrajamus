@@ -16,6 +16,8 @@ class SCTrackIndex(indexes.SearchIndex, indexes.Indexable):
 
 class ProfileIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
+    first_name = indexes.CharField(model_attr='first_name')
+    last_name = indexes.CharField(model_attr='last_name')
     created_at = indexes.DateTimeField(model_attr='date_joined')
 
     def get_model(self):

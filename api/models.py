@@ -760,7 +760,6 @@ class LikedTrack(BaseModel):
         Profile
     )
 
-
 # def get_private_contest_picture_upload_path(self, filename):
 #     return 'contests/contest_{}_pic.jpg'.format(self.id)
 #

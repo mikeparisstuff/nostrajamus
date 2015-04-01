@@ -99,22 +99,30 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     def get_total_jam_points(self, obj):
         return obj.total_jam_points
 
-    def get_my_rewards(self, obj):
-        rewards = obj.my_rewards
-        if rewards:
-            serializer = RewardSerializer(rewards, many=True)
+    # def get_my_rewards(self, obj):
+    #     rewards = obj.my_rewards
+    #     if rewards:
+    #         serializer = RewardSerializer(rewards, many=True)
+    #         return serializer.data
+    #     else:
+    #         return None
+
+    def get_my_likes(self, obj):
+        likes = obj.likes
+        if likes:
+            serializer = LikedTrackSerializer(likes, many=True)
             return serializer.data
         else:
             return None
 
     my_entries = serializers.SerializerMethodField()
     total_jam_points = serializers.SerializerMethodField()
-    my_rewards = serializers.SerializerMethodField()
+    my_likes = serializers.SerializerMethodField()
 
     class Meta:
         model = Profile
-        fields = ('id', 'url', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points', 'my_rewards', 'my_entries', 'description')
-        read_only_fields = ('id', 'total_jam_points', 'my_rewards', 'my_entries')
+        fields = ('id', 'url', 'username', 'first_name', 'last_name', 'email', 'profile_picture', 'location', 'total_jam_points', 'my_entries', 'description', 'my_likes')
+        read_only_fields = ('id', 'total_jam_points', 'my_entries', 'my_likes')
 
 class ContestEntrySerializer(serializers.ModelSerializer):
 
