@@ -22,12 +22,12 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
         var inProgressContests = [];
         var completedContests = [];
 
-		var now = new Date();
+		var now = moment(new Date());
 		// now = Date.parse(now);
 
 		for (var contest in contestsList) {
-			var start_time = new Date(contestsList[contest].start_time).addHours(5);
-			var end_time = new Date(contestsList[contest].end_time).addHours(5);
+			var start_time = moment(new Date(contestsList[contest].start_time));
+			var end_time = moment(new Date(contestsList[contest].end_time));
 
 			if (now < start_time) {
 				$scope.convertDateTime(contest, contestsList);
