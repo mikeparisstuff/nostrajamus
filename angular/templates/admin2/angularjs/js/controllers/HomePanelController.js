@@ -42,7 +42,7 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 	 //        });
 		// };
 
-		if (api.data.myUser.my_entries.length > 0) {
+		if (api.data.myUser.my_entries) {
 			$scope.myContestInfo = api.data.myUser.my_entries.filter(function(elem) {return elem.is_active});
 		}
 
