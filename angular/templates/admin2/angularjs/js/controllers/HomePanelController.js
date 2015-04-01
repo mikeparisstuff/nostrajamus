@@ -8,16 +8,16 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 
     $scope.contests = contests;
     $scope.dailyLeaders = dailyLeaders;
-    $scope.myContestInfo = myData;
+    // $scope.myContestInfo = myData;
     $scope.currentPage = 1;
 
-    if ($scope.authState.user.length > 0) {
-    	$scope.myContestInfo = myData;
-    	// console.log($scope.myData);
-    }
-    else {
-    	$scope.myData = null;
-    }
+    // if ($scope.authState.user.length > 0) {
+    // 	$scope.myContestInfo = myData;
+    // 	// console.log($scope.myData);
+    // }
+    // else {
+    // 	$scope.myData = null;
+    // }
 
     if (authState.user) {
 		// My Contest Info
@@ -41,6 +41,8 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 	 //    	  	// console.log("FAILURE");
 	 //        });
 		// };
+
+		$scope.myContestInfo = api.data.myUser.my_entries.filter(function(elem) {return elem.is_active});
 
 		var getContestRank = function(i, contestNum, myContestInfo){
 	    	$http({
@@ -81,8 +83,6 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 				}
 			}
 		}
-
-		var myData = api.data.myUser.my_entries.filter(function(elem) {return elem.is_active});
 
 		// $scope.myContestInfo.reverse();
 
