@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', 'myData', '$http', '$sce', 'globalPlayerService', function($rootScope, $scope, settings, contestInfo, contestEntries, myData, $http, $sce, globalPlayerService) {
+MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', 'myData', '$http', '$sce', 'globalPlayerService', 'api', function($rootScope, $scope, settings, contestInfo, contestEntries, myData, $http, $sce, globalPlayerService, api) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
