@@ -60,24 +60,24 @@
 				<!-- SIDEBAR USERPIC -->
 				<!-- <div class="profile-userpic" align="center"> -->
 				<div align="center">
-					<img class="profile-pic-lg img-profile" src="{{getProfilePicture(api.data.myUser.profile_picture)}}" ng-show="getProfilePicture(api.data.myUser.profile_picture)">
-	               	<i class="fa fa-user fa-5x" style="color:#ff5252;" ng-hide="getProfilePicture(api.data.myUser.profile_picture)"></i>
-					<!-- <img src="{{getProfilePicture(api.data.myUser.profile_picture)}}" class="img-responsive img-circle img-profile" alt=""ng-show="getProfilePicture(api.data.myUser.profile_picture)"> -->
+					<img class="profile-pic-lg img-profile" src="{{getProfilePicture(myInfo.profile_picture)}}" ng-show="getProfilePicture(myInfo.profile_picture)">
+	               	<i class="fa fa-user fa-5x" style="color:#ff5252;" ng-hide="getProfilePicture(myInfo.profile_picture)"></i>
+					<!-- <img src="{{getProfilePicture(myInfo.profile_picture)}}" class="img-responsive img-circle img-profile" alt=""ng-show="getProfilePicture(myInfo.profile_picture)"> -->
 					<!-- <i class="fa fa-user fa-5x" style="color:#ff5252;" ng-hide="getProfilePicture(myInfo.profile_picture)"></i> -->
 				</div>
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name font-nostra-dark">
-						{{api.data.myUser.username}}
+						{{myInfo.username}}
 					</div>
 					<!-- <div class="profile-usertitle-job"> -->
 					<div>
-						{{api.data.myUser.first_name}} {{api.data.myUser.last_name}}
+						{{myInfo.first_name}} {{myInfo.last_name}}
 					</div>
 					<!-- <div class="profile-usertitle-location"> -->
 					<div>
-						{{api.data.myUser.location}}
+						{{myInfo.location}}
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -85,8 +85,8 @@
 				<div class="profile-userbuttons">
 					<!-- <button type="button" class="btn btn-circle green-haze btn-sm">10 JAM</button> -->
 					<!-- <button type="button" class="btn btn-circle btn-danger btn-sm">7 Contests</button> -->
-					<div class="font-nostra">{{api.data.myUser.total_jam_points}}</div> Jam Points
-					<div class="font-nostra">{{getNumContests(api.data.myUser.my_entries)}}</div> Contests
+					<div class="font-nostra">{{myInfo.total_jam_points}}</div> Jam Points
+					<div class="font-nostra">{{getNumContests(myInfo.my_entries)}}</div> Contests
 				</div>
 				<hr>
 <!-- 				<div align="center">

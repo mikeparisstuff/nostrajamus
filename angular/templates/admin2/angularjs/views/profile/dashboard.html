@@ -48,7 +48,7 @@
 				</div> -->
 			</div>
 			<div class="portlet-body">
-				<div class="row" ng-repeat="track in api.data.myUser.my_entries">
+				<div class="row" ng-repeat="track in myInfo.my_entries">
 					<div class="col-md-12">
 						<div data-ng-include="'/assets/tpl/jamus-track-item-md.html'" class="jamus-track-item-md"></div>
 					</div>
@@ -65,7 +65,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <div class="row" ng-repeat="track in api.data.myUser.my_likes">
+                <div class="row" ng-repeat="track in myInfo.my_likes">
                     <div class="col-md-12">
                         <div data-ng-include="'/assets/tpl/jamus-track-item-md.html'" class="jamus-track-item-md"></div>
                     </div>

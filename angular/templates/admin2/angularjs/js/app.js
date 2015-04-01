@@ -561,7 +561,7 @@ MetronicApp.controller('HeaderController', ['$rootScope', '$scope', '$http', 'au
     $scope.onSearchSelect = function(item, model, label) {
         console.log(item);
         if (item.type == 'profile') {
-            $state.go('profile.dashboard', {userID: item.id});
+            $state.go('profile.dashboard', {userID: model.id});
 //            window.location.href = "/#/profile/" + item.id + "/dashboard/";
         } else if (item.type == 'track') {
             $state.go('tracks', {trackID: item.id});
@@ -1378,7 +1378,10 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                 myInfo: ['$http', '$stateParams', function($http, $stateParams) {
                     return $http.get('/api/users/' + $stateParams.userID).then(function(response) {
                         // console.log(response.data);
-                        return response.data;
+                        var data = response.data;
+                        var cleaned = data.my_likes.map(function(elem) { return elem.track });
+                        data.my_likes = cleaned;
+                        return data;
                     });
                 }],
                 me: ['$http', '$stateParams', function($http, $stateParams) {
