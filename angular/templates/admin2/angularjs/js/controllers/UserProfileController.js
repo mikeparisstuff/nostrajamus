@@ -136,9 +136,9 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
         globalPlayerService.player.resetTrack(track.track);
         var tracks;
         if (type == "likes") {
-            tracks = api.data.myUser.my_likes;
+            tracks = $scope.myInfo.my_likes;
         } else {
-            tracks = api.data.myUser.my_entries;
+            tracks = $scope.myInfo.my_entries;
         }
         var tunes = tracks.slice(index+1).map(function(elem) {
             return elem.track;
