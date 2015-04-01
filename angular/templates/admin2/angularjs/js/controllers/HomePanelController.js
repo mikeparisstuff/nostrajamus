@@ -8,7 +8,6 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 
     $scope.contests = contests;
     $scope.dailyLeaders = dailyLeaders;
-    var myData = api.data.myUser.my_entries.filter(function(elem) {  return elem.is_active});
     $scope.myContestInfo = myData;
     $scope.currentPage = 1;
 
@@ -82,6 +81,8 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 				}
 			}
 		}
+
+		var myData = api.data.myUser.my_entries.filter(function(elem) {return elem.is_active});
 
 		// $scope.myContestInfo.reverse();
 

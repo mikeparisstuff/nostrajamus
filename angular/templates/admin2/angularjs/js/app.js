@@ -395,7 +395,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http, api) {
 //        console.log('sound '+this.data.currentTrack.id+' playing: ' + this.data.trackProgress);
     };
     player.loadTrack = function(track, callback) {
-        console.log(track);
+        // console.log(track);
         this.data.currentTrackData = track;
         var trackId = track.sc_id;
         var that = this;

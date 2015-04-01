@@ -155,7 +155,7 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
 
 	$scope.playRandom = function() {
 		var randContest = $rootScope.contests[Math.floor(Math.random() * $rootScope.contests.length)];
-		if (moment(randContest.start_time) <= moment(new Date())) {
+		if (moment(randContest.start_time) <= moment(new Date()) && homeService.home.data.panelId != randContest.id) {
 			$scope.setPanelPlay(randContest);
 		}
 		else {
