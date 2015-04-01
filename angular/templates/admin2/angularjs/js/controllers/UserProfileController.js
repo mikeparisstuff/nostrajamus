@@ -131,10 +131,16 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
 
     $scope.player = globalPlayerService.player;
 
-    $scope.playNewTrack = function(track, index) {
+    $scope.playNewTrack = function(track, index, type) {
         homeService.home.data.panelId = 0;
         globalPlayerService.player.resetTrack(track.track);
-        var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
+        var tracks;
+        if (type == "likes") {
+            tracks = api.data.myUser.my_likes;
+        } else {
+            tracks = api.data.myUser.my_entries;
+        }
+        var tunes = tracks.slice(index+1).map(function(elem) {
             return elem.track;
         });
         globalPlayerService.player.data.trackQueue = tunes;

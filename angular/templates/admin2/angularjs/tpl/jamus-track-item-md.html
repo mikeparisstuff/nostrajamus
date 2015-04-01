@@ -15,8 +15,8 @@
     <div class="track-img-wrapper col-md-3 col-sm-3 col-xs-3 text-center" style="background-image: url({{ getCroppedImageUrl(track.track.artwork_url) }});" ng-show="track">
         <!---->
          <!--<img class="track-img img-responsive center-block" src="https://i1.sndcdn.com/artworks-000093556135-fu2rsq-large.jpg" alt="" />-->
-        <span ng-if="track.track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn fa fa-5x fa-play-circle-o" ng-click="playNewTrack(track, $index)"></span>
-        <span ng-if="track.track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn fa fa-4x fa-pause" ng-click="playNewTrack(track, $index)"></span>
+        <span ng-if="track.track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn fa fa-5x fa-play-circle-o" ng-click="playNewTrack(track, $index, track_type)"></span>
+        <span ng-if="track.track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn fa fa-4x fa-pause" ng-click="playNewTrack(track, $index, track_type)"></span>
         <!-- <div class="play-btn-container">
 
         </div> -->
