@@ -113,7 +113,7 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
             serializer = LikedTrackSerializer(likes, many=True)
             return serializer.data
         else:
-            return None
+            return []
 
     my_entries = serializers.SerializerMethodField()
     total_jam_points = serializers.SerializerMethodField()
