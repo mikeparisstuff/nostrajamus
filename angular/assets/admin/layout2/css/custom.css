@@ -1031,6 +1031,24 @@ Red-nostra
 }
 
 /* END TRACK ITEM */
+/* START LIKES ITEM PROFILE */
+.track-title-likes {
+  font-size: 11px;
+}
+
+.track-artist-likes {
+  font-size: 10px;
+}
+
+.likes-track-like-wrapper {
+  margin: 0 !important;
+}
+
+.likes-track-share-wrapper {
+  margin-top: 9px !important;
+}
+
+/* END LIKES ITEM PROFILE */
 .jamus-contest-item {
   padding: 0 !important;
   height: 100px;

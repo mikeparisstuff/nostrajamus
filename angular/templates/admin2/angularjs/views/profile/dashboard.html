@@ -29,7 +29,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-12">
 
 		<div class="portlet light">
 			<div class="portlet-title">
@@ -50,14 +50,14 @@
 			<div class="portlet-body">
 				<div class="row" ng-repeat="track in myInfo.my_entries">
 					<div class="col-md-12" ng-init="track_type = 'entries'">
-						<div data-ng-include="'/assets/tpl/jamus-track-item-md.html'" class="jamus-track-item-md"></div>
+						<div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- END PORTLET -->
 	</div>
-    <div class="col-md-6">
+    <!-- <div class="col-md-12">
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption caption-md">
@@ -67,12 +67,12 @@
             <div class="portlet-body">
                 <div class="row" ng-repeat="track in myInfo.my_likes">
                     <div class="col-md-12" ng-init="track_type = 'likes'">
-                        <div data-ng-include="'/assets/tpl/jamus-track-item-md.html'" class="jamus-track-item-md"></div>
+                        <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 

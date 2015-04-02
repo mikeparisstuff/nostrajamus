@@ -11,7 +11,7 @@ $screen-md-min:              		992px !default;
 $screen-lg-min:             	 	1200px !default;
 
 // Large scree / wider desktop
-$screen-lg-med:                     1260px !default;
+$screen-lg-med:                 1260px !default;
 
 // So media queries don't overlap when required, provide a maximum
 $screen-xs-max:              		($screen-sm-min - 1) !default;
@@ -1012,6 +1012,23 @@ Red-nostra
 }
 
 /* END TRACK ITEM */
+
+/* START LIKES ITEM PROFILE */
+
+.track-title-likes {
+  font-size: 11px;
+}
+.track-artist-likes {
+  font-size: 10px;
+}
+.likes-track-like-wrapper {
+  margin: 0 !important;
+}
+.likes-track-share-wrapper {
+  margin-top: 9px !important;
+}
+
+/* END LIKES ITEM PROFILE */
 
 // Start Contest Item
 

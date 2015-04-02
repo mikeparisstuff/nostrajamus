@@ -132,6 +132,24 @@
 				<!-- END MENU -->
 			</div>
 			<!-- END PORTLET MAIN -->
+
+			<div class="col-md-12">
+		        <div class="portlet light">
+		            <div class="portlet-title">
+		                <div class="caption caption-md">
+		                    <span class="caption-subject font-nostra bold uppercase">Likes</span>
+		                </div>
+		            </div>
+		            <div class="portlet-body">
+		                <div class="row" ng-repeat="track in myInfo.my_likes">
+		                    <div class="col-md-12" ng-init="track_type = 'likes'">
+		                        <div data-ng-include="'/assets/tpl/jamus-like-item.html'"></div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+
 			<!-- PORTLET MAIN -->
 			<!-- <div class="portlet light"> -->
 				<!-- STAT -->

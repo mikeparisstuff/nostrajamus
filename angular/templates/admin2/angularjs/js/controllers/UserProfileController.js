@@ -127,11 +127,22 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
         $('#shareLargeModal').modal('show');
     };
 
+    $scope.truncate = function(title) {
+        console.log(title);
+        console.log(title.toString().length);
+        if (title.toString().length > 35) {
+            var newTitle = title.toString().substring(0,35) + "...";
+            return newTitle;
+        }
+        return title;
+    };
+
     /* BEGIN PLAYER LOGIC */
 
     $scope.player = globalPlayerService.player;
 
     $scope.playNewTrack = function(track, index, type) {
+        console.log(type);
         homeService.home.data.panelId = 0;
         globalPlayerService.player.resetTrack(track.track);
         var tracks;
@@ -143,6 +154,7 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
         var tunes = tracks.slice(index+1).map(function(elem) {
             return elem.track;
         });
+        console.log(tunes);
         globalPlayerService.player.data.trackQueue = tunes;
         // Set the next url and such
         var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
