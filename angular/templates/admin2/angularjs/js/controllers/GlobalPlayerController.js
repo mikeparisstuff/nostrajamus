@@ -35,7 +35,7 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
         });
     });
 
-    $scope.$watch(function() {return globalPlayerService.data.trackQueue}, function(current, previous){
+    $scope.$watch(function() {return globalPlayerService.data.trackQueue;}, function(current, previous){
         $scope.player.data.trackQueue = current;
     });
 
