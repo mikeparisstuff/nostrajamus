@@ -61,7 +61,11 @@ def update_daily_rankings():
     for track in tracks:
         # Update Weekly
         last_day = timezone.now() - timedelta(days=1)
-        most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        try:
+            most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        except IndexError as e:
+            print "Could not get periodic playcount for track: {}".format(track.title)
+            continue
         daily = SCPeriodicPlayCount.objects.filter(created_at__lte=last_day, track=track).order_by('-created_at')[:1]
         if len(daily) > 0:
             daily = daily[0]
@@ -93,7 +97,11 @@ def update_weekly_rankings():
     for track in tracks:
         # Update Weekly
         last_week = timezone.now() - timedelta(days=7)
-        most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        try:
+            most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        except IndexError as e:
+            print "Could not get periodic playcount for track: {}".format(track.title)
+            continue
         weekly = SCPeriodicPlayCount.objects.filter(created_at__lte=last_week, track=track).order_by('-created_at')[:1]
         if len(weekly) > 0:
             weekly = weekly[0]
@@ -125,7 +133,11 @@ def update_monthly_rankings():
     for track in tracks:
         # Update Weekly
         last_month = timezone.now() - timedelta(days=30)
-        most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        try:
+            most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        except IndexError as e:
+            print "Could not get periodic playcount for track: {}".format(track.title)
+            continue
         monthly = SCPeriodicPlayCount.objects.filter(created_at__lte=last_month, track=track).order_by('-created_at')[:1]
         if len(monthly) > 0:
             monthly = monthly[0]
@@ -156,7 +168,11 @@ def update_all_time_rankings():
     tracks = SCTrack.objects.all()
     for track in tracks:
         # Update Weekly
-        most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        try:
+            most_recent = SCPeriodicPlayCount.objects.filter(track=track).order_by('-created_at')[0]
+        except IndexError as e:
+            print "Could not get periodic playcount for track: {}".format(track.title)
+            continue
         all_time = SCPeriodicPlayCount.objects.filter(track=track).earliest('created_at')
         jam_points = calculate_jam_points(all_time.playback_count, all_time.follower_count, most_recent.playback_count, most_recent.follower_count )
         try:
