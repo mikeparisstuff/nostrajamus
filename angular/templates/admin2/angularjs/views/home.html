@@ -117,12 +117,14 @@
 				</div>
 				<!-- <div class="portlet-body"> -->
 					<div class="table-scrollable table-scrollable-borderless">
-						<ul class="col-md-4 img-list" ng-repeat="contest in inProgressContests">
-							<li data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></li>
-						</ul>
-						<ul class="col-md-4 img-list" ng-repeat="contest in completedContests">
-							<li data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></li>
-						</ul>
+						<perfect-scrollbar class="scroller" wheel-propagation="true" wheel-speed="10" min-scrollbar-length="100%">
+							<ul class="col-md-4 img-list" ng-repeat="contest in inProgressContests">
+								<li data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></li>
+							</ul>
+							<ul class="col-md-4 img-list" ng-repeat="contest in completedContests">
+								<li data-ng-include="'/assets/tpl/jamus-contest-item-square.html'"></li>
+							</ul>
+						</perfect-scrollbar>
 					</div>
 				<!-- </div> -->
 			</div>
