@@ -48,11 +48,13 @@
 				</div> -->
 			</div>
 			<div class="portlet-body">
-				<div class="row" ng-repeat="track in myInfo.my_entries">
-					<div class="col-md-12" ng-init="track_type = 'entries'">
-						<div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
-					</div>
-				</div>
+                <perfect-scrollbar class="scroller" wheel-propagation="true" wheel-speed="10" min-scrollbar-length="100%" style="height:1100px">
+    				<div class="row" ng-repeat="track in myInfo.my_entries">
+    					<div class="col-md-12" ng-init="track_type = 'entries'">
+    						<div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
+    					</div>
+    				</div>
+                </perfect-scrollbar>
 			</div>
 		</div>
 		<!-- END PORTLET -->

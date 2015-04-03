@@ -128,8 +128,6 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
     };
 
     $scope.truncate = function(title) {
-        console.log(title);
-        console.log(title.toString().length);
         if (title.toString().length > 35) {
             var newTitle = title.toString().substring(0,35) + "...";
             return newTitle;
