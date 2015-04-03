@@ -45,6 +45,15 @@ $screen-md-max:              		($screen-lg-min - 1) !default;
   width:100%;
   text-align:center;
 }
+.scroller {
+  // white-space: pre-line;
+  height: 500px;
+  overflow-y: hidden;
+  position: relative;
+}
+.home-panel {
+  margin-bottom: 50px;
+}
 
 .nostra {
   font-family: "Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;

@@ -55,6 +55,7 @@
 	<div class="col-md-12">
 		<!-- BEGIN PROFILE SIDEBAR -->
 		<div class="profile-sidebar">
+		<!-- <perfect-scrollbar class="scroller" wheel-propagation="true" wheel-speed="10" min-scrollbar-length="100%"> -->
 			<!-- PORTLET MAIN -->
 			<div class="portlet light profile-sidebar-portlet">
 				<!-- SIDEBAR USERPIC -->
@@ -85,8 +86,14 @@
 				<div class="profile-userbuttons">
 					<!-- <button type="button" class="btn btn-circle green-haze btn-sm">10 JAM</button> -->
 					<!-- <button type="button" class="btn btn-circle btn-danger btn-sm">7 Contests</button> -->
-					<div class="font-nostra">{{myInfo.total_jam_points}}</div> Jam Points
-					<div class="font-nostra">{{getNumContests(myInfo.my_entries)}}</div> Contests
+					<div class="row">
+						<div class="col-md-6">
+							<div class="font-nostra">{{myInfo.total_jam_points}}</div> Jam Points
+						</div>
+						<div class="col-md-6">
+							<div class="font-nostra">{{getNumContests(myInfo.my_entries)}}</div> Contests
+						</div>
+					</div>
 				</div>
 				<hr>
 <!-- 				<div align="center">
@@ -104,51 +111,73 @@
 				<!--</div>-->
 
 				<!-- END SIDEBAR BUTTONS -->
-				<!-- SIDEBAR MENU -->
-				<div class="profile-usermenu">
-					<ul class="nav">
-						<li ng-class="{active: $state.includes('profile.dashboard')}">
-							<a ui-sref="profile.dashboard">
-							<i class="icon-home"></i>
-							Overview </a>
-						</li>
-						<li ng-show="me=='me'" ng-class="{active: $state.includes('profile.account')}">
-							<a ui-sref="profile.account">
-							<i class="icon-settings"></i>
-							Settings</a>
-						</li>
-<!-- 						<li>
-							<a href="#/todo">
-							<i class="icon-check"></i>
-							Tasks </a>
-						</li> -->
-<!-- 						<li ng-class="{active: $state.includes('profile.help')}">
-							<a ui-sref="profile.help">
-							<i class="icon-info"></i>
-							Help </a>
-						</li> -->
-					</ul>
-				</div>
-				<!-- END MENU -->
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+			        <div class="portlet light">
+			            <div class="portlet-title">
+			                <div class="caption caption-md">
+			                    <span class="caption-subject font-nostra bold uppercase">Likes</span>
+			                </div>
+			            </div>
+			            <!-- <div class="portlet-body">
+			                <div class="row" ng-repeat="track in myInfo.my_likes">
+			                    <div class="col-md-12" ng-init="track_type = 'likes'">
+			                        <div data-ng-include="'/assets/tpl/jamus-like-item.html'"></div>
+			                    </div>
+			                </div>
+			            </div> -->
+			        </div>
+			    </div>
 			</div>
 			<!-- END PORTLET MAIN -->
+			<div class="row">
+				<perfect-scrollbar class="scroller" wheel-propagation="true" wheel-speed="10" min-scrollbar-length="100%" style="height:500px">
+					<div class="col-md-12">
+				        <div class="portlet light">
+				            <!-- <div class="portlet-title">
+				                <div class="caption caption-md">
+				                    <span class="caption-subject font-nostra bold uppercase">Likes</span>
+				                </div>
+				            </div> -->
+				            <div class="portlet-body">
+				                <div class="row" ng-repeat="track in myInfo.my_likes">
+				                    <div class="col-md-12" ng-init="track_type = 'likes'">
+				                        <div data-ng-include="'/assets/tpl/jamus-like-item.html'"></div>
+				                    </div>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</perfect-scrollbar>
+			</div>
 
-			<div class="col-md-12">
-		        <div class="portlet light">
-		            <div class="portlet-title">
-		                <div class="caption caption-md">
-		                    <span class="caption-subject font-nostra bold uppercase">Likes</span>
-		                </div>
-		            </div>
-		            <div class="portlet-body">
-		                <div class="row" ng-repeat="track in myInfo.my_likes">
-		                    <div class="col-md-12" ng-init="track_type = 'likes'">
-		                        <div data-ng-include="'/assets/tpl/jamus-like-item.html'"></div>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
+			<!-- SIDEBAR MENU -->
+			<div class="profile-usermenu">
+				<ul class="nav">
+					<li ng-class="{active: $state.includes('profile.dashboard')}">
+						<a ui-sref="profile.dashboard">
+						<i class="icon-home"></i>
+						Overview </a>
+					</li>
+					<li ng-show="me=='me'" ng-class="{active: $state.includes('profile.account')}">
+						<a ui-sref="profile.account">
+						<i class="icon-settings"></i>
+						Settings</a>
+					</li>
+<!-- 						<li>
+						<a href="#/todo">
+						<i class="icon-check"></i>
+						Tasks </a>
+					</li> -->
+<!-- 						<li ng-class="{active: $state.includes('profile.help')}">
+						<a ui-sref="profile.help">
+						<i class="icon-info"></i>
+						Help </a>
+					</li> -->
+				</ul>
+			</div>
+			<!-- END MENU -->
 
 			<!-- PORTLET MAIN -->
 			<!-- <div class="portlet light"> -->
@@ -198,10 +227,11 @@
 				</div>
 			</div> -->
 			<!-- END PORTLET MAIN -->
+		<!-- </perfect-scrollbar> -->
 		</div>
 		<!-- END BEGIN PROFILE SIDEBAR -->
 		<!-- BEGIN PROFILE CONTENT -->
-		<div ui-view class="profile-content fade-in-up"> 
+		<div ui-view class="profile-content fade-in-up">
 		</div>
 		<!-- END PROFILE CONTENT -->
 	</div>
