@@ -822,6 +822,41 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
             }
         })
 
+        //Callback
+        .state('callback', {
+            url: "/callback.html",
+            templateUrl: "/assets/views/callback.html",
+            data: {
+                pageTitle: '| Callback',
+                authenticate: false
+            },
+            controller: "GeneralPageController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '/assets/global/plugins/morris/morris.css',
+                            '/assets/admin/pages/css/tasks.css',
+                            
+                            '/assets/global/plugins/morris/morris.min.js',
+                            '/assets/global/plugins/morris/raphael-min.js',
+                            '/assets/global/plugins/jquery.sparkline.min.js',
+
+                            '/assets/admin/pages/scripts/index3.js',
+                            '/assets/admin/pages/scripts/tasks.js',
+
+                            '/assets/admin/pages/scripts/tasks.js',
+
+                            '/assets/js/controllers/GeneralPageController.js',
+                            '/assets/js/controllers/GlobalPlayerController.js'
+                        ] 
+                    });
+                }]
+            }
+        })
+
         // Dashboard
         // .state('dashboard', {
         //     url: "/dashboard",

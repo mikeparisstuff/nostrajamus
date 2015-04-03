@@ -127,8 +127,12 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 	// End Countdown Timer
 
 	// SoundCloud
-	SC.initialize({
-        client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
+	// SC.initialize({
+ //        client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
+ //    });
+    SC.initialize({
+      client_id: 'f0b7083f9e4c053ca072c48a26e8567a',
+      redirect_uri: 'http://127.0.0.1:8000/#/callback.html'
     });
 	var url = "https://api.soundcloud.com/tracks";
     var urlResolve = "https://api.soundcloud.com/resolve.json";
@@ -175,6 +179,20 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             });
         }
   	};
+
+    $scope.connectSC = function() {
+        SC.connect(function() {
+          SC.get('/me', function(me) {
+            // alert('Hello, ' + me.username); 
+
+            //get user id
+            //use user id for query link: https://api-v2.soundcloud.com/profile/soundcloud:users:[6419732]?limit=5&offset=0
+            //return array of reposted tracks
+            //populate these on page
+
+          });
+        });
+    };
 
     // $scope.getSCUrl = function(item) {
     //     // console.log(item);
