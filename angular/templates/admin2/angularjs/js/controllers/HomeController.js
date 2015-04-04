@@ -23,11 +23,15 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
         var completedContests = [];
 
 		var now = moment(new Date());
+		console.log(now);
 		// now = Date.parse(now);
 
 		for (var contest in contestsList) {
-			var start_time = moment(new Date(contestsList[contest].start_time));
-			var end_time = moment(new Date(contestsList[contest].end_time));
+			var start_time = moment(new Date(contestsList[contest].start_time).addHours(4));
+			var end_time = moment(new Date(contestsList[contest].end_time).addHours(4));
+
+			console.log(start_time);
+			console.log(end_time);
 
 			if (now < start_time) {
 				$scope.convertDateTime(contest, contestsList);
