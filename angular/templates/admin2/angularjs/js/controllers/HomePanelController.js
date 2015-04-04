@@ -217,8 +217,10 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
     };
 
     $scope.getCroppedImageUrl = function(url) {
-        var cropped = url.replace("-large", "-t300x300");
-        return cropped;
+    	if (url) {
+    		var cropped = url.replace("-large", "-t300x300");
+        	return cropped;
+    	}
     };
 
     $scope.$on('player.data.trackProgress.update', function (newState) {

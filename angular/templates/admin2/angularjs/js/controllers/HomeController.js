@@ -53,17 +53,19 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
 	};
 
 	$scope.insertCommas = function(s) {
-        s = s.toString();
-        // get stuff before the dot
-        var d = s.indexOf('.');
-        var s2 = d === -1 ? s : s.slice(0, d);
-        // insert commas every 3 digits from the right
-        for (var i = s2.length - 3; i > 0; i -= 3)
-          s2 = s2.slice(0, i) + ',' + s2.slice(i);
-        // append fractional part
-        if (d !== -1)
-          s2 += s.slice(d);
-        return s2;
+		if (s) {
+			s = s.toString();
+	        // get stuff before the dot
+	        var d = s.indexOf('.');
+	        var s2 = d === -1 ? s : s.slice(0, d);
+	        // insert commas every 3 digits from the right
+	        for (var i = s2.length - 3; i > 0; i -= 3)
+	          s2 = s2.slice(0, i) + ',' + s2.slice(i);
+	        // append fractional part
+	        if (d !== -1)
+	          s2 += s.slice(d);
+	        return s2;
+		}
     };
 
 	Date.prototype.addHours = function(h){
@@ -189,8 +191,11 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
     };
 
     $scope.getCroppedImageUrl = function(url) {
-        var cropped = url.replace("-large", "-t300x300");
-        return cropped;
+    	if (url) {
+    		var cropped = url.replace("-large", "-t300x300");
+        	return cropped;
+    	}
+    	return url;
     };
 
     $scope.$on('player.data.trackProgress.update', function (newState) {
