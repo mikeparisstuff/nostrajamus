@@ -55,7 +55,7 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 	        }).success(function (data, status, headers, config) {
 	    	  	// console.log(data);
 	    	  	$scope.myContestInfo[i].rank = data.rank;
-	    	  	console.log($scope.myContestInfo);
+	    	  	// console.log($scope.myContestInfo);
 	    	  	// $scope.myContestRank.push(data);	    	  	
 	    	  	// console.log("SUCCESS");
 	        }).error(function (data, status, headers, config) {
@@ -104,17 +104,20 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
     $scope.trendingTracks = dailyLeaders.results;
 
 	$scope.insertCommas = function(s) {
-        s = s.toString();
-        // get stuff before the dot
-        var d = s.indexOf('.');
-        var s2 = d === -1 ? s : s.slice(0, d);
-        // insert commas every 3 digits from the right
-        for (var i = s2.length - 3; i > 0; i -= 3)
-          s2 = s2.slice(0, i) + ',' + s2.slice(i);
-        // append fractional part
-        if (d !== -1)
-          s2 += s.slice(d);
-        return s2;
+		if (s) {
+			s = s.toString();
+	        // get stuff before the dot
+	        var d = s.indexOf('.');
+	        var s2 = d === -1 ? s : s.slice(0, d);
+	        // insert commas every 3 digits from the right
+	        for (var i = s2.length - 3; i > 0; i -= 3)
+	          s2 = s2.slice(0, i) + ',' + s2.slice(i);
+	        // append fractional part
+	        if (d !== -1)
+	          s2 += s.slice(d);
+	        return s2;
+		}
+		return s;
     };
 
     $scope.getPlayIncrease = function(track) {
@@ -218,7 +221,7 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
         return cropped;
     };
 
-    $scope.$on('player.trackProgress.update', function (newState) {
+    $scope.$on('player.data.trackProgress.update', function (newState) {
 //        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
         $scope.$apply(function() {
             $scope.player.data = globalPlayerService.player.data;

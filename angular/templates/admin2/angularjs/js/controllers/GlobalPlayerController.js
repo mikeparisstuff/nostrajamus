@@ -21,7 +21,7 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
         globalPlayerService.player.getDefaultQueue();
     }
 
-    $scope.$on('player.trackProgress.update', function (newState) {
+    $scope.$on('player.data.trackProgress.update', function (newState) {
 //        console.log(globalPlayerService.player.data.trackProgress);
 //        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
         $scope.$apply(function() {
@@ -29,7 +29,7 @@ MetronicApp.controller('GlobalPlayerController', function($rootScope, $scope, gl
         });
     });
 
-    $scope.$on('player.trackQueue.update', function() {
+    $scope.$on('player.data.trackQueue.update', function() {
        $scope.$apply(function() {
             $scope.player.data.trackQueue = globalPlayerService.player.data.trackQueue;
         });

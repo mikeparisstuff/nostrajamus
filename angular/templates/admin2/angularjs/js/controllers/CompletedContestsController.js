@@ -207,7 +207,7 @@ MetronicApp.controller('CompletedContestsController', ['$rootScope', '$scope', '
         return cropped;
     };
 
-    $scope.$on('player.trackProgress.update', function (newState) {
+    $scope.$on('player.data.trackProgress.update', function (newState) {
 //        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
         $scope.$apply(function() {
             $scope.player.data = globalPlayerService.player.data;

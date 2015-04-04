@@ -326,7 +326,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http, api) {
     };
 
     var broadcast = function (progress) {
-      $rootScope.$broadcast('player.trackProgress.update', progress);
+      $rootScope.$broadcast('player.data.trackProgress.update', progress);
     };
 
     player.updateProgress = function (newState) {
@@ -340,7 +340,7 @@ MetronicApp.factory('globalPlayerService', function($rootScope, $http, api) {
             that.loadTrack(response.data.results[0].track);
             that.data.trackQueue = response.data.results.slice(1).map(function(elem) { return elem.track });
             that.data.nextPageUrl = '/api/tracks/trending/?filter=daily&page=2';
-            $rootScope.$broadcast('player.trackQueue.update', that.data.trackQueue);
+            $rootScope.$broadcast('player.data.trackQueue.update', that.data.trackQueue);
         });
     };
     player.playPause = function() {
