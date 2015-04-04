@@ -38,22 +38,27 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <div class="col-md-9 submit-song-form">
-                                    <input type="text" name="" class="form-control input-lg submit-song-input" id="search" type="text" placeholder="Start typing to search Soundcloud OR enter a Soundcloud url . . . Results will appear below" ng-model="asyncSelected" typeahead="track.title for track in getTracks($viewValue)" typeahead-on-select='onSelect($item, $model, $label)'>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="clearfix"></div>
-                                    <div class="col-md-12 text-center">
-                                        <div id="success"></div>
-                                        <button type="submit" class="btn btn-xl" ng-click="postTrack(origTrack)">Join Contest</button>
-                                        <div id="errors"></div>
+                                <div class="row">
+                                    <div class="col-md-9 submit-song-form">
+                                        <input type="text" name="" class="form-control input-lg submit-song-input" id="search" type="text" placeholder="Start typing to search Soundcloud OR enter a Soundcloud url . . . Results will appear below" ng-model="asyncSelected" typeahead="track.title for track in getTracks($viewValue)" typeahead-on-select='onSelect($item, $model, $label)'>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-12 text-center">
+                                            <div id="success"></div>
+                                            <button type="submit" class="btn btn-xl" ng-click="postTrack(origTrack)">Join Contest</button>
+                                            <div id="errors"></div>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <br>
-                                <div class="text-center" id="removedSong" ng-model="removedSong"><b>{{removedSong}}</b></div>
-                                <div class="col-md-12">
-                                    <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
-                                    <br>
+                                <div class="row">
+                                    <div class="text-center" id="removedSong" ng-model="removedSong"><b>{{removedSong}}</b></div>
+                                    <div class="col-md-12">
+                                        <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
+                                        <br>
+                                    </div>
                                 </div>
                                 <!-- <iframe width="100%" height="83" scrolling="no" frameborder="no" ng-src="{{ track_url }}" ng-show="track_url"></iframe> -->
                                 <!-- <h4 class="text-center" ng-show="track">Play Count: {{ track.playback_count }}</h4> -->
