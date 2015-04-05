@@ -481,7 +481,7 @@ MetronicApp.factory('soundcloud', ['$rootScope', function($rootScope) {
     var sc = {
         data: {
             client_id: 'f0b7083f9e4c053ca072c48a26e8567a',
-            redirect_uri: 'http://127.0.0.1:8000/callback/',
+            redirect_uri: 'http://nostrajamus.com/callback/',
             user_id: "",
             username: "",
             recommendedTracks: []
