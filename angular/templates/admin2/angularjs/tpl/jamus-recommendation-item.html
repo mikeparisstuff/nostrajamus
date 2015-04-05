@@ -1,0 +1,79 @@
+<div class="row jamus-track-item" ng-show="track">
+    <div class="track-img-wrapper col-md-3 col-sm-3 col-xs-3 text-center" style="background-image: url({{ getCroppedImageUrl(track.artwork_url) }});">
+        <!---->
+         <!--<img class="track-img img-responsive center-block" src="https://i1.sndcdn.com/artworks-000093556135-fu2rsq-large.jpg" alt="" />-->
+        <span ng-if="track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn fa fa-5x fa-play-circle-o" ng-click="playNewTrack(track, $index, track_type)"></span>
+        <span ng-if="track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn fa fa-4x fa-pause" ng-click="playNewTrack(track, $index, track_type)"></span>
+        <!-- <div class="play-btn-container">
+
+        </div> -->
+    </div>
+
+    <div class="track-data col-md-9 col-sm-9 col-xs-9" ng-show="track">
+        <div ng-if="player.data.currentTrackData.sc_id == track.sc_id" class="progress jamus-list-item-progress-bar">
+            <div class="progress-bar" role="progressbar" aria-valuenow="{{ player.data.trackProgress }}" aria-valuemin="0" aria-valuemax="1" style="width: {{ player.data.trackProgress * 100 }}%;">
+            </div>
+        </div>
+        <div class="track-data-top text-center">
+            <div class="row">
+                <i class="btn fa fa-times" ng-click="removeSubmission()" style="float:right" ng-if="fromOpenContests && hasSubmitted"></i>
+                <div class="col-xs-offset-1 col-xs-10">
+                    <h4><div class="track-title"><b><a target="_blank" href="{{ track.permalink_url }}">{{ track.title }}</a></b></div></h4>
+                    <!-- <h4 class="track-title">{{ track.title }}</h4> -->
+                    <p class="track-artist">{{ track.user.username }}</p>
+                </div>
+            </div>
+            <!--<div class="track-queue-btn track-right-icon">-->
+                <!--<span class="fa fa-2x fa-plus-square-o" ng-click="player.addTrackToQueue(track)"></span>-->
+            <!--</div>-->
+        </div>
+        <hr class="track-divider"/>
+        <div class="track-data-bottom text-center">
+            <div class="row">
+                <div class="col-md-2 col-sm-2 col-xs-4"><b class="track-item-subtitle">Initial Plays</b><br /><span class="track-item-number">{{ insertCommas(track.playback_count) }}</span>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-4"><b class="track-item-subtitle">% Inc</b><br />
+                    <span class="track-item-number">0.0</span>
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-4"><b class="track-item-subtitle">Current Plays</b><br /><span class="track-item-number">{{insertCommas(track.playback_count) }}</span></div>
+                <!-- FIX THIS -->
+                <div class="col-md-2 col-sm-2 col-xs-4"><b class="track-item-subtitle">Followers</b><br /><span class="track-item-number">{{ insertCommas(track.followers_count) }}</span></div>
+                <!-- END FIX THIS -->
+                <div class="col-md-2 col-sm-2 col-xs-4"><b class="track-item-subtitle">JP</b><br /><span class="track-item-number">0</span></div>
+                <!-- <div class="soundcloud-icon col-md-2 col-sm-2 col-xs-4">
+                    <a target="_blank" href="{{ track.permalink_url }}" class="fa fa-3x fa-soundcloud"></a>
+                </div> -->
+
+                <div class="col-md-2 col-sm-2 col-xs-4 widget-wrapper">
+                    <div class="track-post-wrapper">
+                        <button class="btn btn-primary red-nostra" type="button" ng-click="postTrack(track, track_type)" ng-if="!hasSubmitted">
+                            JOIN
+                        </button>
+                        <div class="" ng-if="hasSubmitted">
+                            <div class="track-like-wrapper">
+                                <button class="btn button-icon" type="button" aria-expanded="true" ng-click="api.likeTrack(track)">
+                                    <span ng-if="api.trackIsLiked(track)" class="fa fa-2x fa-heart isLiked"></span>
+                                    <span ng-if="!api.trackIsLiked(track)" class="fa fa-2x fa-heart-o"></span>
+                                </button>
+                            </div>
+                            <div class="track-share-wrapper">
+                                <a href="#" ng-click="updateRefer(myData.id, track.id)">
+                                    <i class="fa fa-share fa-2x"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- <div class="col-md-12 col-sm-12 col-xs-12" ng-hide="track" align="center">
+        <br>
+        <h4>Powered by</h4>
+        <img src="assets/nostraV1/img/contest/powered_soundcloud.png" height="100"></img>
+    </div> -->
+</div>

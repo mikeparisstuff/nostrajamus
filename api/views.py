@@ -33,7 +33,8 @@ else:
     MAILCHIMP_LIST_ID = '3556cd8dcc'
 
 import soundcloud
-client = soundcloud.Client(client_id='011325f9ff53871e49215492068499c6')
+client = soundcloud.Client(client_id='f0b7083f9e4c053ca072c48a26e8567a')
+# 011325f9ff53871e49215492068499c6
 
 
 from django.views.generic.base import TemplateView
@@ -48,6 +49,10 @@ class OnePageAppView(TemplateView):
 #             return render_to_response("index.html", RequestContext(request))
 #         else:
 #             return render_to_response("landing.html")
+
+class SCCallbackView(APIView):
+    def get(self, request, format=None):
+        return render_to_response("callback.html")
 
 class ForgetView(APIView):
     def get(self, request, format=None):

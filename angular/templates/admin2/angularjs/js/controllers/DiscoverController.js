@@ -342,6 +342,13 @@ MetronicApp.controller('DiscoverController', ['$rootScope', '$scope', '$http', '
         return cropped;
     };
 
+    if ($scope.referralTrack != null) {
+        $scope.playNewTrack($scope.referralTrack);
+    }
+    else if ($scope.viewTrack != null) {
+        $scope.playNewTrack($scope.viewTrack);
+    }
+
     $scope.$on('player.data.trackProgress.update', function (newState) {
 //        $scope.trackProgress = globalPlayerService.player.data.trackProgress;
         $scope.$apply(function() {

@@ -11,7 +11,8 @@ var MetronicApp = angular.module("MetronicApp", [
     "ngResource", //authentication with django
     "angularFileUpload", //file upload
     "infinite-scroll",
-    "perfect_scrollbar"
+    "perfect_scrollbar",
+    "ngCookies"
 ]);
 
 /* Configure ocLazyLoader(refer: https://github.com/ocombe/ocLazyLoad) */
@@ -476,6 +477,27 @@ MetronicApp.factory('spinnerService', ['$rootScope', function ($rootScope) {
     return {spinner: spinner};
 }]);
 
+MetronicApp.factory('soundcloud', ['$rootScope', function($rootScope) {
+    var sc = {
+        data: {
+            client_id: 'f0b7083f9e4c053ca072c48a26e8567a',
+            redirect_uri: 'http://127.0.0.1:8000/callback/',
+            user_id: "",
+            username: "",
+            recommendedTracks: []
+        }
+    };
+
+    sc.init = function() {
+        SC.initialize({
+          client_id: this.data.client_id,
+          redirect_uri: this.data.redirect_uri
+        });
+    };
+    
+    return {sc: sc};
+}]);
+
 //We already have a limitTo filter built-in to angular,
 //let's make a startFrom filter
 // MetronicApp.filter('startFrom', function() {
@@ -823,39 +845,39 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         })
 
         //Callback
-        .state('callback', {
-            url: "/callback.html",
-            templateUrl: "/assets/views/callback.html",
-            data: {
-                pageTitle: '| Callback',
-                authenticate: false
-            },
-            controller: "GeneralPageController",
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'MetronicApp',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
-                            '/assets/global/plugins/morris/morris.css',
-                            '/assets/admin/pages/css/tasks.css',
+        // .state('callback', {
+        //     url: "/callback.html",
+        //     templateUrl: "/assets/views/callback.html",
+        //     data: {
+        //         pageTitle: '| Callback',
+        //         authenticate: false
+        //     },
+        //     controller: "GeneralPageController",
+        //     resolve: {
+        //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+        //             return $ocLazyLoad.load({
+        //                 name: 'MetronicApp',
+        //                 insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+        //                 files: [
+        //                     '/assets/global/plugins/morris/morris.css',
+        //                     '/assets/admin/pages/css/tasks.css',
                             
-                            '/assets/global/plugins/morris/morris.min.js',
-                            '/assets/global/plugins/morris/raphael-min.js',
-                            '/assets/global/plugins/jquery.sparkline.min.js',
+        //                     '/assets/global/plugins/morris/morris.min.js',
+        //                     '/assets/global/plugins/morris/raphael-min.js',
+        //                     '/assets/global/plugins/jquery.sparkline.min.js',
 
-                            '/assets/admin/pages/scripts/index3.js',
-                            '/assets/admin/pages/scripts/tasks.js',
+        //                     '/assets/admin/pages/scripts/index3.js',
+        //                     '/assets/admin/pages/scripts/tasks.js',
 
-                            '/assets/admin/pages/scripts/tasks.js',
+        //                     '/assets/admin/pages/scripts/tasks.js',
 
-                            '/assets/js/controllers/GeneralPageController.js',
-                            '/assets/js/controllers/GlobalPlayerController.js'
-                        ] 
-                    });
-                }]
-            }
-        })
+        //                     '/assets/js/controllers/GeneralPageController.js',
+        //                     '/assets/js/controllers/GlobalPlayerController.js'
+        //                 ] 
+        //             });
+        //         }]
+        //     }
+        // })
 
         // Dashboard
         // .state('dashboard', {

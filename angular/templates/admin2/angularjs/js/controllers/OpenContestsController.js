@@ -1,6 +1,6 @@
 
 /* Setup general page controller */
-MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', 'myData', '$http', '$sce', 'globalPlayerService', 'api', function($rootScope, $scope, settings, contestInfo, contestEntries, myData, $http, $sce, globalPlayerService, api) {
+MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'settings', 'contestInfo', 'contestEntries', 'myData', '$http', '$sce', 'globalPlayerService', 'api', 'soundcloud', '$cookies', '$timeout', function($rootScope, $scope, settings, contestInfo, contestEntries, myData, $http, $sce, globalPlayerService, api, soundcloud, $cookies, $timeout) {
     $scope.$on('$viewContentLoaded', function() {   
     	// initialize core components
     	Metronic.initAjax();
@@ -11,7 +11,10 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 
     $scope.hideDiscoverer = true;
     $scope.submissionPage = true;
+    $scope.track_type = 'manual';
     $scope.api = api;
+    $scope.soundcloud = soundcloud;
+    soundcloud.sc.init();
 
     $scope.contestInfo = contestInfo;
     $scope.contestEntries = contestEntries;
@@ -61,7 +64,6 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             }
         }
     };
-
 
     $scope.getSrc = function(track) {
     	var SCUrl = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + track.sc_id + '&amp;color=ff5252&amp;theme_color=ff5252&amp;auto_play=true&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true';
@@ -130,12 +132,107 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 	// SC.initialize({
  //        client_id: 'f0b7083f9e4c053ca072c48a26e8567a'
  //    });
-    SC.initialize({
-      client_id: 'f0b7083f9e4c053ca072c48a26e8567a',
-      redirect_uri: 'http://127.0.0.1:8000/#/callback.html'
-    });
+
 	var url = "https://api.soundcloud.com/tracks";
     var urlResolve = "https://api.soundcloud.com/resolve.json";
+
+    $scope.connectSC = function() {
+
+        $scope.recommendedTracks = [];
+
+        SC.connect(function() {
+
+            console.log("Logged in!");
+
+            SC.get('/me', function(me, error) {
+                if (error) {
+                    console.log(error);
+                }
+                else {
+                    console.log('Hello, ' + me.username);
+                    console.log(me);
+
+                    soundcloud.sc.data.user_id = me.id;
+                    soundcloud.sc.data.username = me.username;
+
+                    // $http.get('https://api-v2.soundcloud.com/profile/soundcloud:users:' + soundcloud.user_id + '?limit=1&offset=0').then(function (response) {
+                    //     console.log(response);
+                    // });
+                }
+            });
+
+            $scope.getRecommendations();
+        });
+    };
+
+    $scope.getRecommendations = function() {
+        SC.get('/me/activities', function(activities, error) {
+            if (error) {
+                console.log(error);
+            }
+            else {
+                // console.log(activities);
+                var newTracks = activities.collection.map(function(track) {
+                    if (track.type == "track-repost") {
+                        delete track.origin.reposts_count;
+                        delete track.origin.user_favorite;
+                        // delete track.origin.user.uri;
+                        delete track.origin.user_uri;
+                        delete track.origin.likes_count;
+                        delete track.origin.user_playback_count;
+                        if (track.origin.downloadable == null) {
+                            track.origin.downloadable = false;
+                        }
+                        $scope.getFollows(track.origin);
+                        // console.log(track);
+                        return track.origin;
+                    }
+                    else {
+                        return null;
+                    }
+                });
+                // console.log($scope.recommendedTracks);
+
+                // console.log(newTracks);
+
+                $timeout(function() {
+                    $scope.recommendedTracks = newTracks;
+                }, 0);
+            }
+        });
+    };
+
+    $scope.getFollows = function(track) {
+        // console.log(track);
+        var url = "https://api.soundcloud.com/users/" + track.user.id;
+        $http.get(url, {
+          params: {
+            client_id: soundcloud.sc.data.client_id,
+          }
+        }).then(function(response){
+            // console.log(response.data);
+            // $scope.initial_followers_count = response.data.followers_count;
+
+            // console.log($scope.initial_followers_count);
+
+            track.followers_count = response.data.followers_count;
+            // return response.data.followers_count;
+
+            // $scope.track = {
+            //     track: item,
+            //     initial_playback_count: item.playback_count,
+            //     current_playback_count: item.playback_count,
+            //     initial_follower_count: $scope.initial_followers_count,
+            //     jam_points: 0
+            // };
+
+            // console.log($scope.track);
+        });
+    };
+
+    if (soundcloud.sc.data.user_id) {
+        $scope.getRecommendations();
+    }
 
 	$scope.getTracks = function(val) {
         var begin = val.slice(0,8);
@@ -180,20 +277,6 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         }
   	};
 
-    $scope.connectSC = function() {
-        SC.connect(function() {
-          SC.get('/me', function(me) {
-            // alert('Hello, ' + me.username); 
-
-            //get user id
-            //use user id for query link: https://api-v2.soundcloud.com/profile/soundcloud:users:[6419732]?limit=5&offset=0
-            //return array of reposted tracks
-            //populate these on page
-
-          });
-        });
-    };
-
     // $scope.getSCUrl = function(item) {
     //     // console.log(item);
     //     $scope.track = item;
@@ -208,6 +291,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
   	$scope.onSelect = function(item, model, label) {
   		// console.log(item);
         $scope.origTrack = item;
+        $scope.track_type = 'manual';
 
         var url = "https://api.soundcloud.com/users/" + item.user.id;
         $http.get(url, {
@@ -298,8 +382,12 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         return s2;
     };
 
-  	$scope.postTrack = function(track) {
+  	$scope.postTrack = function(track, type) {
         console.log(track);
+        $scope.track_type = type;
+        if ($scope.track_type == 'recommendations') {
+            $scope.track = track;
+        }
   		$http({
             url: '/api/contests/' + $scope.contestInfo.id + '/enter/' ,
             method: "POST",
@@ -330,7 +418,7 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 //                location.reload();
             }).error(function (data, status, headers, config) {
                 // $scope.status = status;
-        	  	// console.log(data);
+        	  	console.log(data);
                 alert("Try again.");
             });
   	};
@@ -341,8 +429,10 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
         $http.delete('/api/contest_entries/' + $scope.myTrack.id).then(function (response) {
             // console.log(response);
             $scope.hasSubmitted = false;  
-            $scope.removedSong = "You just removed your submission of this song below. Please enter another if you dare.";          
+            $scope.removedSong = "You just removed your submission. Please enter another if you dare.";          
         });
+
+        $scope.track = null;
     };
 
     $scope.getReferralLink = function(userId, trackId) {
@@ -388,15 +478,32 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
 
     $scope.player = globalPlayerService.player;
 
-    $scope.playNewTrack = function(track, index) {
-        globalPlayerService.player.resetTrack(track.track);
-        var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
-            return elem.track;
-        });
-        globalPlayerService.player.data.trackQueue = tunes;
-        // Set the next url and such
-        var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
-        globalPlayerService.player.data.nextPageUrl = nextUrl;
+    $scope.playNewTrack = function(track, index, type) {
+        // Start Preview
+        if (type == "recommendations") {
+            track.sc_id = track.id;
+            globalPlayerService.player.resetTrack(track);
+            var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
+                return elem.track;
+            });
+            globalPlayerService.player.data.trackQueue = tunes;
+            // Set the next url and such
+            var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
+            globalPlayerService.player.data.nextPageUrl = nextUrl;
+        }
+        // End Preview
+        // Start Recommendations
+        else {
+            globalPlayerService.player.resetTrack(track.track);
+            var tunes = $scope.contestEntries.results.slice(index+1).map(function(elem) {
+                return elem.track;
+            });
+            globalPlayerService.player.data.trackQueue = tunes;
+            // Set the next url and such
+            var nextUrl = '/api/contests/' + $scope.contestInfo.id + 'entries/?page=' + ($scope.currentPage + 1);
+            globalPlayerService.player.data.nextPageUrl = nextUrl;
+        }
+        // End Recommendations
     };
 
     $scope.getCroppedImageUrl = function(url) {

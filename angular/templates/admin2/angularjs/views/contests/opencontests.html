@@ -28,7 +28,7 @@
         <div class="row">
             <br>
             <div class="col-lg-12 text-center">
-                <p class="subheading-button"><button type="button" class="btn btn-default dark-nostra-modal" data-toggle="modal" data-target="#officialTrackModal">Remember Official Uploads Only</button></p>
+                <p class="subheading-button"><button type="button" class="btn btn-default dark-nostra-modal" data-toggle="modal" data-target="#officialTrackModal">Remember: Official Uploads Only</button></p>
             </div>
             <br>
         </div>
@@ -46,7 +46,7 @@
                                         <div class="clearfix"></div>
                                         <div class="col-md-12 text-center">
                                             <div id="success"></div>
-                                            <button type="submit" class="btn btn-xl" ng-click="postTrack(origTrack)">Join Contest</button>
+                                            <button type="submit" class="btn btn-xl" ng-click="postTrack(origTrack, 'manual')">Join Contest</button>
                                             <div id="errors"></div>
                                         </div>
                                     </div>
@@ -54,9 +54,11 @@
 
                                 <br>
                                 <div class="row">
-                                    <div class="text-center" id="removedSong" ng-model="removedSong"><b>{{removedSong}}</b></div>
-                                    <div class="col-md-12">
-                                        <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
+                                    <div class="text-center red" id="removedSong" ng-model="removedSong"><b>{{removedSong}}</b></div>
+                                    <div class="col-md-12" ng-if="track">
+                                        <!-- <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div> -->
+                                        <div data-ng-include="'/assets/tpl/jamus-track-item.html'" ng-if="track_type == 'manual'"></div>
+                                        <div data-ng-include="'/assets/tpl/jamus-recommendation-item.html'" ng-if="track_type == 'recommendations'"></div>
                                         <br>
                                     </div>
                                 </div>
@@ -80,9 +82,20 @@
             </div>
         </div>
 
-        <!-- <div class="row">
-            <div class="btn btn-primary" ng-click="connectSC()">Connect SC</div>
-        </div> -->
+        <div class="col-md-12 text-center">
+            <span class="row Sica-Bold">
+                <span ng-if="soundcloud.sc.data.user_id != ''">Here are some of your songs to get you started:</span>
+                <span ng-if="soundcloud.sc.data.user_id == ''">Having trouble finding a song? Let us help you!</span>
+                <br>
+                <img class="btn" src="/assets/global/img/btn-connect-sc-l.png" ng-click="connectSC()" ng-if="soundcloud.sc.data.user_id == ''"/>
+            </span>
+
+            <div class="row" id="recommendationsList" ng-repeat="track in recommendedTracks" ng-init="track_type = 'recommendations'">
+                <!-- <div class="col-md-12"> -->
+                    <div data-ng-include="'/assets/tpl/jamus-recommendation-item.html'"></div>
+                <!-- </div> -->
+            </div>
+        </div>
 
     </div>
 </div>
@@ -112,7 +125,10 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div data-ng-include="'/assets/tpl/jamus-track-item.html'"></div>
+                <!-- Track Type: {{track_type}} -->
+                <!-- {{track}} -->
+                <div data-ng-include="'/assets/tpl/jamus-track-item.html'" ng-if="track_type != 'recommendations'"></div>
+                <div data-ng-include="'/assets/tpl/jamus-recommendation-item.html'" ng-if="track_type == 'recommendations'"></div>
             </div>
             <!-- <div class="col-md-12"> -->
                 <!-- <iframe width="100%" height="166" scrolling="no" frameborder="no" ng-src="{{getSrc(mySubmittedTrack)}}"></iframe> -->
