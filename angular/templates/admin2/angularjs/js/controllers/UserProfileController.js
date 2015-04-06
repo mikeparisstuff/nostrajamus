@@ -18,6 +18,10 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
     //     return response.data;
     // });
 
+    $scope.generateReferralLink = function() {
+        return "nostrajamus.com/?ref=" + myInfo.username;
+    };
+
     $scope.getProfilePicture = function(pic) {
       var src = '';
         

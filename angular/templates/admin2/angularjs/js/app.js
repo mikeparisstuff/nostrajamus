@@ -1429,7 +1429,6 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
                             '/assets/admin/pages/scripts/profile.js',
 
                             '/assets/js/controllers/UserProfileController.js',
-
                         ]
                     });
                 }],
