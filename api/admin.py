@@ -5,6 +5,7 @@ from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSo
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'first_name', 'last_name', 'username', 'email', 'jam_points')
+    search_fields = ['first_name', 'last_name', 'username', 'email']
 
 class ContestAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'num_entries', 'start_time', 'end_time')
