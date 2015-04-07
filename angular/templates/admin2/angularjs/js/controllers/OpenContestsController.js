@@ -400,9 +400,10 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             headers: {'Content-Type': 'application/json'}
         }).success(function (data, status, headers, config) {
         	  	// console.log(data);
-
-                track.followers_count = $scope.followers_count;
-                $scope.track = track;
+                if ($scope.track_type == 'recommendations') {
+                    $scope.track.followers_count = $scope.followers_count;
+                    // $scope.track = track;
+                }
 
                 $http.get('/api/users/me').then(function (response) {
                     // console.log(response.data);
