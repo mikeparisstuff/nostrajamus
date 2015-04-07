@@ -98,17 +98,20 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
 
     $scope.uploadFile = function () {
         console.log($scope.myInfo);
+        console.log($scope.api.data.myUser);
         var file = $scope.selectedFile[0];
-        var url = $scope.myInfo.url;
+        // var url = $scope.myInfo.id;
+        var url = "/api/users/" + $scope.myInfo.id;
 //        $scope.myInfo.profile_picture = file;
         $scope.upload = $upload.upload({
             url: url,
             method: 'PUT',
             data: {
-                "first_name": $scope.myInfo.first_name,
-                "last_name": $scope.myInfo.last_name,
-                "email": $scope.myInfo.email,
-                "location": $scope.myInfo.location
+                "first_name": $scope.api.data.myUser.first_name,
+                "last_name": $scope.api.data.myUser.last_name,
+                "email": $scope.api.data.myUser.email,
+                "location": $scope.api.data.myUser.location
+                // "description": $scope.api.data.myUser.description
             },
             file: file
         }).progress(function (evt) {
@@ -117,7 +120,7 @@ MetronicApp.controller('UserProfileController', ["$rootScope", "$scope", "$http"
         }).success(function (data) {
             //do something
             alert("Profile Updated");
-            $location.path("profile/account")
+            $location.path("profile/account");
         });
     };
 

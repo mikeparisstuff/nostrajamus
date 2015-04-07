@@ -189,7 +189,8 @@ MetronicApp.controller('authController', function($scope, api, authState, $http,
     // console.log(authState);
 
     $scope.makeCredentials = function(){
-        if ($scope.password1 != null && $scope.password2 != null && $scope.password1 === $scope.password2) {
+        // if ($scope.password1 != null && $scope.password2 != null && $scope.password1 === $scope.password2) {
+        if ($scope.password1 != null) {
             // console.log(
             //     JSON.stringify({
             //         "username": $scope.user_name,
@@ -203,8 +204,10 @@ MetronicApp.controller('authController', function($scope, api, authState, $http,
             // );
             return JSON.stringify({
                 "username": $scope.user_name,
-                "first_name": $scope.first_name,
-                "last_name": $scope.last_name,
+                // "first_name": $scope.first_name,
+                "first_name": " ",
+                // "last_name": $scope.last_name,
+                "last_name": " ",
                 "email": $scope.email,
                 "password": $scope.password1,
                 "profile_picture": null,
