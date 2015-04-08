@@ -90,11 +90,14 @@
                 <img class="btn" src="/assets/global/img/btn-connect-sc-l.png" ng-click="connectSC()" ng-if="soundcloud.sc.data.user_id == ''"/>
             </span>
 
-            <div class="row" id="recommendationsList" ng-repeat="track in recommendedTracks" ng-init="track_type = 'recommendations'">
-                <!-- <div class="col-md-12"> -->
-                    <div data-ng-include="'/assets/tpl/jamus-recommendation-item.html'"></div>
-                <!-- </div> -->
-            </div>
+            <span ng-if="recommendedTracks">
+                <div class="row" id="recommendationsList" ng-repeat="track in recommendedTracks" ng-init="track_type = 'recommendations'">
+                    <!-- {{recommendedTracks}} -->
+                    <!-- <div class="col-md-12"> -->
+                        <div data-ng-include="'/assets/tpl/jamus-recommendation-item.html'"></div>
+                    <!-- </div> -->
+                </div>
+            </span>
         </div>
 
     </div>

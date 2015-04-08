@@ -161,7 +161,10 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
                 }
             });
 
-            $scope.getRecommendations();
+            $timeout(function() {
+                $scope.getRecommendations();
+            }, 0);
+
         });
     };
 
@@ -191,13 +194,16 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
                         return null;
                     }
                 });
-                // console.log($scope.recommendedTracks);
+                console.log($scope.recommendedTracks);
 
-                // console.log(newTracks);
+                console.log(newTracks);
 
-                $timeout(function() {
+                // $timeout(function() {
                     $scope.recommendedTracks = newTracks;
-                }, 0);
+                    // console.log($scope.recommendedTracks);
+                // });
+
+                console.log($scope.recommendedTracks);
             }
         });
     };
