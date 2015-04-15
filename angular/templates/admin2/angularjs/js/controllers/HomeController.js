@@ -15,6 +15,15 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
     $rootScope.contests = contests;
     $scope.authState = authState;
 
+    // $scope.getFeaturedTrack = function(track_id) {
+    // 	console.log(track_id);
+    // 	$http.get('/api/tracks/' + track_id).then(function(response) {
+    // 		console.log(response.data);
+    // 		$scope.featuredTrack = response.data;
+    // 		return $scope.featuredTrack;
+	   //  });
+    // };
+
     $scope.filterContests = function(contestsList) {
     	contestsList.reverse();
 

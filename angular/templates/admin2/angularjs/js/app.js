@@ -1116,39 +1116,39 @@ MetronicApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvi
         })
 
         // Test
-        // .state('test', {
-        //     url: "/test.html",
-        //     templateUrl: "/assets/views/test.html",            
-        //     data: {pageTitle: '| Admin Test Template'},
-        //     controller: "TestController",
-        //     resolve: {
-        //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
-        //             return $ocLazyLoad.load({
-        //                 name: 'MetronicApp',
-        //                 insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-        //                 files: [
-        //                     '/assets/global/plugins/morris/morris.css',
-        //                     '/assets/admin/pages/css/tasks.css',
+        .state('test', {
+            url: "/test",
+            templateUrl: "/assets/views/test.html",            
+            data: {pageTitle: '| Admin Test Template'},
+            controller: "TestController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'MetronicApp',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '/assets/global/plugins/morris/morris.css',
+                            '/assets/admin/pages/css/tasks.css',
                             
-        //                     '/assets/global/plugins/morris/morris.min.js',
-        //                     '/assets/global/plugins/morris/raphael-min.js',
-        //                     '/assets/global/plugins/jquery.sparkline.min.js',
+                            '/assets/global/plugins/morris/morris.min.js',
+                            '/assets/global/plugins/morris/raphael-min.js',
+                            '/assets/global/plugins/jquery.sparkline.min.js',
 
-        //                     '/assets/admin/pages/scripts/index3.js',
-        //                     '/assets/admin/pages/scripts/tasks.js',
+                            '/assets/admin/pages/scripts/index3.js',
+                            '/assets/admin/pages/scripts/tasks.js',
 
-        //                     '/assets/js/controllers/TestController.js'
-        //                 ] 
-        //             });
-        //         }],
-        //         signups: ['$http', function($http) {
-        //             return $http.get('/assets/Signup.json').then(function(response) {
-        //                 // console.log(response.data);
-        //                 return response.data;
-        //             });
-        //         }]
-        //     }
-        // })
+                            '/assets/js/controllers/TestController.js'
+                        ] 
+                    });
+                }]
+                // signups: ['$http', function($http) {
+                //     return $http.get('/assets/Signup.json').then(function(response) {
+                //         // console.log(response.data);
+                //         return response.data;
+                //     });
+                // }]
+            }
+        })
 
         // AngularJS plugins
         // .state('fileupload', {

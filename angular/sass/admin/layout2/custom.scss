@@ -365,6 +365,36 @@ section#services {
   overflow:hidden;
   text-align:center;
 }
+.profile-pic-default-md-plus {
+  position: absolute;
+  padding-top: 17px;
+  margin-bottom: -6px;
+  width: 54px;
+  height: 54px;
+  // border: 0.5px solid #ff5252;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  // background:red;
+  overflow:hidden;
+  text-align:center;
+}
+.profile-pic-md-plus {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  // border: 0.5px solid #ff5252;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  // background:red;
+  overflow:hidden;
+  text-align:center;
+}
 .profile-pic-lg {
   position: absolute;
   width: 149px;
@@ -1045,6 +1075,158 @@ Red-nostra
 
 /* END LIKES ITEM PROFILE */
 
+/* START LEADERS ITEM PROFILE */
+
+@mixin transitions{
+  -webkit-transition: 0.25s all ease-in-out;
+  -moz-transition: 0.25s all ease-in-out;
+  -ms-transition: 0.25s all ease-in-out;
+  -o-transition: 0.25s all ease-in-out;
+   transition: 0.25s all ease-in-out;
+}
+
+@mixin trans-delay{
+  -webkit-transition-delay: 0.25s;
+  -moz-transition-delay: 0.25s;
+  -ms-transition-delay: 0.25s;
+  -o-transition-delay: 0.25s;
+   transition-delay: 0.25s;
+}
+
+.buttons-leader{
+  margin-top: 50px;
+  text-align:center;
+  .button-leader{
+    display:inline-block;
+    overflow:hidden;
+    width: 150px;
+    height: 150px;
+    background:#fff;
+    border: 1px solid #efefef;
+    border-radius: 1px;
+    margin:5px;
+    vertical-align:top;
+    @include transitions;
+    span{
+      margin-top:20px;
+      display:block;
+      // font-size:54px;
+      padding-top:20px;
+      @include transitions;
+      // .leaders-profile-pic {
+      //   margin-top: -15px;
+      // }
+   }
+    h5{
+     margin-top:15px;
+     // font-weight:600;
+     // color:grey;
+     @include transitions;
+   }
+    p{
+     // font-size:14px;
+      opacity:0;
+      padding:8px;
+      // color:grey;
+   }
+  }
+  
+  .active-leader{
+    width:300px;
+    height:300px;
+    span{
+      @include transitions;
+      // font-size:81px;
+      img, i {
+        transform: scale(1.5);
+        transition: 0.5s all ease-in-out;
+      }
+      .leaders-profile-pic {
+        margin-top: -5px;
+      }
+    }
+    p{
+      opacity:1;
+      @include transitions;
+      @include trans-delay;
+    }
+    h5{
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  }
+}
+.leader-rows {
+  margin: -50px;
+}
+.leaders-jam-points {
+  // margin-top: 10px;
+}
+.track-title-leaders {
+  font-size: 11px;
+}
+.track-artist-leaders {
+  font-size: 10px;
+  padding: 0 !important;
+}
+.leaders-track-like-wrapper {
+  margin: 0 !important;
+}
+.leaders-track-share-wrapper {
+  margin-top: 9px !important;
+}
+.liked-track-leaderboard {
+  margin-top: -10px;
+}
+.button-icon-leaderboard {
+  padding: 0;
+}
+.leaders-more-btn {
+  margin-top: 5px;
+  color: #aaa;
+  cursor: pointer;
+}
+.leaders-more-btn:hover {
+  margin-top: 5px;
+  color: #999;
+  cursor: pointer;
+}
+.track-data-top-leaders {
+  padding-top: 5px;
+}
+.track-data-bottom-leaders > div {
+  padding-top: 7px;
+  height: 100%;
+}
+.track-divider-leaders {
+  margin-top: 0px;
+  margin-bottom: 1px;
+}
+
+@media (max-width: $screen-xs-min) {
+  .track-title-leaders {
+    font-size: 7px;
+  }
+  .track-data-bottom-leaders {
+    > .row {
+      div {
+        font-size: 5px;
+      }
+    }
+  }
+  .track-data-top-leaders {
+    padding-top: 5px;
+  }
+  .track-divider-leaders {
+    margin-bottom: 0;
+  }
+}
+
+/* END LEADERS ITEM PROFILE */
+
 // Start Contest Item
 
 .jamus-contest-item {
@@ -1600,3 +1782,4 @@ ul.img-list li:hover span.text-content-playlist {
        overflow: hidden!important;
    }
 }
+/* END BOOTSTRAP COLLAPSE */

@@ -79,6 +79,7 @@
 	<!-- </div> -->
 <!-- </div> -->
 <!-- <a id="tastemakers"></a> -->
+
 <div class="row">
 	<div class="col-md-12 col-sm-12">
 		<!-- BEGIN PORTLET-->
@@ -102,49 +103,34 @@
 					<!--</ul>-->
 				<!--</div>-->
 			</div>
-			<div class="portlet-body">
-<!-- 				<div class="row number-stats margin-bottom-30">
-					<div class="col-md-6 col-sm-6 col-xs-6">
-						<div class="stat-left">
-							<div class="stat-chart"> -->
-								<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-<!-- 								<div id="sparkline_bar"></div>
-							</div>
-							<div class="stat-number">
-								<div class="title">
-									JAM Points Total
-								</div>
-								<div class="number">
-									2460
-								</div>
-							</div>
-						</div>
-					</div> -->
-<!-- 					<div class="col-md-6 col-sm-6 col-xs-6">
-						<div class="stat-right">
-							<div class="stat-chart"> -->
-								<!-- do not line break "sparkline_bar" div. sparkline chart has an issue when the container div has line break -->
-<!-- 								<div id="sparkline_bar2"></div>
-							</div>
-							<div class="stat-number">
-								<div class="title">
-									This Week
-								</div>
-								<div class="number">
-									+719
-								</div>
-							</div>
-						</div>
+			<div class="portlet-body" style="margin-bottom:10%;">
+
+				<div class="row leader-rows" ng-repeat="leaders in chunkedLeaders">
+					<div class="buttons-leader">
+					    <div ng-class="{'button-leader active-leader': leader.hover || leader.my_entries[0].track.sc_id == player.data.currentTrackData.sc_id, 'button-leader': !leader.hover || leader.my_entries[0].track.sc_id != player.data.currentTrackData.sc_id}" ng-repeat="leader in leaders" ng-mouseover="hoverExpand(leader)" ng-mouseleave="hoverShrink(leader)">
+					        <a href="#/profile/{{leader.id}}/dashboard"><h5 class="Sica-Bold">{{leader.username}}</h5></a>
+					        <span class="leaders-profile-pic" style="margin-top:-15px;cursor:pointer;" ng-click="goToProfile(leader.id)">
+					        	<img class="profile-pic-md-plus" src="{{getProfilePicture(leader.profile_picture)}}" ng-show="getProfilePicture(leader.profile_picture)">
+				                <i class="fa fa-user fa-3x red profile-pic-default-md-plus" ng-hide="getProfilePicture(leader.profile_picture)"></i>
+					        </span>
+					        <div class="Sica-Regular leaders-jam-points" style="margin-top:30px; margin-bottom:-15px;">{{leader.total_jam_points}}</div>
+					        <p ng-init="track = leader.my_entries[0]">
+					        	<div data-ng-include="'/assets/tpl/jamus-leader-item.html'"></div>
+						        <div class="text-center leaders-more-btn" ng-click="goToProfile(leader.id)">
+						        	<i class="fa fa-ellipsis-h fa-2x"></i>
+						        </div>
+					        </p>
+					    </div>
 					</div>
-				</div> -->
-                <div class="table-scrollable table-scrollable-borderless">
+				</div>
+
+                <!-- <div class="table-scrollable table-scrollable-borderless">
                     <table class="table table-hover table-light">
                         <thead>
                             <tr>
                                 <th width="33%" class="text-center">
                                     Rank
                                 </th>
-                                <!-- DOC: colspan="2" -->
                                 <th width="33%" class="text-center">
                                     Tastemaker
                                 </th>
@@ -158,19 +144,10 @@
                                 {{$index+1}}
                             </th>
                             <td class="bold text-center" width="33%">
-                            	<!-- <div class="row">
-									<div class="col-md-2 col-md-offset-2">
-										<div class="profile-pic-sm">
-											<img src="{{getProfilePicture(leader.profile_picture)}}" ng-show="getProfilePicture(leader.profile_picture)" class="profile-circle-img" height="100%" width="100%">
-										</div>
-									</div>
-								</div> -->
                                 <div class="row">
                                     <div class="col-md-2 col-md-offset-2">
-                                    	<!-- <div class="profile-pic-sm"> -->
 	                                        <img class="profile-pic-sm" src="{{getProfilePicture(leader.profile_picture)}}" ng-show="getProfilePicture(leader.profile_picture)">
 	                                        <i class="fa fa-user fa-lg" ng-hide="getProfilePicture(leader.profile_picture)"></i>
-	                                    <!-- </div> -->
                                     </div>
                                     <a href="#/profile/{{leader.id}}/dashboard"><div class="col-md-6">{{leader.username}}</div></a>
                                 </div>
@@ -180,228 +157,42 @@
                             </td>
                         </tr>
                     </table>
-                </div>
+                </div> -->
 
-				<div class="tab-content">
-					<div class="tab-pane active" id="tab_1_1">
-						<!--<div class="actions pull-right">-->
-							<!--<div class="btn-group btn-group-devided" data-toggle="buttons">-->
-								<!--<label class="btn btn-transparent grey-salsa btn-circle btn-sm active" ng-click="timeSelect='day'">-->
-								<!--<input type="radio" name="options" class="toggle">Week</label>-->
-								<!--<label class="btn btn-transparent grey-salsa btn-circle btn-sm" ng-click="timeSelect='week'">-->
-								<!--<input type="radio" name="options" class="toggle">Month</label>-->
-								<!--<label class="btn btn-transparent grey-salsa btn-circle btn-sm" ng-click="timeSelect='month'">-->
-								<!--<input type="radio" name="options" class="toggle">All Time</label>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="row" ng-show="timeSelect=='day'">-->
-							<!--<div class="col-md-12 col-sm-12">-->
-								<!--&lt;!&ndash; BEGIN PORTLET&ndash;&gt;-->
-								<!--<div class="portlet light">-->
-									<!--&lt;!&ndash; <div class="portlet-title">-->
-										<!--<div class="caption caption-md">-->
-											<!--<i class="icon-bar-chart font-green-haze hide"></i>-->
-											<!--<span class="caption-subject font-nostra bold uppercase">Upcoming Jams</span>-->
-											<!--<span class="caption-helper hide">weekly stats...</span>-->
-										<!--</div>-->
-									<!--</div> &ndash;&gt;-->
-									<!--<div class="portlet-body text-center">-->
-										<!--<div ng-repeat="track in dayTracks | startFrom:currentPage*pageSize | limitTo:pageSize">-->
-											<!--<div class="row list-separated text-center">-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-red-flamingo">-->
-														<!--{{track.initial_playback_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Play Increase-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}%-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Current Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Total Followers-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-green-haze">-->
-														<!--{{track.current_follower_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<div class="row" align="center">-->
-												<!--<div class="col-md-12 col-sm-12 col-xs-24">-->
-													<!--<iframe width="75%" height="200" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<hr>-->
-										<!--</div>-->
-
-										<!--<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">-->
-									        <!--Prev-->
-									    <!--</button>-->
-									    <!--{{currentPage+1}}/{{numberOfPages()}}-->
-									    <!--<button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.length/pageSize-1" ng-click="currentPage=currentPage+1">-->
-									        <!--Next-->
-									    <!--</button>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--&lt;!&ndash; END PORTLET&ndash;&gt;-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="row" ng-show="timeSelect=='week'">-->
-							<!--<div class="col-md-12 col-sm-12">-->
-								<!--&lt;!&ndash; BEGIN PORTLET&ndash;&gt;-->
-								<!--<div class="portlet light">-->
-									<!--&lt;!&ndash; <div class="portlet-title">-->
-										<!--<div class="caption caption-md">-->
-											<!--<i class="icon-bar-chart font-green-haze hide"></i>-->
-											<!--<span class="caption-subject font-nostra bold uppercase">Upcoming Jams</span>-->
-											<!--<span class="caption-helper hide">weekly stats...</span>-->
-										<!--</div>-->
-									<!--</div> &ndash;&gt;-->
-									<!--<div class="portlet-body text-center">-->
-										<!--<div ng-repeat="track in weekTracks | startFrom:currentPage*pageSize | limitTo:pageSize">-->
-											<!--<div class="row list-separated text-center">-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-red-flamingo">-->
-														<!--{{track.initial_playback_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Play Increase-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}%-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Current Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Total Followers-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-green-haze">-->
-														<!--{{track.current_follower_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<div class="row" align="center">-->
-												<!--<div class="col-md-12 col-sm-12 col-xs-24">-->
-													<!--<iframe width="75%" height="200" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<hr>-->
-										<!--</div>-->
-
-										<!--<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">-->
-									        <!--Prev-->
-									    <!--</button>-->
-									    <!--{{currentPage+1}}/{{numberOfPages()}}-->
-									    <!--<button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.length/pageSize-1" ng-click="currentPage=currentPage+1">-->
-									        <!--Next-->
-									    <!--</button>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--&lt;!&ndash; END PORTLET&ndash;&gt;-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="row" ng-show="timeSelect=='month'">-->
-							<!--<div class="col-md-12 col-sm-12">-->
-								<!--&lt;!&ndash; BEGIN PORTLET&ndash;&gt;-->
-								<!--<div class="portlet light">-->
-									<!--&lt;!&ndash; <div class="portlet-title">-->
-										<!--<div class="caption caption-md">-->
-											<!--<i class="icon-bar-chart font-green-haze hide"></i>-->
-											<!--<span class="caption-subject font-nostra bold uppercase">Upcoming Jams</span>-->
-											<!--<span class="caption-helper hide">weekly stats...</span>-->
-										<!--</div>-->
-									<!--</div> &ndash;&gt;-->
-									<!--<div class="portlet-body text-center">-->
-										<!--<div ng-repeat="track in monthTracks | startFrom:currentPage*pageSize | limitTo:pageSize">-->
-											<!--<div class="row list-separated text-center">-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Initial Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-red-flamingo">-->
-														<!--{{track.initial_playback_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Play Increase-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--<span class="font-lg font-grey-mint">+</span>{{getPlayIncrease(track)}}%-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Current Playcount-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-purple">-->
-														<!--{{track.current_playback_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-												<!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-													<!--<div class="font-grey-mint font-sm">-->
-														<!--Total Followers-->
-													<!--</div>-->
-													<!--<div class="uppercase font-hg font-green-haze">-->
-														<!--{{track.current_follower_count}} <span class="font-lg font-grey-mint"></span>-->
-													<!--</div>-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<div class="row" align="center">-->
-												<!--<div class="col-md-12 col-sm-12 col-xs-24">-->
-													<!--<iframe width="75%" height="200" scrolling="no" frameborder="no" ng-src="{{getSrc(track)}}"></iframe>-->
-												<!--</div>-->
-											<!--</div>-->
-											<!--<hr>-->
-										<!--</div>-->
-
-										<!--<button class="btn btn-primary red-nostra" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">-->
-									        <!--Prev-->
-									    <!--</button>-->
-									    <!--{{currentPage+1}}/{{numberOfPages()}}-->
-									    <!--<button class="btn btn-primary red-nostra" ng-disabled="currentPage>=trending.length/pageSize-1" ng-click="currentPage=currentPage+1">-->
-									        <!--Next-->
-									    <!--</button>-->
-									<!--</div>-->
-								<!--</div>-->
-								<!--&lt;!&ndash; END PORTLET&ndash;&gt;-->
-							<!--</div>-->
-						<!--</div>-->
-					</div>
-
-				</div>
 			</div>
 		</div>
 		<!-- END PORTLET-->
 	</div>
+</div>
+
+<div class="modal fade" id="shareLargeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header title-bg">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title white" id="myModalLabel">Share This Song</h4>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Tell your friends!</h4>
+                <br>
+                <h5>Share this link:</h5>
+                <!-- <br> -->
+                <!-- {{getReferralLink(track.track.id)}} -->
+                <input type="text" class="form-control text-center" value="{{referLink}}" style="width:100%"></input>
+                <br><br>
+                Follow us:
+                <br><br>
+                <a href="https://twitter.com/NostraJAMusUVA" target="_blank"><i class="fa fa-twitter fa-2x social-media-icons"></i></a>&nbsp
+                <a href="https://www.facebook.com/nostrajamus.music" target="_blank"><i class="fa fa-facebook fa-2x social-media-icons"></i></a>&nbsp
+                <a href="https://soundcloud.com/nostrajamus" target="_blank"><i class="fa fa-soundcloud fa-2x social-media-icons"></i></a>&nbsp
+                <a href="https://play.spotify.com/user/collinwaldoch/playlist/0QmOLxaXpiDhToT2jxTVgL?play=true&utm_source=open.spotify.com&utm_medium=open" target="_blank"><i class="fa fa-spotify fa-2x social-media-icons"></i></a>&nbsp
+                <a href="http://nostrajamus.tumblr.com/" target="_blank"><i class="fa fa-tumblr fa-2x social-media-icons"></i></a>
+            </div>
+            <div class="modal-footer title-bg">
+                <button type="button" class="btn btn-default red-nostra-modal" data-dismiss="modal">Sweet.</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- <a id="upcomingjams"></a> -->

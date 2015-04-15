@@ -373,6 +373,34 @@ section#services {
   text-align: center;
 }
 
+.profile-pic-default-md-plus {
+  position: absolute;
+  padding-top: 17px;
+  margin-bottom: -6px;
+  width: 54px;
+  height: 54px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.profile-pic-md-plus {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  top: 0px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
 .profile-pic-lg {
   position: absolute;
   width: 149px;
@@ -1069,6 +1097,161 @@ Red-nostra
 }
 
 /* END LIKES ITEM PROFILE */
+/* START LEADERS ITEM PROFILE */
+.buttons-leader {
+  margin-top: 50px;
+  text-align: center;
+}
+.buttons-leader .button-leader {
+  display: inline-block;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  background: #fff;
+  border: 1px solid #efefef;
+  border-radius: 1px;
+  margin: 5px;
+  vertical-align: top;
+  -webkit-transition: 0.25s all ease-in-out;
+  -moz-transition: 0.25s all ease-in-out;
+  -ms-transition: 0.25s all ease-in-out;
+  -o-transition: 0.25s all ease-in-out;
+  transition: 0.25s all ease-in-out;
+}
+.buttons-leader .button-leader span {
+  margin-top: 20px;
+  display: block;
+  padding-top: 20px;
+  -webkit-transition: 0.25s all ease-in-out;
+  -moz-transition: 0.25s all ease-in-out;
+  -ms-transition: 0.25s all ease-in-out;
+  -o-transition: 0.25s all ease-in-out;
+  transition: 0.25s all ease-in-out;
+}
+.buttons-leader .button-leader h5 {
+  margin-top: 15px;
+  -webkit-transition: 0.25s all ease-in-out;
+  -moz-transition: 0.25s all ease-in-out;
+  -ms-transition: 0.25s all ease-in-out;
+  -o-transition: 0.25s all ease-in-out;
+  transition: 0.25s all ease-in-out;
+}
+.buttons-leader .button-leader p {
+  opacity: 0;
+  padding: 8px;
+}
+.buttons-leader .active-leader {
+  width: 300px;
+  height: 300px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+.buttons-leader .active-leader span {
+  -webkit-transition: 0.25s all ease-in-out;
+  -moz-transition: 0.25s all ease-in-out;
+  -ms-transition: 0.25s all ease-in-out;
+  -o-transition: 0.25s all ease-in-out;
+  transition: 0.25s all ease-in-out;
+}
+.buttons-leader .active-leader span img, .buttons-leader .active-leader span i {
+  transform: scale(1.5);
+  transition: 0.5s all ease-in-out;
+}
+.buttons-leader .active-leader span .leaders-profile-pic {
+  margin-top: -5px;
+}
+.buttons-leader .active-leader p {
+  opacity: 1;
+  -webkit-transition: 0.25s all ease-in-out;
+  -moz-transition: 0.25s all ease-in-out;
+  -ms-transition: 0.25s all ease-in-out;
+  -o-transition: 0.25s all ease-in-out;
+  transition: 0.25s all ease-in-out;
+  -webkit-transition-delay: 0.25s;
+  -moz-transition-delay: 0.25s;
+  -ms-transition-delay: 0.25s;
+  -o-transition-delay: 0.25s;
+  transition-delay: 0.25s;
+}
+.buttons-leader .active-leader h5 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.leader-rows {
+  margin: -50px;
+}
+
+.track-title-leaders {
+  font-size: 11px;
+}
+
+.track-artist-leaders {
+  font-size: 10px;
+  padding: 0 !important;
+}
+
+.leaders-track-like-wrapper {
+  margin: 0 !important;
+}
+
+.leaders-track-share-wrapper {
+  margin-top: 9px !important;
+}
+
+.liked-track-leaderboard {
+  margin-top: -10px;
+}
+
+.button-icon-leaderboard {
+  padding: 0;
+}
+
+.leaders-more-btn {
+  margin-top: 5px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.leaders-more-btn:hover {
+  margin-top: 5px;
+  color: #999;
+  cursor: pointer;
+}
+
+.track-data-top-leaders {
+  padding-top: 5px;
+}
+
+.track-data-bottom-leaders > div {
+  padding-top: 7px;
+  height: 100%;
+}
+
+.track-divider-leaders {
+  margin-top: 0px;
+  margin-bottom: 1px;
+}
+
+@media (max-width: 480px) {
+  .track-title-leaders {
+    font-size: 7px;
+  }
+
+  .track-data-bottom-leaders > .row div {
+    font-size: 5px;
+  }
+
+  .track-data-top-leaders {
+    padding-top: 5px;
+  }
+
+  .track-divider-leaders {
+    margin-bottom: 0;
+  }
+}
+/* END LEADERS ITEM PROFILE */
 .jamus-contest-item {
   padding: 0 !important;
   height: 100px;
@@ -1575,3 +1758,4 @@ ul.img-list li:hover span.text-content-playlist {
     overflow: hidden !important;
   }
 }
+/* END BOOTSTRAP COLLAPSE */

@@ -1,0 +1,56 @@
+<!-- leader -->
+
+<div class="row">
+
+    <div class="col-md-12 jamus-contest-item">
+        <div class="track-img-wrapper-contest col-md-3 col-sm-3 col-xs-3 text-center" style="background-image: url({{ getCroppedImageUrl(track.track.artwork_url) }});">
+            <span ng-if="track.track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn-contest fa fa-3x fa-play-circle-o" ng-click="playNewTrack(track, $index)"></span>
+            <span ng-if="track.track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn-contest fa fa-2x fa-pause" ng-click="playNewTrack(track, $index)"></span>
+        </div>
+
+        <div class="track-data col-md-9 col-sm-9 col-xs-9">
+            <div ng-if="player.data.currentTrackData.sc_id == track.track.sc_id" class="progress jamus-list-item-progress-bar-contest">
+                <div class="progress-bar-contest" role="progressbar" aria-valuenow="{{ player.data.trackProgress }}" aria-valuemin="0" aria-valuemax="1" style="width: {{ player.data.trackProgress * 100 }}%;">
+                </div>
+            </div>
+            <div class="track-data-top-leaders text-center">
+                <div class="row">
+                    <div class="col-xs-offset-1 col-xs-10">
+                        <div class="track-title-leaders"><b><a target="_blank" href="{{ track.track.permalink_url }}">{{ truncate(track.track.title) }}</a></b></div>
+                        <p class="track-artist-leaders">{{ track.track.user.username }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="track-divider-leaders"/>
+            <div class="track-data-bottom-leaders text-center">
+                <div class="row">
+                    <div class="contest-stats col-md-6 col-sm-6 col-xs-12"><b>Jam Pts.</b><br />{{ insertCommas(track.jam_points) }}</div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <div class="leaders-track-like-wrapper">
+                            <button class="btn button-icon button-icon-leaderboard" type="button" aria-expanded="true" ng-click="api.likeTrack(track.track)" ng-if="authState.user">
+                                <span ng-if="api.trackIsLiked(track.track)" class="fa fa-1x fa-heart isLiked" style="margin-top:-10px"></span>
+                                <span ng-if="!api.trackIsLiked(track.track)" class="fa fa-1x fa-heart-o" style="margin-top:-10px"></span>
+                            </button>
+                            <button class="btn button-icon button-icon-leaderboard" type="button" aria-expanded="true" ng-click="api.likeTrack(track.track)" ng-if="!authState.user">
+                                <span ng-if="api.trackIsLiked(track.track)" class="fa fa-1x fa-heart isLiked" style="margin-top:-10px"></span>
+                                <span ng-if="!api.trackIsLiked(track.track)" class="fa fa-1x fa-heart-o" style="margin-top:-10px"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <div class="leaders-track-share-wrapper">
+                            <a href="#" ng-click="updateRefer(track.id)" ng-if="!submissionPage">
+                                <i class="fa fa-share fa-1x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
