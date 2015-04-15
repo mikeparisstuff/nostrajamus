@@ -1188,6 +1188,14 @@ Red-nostra
   margin-left: -1px;
 }
 
+.jamus-leaders-item {
+  padding: 0 !important;
+  height: 100px;
+  border: 1px solid #eeeeee;
+  background-color: #ffffff;
+  width: 96%;
+}
+
 .track-title-leaders {
   font-size: 11px;
 }

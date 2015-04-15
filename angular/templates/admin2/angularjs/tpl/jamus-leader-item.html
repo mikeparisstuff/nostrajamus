@@ -2,7 +2,7 @@
 
 <div class="row leader-track-item">
 
-    <div class="col-md-12 jamus-contest-item">
+    <div class="col-md-12 jamus-leaders-item">
         <div class="track-img-wrapper-contest col-md-3 col-sm-3 col-xs-3 text-center" style="background-image: url({{ getCroppedImageUrl(track.track.artwork_url) }});">
             <span ng-if="track.track.sc_id != player.data.currentTrackData.sc_id || !player.data.isPlaying" class="play-btn-contest fa fa-3x fa-play-circle-o" ng-click="playNewTrack(track, $index)"></span>
             <span ng-if="track.track.sc_id == player.data.currentTrackData.sc_id && player.data.isPlaying" class="play-btn-contest fa fa-2x fa-pause" ng-click="playNewTrack(track, $index)"></span>
