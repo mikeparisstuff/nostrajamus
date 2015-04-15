@@ -116,9 +116,10 @@
 					        <div class="Sica-Regular leaders-jam-points" style="margin-top:30px; margin-bottom:-15px;">{{leader.total_jam_points}}</div>
 					        <p ng-init="track = leader.my_entries[0]">
 					        	<div data-ng-include="'/assets/tpl/jamus-leader-item.html'"></div>
-						        <div class="text-center leaders-more-btn" ng-click="goToProfile(leader.id)">
+					        	<!-- DOC: To add ellipsis back in, uncomment below statement and remove css for 'leader-track-item' class in jamus-leader-item.html -->
+						        <!-- <div class="text-center leaders-more-btn" ng-click="goToProfile(leader.id)">
 						        	<i class="fa fa-ellipsis-h fa-2x"></i>
-						        </div>
+						        </div> -->
 					        </p>
 					    </div>
 					</div>

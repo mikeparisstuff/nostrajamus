@@ -57,8 +57,8 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
     };
 
     $scope.truncate = function(title) {
-      if (title.toString().length > 25) {
-          var newTitle = title.toString().substring(0,25) + "...";
+      if (title.toString().length > 24) {
+          var newTitle = title.toString().substring(0,24) + "...";
           return newTitle;
       }
       return title;
@@ -80,6 +80,10 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
 
     $scope.goToProfile = function(leader_id) {
       $state.go('profile.dashboard', {userID: leader_id});
+    };
+
+    $scope.getMoreTracks = function(leaderItem) {
+      leaderItem.numSongs += 1;
     };
 
     /* BEGIN PLAYER LOGIC */
