@@ -120,6 +120,14 @@ MetronicApp.controller('HomePanelController', function($rootScope, $scope, $http
 		return s;
     };
 
+    $scope.truncate = function(title) {
+      if (title.toString().length > 50) {
+          var newTitle = title.toString().substring(0,50) + "...";
+          return newTitle;
+      }
+      return title;
+    };
+
     $scope.getPlayIncrease = function(track) {
 		// get play count increase
 		var currPlayCount = track.current_playback_count;
