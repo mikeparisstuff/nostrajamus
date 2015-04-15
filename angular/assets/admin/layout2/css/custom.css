@@ -1108,10 +1108,10 @@ Red-nostra
   width: 150px;
   height: 150px;
   background: #fff;
-  border: 1px solid #efefef;
+  border: 1px solid #333;
   border-radius: 1px;
   margin: 5px;
-  vertical-align: top;
+  vertical-align: middle;
   -webkit-transition: 0.25s all ease-in-out;
   -moz-transition: 0.25s all ease-in-out;
   -ms-transition: 0.25s all ease-in-out;
