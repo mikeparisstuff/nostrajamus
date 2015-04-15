@@ -58,7 +58,7 @@ MetronicApp.controller('LeaderboardController', ['$rootScope', '$scope', '$http'
 
     $scope.truncate = function(title) {
       if (title.toString().length > 25) {
-          var newTitle = title.toString().substring(0,30) + "...";
+          var newTitle = title.toString().substring(0,25) + "...";
           return newTitle;
       }
       return title;
