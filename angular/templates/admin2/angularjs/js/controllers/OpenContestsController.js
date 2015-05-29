@@ -396,43 +396,48 @@ MetronicApp.controller('OpenContestsController', ['$rootScope', '$scope', 'setti
             delete track.followers_count;
             $scope.track = track;
         }
-  		$http({
-            url: '/api/contests/' + $scope.contestInfo.id + '/enter/' ,
-            method: "POST",
-            data:
-            {
-            	"track": track
-            },
-            headers: {'Content-Type': 'application/json'}
-        }).success(function (data, status, headers, config) {
-        	  	// console.log(data);
-                if ($scope.track_type == 'recommendations') {
-                    $scope.track.followers_count = $scope.followers_count;
-                    // $scope.track = track;
-                }
+        if (track.playback_count <= 200) {
+            $scope.error_playback_count = "Sorry. Your song needs to have at least 200 plays. Try another song.";
+        }
+        else {
+            $http({
+                url: '/api/contests/' + $scope.contestInfo.id + '/enter/' ,
+                method: "POST",
+                data:
+                {
+                    "track": track
+                },
+                headers: {'Content-Type': 'application/json'}
+            }).success(function (data, status, headers, config) {
+                    // console.log(data);
+                    if ($scope.track_type == 'recommendations') {
+                        $scope.track.followers_count = $scope.followers_count;
+                        // $scope.track = track;
+                    }
 
-                $http.get('/api/users/me').then(function (response) {
-                    // console.log(response.data);
-                    $scope.myData = response.data;
-                    if ($scope.myData.my_entries != null) {
-                        for (var i=0; i < $scope.myData.my_entries.length; i++) {
-                            if ($scope.myData.my_entries[i].contest == $scope.contestInfo.id) {
-                                $scope.myTrack = $scope.myData.my_entries[i];
-                                $scope.mySubmittedTrack = $scope.myData.my_entries[i].track;
-                                $scope.hasSubmitted = true;
-                                $('#shareModal').modal('show');
+                    $http.get('/api/users/me').then(function (response) {
+                        // console.log(response.data);
+                        $scope.myData = response.data;
+                        if ($scope.myData.my_entries != null) {
+                            for (var i=0; i < $scope.myData.my_entries.length; i++) {
+                                if ($scope.myData.my_entries[i].contest == $scope.contestInfo.id) {
+                                    $scope.myTrack = $scope.myData.my_entries[i];
+                                    $scope.mySubmittedTrack = $scope.myData.my_entries[i].track;
+                                    $scope.hasSubmitted = true;
+                                    $('#shareModal').modal('show');
+                                }
                             }
                         }
-                    }
-                });
-//                alert("Thanks for submitting!");
+                    });
+    //                alert("Thanks for submitting!");
 
-//                location.reload();
-            }).error(function (data, status, headers, config) {
-                // $scope.status = status;
-        	  	console.log(data);
-                alert("Try again.");
-            });
+    //                location.reload();
+                }).error(function (data, status, headers, config) {
+                    // $scope.status = status;
+                    console.log(data);
+                    alert("Try again.");
+                });
+        }
   	};
 
     $scope.removeSubmission = function() {
