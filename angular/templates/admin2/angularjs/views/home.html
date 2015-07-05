@@ -73,33 +73,40 @@
 						<span class="caption-subject font-nostra bold uppercase">Join a Contest</span>
 					</div>
 				</div>
-				<!-- <div class="portlet-body"> -->
-					<div class="table-scrollable table-scrollable-borderless">
-						<ul class="col-md-4 img-list" ng-repeat="contest in openContests | limitTo:3">
-							<li ng-if="authState.user">
-								<a href="#/opencontests/{{contest.id}}">
-									<div class="row jamus-open-item">
-									    <div class="track-img-wrapper col-md-12 col-sm-12 col-xs-12 text-center" style="background-image: url({{ getCroppedImageUrl(contest.contest_picture) }});">
-									    </div>
-									    <span class="text-content"><span class="nostra-description">{{contest.description}}</span></span>
-									</div>
-								</a>
-								<div class="text-center Sica-Regular"><b>Submit by:</b><br>{{getFullDate(contest.start_time)}} (ET)</div>
-							</li>
+				<!-- START No Contests -->
+				<div ng-show="noOpenContests(openContests)" class="Sica-SemiBold text-center">
+					There aren't any open contests currently. We're updating Nostrajamus and more contests will start in the near future. Until then, feel free to browse the rest of the contests, playlists, and profiles!
+					<br><br>
+					<span class="Sica-SemiBoldItalic">Jam on ...</span>
+				</div>
+				<!-- End No Contests -->
+				<!-- START New Contests -->
+				<div ng-hide="noOpenContests(openContests)" class="table-scrollable table-scrollable-borderless">
+					<ul class="col-md-4 img-list" ng-repeat="contest in openContests | limitTo:3">
+						<li ng-if="authState.user">
+							<a href="#/opencontests/{{contest.id}}">
+								<div class="row jamus-open-item">
+								    <div class="track-img-wrapper col-md-12 col-sm-12 col-xs-12 text-center" style="background-image: url({{ getCroppedImageUrl(contest.contest_picture) }});">
+								    </div>
+								    <span class="text-content"><span class="nostra-description">{{contest.description}}</span></span>
+								</div>
+							</a>
+							<div class="text-center Sica-Regular"><b>Submit by:</b><br>{{getFullDate(contest.start_time)}} (ET)</div>
+						</li>
 
-							<li ng-if="!authState.user">
-								<a href="#" data-toggle="modal" data-target="#registerModal">
-									<div class="row jamus-open-item">
-									    <div class="track-img-wrapper col-md-12 col-sm-12 col-xs-12 text-center" style="background-image: url({{ getCroppedImageUrl(contest.contest_picture) }});">
-									    </div>
-									    <span class="text-content"><span class="nostra-description">{{contest.description}}</span></span>
-									</div>
-								</a>
-								<div class="text-center Sica-Regular"><b>Submit by:</b><br>{{getFullDate(contest.start_time)}} (ET)</div>
-							</li>
-						</ul>
-					</div>
-				<!-- </div> -->
+						<li ng-if="!authState.user">
+							<a href="#" data-toggle="modal" data-target="#registerModal">
+								<div class="row jamus-open-item">
+								    <div class="track-img-wrapper col-md-12 col-sm-12 col-xs-12 text-center" style="background-image: url({{ getCroppedImageUrl(contest.contest_picture) }});">
+								    </div>
+								    <span class="text-content"><span class="nostra-description">{{contest.description}}</span></span>
+								</div>
+							</a>
+							<div class="text-center Sica-Regular"><b>Submit by:</b><br>{{getFullDate(contest.start_time)}} (ET)</div>
+						</li>
+					</ul>
+				</div>
+				<!-- END New Contests -->
 			</div>
 			<!-- END PORTLET-->
 		</div>

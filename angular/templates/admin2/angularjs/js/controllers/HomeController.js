@@ -61,6 +61,15 @@ MetronicApp.controller('HomeController', function($rootScope, $scope, $http, $ti
 		$scope.completedContests = completedContests.reverse();
 	};
 
+	$scope.noOpenContests = function(openContests) {
+    	if (openContests === undefined || openContests.length == 0) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+
 	$scope.insertCommas = function(s) {
 		if (s) {
 			s = s.toString();
