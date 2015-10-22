@@ -4,7 +4,7 @@ from rest_framework import routers
 from api import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 import haystack
-
+from rest_framework.authtoken import views as rfviews
 
 
 router = routers.DefaultRouter()
@@ -34,6 +34,7 @@ urlpatterns = patterns('',
     url(r'^api-auth/', include('rest_framework.urls',namespace='rest_framework')),
     # url(r'^$', views.HomePageView.as_view(), name='home_page'),
     url(r'^$', views.OnePageAppView.as_view(), name='home_page'),
+    url(r'^api-token-auth/', rfviews.obtain_auth_token)
 )
 
 urlpatterns += staticfiles_urlpatterns()
