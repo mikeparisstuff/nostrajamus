@@ -1,0 +1,19 @@
+#db:
+#  image: postgres
+web:
+  restart: always
+  build: .
+  volumes:
+    - .:/code
+  ports:
+    - "8000:8000"
+#  env_file: .env
+  command: gunicorn -w 3 -b 0.0.0.0:8000 nostrajamus.wsgi
+
+nginx:
+  restart: always
+  build: ./nginx
+  ports:
+    - "80:80"
+  links:
+    - web:web
