@@ -27,8 +27,6 @@ class BaseModel(models.Model):
         abstract = True
 
 
-################# CONTESTS ##########################
-
 HEAD_TO_HEAD = 'HEADTOHEAD'
 POOL = 'POOL'
 CONTEST_TYPES = (
@@ -141,6 +139,18 @@ class Profile(AbstractUser):
         likes = self.likedtrack_set.all().order_by('-created_at')
         return likes
 
+    @property
+    def followers(self):
+        followers_relation = self.followers_set.all().order_by('follower__username')
+        followers = [f.follower for f in followers_relation]
+        return followers
+
+    @property
+    def following(self):
+        followers_relation = self.followed_set.all().order_by('followed_user__username')
+        following = [f.followed_user for f in followers_relation]
+        return following
+
     # contests = models.ManyToManyField(
     #     Contest,
     #     blank=True,
@@ -151,6 +161,24 @@ class Profile(AbstractUser):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
+
+class FollowingRelation(BaseModel):
+
+    follower = models.ForeignKey(
+        Profile,
+        related_name = "followed_set"
+    )
+
+    followed_user = models.ForeignKey(
+        Profile,
+        related_name = "followers_set"
+    )
+
+
+############################################################
+#                                                Contests                                                      #
+############################################################
 
 def get_contest_picture_upload_path(self, filename):
     return 'contests/contest_{}_pic.jpg'.format(self.id)
@@ -283,6 +311,9 @@ class ContestMembership(BaseModel):
         default=True
     )
 
+############################################################
+#                                                SoundCloud                                                #
+############################################################
 
 class SCUser(BaseModel):
 
@@ -604,6 +635,10 @@ class SCPeriodicPlayCount(BaseModel):
 
     class Meta:
         order_with_respect_to = 'track'
+
+############################################################
+#                                                Songs                                                          #
+############################################################
 
 class WatchedSong(BaseModel):
 

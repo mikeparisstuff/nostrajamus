@@ -8,7 +8,8 @@ web:
   ports:
     - "8000:8000"
 #  env_file: .env
-  command: gunicorn -w 3 -b 0.0.0.0:8000 nostrajamus.wsgi
+  # command: gunicorn -w 3 -b 0.0.0.0:8000 nostrajamus.wsgi
+  command: python manage.py runserver 0.0.0.0:8000
 
 nginx:
   restart: always
@@ -17,3 +18,12 @@ nginx:
     - "80:80"
   links:
     - web:web
+
+# celery:
+#   restart: always
+#   build: .
+#   volumes:
+#     - .:/code
+#   environment:
+#     - C_FORCE_ROOT=true
+#   command: celery worker -A nostrajamus -l info

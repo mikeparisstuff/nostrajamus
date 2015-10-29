@@ -1,5 +1,5 @@
 from django.contrib import admin
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSong, ContestEntry, SCUser, Feedback, ResetPasswordToken, PeriodicRanking, LikedTrack
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, WatchedSong, ContestEntry, SCUser, Feedback, ResetPasswordToken, PeriodicRanking, LikedTrack, FollowingRelation
 
 # Register your models here.
 
@@ -37,6 +37,9 @@ class PeriodicRankingAdmin(admin.ModelAdmin):
 class LikedTrackAdmin(admin.ModelAdmin):
     list_display = ('id', 'track', 'user')
 
+class FollowingRelationAdmin(admin.ModelAdmin):
+    list_display = ('follower', 'followed_user')
+
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(SCTrack, SCTrackAdmin)
 admin.site.register(Contest, ContestAdmin)
@@ -48,3 +51,4 @@ admin.site.register(Feedback, FeedbackAdmin)
 admin.site.register(ResetPasswordToken, ResetTokenAdmin)
 admin.site.register(PeriodicRanking, PeriodicRankingAdmin)
 admin.site.register(LikedTrack, LikedTrackAdmin)
+admin.site.register(FollowingRelation, FollowingRelationAdmin)

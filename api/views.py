@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response, RequestContext, redirec
 from rest_framework import viewsets, status, permissions, views
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken, PeriodicRanking, LikedTrack
+from api.models import Profile, Contest, SCTrack, SCPeriodicPlayCount, SCUser, ContestEntry, Feedback, ResetPasswordToken, PeriodicRanking, LikedTrack, FollowingRelation
 from api.serializers import ProfileSerializer, ContestSerializer, SCTrackSerializer, SCPeriodicPlayCountSerializer, SCUserSerializer, ContestEntrySerializer, FeedbackSerializer, PaginatedContestEntrySerializer, PaginatedRankingSerializer, RankingSerializer, LikedTrackSerializer
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Sum
@@ -93,6 +93,8 @@ class LogoutView(APIView):
     def get(self, request, format=None):
         logout(request)
         return redirect('/')
+
+
 
 class Contest1View(APIView):
 
@@ -227,6 +229,31 @@ class UserViewSet(viewsets.ModelViewSet):
         likes = user.likes
         serializer = LikedTrackSerializer(likes, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @detail_route(permission_classes=(permissions.IsAuthenticated,), methods=("POST", "DELETE"))
+    def follow(self, request, *args, **kwargs):
+        me = request.user
+        user = self.get_object()
+        if request.method == "POST":
+            try:
+                FollowingRelation.objects.create(
+                    follower = me,
+                    followed_user = user
+                )
+                return Response({"detail": "Successfully created new following relation"}, status=status.HTTP_201_CREATED)
+            except KeyError as e:
+                return Response({"detail": "You need to include the field follow_username in the request"}, status=status.HTTP_400_BAD_REQUEST)
+            except Profile.DoesNotExist as e:
+                return Response({"detail": "We could not find a user with that username"}, status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == "DELETE":
+            try:
+                f = FollowingRelation.objects.get(follower = me, followed_user = user)
+                f.delete()
+                return Response({"detail": "Successfully deleted following relation"}, status=status.HTTP_200_OK)
+            except FollowingRelation.DoesNotExist:
+                return Response({"detail": "Could not find following relation"}, status=status.HTTP_400_BAD_REQUEST)
+
+
 
     # def list(self, request):
     #     pass
