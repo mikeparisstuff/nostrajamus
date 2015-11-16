@@ -1,4 +1,5 @@
 from django.shortcuts import render, render_to_response, RequestContext, redirect
+from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import viewsets, status, permissions, views
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
@@ -40,9 +41,15 @@ client = soundcloud.Client(client_id='f0b7083f9e4c053ca072c48a26e8567a')
 
 from django.views.generic.base import TemplateView
 
+@ensure_csrf_cookie
+def indexPage(request, format=None):
+    return render(request, 'index.html')
 
 class OnePageAppView(TemplateView):
     template_name = 'index.html'
+
+    def get(self, request, format=None):
+        return render(request, 'index.html')
 
 # class HomePageView(APIView):
 #     def get(self, request, format=None):
