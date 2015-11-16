@@ -9,6 +9,7 @@ from django.db.models import Sum
 from django.core.mail import send_mail
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
 from api.search_indexes import SCTrackIndex
 import mailchimp
 from . import authentication
@@ -143,7 +144,13 @@ class UserViewSet(viewsets.ModelViewSet):
             authenticated = authenticate(username=username, password=password)
             login(request, authenticated)
             user_serializer = ProfileSerializer(user, context={'request': request})
-            return Response(user_serializer.data, status=status.HTTP_200_OK)
+
+            user_token = Token.objects.get(user=user)
+
+            return Response({
+                    "token" : user_token.key,
+                    "user" : user_serializer.data
+                    }, status=status.HTTP_200_OK)
         except KeyError as e:
             return Response({
                 "detail": "Missing some fields with error: {}".format(e)
